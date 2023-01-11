@@ -7,16 +7,16 @@
 #include "bme.h"
 
 
-bme::int32_t getTemperatureCalibration(bme280_calib_data *cal, int32_t adc_T) {
-  int32_t var1  = ((((adc_T>>3) - ((int32_t)cal->dig_T1 <<1))) *
-     ((int32_t)cal->dig_T2)) >> 11;
+    bme::int32_t getTemperatureCalibration(bme280_calib_data *cal, int32_t adc_T) {
+      int32_t var1  = ((((adc_T>>3) - ((int32_t)cal->dig_T1 <<1))) *
+         ((int32_t)cal->dig_T2)) >> 11;
 
-  int32_t var2  = (((((adc_T>>4) - ((int32_t)cal->dig_T1)) *
-       ((adc_T>>4) - ((int32_t)cal->dig_T1))) >> 12) *
-     ((int32_t)cal->dig_T3)) >> 14;
+      int32_t var2  = (((((adc_T>>4) - ((int32_t)cal->dig_T1)) *
+           ((adc_T>>4) - ((int32_t)cal->dig_T1))) >> 12) *
+         ((int32_t)cal->dig_T3)) >> 14;
 
-  return var1 + var2;
-}
+      return var1 + var2;
+    }
 
 bme::void readCalibrationData(int fd, bme280_calib_data *data) {
   data->dig_T1 = (uint16_t)wiringPiI2CReadReg16(fd, BME280_REGISTER_DIG_T1);
@@ -131,7 +131,7 @@ bme::float getAltitude(float pressure) {
 }
 
 bme::void harvestDataAndRun(){
-    int fd = wiringPiI2CSetup(BME280_ADDRESS);
+    this->fd = wiringPiI2CSetup(BME280_ADDRESS);
     if(fd < 0) {
     printf("Device not found");
     return -1;
