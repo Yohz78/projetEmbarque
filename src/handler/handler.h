@@ -8,7 +8,7 @@
 class Handler{
     private:
         HCSR50 hcsr;
-        HMC5883L hmc; 
+        HMC5883L hmc;
         //BME bme;
 
     public:
@@ -17,5 +17,5 @@ class Handler{
 
     ~Handler();
 
-    void run();    
-}
+    void run();
+};
