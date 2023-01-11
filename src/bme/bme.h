@@ -107,9 +107,9 @@ class bme{
 
     void harvestDataAndRun();
 
-    float getTemperature() const { return temperature; }
+    float getTemperature() const { return temp; }
     float getPressure() const  { return pressure; }
-    float getHumidity() const { return humidity; }
+    float getHumidite() const { return humidite; }
 
 
 
