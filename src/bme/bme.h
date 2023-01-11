@@ -98,7 +98,7 @@ class bme{
     public:
 
     //CTOR
-    bme();
+    bme(float=0,float=0,float=0);
     //DTOR
     ~bme();
 

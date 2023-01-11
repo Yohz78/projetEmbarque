@@ -8,7 +8,7 @@ int main() {
 
     std::cout <<"toto" << std::endl;
 
-    bme test;
+    bme test(0,0,0);
     test.harvestDataAndRun();
 
     return 0;

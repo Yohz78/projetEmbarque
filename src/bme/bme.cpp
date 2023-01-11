@@ -6,15 +6,13 @@
 #include <wiringPiI2C.h>
 #include "bme.h"
 
-bme::bme()
-{
-    std::cout << "BME cree" << std::endl;
+bme::bme(float a, float b, float c){
+    this->temp = a;
+    this->pression = b;
+    this->humidite = c;
 }
 
-bme::~bme()
-{
-    std::cout << "BME detruit" << std::endl;
-}
+bme::~bme(){}
 
 int32_t bme::getTemperatureCalibration(bme280_calib_data *cal, int32_t adc_T) {
       int32_t var1  = ((((adc_T>>3) - ((int32_t)cal->dig_T1 <<1))) *
@@ -164,7 +162,6 @@ void bme::harvestDataAndRun(){
         " \"temperature\":%.2f, \"timestamp\":%d}\n",
         h, p, t, (int)time(NULL));
     }
-
 }
 
 /***************************************************************************
