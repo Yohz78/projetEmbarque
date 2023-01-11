@@ -6,8 +6,17 @@
 #include <wiringPiI2C.h>
 #include "bme.h"
 
+bme::bme()
+{
 
-    bme::int32_t getTemperatureCalibration(bme280_calib_data *cal, int32_t adc_T) {
+}
+
+bme::~bme()
+{
+
+}
+
+int32_t bme::getTemperatureCalibration(bme280_calib_data *cal, int32_t adc_T) {
       int32_t var1  = ((((adc_T>>3) - ((int32_t)cal->dig_T1 <<1))) *
          ((int32_t)cal->dig_T2)) >> 11;
 
@@ -16,9 +25,9 @@
          ((int32_t)cal->dig_T3)) >> 14;
 
       return var1 + var2;
-    }
+}
 
-bme::void readCalibrationData(int fd, bme280_calib_data *data) {
+void bme::readCalibrationData(int fd, bme280_calib_data *data) {
   data->dig_T1 = (uint16_t)wiringPiI2CReadReg16(fd, BME280_REGISTER_DIG_T1);
   data->dig_T2 = (int16_t)wiringPiI2CReadReg16(fd, BME280_REGISTER_DIG_T2);
   data->dig_T3 = (int16_t)wiringPiI2CReadReg16(fd, BME280_REGISTER_DIG_T3);
@@ -41,12 +50,12 @@ bme::void readCalibrationData(int fd, bme280_calib_data *data) {
   data->dig_H6 = (int8_t)wiringPiI2CReadReg8(fd, BME280_REGISTER_DIG_H6);
 }
 
-bme::float compensateTemperature(int32_t t_fine) {
+float bme::compensateTemperature(int32_t t_fine) {
   float T  = (t_fine * 5 + 128) >> 8;
   return T/100;
 }
 
-bme::float compensatePressure(int32_t adc_P, bme280_calib_data *cal, int32_t t_fine) {
+float bme::compensatePressure(int32_t adc_P, bme280_calib_data *cal, int32_t t_fine) {
   int64_t var1, var2, p;
 
   var1 = ((int64_t)t_fine) - 128000;
@@ -70,7 +79,7 @@ bme::float compensatePressure(int32_t adc_P, bme280_calib_data *cal, int32_t t_f
 }
 
 
-bme::float compensateHumidity(int32_t adc_H, bme280_calib_data *cal, int32_t t_fine) {
+float bme::compensateHumidity(int32_t adc_H, bme280_calib_data *cal, int32_t t_fine) {
   int32_t v_x1_u32r;
 
   v_x1_u32r = (t_fine - ((int32_t)76800));
@@ -89,8 +98,7 @@ bme::float compensateHumidity(int32_t adc_H, bme280_calib_data *cal, int32_t t_f
   float h = (v_x1_u32r>>12);
   return  h / 1024.0;
 }
-
-bme::void getRawData(int fd, bme280_raw_data *raw) {
+void bme::getRawData(int fd, bme280_raw_data *raw) {
   wiringPiI2CWrite(fd, 0xf7);
 
   raw->pmsb = wiringPiI2CRead(fd);
@@ -119,7 +127,7 @@ bme::void getRawData(int fd, bme280_raw_data *raw) {
   raw->humidity = (raw->humidity | raw->hlsb);
 }
 
-bme::float getAltitude(float pressure) {
+float bme::getAltitude(float pressure) {
   // Equation taken from BMP180 datasheet (page 16):
   //  http://www.adafruit.com/datasheets/BST-BMP180-DS000-09.pdf
 
@@ -130,7 +138,7 @@ bme::float getAltitude(float pressure) {
   return 44330.0 * (1.0 - pow(pressure / MEAN_SEA_LEVEL_PRESSURE, 0.190294957));
 }
 
-bme::void harvestDataAndRun(){
+void bme::harvestDataAndRun(){
     this->fd = wiringPiI2CSetup(BME280_ADDRESS);
     if(fd < 0) {
     printf("Device not found");
