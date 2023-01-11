@@ -15,18 +15,18 @@ all: $(EXEC)
 
 # Règle de compilation
 $(EXEC): $(OBJ)
-        g++ -o $@ $^ $(CXXFLAGS)
+	g++ -o $@ $^ $(CXXFLAGS)
 
 # Règle de nettoyage
 clean:
-        rm -f $(OBJ) $(EXEC)
+	rm -f $(OBJ) $(EXEC)
 
 # Règle d'exécution
 run: $(EXEC)
-        ./$(EXEC)
+	./$(EXEC)
 
 # Règles de dépendances
 %.o: %.cpp
-        g++ -c -o $@ $< $(CXXFLAGS)
+	g++ -c -o $@ $< $(CXXFLAGS)
 
 ###################################################
