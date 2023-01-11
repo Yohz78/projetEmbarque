@@ -1,0 +1,8 @@
+*.pdf
+bin/
+obj/
+*.depend
+*.layout
+*.o
+*.exe
+
