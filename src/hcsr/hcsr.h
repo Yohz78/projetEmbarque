@@ -11,6 +11,8 @@ class HCSR50 {
   public:
     // Constructor
     HCSR50(int pin);
+    //
+    ~HCSR50();
 
     // Function to check if motion was detected
     bool checkMotion();
