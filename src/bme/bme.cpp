@@ -8,12 +8,12 @@
 
 bme::bme()
 {
-
+    std::cout << "BME cree" << std::endl;
 }
 
 bme::~bme()
 {
-
+    std::cout << "BME detruit" << std::endl;
 }
 
 int32_t bme::getTemperatureCalibration(bme280_calib_data *cal, int32_t adc_T) {
