@@ -3,7 +3,7 @@
 #include <sstream>
 #include <wiringPiI2C.h>
 
-class HMC5883L {
+class HMC5883L{
   private:
     int fd; // I2C file descriptor
     int x, y, z, temp;
