@@ -1,22 +1,14 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <iostream>
 
-void *print_message(void *ptr) {
-    while (1) {
-        char *message;
-        message = (char *) ptr;
-        printf("%s\n", message);
-        sleep(1);
-    }
-}
+#include "src/bme/bme.h"
+#include "src/hmc/hmc.h"
+#include "src/hcsr/hcsr.h"
 
 int main() {
-    pthread_t thread1;
-    const char *message1 = "Thread 1";
-    int  iret1;
 
-    iret1 = pthread_create(&thread1, NULL, print_message, (void*) message1);
-    pthread_join( thread1, NULL);
+    std::cout <<"toto" << std::endl;
     return 0;
 }
