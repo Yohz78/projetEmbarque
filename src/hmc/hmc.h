@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <wiringPiI2C.h>
+#include <wiringPi.h>
 
 using namespace std;
 
