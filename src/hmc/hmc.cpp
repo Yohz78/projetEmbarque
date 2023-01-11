@@ -11,24 +11,24 @@ HMC5883L::HMC5883L(){
 }
 
 void HMC5883L::readX(){
-    unsigned char data[6];
-    wiringPiI2CReadReg8(fd, 0x03);
-    int x = (int)(data[0] << 8 | data[1]);
-    this->x=x;
+    int x_raw = wiringPiI2CReadReg8(this->fd, 0x03);
+    if(x_raw & 0x8000)
+        x_raw = x_raw - 0x10000;
+    this->x=x_raw;
 }
 
 void HMC5883L::readY(){
-    unsigned char data[6];
-    wiringPiI2CReadReg8(fd, 0x03);
-    int y = (int)(data[2] << 8 | data[3]);
-    this->y=y;
+    int y_raw = wiringPiI2CReadReg8(this->fd, 0x05);
+    if(y_raw & 0x8000)
+        y_raw = y_raw - 0x10000;
+    this->y=y_raw;
 }
 
 void HMC5883L::readZ(){
-    unsigned char data[6];
-    wiringPiI2CReadReg8(fd, 0x03);
-    int z = (int)(data[4] << 8 | data[5]);
-    this->z=z;
+    int z_raw = wiringPiI2CReadReg8(this->fd, 0x07);
+    if(z_raw & 0x8000)
+        z_raw = z_raw - 0x10000;
+    this->z=z_raw;
 }
 
 void HMC5883L::readTemp(){
