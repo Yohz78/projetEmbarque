@@ -14,3 +14,5 @@ class HCSR50 {
 
     // Function to check if motion was detected
     bool checkMotion();
+
+};

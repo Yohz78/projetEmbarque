@@ -3,8 +3,6 @@
 #include <sstream>
 #include <wiringPiI2C.h>
 
-using namespace std;
-
 class HMC5883L {
   private:
     int fd; // I2C file descriptor
@@ -22,4 +20,4 @@ class HMC5883L {
     void readY();
     void readZ();
     void readTemp();
-}
+};
