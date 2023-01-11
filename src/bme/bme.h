@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Adafruit_BME280.h"
 #include "wiringPi2c.h"
+#include "wiringPi.h"
 class bme{
     private:
 
@@ -14,9 +14,9 @@ class bme{
     bme(); //Ctor
     ~bme(); //Dtor
 
-    float getTemperature() {return readTemperature();}
-    float getPression() {return readPressure();}
-    float getHumidite() {return readHumidity();}
+    void getTemperature();
+    void getPression();
+    void getHumidite();
 
 
 
