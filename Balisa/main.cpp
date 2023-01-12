@@ -12,6 +12,7 @@ int main() {
     //test.harvestDataAndRun();
     Handler handler;
     handler.getHMCvalue();
+    std::cout << "Mouvement: " << handler->hcsr->checkMotion() << std::endl;
 
     return 0;
 }
