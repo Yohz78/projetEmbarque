@@ -18,14 +18,14 @@ void HMC5883L::readX(){
 }
 
 void HMC5883L::readY(){
-    int y_raw = wiringPiI2CReadReg8(this->fd, 0x05);
+    int y_raw = wiringPiI2CReadReg8(this->fd, 0x07);
     if(y_raw & 0x8000)
         y_raw = y_raw - 0x10000;
     this->y=y_raw;
 }
 
 void HMC5883L::readZ(){
-    int z_raw = wiringPiI2CReadReg8(this->fd, 0x07);
+    int z_raw = wiringPiI2CReadReg8(this->fd, 0x05);
     if(z_raw & 0x8000)
         z_raw = z_raw - 0x10000;
     this->z=z_raw;

@@ -4,6 +4,7 @@
 #include <time.h>
 #include <math.h>
 #include <wiringPiI2C.h>
+#include<unistd.h>
 #include "bme.h"
 
 bme::bme(float a, float b, float c){
@@ -153,6 +154,7 @@ void bme::harvestDataAndRun(){
     getRawData(fd, &raw);
 
     while(1){
+      sleep(5);
       int32_t t_fine = getTemperatureCalibration(&cal, raw.temperature);
       this->temp = compensateTemperature(t_fine); // C
       this->pression = compensatePressure(raw.pressure, &cal, t_fine) / 100; // hPa
