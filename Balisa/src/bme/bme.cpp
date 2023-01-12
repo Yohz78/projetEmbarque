@@ -142,8 +142,7 @@ float bme::getAltitude(float pressure) {
 std::string bme::harvestDataAndRun(){
     this->fd = wiringPiI2CSetup(BME280_ADDRESS);
     if(fd < 0) {
-    printf("Device not found");
-    return;
+    return "Device not found";
     }
 
     bme280_calib_data cal;
@@ -163,10 +162,10 @@ std::string bme::harvestDataAndRun(){
       this->pression = compensatePressure(raw.pressure, &cal, t_fine) / 100; // hPa
       this->humidite = compensateHumidity(raw.humidity, &cal, t_fine);       // %
       //float a = getAltitude(p);                         // meters
-      std::string flux = "{\sensor: bme280, humidity" + std::to_string(getHumidite())
-                        +",pressure: " + std::to_string(getPressure())
-                        +",temperature:" + std::to_string(getTemperature())
-                        +", timestamp: " + dt;
+      std::string flux = "{\"sensor\": \"bme280\", \"humidity\"" + std::to_string(getHumidite())
+                        +",\"pressure\": " + std::to_string(getPressure())
+                        +",\"temperature\":" + std::to_string(getTemperature())
+                        +", \"timestamp\": " + dt +"}";
       /*printf("{\"sensor\":\"bme280\", \"humidity\":%.2f, \"pressure\":%.2f,"
         " \"temperature\":%.2f, \"timestamp\":%d}\n",
         getHumidite(), getPressure(), getTemperature(), (int)time(NULL));*/
