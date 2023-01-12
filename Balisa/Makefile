@@ -2,7 +2,7 @@
 EXEC = balise_handler
 
 # Fichiers sources
-SRC = $(wildcard **/*.cpp)
+SRC = $(wildcard src/*/*.cpp)
 
 # Fichiers objets
 OBJ = $(SRC:.cpp=.o)
