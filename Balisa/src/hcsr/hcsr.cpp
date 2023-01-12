@@ -6,6 +6,12 @@ HCSR50::HCSR50(){
     this->motionDetected = false;
 }
 
+HCSR50::~HCSR50()
+{
+
+}
+
+
 bool HCSR50::checkMotion(){
     int value = digitalRead(this->motionPin);
     if (value == HIGH) {
