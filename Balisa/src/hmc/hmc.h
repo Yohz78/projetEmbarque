@@ -19,5 +19,7 @@ class HMC5883L{
     void readX();
     void readY();
     void readZ();
-    void readTemp();
+    int getX();
+    int getY();
+    int getZ();
 };

@@ -7,7 +7,7 @@ HMC5883L::~HMC5883L(){
 HMC5883L::HMC5883L(){
     fd = wiringPiI2CSetup(0x1E); // HMC5883L I2C address
     // Set the configuration register to the default value
-    wiringPiI2CWriteReg8(fd, 0x00, 0x70); // 8 average, 15 Hz, normal measurement    
+    wiringPiI2CWriteReg8(fd, 0x00, 0x70); // 8 average, 15 Hz, normal measurement
 }
 
 void HMC5883L::readX(){
@@ -30,8 +30,17 @@ void HMC5883L::readZ(){
         z_raw = z_raw - 0x10000;
     this->z=z_raw;
 }
+int HMC5883L::getX()
+{
+    return this->x;
+}
 
-void HMC5883L::readTemp(){
-    int temperature = wiringPiI2CReadReg16(fd, 0x41);
-    this->temp=temperature;
+int HMC5883L::getY()
+{
+    return this->y;
+}
+
+int HMC5883L::getZ()
+{
+    return this->z;
 }
