@@ -10,6 +10,8 @@ int main() {
 
     bme test(0,0,0);
     test.harvestDataAndRun();
+    Handler handler();
+    handler.getHMCvalue();
 
     return 0;
 }
