@@ -1,6 +1,7 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <string>
 #include "../hcsr/hcsr.h"
 #include "../bme/bme.h"
 #include "../hmc/hmc.h"
@@ -21,7 +22,7 @@ class Handler{
     HMC5883L getHMC(){return hmc;}
     bme getBME(){return bme280;}
 
-    void getHMCvalue();
+    std::string getHMCvalue();
 
     //void run();
 };

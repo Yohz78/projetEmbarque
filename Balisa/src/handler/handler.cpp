@@ -10,11 +10,12 @@ Handler::~Handler()
 
 }
 
-void Handler::getHMCvalue(){
+std::string Handler::getHMCvalue(){
     this->hmc.readX();
     this->hmc.readY();
     this->hmc.readZ();
-    std::cout<<"x = "<<this->hmc.getX()<<std::endl;
-    std::cout<<"y = "<<this->hmc.getY()<<std::endl;
-    std::cout<<"z = "<<this->hmc.getZ()<<std::endl;
+    std::string flux = "x = " + std::to_string(this->hmc.getX())+
+                       "y = " + std::to_string(this->hmc.getY())+
+                       "z = " + std::to_string(this->hmc.getZ());
+    return flux;
 }

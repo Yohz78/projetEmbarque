@@ -5,6 +5,7 @@
 #include <math.h>
 #include <wiringPiI2C.h>
 #include<unistd.h>
+#include <ctime>
 #include "bme.h"
 
 bme::bme(float a, float b, float c){
@@ -137,7 +138,7 @@ float bme::getAltitude(float pressure) {
   return 44330.0 * (1.0 - pow(pressure / MEAN_SEA_LEVEL_PRESSURE, 0.190294957));
 }
 
-void bme::harvestDataAndRun(){
+std::string bme::harvestDataAndRun(){
     this->fd = wiringPiI2CSetup(BME280_ADDRESS);
     if(fd < 0) {
     printf("Device not found");
@@ -153,14 +154,22 @@ void bme::harvestDataAndRun(){
     bme280_raw_data raw;
     getRawData(fd, &raw);
 
+    time_t time_now = time(0);
+    const char* dt = ctime(&time_now);
+
       int32_t t_fine = getTemperatureCalibration(&cal, raw.temperature);
       this->temp = compensateTemperature(t_fine); // C
       this->pression = compensatePressure(raw.pressure, &cal, t_fine) / 100; // hPa
       this->humidite = compensateHumidity(raw.humidity, &cal, t_fine);       // %
       //float a = getAltitude(p);                         // meters
-      printf("{\"sensor\":\"bme280\", \"humidity\":%.2f, \"pressure\":%.2f,"
+      std::string flux = "{\sensor: bme280, humidity" + std::to_string(getHumidite())
+                        +",pressure: " + std::to_string(getPressure())
+                        +",temperature:" + std::to_string(getTemperature())
+                        +", timestamp: " + dt;
+      /*printf("{\"sensor\":\"bme280\", \"humidity\":%.2f, \"pressure\":%.2f,"
         " \"temperature\":%.2f, \"timestamp\":%d}\n",
-        getHumidite(), getPressure(), getTemperature(), (int)time(NULL));
+        getHumidite(), getPressure(), getTemperature(), (int)time(NULL));*/
+      return flux;
 }
 
 

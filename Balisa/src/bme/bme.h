@@ -111,7 +111,7 @@ class bme{
     void getRawData(int fd, bme280_raw_data *raw);
     float getAltitude(float pressure);
 
-    void harvestDataAndRun();
+    std::string harvestDataAndRun();
 
     float getTemperature() const { return temp; }
     float getPressure() const  { return pression; }
