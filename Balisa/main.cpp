@@ -13,7 +13,7 @@ int main() {
         sleep(1);
         std::cout << "-" ;
     }
-    std::endl;
+    std::cout << std::endl;
     std::cout << "---------------------BME280---------------------" << std::endl;
     handler.getBME().harvestDataAndRun();
     std::cout << "---------------------HMC---------------------" << std::endl;
