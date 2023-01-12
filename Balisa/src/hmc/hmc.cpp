@@ -12,8 +12,8 @@ HMC5883L::HMC5883L(){
 
 void HMC5883L::readX(){
     int x_raw = wiringPiI2CReadReg8(this->fd, 0x03);
-    if(x_raw & 0x8000)
-        x_raw = x_raw - 0x10000;
+    /*if(x_raw & 0x8000)
+        x_raw = x_raw - 0x10000;*/
     this->x=x_raw;
 }
 
