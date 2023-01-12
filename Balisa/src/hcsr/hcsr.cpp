@@ -11,10 +11,10 @@ bool HCSR50::checkMotion(){
     if (value == HIGH) {
         if (this->motionDetected == false) {
             this->motionDetected = true;
-            return true;
         }
+        return true;
     } else {
         this->motionDetected = false;
     }
     return false;
-}    
+}
