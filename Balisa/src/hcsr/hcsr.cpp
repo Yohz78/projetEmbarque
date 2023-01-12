@@ -1,9 +1,9 @@
 #include "hcsr.h"
 
 HCSR50::HCSR50(){
-    motionPin = 38;
+    this->motionPin = 38;
     pinMode(motionPin, INPUT);
-    motionDetected = false;
+    this->motionDetected = false;
 }
 
 bool HCSR50::checkMotion(){

@@ -7,7 +7,7 @@
 
 class Handler{
     private:
-        //HCSR50 hcsr;
+        HCSR50 hcsr;
         HMC5883L hmc;
         bme bme280;
 

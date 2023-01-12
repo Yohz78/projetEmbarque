@@ -1,9 +1,9 @@
 #include "handler.h"
 
 Handler::Handler(){
-    //this->hcsr = HCSR50();
-    this->hmc = HMC5883L();
     this->bme280 = bme();
+    this->hmc = HMC5883L();
+    this->hcsr = HCSR50();
 }
 Handler::~Handler()
 {
