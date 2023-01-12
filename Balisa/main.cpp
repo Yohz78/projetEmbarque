@@ -6,13 +6,14 @@
 //#include "src/bme/bme.h"
 int main() {
 
-    std::cout <<"toto" << std::endl;
-
-    bme test(0,0,0);
-    //test.harvestDataAndRun();
     Handler handler;
+    std::cout << "---------------------BME280---------------------" << std::endl;
+    handler.getBME().harvestDataAndRun();
+    std::cout << "---------------------HMC---------------------" << std::endl;
     handler.getHMCvalue();
+    std::cout << "---------------------HCSR---------------------" << std::endl;
     std::cout << "Mouvement: " << handler.getHCSR().checkMotion() << std::endl;
+    std::cout << "----------------------------------------------" << std::endl;
 
     return 0;
 }
