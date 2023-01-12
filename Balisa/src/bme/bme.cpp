@@ -140,7 +140,7 @@ void bme::harvestDataAndRun(){
     this->fd = wiringPiI2CSetup(BME280_ADDRESS);
     if(fd < 0) {
     printf("Device not found");
-    return -1;
+    return;
     }
 
     bme280_calib_data cal;
@@ -160,51 +160,8 @@ void bme::harvestDataAndRun(){
       //float a = getAltitude(p);                         // meters
       printf("{\"sensor\":\"bme280\", \"humidity\":%.2f, \"pressure\":%.2f,"
         " \"temperature\":%.2f, \"timestamp\":%d}\n",
-        h, p, t, (int)time(NULL));
+        getHumidite(), getPressure(), getTemperature(), (int)time(NULL));
     }
 }
 
-/***************************************************************************
-Modified BSD License
-====================
-Copyright © 2016, Andrei Vainik
-All rights reserved.
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-1. Redistributions of source code must retain the above copyright
-   notice, this list of conditions and the following disclaimer.
-2. Redistributions in binary form must reproduce the above copyright
-   notice, this list of conditions and the following disclaimer in the
-   documentation and/or other materials provided with the distribution.
-3. Neither the name of the organization nor the
-   names of its contributors may be used to endorse or promote products
-   derived from this software without specific prior written permission.
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDER BE LIABLE FOR ANY
-DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-This piece of code was combined from several sources
-https://github.com/adafruit/Adafruit_BME280_Library
-https://cdn-shop.adafruit.com/datasheets/BST-BME280_DS001-10.pdf
-https://projects.drogon.net/raspberry-pi/wiringpi/i2c-library/
-Compensation functions and altitude function originally from:
-https://github.com/adafruit/Adafruit_BME280_Library/blob/master/Adafruit_BME280.cpp
-***************************************************************************
-  This is a library for the BME280 humidity, temperature & pressure sensor
-  Designed specifically to work with the Adafruit BME280 Breakout
-  ----> http://www.adafruit.com/products/2650
-  These sensors use I2C or SPI to communicate, 2 or 4 pins are required
-  to interface.
-  Adafruit invests time and resources providing this open source code,
-  please support Adafruit andopen-source hardware by purchasing products
-  from Adafruit!
-  Written by Limor Fried & Kevin Townsend for Adafruit Industries.
-  BSD license, all text above must be included in any redistribution
- ***************************************************************************
-****************************************************************************/
+
