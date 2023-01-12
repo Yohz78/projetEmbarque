@@ -7,6 +7,9 @@ SRC = $(wildcard src/*/*.cpp)
 # Fichiers objets
 OBJ = $(SRC:.cpp=.o)
 
+# Librairies
+LIB = -lwiringPi
+
 # Flags de compilation
 CXXFLAGS = -std=c++11 -Wall -Wextra
 
@@ -15,7 +18,7 @@ all: $(EXEC)
 
 # Règle de compilation
 $(EXEC): $(OBJ)
-	g++ -o $@ $^ $(CXXFLAGS)
+	g++ -o $@ $^ $(CXXFLAGS) $(LIB)
 
 # Règle de nettoyage
 clean:
@@ -27,6 +30,6 @@ run: $(EXEC)
 
 # Règles de dépendances
 %.o: %.cpp
-	g++ -c -o $@ $< $(CXXFLAGS)
+	g++ -c -o $@ $< $(CXXFLAGS) $(LIB)
 
 ###################################################
