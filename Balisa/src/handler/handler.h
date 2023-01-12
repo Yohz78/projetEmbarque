@@ -13,7 +13,7 @@ class Handler{
 
     public:
 
-    Handler(int pin);
+    Handler();
 
     ~Handler();
 
