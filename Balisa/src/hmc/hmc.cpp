@@ -1,7 +1,7 @@
 #include "hmc.h"
 
 HMC5883L::~HMC5883L(){
-    close(this->fd);
+    //close(this->fd);
 }
 
 HMC5883L::HMC5883L(){

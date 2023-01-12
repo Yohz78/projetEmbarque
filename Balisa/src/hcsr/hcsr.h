@@ -10,7 +10,7 @@ class HCSR50 {
 
   public:
     // Constructor
-    HCSR50(int pin);
+    HCSR50();
     //
     ~HCSR50();
 
