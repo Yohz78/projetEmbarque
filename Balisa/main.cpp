@@ -2,26 +2,13 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <iostream>
+#include <cstring>
 #include <wiringSerial.h>
 
 #include "src/handler/handler.h"
 //#include "src/bme/bme.h"
-int main() {
 
-
-    Handler handler;
-    int fd = serialOpen("/dev/ttyS0", 9600);
-    if (fd < 0) {
-        std::cout << "Error: Unable to open UART device" << std::endl;
-        return -1;
-    }
-    while(1){
-        loop(fd);
-    }
-    return 0;
-}
-
-void loop(int fd) {
+void loop(int fd,Handler handler) {
     if (serialDataAvail(fd)) {
         char command[20];
         int index=0;
@@ -59,6 +46,24 @@ void loop(int fd) {
         }
     }
 }
+
+
+int main() {
+
+
+    Handler handler;
+    int fd = serialOpen("/dev/ttyS0", 9600);
+    if (fd < 0) {
+        std::cout << "Error: Unable to open UART device" << std::endl;
+        return -1;
+    }
+    while(1){
+        loop(fd,&handler);
+    }
+    return 0;
+}
+
+
 
 /*for(int i=0;i<10;i++){
         delay(1);
