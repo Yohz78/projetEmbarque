@@ -3,6 +3,8 @@
 #include <sstream>
 #include <wiringPiI2C.h>
 
+#define HMC_ADDRESS                0x68
+
 class HMC5883L{
   private:
     int fd; // I2C file descriptor

@@ -9,7 +9,7 @@ int main() {
     std::cout <<"toto" << std::endl;
 
     bme test(0,0,0);
-    test.harvestDataAndRun();
+    //test.harvestDataAndRun();
     Handler handler();
     handler.getHMCvalue();
 

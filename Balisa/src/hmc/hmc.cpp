@@ -5,7 +5,7 @@ HMC5883L::~HMC5883L(){
 }
 
 HMC5883L::HMC5883L(){
-    fd = wiringPiI2CSetup(0x1E); // HMC5883L I2C address
+    fd = wiringPiI2CSetup(HMC_ADDRESS); // HMC5883L I2C address 0x68
     // Set the configuration register to the default value
     wiringPiI2CWriteReg8(fd, 0x00, 0x70); // 8 average, 15 Hz, normal measurement
 }
