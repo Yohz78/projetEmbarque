@@ -17,6 +17,10 @@ class Handler{
 
     ~Handler();
 
+    HCSR50 getHCSR() {return hcsr;}
+    HMC5883L getHMC(){return hmc;}
+    bme getBME(){return bme280;}
+
     void getHMCvalue();
 
     //void run();
