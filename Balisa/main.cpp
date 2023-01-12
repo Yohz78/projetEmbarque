@@ -2,11 +2,14 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <iostream>
-#include "src/handler/handler.h"
-
+//#include "src/handler/handler.h"
+#include "src/bme/bme.h"
 int main() {
 
     std::cout <<"toto" << std::endl;
+
+    bme test(0,0,0);
+    test.harvestDataAndRun();
 
     return 0;
 }
