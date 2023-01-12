@@ -6,6 +6,7 @@
 #include <wiringPiI2C.h>
 #include<unistd.h>
 #include <ctime>
+#include <string>
 #include "bme.h"
 
 bme::bme(float a, float b, float c){
