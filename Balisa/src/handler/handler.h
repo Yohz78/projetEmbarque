@@ -19,5 +19,5 @@ class Handler{
 
     void getHMCvalue();
 
-    void run();
+    //void run();
 };

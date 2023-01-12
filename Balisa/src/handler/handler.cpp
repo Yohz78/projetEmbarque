@@ -5,6 +5,10 @@ Handler::Handler(){
     this->hmc = HMC5883L();
     this->bme280 = bme();
 }
+Handler::~Handler()
+{
+
+}
 
 void Handler::getHMCvalue(){
     std::cout<<"x = "<<this->hmc.getX()<<std::endl;
