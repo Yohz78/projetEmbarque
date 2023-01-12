@@ -2,7 +2,8 @@
 
 HCSR50::HCSR50(){
     this->motionPin = 38;
-    pinMode(motionPin, INPUT);
+    wiringPiSetup();
+    pinMode(this->motionPin, INPUT);
     this->motionDetected = false;
 }
 
