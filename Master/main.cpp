@@ -23,7 +23,11 @@ void* read_sensor_data(void* args) {
 }
 
 int main() {
-    fd = serialOpen("/dev/tty0", 9600); // Ouvre le port série sur /dev/ttyAMA0 à 9600 bauds
+    fd = serialOpen("/dev/ttyAMA0", 9600); // Ouvre le port série sur /dev/ttyAMA0 à 9600 bauds
+    if (fd < 0) {
+        std::cout << "Error: Unable to open UART device" << std::endl;
+        return -1;
+    }
     pthread_create(&thread, NULL, read_sensor_data, NULL);
     pthread_join(thread, NULL);
     serialClose(fd); // Ferme le port série
