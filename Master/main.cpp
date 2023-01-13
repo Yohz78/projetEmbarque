@@ -28,8 +28,8 @@ int main() {
         std::cout << "Error: Unable to open UART device" << std::endl;
         return -1;
     }
-    //pthread_create(&thread, NULL, read_sensor_data, NULL);
-    //pthread_join(thread, NULL);
+    pthread_create(&thread, NULL, read_sensor_data, NULL);
+    pthread_join(thread, NULL);
     serialClose(fd); // Ferme le port série
     return 0;
 }
