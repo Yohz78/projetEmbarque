@@ -8,9 +8,13 @@ int interval = 1; // Intervalle en secondes
 //pthread_t thread;
 
 void read_sensor_data() {
-//while (true) {
+while (true) {
         serialPuts(fd, "all"); // Envoie la commande "all" à l'esclave
-        char data[1000];
+        if (serialPuts(fd, "all") < 0) {
+            std::cout << "Error: Unable to send data over UART" << std::endl;
+            return -1;
+        }
+        char data[10000];
         int index = 0;
         while (serialDataAvail(fd)) {
             data[index] = serialGetchar(fd);
@@ -19,7 +23,7 @@ void read_sensor_data() {
         data[index] = '\0';
         std::cout << "Données reçues : " << data << std::endl;
         sleep(interval); // Fait une pause pendant interval secondes
-//    }
+    }
 }
 
 int main() {
@@ -28,8 +32,8 @@ int main() {
         std::cout << "Error: Unable to open UART device" << std::endl;
         return -1;
     }
-    //pthread_create(&thread, NULL, read_sensor_data, NULL);
-    //pthread_join(thread, NULL);
+    pthread_create(&thread, NULL, read_sensor_data, NULL);
+    pthread_join(thread, NULL);
     read_sensor_data();
     serialClose(fd); // Ferme le port série
     return 0;
