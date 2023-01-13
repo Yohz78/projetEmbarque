@@ -7,16 +7,11 @@ int fd;
 int interval = 1; // Intervalle en secondes
 pthread_t thread;
 
-void read_sensor_data() {
+void* read_sensor_data() {
     while (true) {
-        bool success = serialPuts(fd, "all");
-        if (!success) {
-        std::cout << "Error: Unable to send data over UART" << std::endl;
-        return;
-        }
-
         char data[10000];
         int index = 0;
+        serialPuts(fd, "all"); 
         while (serialDataAvail(fd) > 0) {
             int c = serialGetchar(fd);
             if (c < 0) {
