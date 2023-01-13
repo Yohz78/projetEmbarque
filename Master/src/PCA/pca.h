@@ -12,12 +12,5 @@ class PCA9685 {
     public:
         void init();
 
-        void setServo(int servo, int angle) {
-            int on = 0;
-            int off = angle * 4096 / 180;
-            wiringPiI2CWriteReg8(fd, LED0_ON_L + 4 * servo, on & 0xFF);
-            wiringPiI2CWriteReg8(fd, LED0_ON_H + 4 * servo, on >> 8);
-            wiringPiI2CWriteReg8(fd, LED0_OFF_L + 4 * servo, off & 0xFF);
-            wiringPiI2CWriteReg8(fd, LED0_OFF_H + 4 * servo, off >> 8);
-        }
+        void setServo(int servo, int angle);
 };
