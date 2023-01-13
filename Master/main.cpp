@@ -8,7 +8,7 @@ int interval = 1; // Intervalle en secondes
 //pthread_t thread;
 
 void* read_sensor_data() {
-    while (true) {
+//while (true) {
         serialPuts(fd, "all"); // Envoie la commande "all" à l'esclave
         char data[1000];
         int index = 0;
@@ -19,7 +19,7 @@ void* read_sensor_data() {
         data[index] = '\0';
         std::cout << "Données reçues : " << data << std::endl;
         sleep(interval); // Fait une pause pendant interval secondes
-    }
+//    }
 }
 
 int main() {
