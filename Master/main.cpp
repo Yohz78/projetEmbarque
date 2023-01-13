@@ -7,7 +7,7 @@ int fd;
 int interval = 1; // Intervalle en secondes
 pthread_t thread;
 
-void* read_sensor_data() {
+void* read_sensor_data(void *args) {
     while (true) {
         char data[10000];
         int index = 0;
