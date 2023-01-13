@@ -64,9 +64,7 @@ int main() {
         std::cout << "Error: Unable to open UART device" << std::endl;
         return -1;
     }
-    while(1){
-        loop(fd,&handler);
-    }
+        loop(fd,&handler);    
     return 0;
 }
 
