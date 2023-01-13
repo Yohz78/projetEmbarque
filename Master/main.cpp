@@ -8,16 +8,20 @@ int interval = 1; // Intervalle en secondes
 //pthread_t thread;
 
 void read_sensor_data() {
-while (true) {
-        serialPuts(fd, "all"); // Envoie la commande "all" à l'esclave
+    while (true) {
         if (serialPuts(fd, "all") < 0) {
             std::cout << "Error: Unable to send data over UART" << std::endl;
-            return -1;
+            return;
         }
         char data[10000];
         int index = 0;
-        while (serialDataAvail(fd)) {
-            data[index] = serialGetchar(fd);
+        while (serialDataAvail(fd) > 0) {
+            int c = serialGetchar(fd);
+            if (c < 0) {
+                std::cout << "Error: Unable to receive data over UART" << std::endl;
+                return;
+            }
+            data[index] = c;
             index++;
         }
         data[index] = '\0';
