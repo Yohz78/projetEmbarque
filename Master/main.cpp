@@ -16,7 +16,6 @@ void* read_sensor_data() {
             int c = serialGetchar(fd);
             if (c < 0) {
                 std::cout << "Error: Unable to receive data over UART" << std::endl;
-                return;
             }
             data[index] = c;
             index++;
