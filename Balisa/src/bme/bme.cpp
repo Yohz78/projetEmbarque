@@ -38,6 +38,13 @@ bme::~bme(){}
  * @return int32_t 
  */
 
+/**
+ * @brief This function calibrates the temperature given a raw temperature data
+ * 
+ * @param bme280_calib_data \p cal 
+ * @param int32_t \p adc_T 
+ * @return int32_t 
+ */
 int32_t bme::getTemperatureCalibration(bme280_calib_data *cal, int32_t adc_T) {
       int32_t var1  = ((((adc_T>>3) - ((int32_t)cal->dig_T1 <<1))) *
          ((int32_t)cal->dig_T2)) >> 11;
@@ -92,7 +99,7 @@ float bme::compensateTemperature(int32_t t_fine) {
 }
 
 /**
- * @brief 
+ * @brief This function computes the pressure in Pascal.
  * 
  * @param[in] int32_t \p adc_P 
  * @param[in] bme280_calib_data \p cal 

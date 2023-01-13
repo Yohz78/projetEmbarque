@@ -127,8 +127,23 @@ class bme{
 
     std::string harvestDataAndRun();
 
+    /**
+     * @brief Get the Temperature object
+     * 
+     * @return float 
+     */
     float getTemperature() const { return temp; }
+    /**
+     * @brief Get the Pressure object
+     * 
+     * @return float 
+     */
     float getPressure() const  { return pression; }
+    /**
+     * @brief Get the Humidite object
+     * 
+     * @return float 
+     */
     float getHumidite() const { return humidite; }
 };
 #endif

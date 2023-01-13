@@ -94,11 +94,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a6c5101724349fbac2f02a1e930301d0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function reading the calibration data and saving it in the data struct passed in parameter.  <br /></td></tr>
 <tr class="separator:a6c5101724349fbac2f02a1e930301d0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a687090b9cc8359007567098b5f65ab79"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbme.html#a687090b9cc8359007567098b5f65ab79">getTemperatureCalibration</a> (<a class="el" href="structbme280__calib__data.html">bme280_calib_data</a> *cal, int32_t adc_T)</td></tr>
+<tr class="memdesc:a687090b9cc8359007567098b5f65ab79"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function calibrates the temperature given a raw temperature data.  <br /></td></tr>
 <tr class="separator:a687090b9cc8359007567098b5f65ab79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e8c4476fad0b05d68d46b2130561390"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbme.html#a7e8c4476fad0b05d68d46b2130561390">compensateTemperature</a> (int32_t t_fine)</td></tr>
 <tr class="memdesc:a7e8c4476fad0b05d68d46b2130561390"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function computes the temperature in Celsius.  <br /></td></tr>
 <tr class="separator:a7e8c4476fad0b05d68d46b2130561390"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c2f12c9634d77683d3f9fc03209aede"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbme.html#a2c2f12c9634d77683d3f9fc03209aede">compensatePressure</a> (int32_t adc_P, <a class="el" href="structbme280__calib__data.html">bme280_calib_data</a> *cal, int32_t t_fine)</td></tr>
+<tr class="memdesc:a2c2f12c9634d77683d3f9fc03209aede"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function computes the pressure in Pascal.  <br /></td></tr>
 <tr class="separator:a2c2f12c9634d77683d3f9fc03209aede"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35b8e86239158e07065e6460538d2323"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbme.html#a35b8e86239158e07065e6460538d2323">compensateHumidity</a> (int32_t adc_H, <a class="el" href="structbme280__calib__data.html">bme280_calib_data</a> *cal, int32_t t_fine)</td></tr>
 <tr class="memdesc:a35b8e86239158e07065e6460538d2323"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thus function computes the humidity as a percentage.  <br /></td></tr>
@@ -112,14 +114,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ace6c92343bf82117def8cb42f7757d1e"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbme.html#ace6c92343bf82117def8cb42f7757d1e">harvestDataAndRun</a> ()</td></tr>
 <tr class="memdesc:ace6c92343bf82117def8cb42f7757d1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function harvest the data and produces a JSON-like string with the results.  <br /></td></tr>
 <tr class="separator:ace6c92343bf82117def8cb42f7757d1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42eca4cb1b5f95c32b59c0466d71e9b4"><td class="memItemLeft" align="right" valign="top"><a id="a42eca4cb1b5f95c32b59c0466d71e9b4" name="a42eca4cb1b5f95c32b59c0466d71e9b4"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>getTemperature</b> () const</td></tr>
+<tr class="memitem:a42eca4cb1b5f95c32b59c0466d71e9b4"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbme.html#a42eca4cb1b5f95c32b59c0466d71e9b4">getTemperature</a> () const</td></tr>
+<tr class="memdesc:a42eca4cb1b5f95c32b59c0466d71e9b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Temperature object.  <br /></td></tr>
 <tr class="separator:a42eca4cb1b5f95c32b59c0466d71e9b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c2d694657cdfe78b3ca05fb21f6b07e"><td class="memItemLeft" align="right" valign="top"><a id="a3c2d694657cdfe78b3ca05fb21f6b07e" name="a3c2d694657cdfe78b3ca05fb21f6b07e"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>getPressure</b> () const</td></tr>
+<tr class="memitem:a3c2d694657cdfe78b3ca05fb21f6b07e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbme.html#a3c2d694657cdfe78b3ca05fb21f6b07e">getPressure</a> () const</td></tr>
+<tr class="memdesc:a3c2d694657cdfe78b3ca05fb21f6b07e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Pressure object.  <br /></td></tr>
 <tr class="separator:a3c2d694657cdfe78b3ca05fb21f6b07e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54d3128e57b23f6233e78008ead84179"><td class="memItemLeft" align="right" valign="top"><a id="a54d3128e57b23f6233e78008ead84179" name="a54d3128e57b23f6233e78008ead84179"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>getHumidite</b> () const</td></tr>
+<tr class="memitem:a54d3128e57b23f6233e78008ead84179"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbme.html#a54d3128e57b23f6233e78008ead84179">getHumidite</a> () const</td></tr>
+<tr class="memdesc:a54d3128e57b23f6233e78008ead84179"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Humidite object.  <br /></td></tr>
 <tr class="separator:a54d3128e57b23f6233e78008ead84179"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -266,6 +268,8 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>getHumidite</b> () c
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>This function computes the pressure in Pascal. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">int32_t</td><td><code>adc_P</code> </td></tr>
@@ -332,6 +336,62 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>getHumidite</b> () c
 
 </div>
 </div>
+<a id="a54d3128e57b23f6233e78008ead84179" name="a54d3128e57b23f6233e78008ead84179"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54d3128e57b23f6233e78008ead84179">&#9670;&#160;</a></span>getHumidite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float bme::getHumidite </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the Humidite object. </p>
+<dl class="section return"><dt>Returns</dt><dd>float </dd></dl>
+
+</div>
+</div>
+<a id="a3c2d694657cdfe78b3ca05fb21f6b07e" name="a3c2d694657cdfe78b3ca05fb21f6b07e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c2d694657cdfe78b3ca05fb21f6b07e">&#9670;&#160;</a></span>getPressure()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float bme::getPressure </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the Pressure object. </p>
+<dl class="section return"><dt>Returns</dt><dd>float </dd></dl>
+
+</div>
+</div>
 <a id="a798402e680783750a50fda1b82012966" name="a798402e680783750a50fda1b82012966"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a798402e680783750a50fda1b82012966">&#9670;&#160;</a></span>getRawData()</h2>
 
@@ -369,6 +429,34 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>getHumidite</b> () c
 
 </div>
 </div>
+<a id="a42eca4cb1b5f95c32b59c0466d71e9b4" name="a42eca4cb1b5f95c32b59c0466d71e9b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42eca4cb1b5f95c32b59c0466d71e9b4">&#9670;&#160;</a></span>getTemperature()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float bme::getTemperature </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the Temperature object. </p>
+<dl class="section return"><dt>Returns</dt><dd>float </dd></dl>
+
+</div>
+</div>
 <a id="a687090b9cc8359007567098b5f65ab79" name="a687090b9cc8359007567098b5f65ab79"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a687090b9cc8359007567098b5f65ab79">&#9670;&#160;</a></span>getTemperatureCalibration()</h2>
 
@@ -394,10 +482,20 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>getHumidite</b> () c
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>This function calibrates the temperature given a raw temperature data. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname"><a class="el" href="structbme280__calib__data.html" title="Struct for the calibration data.">bme280_calib_data</a></td><td><code>cal</code> $ Struct for calibration data </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">int32_t</td><td><code>adc_T</code> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int32_t </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="structbme280__calib__data.html" title="Struct for the calibration data.">bme280_calib_data</a></td><td><code>cal</code> </td></tr>
+    <tr><td class="paramname">int32_t</td><td><code>adc_T</code> </td></tr>
   </table>
   </dd>
 </dl>
