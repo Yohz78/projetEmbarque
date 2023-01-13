@@ -8,7 +8,7 @@ int interval = 1; // Intervalle en secondes
 void* read_sensor_data(void* args) {
     while (true) {
         serialPuts(fd, "all"); // Envoie la commande "all" à l'esclave
-        char data[100];
+        char data[1000];
         int index = 0;
         while (serialDataAvail(fd)) {
             data[index] = serialGetChar(fd);
