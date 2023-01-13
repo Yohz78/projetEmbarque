@@ -1,5 +1,10 @@
 #include "hcsr.h"
 
+
+/**
+ * @brief Construct a new HCSR50::HCSR50 object
+ * 
+ */
 HCSR50::HCSR50(){
     this->motionPin = 38;
     wiringPiSetup();
@@ -7,12 +12,21 @@ HCSR50::HCSR50(){
     this->motionDetected = false;
 }
 
+/**
+ * @brief Destroy the HCSR50::HCSR50 object
+ * 
+ */
 HCSR50::~HCSR50()
 {
 
 }
 
-
+/**
+ * @brief Method to check if the sensor detected motion in its detection radius.
+ * 
+ * @return true 
+ * @return false 
+ */
 bool HCSR50::checkMotion(){
     int value = digitalRead(this->motionPin);
     if (value == HIGH) {

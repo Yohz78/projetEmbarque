@@ -8,6 +8,13 @@
 #include "src/handler/handler.h"
 //#include "src/bme/bme.h"
 
+/**
+ * @brief This function gets a command input from the Master and execute the command. 
+ * 
+ * @param[in] fd 
+ * @param[in] Handler handler 
+ */
+
 void loop(int fd,Handler* handler) {
     if (serialDataAvail(fd)) {
         char command[20];

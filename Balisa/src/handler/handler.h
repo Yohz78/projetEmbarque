@@ -6,6 +6,10 @@
 #include "../bme/bme.h"
 #include "../hmc/hmc.h"
 
+/**
+ * @class Handler
+ * @brief This class is a wrapper for the 3 sensors, the BME 280, the HCSR50 and the HMC5883L
+ */
 class Handler{
     private:
         HCSR50 hcsr;

@@ -9,13 +9,34 @@
 #include <string>
 #include "bme.h"
 
+
+/**
+ * @brief Construct a new bme::bme object
+ * 
+ * @param[in] float \p a  
+ * @param[in] float \p b 
+ * @param[in] float \p c 
+ */
 bme::bme(float a, float b, float c){
     this->temp = a;
     this->pression = b;
     this->humidite = c;
 }
 
+/**
+ * @brief Destroy the bme::bme object
+ * 
+ */
+
 bme::~bme(){}
+
+/**
+ * @brief 
+ * 
+ * @param[in] bme280_calib_data \p cal $ Struct for calibration data
+ * @param[in] int32_t \p adc_T 
+ * @return int32_t 
+ */
 
 int32_t bme::getTemperatureCalibration(bme280_calib_data *cal, int32_t adc_T) {
       int32_t var1  = ((((adc_T>>3) - ((int32_t)cal->dig_T1 <<1))) *
@@ -28,6 +49,13 @@ int32_t bme::getTemperatureCalibration(bme280_calib_data *cal, int32_t adc_T) {
       return var1 + var2;
 }
 
+
+/**
+ * @brief Function reading the calibration data and saving it in the data struct passed in parameter
+ * 
+ * @param[in] fd $ File descriptor 
+ * @param[in] bme280_calib_data \p data $ Struct for calibration data
+ */
 void bme::readCalibrationData(int fd, bme280_calib_data *data) {
   data->dig_T1 = (uint16_t)wiringPiI2CReadReg16(fd, BME280_REGISTER_DIG_T1);
   data->dig_T2 = (int16_t)wiringPiI2CReadReg16(fd, BME280_REGISTER_DIG_T2);
@@ -51,10 +79,26 @@ void bme::readCalibrationData(int fd, bme280_calib_data *data) {
   data->dig_H6 = (int8_t)wiringPiI2CReadReg8(fd, BME280_REGISTER_DIG_H6);
 }
 
+
+/**
+ * @brief This method computes the temperature in Celsius.
+ * 
+ * @param[in] int32_t \p t_fine 
+ * @return float 
+ */
 float bme::compensateTemperature(int32_t t_fine) {
   float T  = (t_fine * 5 + 128) >> 8;
   return T/100;
 }
+
+/**
+ * @brief 
+ * 
+ * @param[in] int32_t \p adc_P 
+ * @param[in] bme280_calib_data \p cal 
+ * @param[in] int32_t \p t_fine 
+ * @return float 
+ */
 
 float bme::compensatePressure(int32_t adc_P, bme280_calib_data *cal, int32_t t_fine) {
   int64_t var1, var2, p;
@@ -79,6 +123,14 @@ float bme::compensatePressure(int32_t adc_P, bme280_calib_data *cal, int32_t t_f
   return (float)p/256;
 }
 
+/**
+ * @brief Thus function computes the humidity as a percentage.
+ * 
+ * @param[in] int32_t \p adc_H 
+ * @param[in] bme280_calib_data \p cal 
+ * @param[in] int32_t \p t_fine 
+ * @return float 
+ */
 
 float bme::compensateHumidity(int32_t adc_H, bme280_calib_data *cal, int32_t t_fine) {
   int32_t v_x1_u32r;
@@ -99,6 +151,13 @@ float bme::compensateHumidity(int32_t adc_H, bme280_calib_data *cal, int32_t t_f
   float h = (v_x1_u32r>>12);
   return  h / 1024.0;
 }
+
+/**
+ * @brief This function retrieve the raw data from the sensor.
+ * 
+ * @param[in] fd $File descriptor
+ * @param[in] bme280_raw_data \p raw $Struct for the raw data 
+ */
 void bme::getRawData(int fd, bme280_raw_data *raw) {
   wiringPiI2CWrite(fd, 0xf7);
 
@@ -128,17 +187,27 @@ void bme::getRawData(int fd, bme280_raw_data *raw) {
   raw->humidity = (raw->humidity | raw->hlsb);
 }
 
+/**
+ * @brief This function computes the altitude given the pressure. 
+ *        // Equation taken from BMP180 datasheet (page 16):
+          //  http://www.adafruit.com/datasheets/BST-BMP180-DS000-09.pdf
+
+          // Note that using the equation from wikipedia can give bad results
+          // at high altitude.  See this thread for more information:
+          //  http://forums.adafruit.com/viewtopic.php?f=22&t=58064
+ * @param[in] float \p pressure 
+ * @return float 
+ */
 float bme::getAltitude(float pressure) {
-  // Equation taken from BMP180 datasheet (page 16):
-  //  http://www.adafruit.com/datasheets/BST-BMP180-DS000-09.pdf
-
-  // Note that using the equation from wikipedia can give bad results
-  // at high altitude.  See this thread for more information:
-  //  http://forums.adafruit.com/viewtopic.php?f=22&t=58064
-
+  
   return 44330.0 * (1.0 - pow(pressure / MEAN_SEA_LEVEL_PRESSURE, 0.190294957));
 }
 
+/**
+ * @brief This function harvest the data and produces a JSON-like string with the results
+ * 
+ * @return std::string 
+ */
 std::string bme::harvestDataAndRun(){
     this->fd = wiringPiI2CSetup(BME280_ADDRESS);
     if(fd < 0) {

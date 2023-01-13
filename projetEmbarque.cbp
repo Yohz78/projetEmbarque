@@ -32,6 +32,18 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Balisa/main.cpp" />
+		<Unit filename="Balisa/src/bme/bme.cpp" />
+		<Unit filename="Balisa/src/bme/bme.h" />
+		<Unit filename="Balisa/src/handler/handler.cpp" />
+		<Unit filename="Balisa/src/handler/handler.h" />
+		<Unit filename="Balisa/src/hcsr/hcsr.cpp" />
+		<Unit filename="Balisa/src/hcsr/hcsr.h" />
+		<Unit filename="Balisa/src/hmc/hmc.cpp" />
+		<Unit filename="Balisa/src/hmc/hmc.h" />
+		<Unit filename="Master/main.cpp" />
+		<Unit filename="Master/src/pca/pca.cpp" />
+		<Unit filename="Master/src/pca/pca.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

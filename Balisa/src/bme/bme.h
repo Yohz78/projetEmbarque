@@ -39,6 +39,11 @@
 /*
 * Immutable calibration data read from bme280
 */
+
+/**
+ * @struct bme280_calib_data
+ * @brief Struct for the calibration data
+ */
 typedef struct
 {
   uint16_t dig_T1;
@@ -66,6 +71,10 @@ typedef struct
 /*
 * Raw sensor measurement data from bme280
 */
+/**
+ * @struct bme280_raw_data
+ * @brief Struct for the raw data
+*/
 typedef struct
 {
   uint8_t pmsb;
@@ -85,6 +94,11 @@ typedef struct
 
 } bme280_raw_data;
 
+/**
+ * @class bme
+ * @brief Class bme in order to handle the BME280 sensor. BME sensor 
+ * has 3 sensor: Temperature, pression and humidity
+ */
 
 class bme{
 

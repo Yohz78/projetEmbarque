@@ -3,6 +3,10 @@
 #include <sstream>
 #include <wiringPi.h>
 
+/**
+ * @class HCSR50
+ * @brief Class to manipulate the HCSR50 sensor
+ */
 class HCSR50 {
   private:
     int motionPin;

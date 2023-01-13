@@ -5,6 +5,10 @@
 
 #define HMC_ADDRESS                0x68
 
+/**
+ * @class HMC5883L
+ * @brief This class handles the sensor HMC5883L.
+ */
 class HMC5883L{
   private:
     int fd; // I2C file descriptor
@@ -21,7 +25,7 @@ class HMC5883L{
     void readX();
     void readY();
     void readZ();
-    int getX();
-    int getY();
-    int getZ();
+    int getX() const;
+    int getY() const;
+    int getZ() const;
 };
