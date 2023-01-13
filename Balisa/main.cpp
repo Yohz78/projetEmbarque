@@ -59,7 +59,7 @@ int main() {
 
 
     Handler handler;
-    int fd = serialOpen("/dev/ttyAMA0", 9600);
+    int fd = serialOpen("/dev/ttyS0", 9600);
     if (fd < 0) {
         std::cout << "Error: Unable to open UART device" << std::endl;
         return -1;
