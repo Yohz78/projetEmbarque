@@ -64,7 +64,19 @@ int main() {
         std::cout << "Error: Unable to open UART device" << std::endl;
         return -1;
     }
-        loop(fd,&handler);    
+        //loop(fd,&handler);   
+
+        serialPuts(fd,"TOTO");
+        serialPuts(fd,"TOTO1");
+        serialPuts(fd,"TOTO2");
+        serialPuts(fd,"TOTO3");
+        serialPuts(fd,"TOTO4");
+        serialPuts(fd,"TOTO5");
+        serialPuts(fd,"TOTO6");
+        serialPuts(fd,"TOTO7");
+        serialPuts(fd,"TOTO8");
+
+
     return 0;
 }
 
