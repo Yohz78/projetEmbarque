@@ -7,17 +7,22 @@ int fd;
 int interval = 1; // Intervalle en secondes
 pthread_t thread;
 
-void* read_sensor_data(void* args) {
+void* read_sensor_data(void *args) {
     while (true) {
-        serialPuts(fd, "all"); // Envoie la commande "all" à l'esclave
-        char data[1000];
+        char data[10000];
         int index = 0;
-        while (serialDataAvail(fd)) {
-            data[index] = serialGetchar(fd);
+        serialPuts(fd, "all"); 
+        while (serialDataAvail(fd) > 0) {
+            int c = serialGetchar(fd);
+            if (c < 0) {
+                std::cout << "Error: Unable to receive data over UART" << std::endl;
+            }
+            data[index] = c;
             index++;
         }
         data[index] = '\0';
         std::cout << "Données reçues : " << data << std::endl;
+        std::cout << "Données reçues : " << data[0] << std::endl;
         sleep(interval); // Fait une pause pendant interval secondes
     }
 }
