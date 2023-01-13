@@ -7,7 +7,7 @@ int fd;
 int interval = 1; // Intervalle en secondes
 //pthread_t thread;
 
-void* read_sensor_data() {
+void read_sensor_data() {
 //while (true) {
         serialPuts(fd, "all"); // Envoie la commande "all" à l'esclave
         char data[1000];
