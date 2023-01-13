@@ -1,0 +1,227 @@
+\hypertarget{classbme}{}\doxysection{bme Class Reference}
+\label{classbme}\index{bme@{bme}}
+
+
+Class bme in order to handle the BME280 sensor. BME sensor has 3 sensor\+: Temperature, pression and humidity.  
+
+
+
+
+{\ttfamily \#include $<$bme.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbme_a85b639442a7bbedf3de87fc5bf8ba287}{bme}} (float=0, float=0, float=0)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{classbme_a85b639442a7bbedf3de87fc5bf8ba287}{bme\+::bme}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbme_abde634fb769aa5ff76ad74270370b4e5}{$\sim$bme}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{classbme_a85b639442a7bbedf3de87fc5bf8ba287}{bme\+::bme}} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbme_a6c5101724349fbac2f02a1e930301d0e}{read\+Calibration\+Data}} (int fd, \mbox{\hyperlink{structbme280__calib__data}{bme280\+\_\+calib\+\_\+data}} $\ast$cal)
+\begin{DoxyCompactList}\small\item\em Function reading the calibration data and saving it in the data struct passed in parameter. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classbme_a687090b9cc8359007567098b5f65ab79}{get\+Temperature\+Calibration}} (\mbox{\hyperlink{structbme280__calib__data}{bme280\+\_\+calib\+\_\+data}} $\ast$cal, int32\+\_\+t adc\+\_\+T)
+\item 
+float \mbox{\hyperlink{classbme_a7e8c4476fad0b05d68d46b2130561390}{compensate\+Temperature}} (int32\+\_\+t t\+\_\+fine)
+\begin{DoxyCompactList}\small\item\em This function computes the temperature in Celsius. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classbme_a2c2f12c9634d77683d3f9fc03209aede}{compensate\+Pressure}} (int32\+\_\+t adc\+\_\+P, \mbox{\hyperlink{structbme280__calib__data}{bme280\+\_\+calib\+\_\+data}} $\ast$cal, int32\+\_\+t t\+\_\+fine)
+\item 
+float \mbox{\hyperlink{classbme_a35b8e86239158e07065e6460538d2323}{compensate\+Humidity}} (int32\+\_\+t adc\+\_\+H, \mbox{\hyperlink{structbme280__calib__data}{bme280\+\_\+calib\+\_\+data}} $\ast$cal, int32\+\_\+t t\+\_\+fine)
+\begin{DoxyCompactList}\small\item\em Thus function computes the humidity as a percentage. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbme_a798402e680783750a50fda1b82012966}{get\+Raw\+Data}} (int fd, \mbox{\hyperlink{structbme280__raw__data}{bme280\+\_\+raw\+\_\+data}} $\ast$raw)
+\begin{DoxyCompactList}\small\item\em This function retrieve the raw data from the sensor. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classbme_af7038b40df669238664f5c3ea246cecc}{get\+Altitude}} (float pressure)
+\begin{DoxyCompactList}\small\item\em This function computes the altitude given the pressure. // Equation taken from BMP180 datasheet (page 16)\+: \href{http://www.adafruit.com/datasheets/BST-BMP180-DS000-09.pdf}{\texttt{ http\+://www.\+adafruit.\+com/datasheets/\+BST-\/\+BMP180-\/\+DS000-\/09.\+pdf}}. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classbme_ace6c92343bf82117def8cb42f7757d1e}{harvest\+Data\+And\+Run}} ()
+\begin{DoxyCompactList}\small\item\em This function harvest the data and produces a JSON-\/like string with the results. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classbme_a42eca4cb1b5f95c32b59c0466d71e9b4}\label{classbme_a42eca4cb1b5f95c32b59c0466d71e9b4}} 
+float {\bfseries get\+Temperature} () const
+\item 
+\mbox{\Hypertarget{classbme_a3c2d694657cdfe78b3ca05fb21f6b07e}\label{classbme_a3c2d694657cdfe78b3ca05fb21f6b07e}} 
+float {\bfseries get\+Pressure} () const
+\item 
+\mbox{\Hypertarget{classbme_a54d3128e57b23f6233e78008ead84179}\label{classbme_a54d3128e57b23f6233e78008ead84179}} 
+float {\bfseries get\+Humidite} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class bme in order to handle the BME280 sensor. BME sensor has 3 sensor\+: Temperature, pression and humidity. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classbme_a85b639442a7bbedf3de87fc5bf8ba287}\label{classbme_a85b639442a7bbedf3de87fc5bf8ba287}} 
+\index{bme@{bme}!bme@{bme}}
+\index{bme@{bme}!bme@{bme}}
+\doxysubsubsection{\texorpdfstring{bme()}{bme()}}
+{\footnotesize\ttfamily bme\+::bme (\begin{DoxyParamCaption}\item[{float}]{a = {\ttfamily 0},  }\item[{float}]{b = {\ttfamily 0},  }\item[{float}]{c = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{classbme_a85b639442a7bbedf3de87fc5bf8ba287}{bme\+::bme}} object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em float} & {\ttfamily a} ~\newline
+ \\
+\hline
+\mbox{\texttt{ in}}  & {\em float} & {\ttfamily b} \\
+\hline
+\mbox{\texttt{ in}}  & {\em float} & {\ttfamily c} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbme_abde634fb769aa5ff76ad74270370b4e5}\label{classbme_abde634fb769aa5ff76ad74270370b4e5}} 
+\index{bme@{bme}!````~bme@{$\sim$bme}}
+\index{````~bme@{$\sim$bme}!bme@{bme}}
+\doxysubsubsection{\texorpdfstring{$\sim$bme()}{~bme()}}
+{\footnotesize\ttfamily bme\+::$\sim$bme (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destroy the \mbox{\hyperlink{classbme_a85b639442a7bbedf3de87fc5bf8ba287}{bme\+::bme}} object. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classbme_a35b8e86239158e07065e6460538d2323}\label{classbme_a35b8e86239158e07065e6460538d2323}} 
+\index{bme@{bme}!compensateHumidity@{compensateHumidity}}
+\index{compensateHumidity@{compensateHumidity}!bme@{bme}}
+\doxysubsubsection{\texorpdfstring{compensateHumidity()}{compensateHumidity()}}
+{\footnotesize\ttfamily float bme\+::compensate\+Humidity (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{adc\+\_\+H,  }\item[{\mbox{\hyperlink{structbme280__calib__data}{bme280\+\_\+calib\+\_\+data}} $\ast$}]{cal,  }\item[{int32\+\_\+t}]{t\+\_\+fine }\end{DoxyParamCaption})}
+
+
+
+Thus function computes the humidity as a percentage. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em int32\+\_\+t} & {\ttfamily adc\+\_\+H} \\
+\hline
+\mbox{\texttt{ in}}  & {\em \mbox{\hyperlink{structbme280__calib__data}{bme280\+\_\+calib\+\_\+data}}} & {\ttfamily cal} \\
+\hline
+\mbox{\texttt{ in}}  & {\em int32\+\_\+t} & {\ttfamily t\+\_\+fine} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+float 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbme_a2c2f12c9634d77683d3f9fc03209aede}\label{classbme_a2c2f12c9634d77683d3f9fc03209aede}} 
+\index{bme@{bme}!compensatePressure@{compensatePressure}}
+\index{compensatePressure@{compensatePressure}!bme@{bme}}
+\doxysubsubsection{\texorpdfstring{compensatePressure()}{compensatePressure()}}
+{\footnotesize\ttfamily float bme\+::compensate\+Pressure (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{adc\+\_\+P,  }\item[{\mbox{\hyperlink{structbme280__calib__data}{bme280\+\_\+calib\+\_\+data}} $\ast$}]{cal,  }\item[{int32\+\_\+t}]{t\+\_\+fine }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em int32\+\_\+t} & {\ttfamily adc\+\_\+P} \\
+\hline
+\mbox{\texttt{ in}}  & {\em \mbox{\hyperlink{structbme280__calib__data}{bme280\+\_\+calib\+\_\+data}}} & {\ttfamily cal} \\
+\hline
+\mbox{\texttt{ in}}  & {\em int32\+\_\+t} & {\ttfamily t\+\_\+fine} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+float 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbme_a7e8c4476fad0b05d68d46b2130561390}\label{classbme_a7e8c4476fad0b05d68d46b2130561390}} 
+\index{bme@{bme}!compensateTemperature@{compensateTemperature}}
+\index{compensateTemperature@{compensateTemperature}!bme@{bme}}
+\doxysubsubsection{\texorpdfstring{compensateTemperature()}{compensateTemperature()}}
+{\footnotesize\ttfamily float bme\+::compensate\+Temperature (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{t\+\_\+fine }\end{DoxyParamCaption})}
+
+
+
+This function computes the temperature in Celsius. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em int32\+\_\+t} & {\ttfamily t\+\_\+fine} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+float 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbme_af7038b40df669238664f5c3ea246cecc}\label{classbme_af7038b40df669238664f5c3ea246cecc}} 
+\index{bme@{bme}!getAltitude@{getAltitude}}
+\index{getAltitude@{getAltitude}!bme@{bme}}
+\doxysubsubsection{\texorpdfstring{getAltitude()}{getAltitude()}}
+{\footnotesize\ttfamily float bme\+::get\+Altitude (\begin{DoxyParamCaption}\item[{float}]{pressure }\end{DoxyParamCaption})}
+
+
+
+This function computes the altitude given the pressure. // Equation taken from BMP180 datasheet (page 16)\+: \href{http://www.adafruit.com/datasheets/BST-BMP180-DS000-09.pdf}{\texttt{ http\+://www.\+adafruit.\+com/datasheets/\+BST-\/\+BMP180-\/\+DS000-\/09.\+pdf}}. 
+
+Note that using the equation from wikipedia can give bad results at high altitude. See this thread for more information\+: \href{http://forums.adafruit.com/viewtopic.php?f=22&t=58064}{\texttt{ http\+://forums.\+adafruit.\+com/viewtopic.\+php?f=22\&t=58064}} 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em float} & {\ttfamily pressure} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+float 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbme_a798402e680783750a50fda1b82012966}\label{classbme_a798402e680783750a50fda1b82012966}} 
+\index{bme@{bme}!getRawData@{getRawData}}
+\index{getRawData@{getRawData}!bme@{bme}}
+\doxysubsubsection{\texorpdfstring{getRawData()}{getRawData()}}
+{\footnotesize\ttfamily void bme\+::get\+Raw\+Data (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{\mbox{\hyperlink{structbme280__raw__data}{bme280\+\_\+raw\+\_\+data}} $\ast$}]{raw }\end{DoxyParamCaption})}
+
+
+
+This function retrieve the raw data from the sensor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em int} & {\ttfamily fd} \$\+File descriptor \\
+\hline
+\mbox{\texttt{ in}}  & {\em \mbox{\hyperlink{structbme280__raw__data}{bme280\+\_\+raw\+\_\+data}}} & {\ttfamily raw} \$\+Struct for the raw data \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbme_a687090b9cc8359007567098b5f65ab79}\label{classbme_a687090b9cc8359007567098b5f65ab79}} 
+\index{bme@{bme}!getTemperatureCalibration@{getTemperatureCalibration}}
+\index{getTemperatureCalibration@{getTemperatureCalibration}!bme@{bme}}
+\doxysubsubsection{\texorpdfstring{getTemperatureCalibration()}{getTemperatureCalibration()}}
+{\footnotesize\ttfamily int32\+\_\+t bme\+::get\+Temperature\+Calibration (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbme280__calib__data}{bme280\+\_\+calib\+\_\+data}} $\ast$}]{cal,  }\item[{int32\+\_\+t}]{adc\+\_\+T }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em \mbox{\hyperlink{structbme280__calib__data}{bme280\+\_\+calib\+\_\+data}}} & {\ttfamily cal} \$ Struct for calibration data \\
+\hline
+\mbox{\texttt{ in}}  & {\em int32\+\_\+t} & {\ttfamily adc\+\_\+T} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int32\+\_\+t 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbme_ace6c92343bf82117def8cb42f7757d1e}\label{classbme_ace6c92343bf82117def8cb42f7757d1e}} 
+\index{bme@{bme}!harvestDataAndRun@{harvestDataAndRun}}
+\index{harvestDataAndRun@{harvestDataAndRun}!bme@{bme}}
+\doxysubsubsection{\texorpdfstring{harvestDataAndRun()}{harvestDataAndRun()}}
+{\footnotesize\ttfamily std\+::string bme\+::harvest\+Data\+And\+Run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This function harvest the data and produces a JSON-\/like string with the results. 
+
+\begin{DoxyReturn}{Returns}
+std\+::string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbme_a6c5101724349fbac2f02a1e930301d0e}\label{classbme_a6c5101724349fbac2f02a1e930301d0e}} 
+\index{bme@{bme}!readCalibrationData@{readCalibrationData}}
+\index{readCalibrationData@{readCalibrationData}!bme@{bme}}
+\doxysubsubsection{\texorpdfstring{readCalibrationData()}{readCalibrationData()}}
+{\footnotesize\ttfamily void bme\+::read\+Calibration\+Data (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{\mbox{\hyperlink{structbme280__calib__data}{bme280\+\_\+calib\+\_\+data}} $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Function reading the calibration data and saving it in the data struct passed in parameter. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em int} & {\ttfamily fd} \$ File descriptor \\
+\hline
+\mbox{\texttt{ in}}  & {\em \mbox{\hyperlink{structbme280__calib__data}{bme280\+\_\+calib\+\_\+data}}} & {\ttfamily data} \$ Struct for calibration data \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Balisa/src/bme/bme.\+h\item 
+Balisa/src/bme/bme.\+cpp\end{DoxyCompactItemize}

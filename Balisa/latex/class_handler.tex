@@ -1,0 +1,77 @@
+\hypertarget{class_handler}{}\doxysection{Handler Class Reference}
+\label{class_handler}\index{Handler@{Handler}}
+
+
+This class is a wrapper for the 3 sensors, the BME 280, the \mbox{\hyperlink{class_h_c_s_r50}{HCSR50}} and the \mbox{\hyperlink{class_h_m_c5883_l}{HMC5883L}}.  
+
+
+
+
+{\ttfamily \#include $<$handler.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_handler_a6eb353aae22778422bc71f6b00aad8be}{Handler}} ()
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_handler}{Handler}}\+:\+: \mbox{\hyperlink{class_handler}{Handler}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_handler_ae28d722f283b987386f29ce960cd3a6b}{$\sim$\+Handler}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_handler}{Handler}}\+:\+: \mbox{\hyperlink{class_handler}{Handler}} object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_handler_ac70e79801cba1c06c320c35dc6ac1905}\label{class_handler_ac70e79801cba1c06c320c35dc6ac1905}} 
+\mbox{\hyperlink{class_h_c_s_r50}{HCSR50}} {\bfseries get\+HCSR} ()
+\item 
+\mbox{\Hypertarget{class_handler_a7214ddd982ed38f632d55a59ab376416}\label{class_handler_a7214ddd982ed38f632d55a59ab376416}} 
+\mbox{\hyperlink{class_h_m_c5883_l}{HMC5883L}} {\bfseries get\+HMC} ()
+\item 
+\mbox{\Hypertarget{class_handler_a980bc5ecedef1ee71a4e22f376336f81}\label{class_handler_a980bc5ecedef1ee71a4e22f376336f81}} 
+\mbox{\hyperlink{classbme}{bme}} {\bfseries get\+BME} ()
+\item 
+std\+::string \mbox{\hyperlink{class_handler_a7bd0e88a87bfe01e456138bd24761800}{get\+HMCvalue}} ()
+\begin{DoxyCompactList}\small\item\em This function return a string with the x,y and z value of the HMC sensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class is a wrapper for the 3 sensors, the BME 280, the \mbox{\hyperlink{class_h_c_s_r50}{HCSR50}} and the \mbox{\hyperlink{class_h_m_c5883_l}{HMC5883L}}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_handler_a6eb353aae22778422bc71f6b00aad8be}\label{class_handler_a6eb353aae22778422bc71f6b00aad8be}} 
+\index{Handler@{Handler}!Handler@{Handler}}
+\index{Handler@{Handler}!Handler@{Handler}}
+\doxysubsubsection{\texorpdfstring{Handler()}{Handler()}}
+{\footnotesize\ttfamily Handler\+::\+Handler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{class_handler}{Handler}}\+:\+: \mbox{\hyperlink{class_handler}{Handler}} object. 
+
+\mbox{\Hypertarget{class_handler_ae28d722f283b987386f29ce960cd3a6b}\label{class_handler_ae28d722f283b987386f29ce960cd3a6b}} 
+\index{Handler@{Handler}!````~Handler@{$\sim$Handler}}
+\index{````~Handler@{$\sim$Handler}!Handler@{Handler}}
+\doxysubsubsection{\texorpdfstring{$\sim$Handler()}{~Handler()}}
+{\footnotesize\ttfamily Handler\+::$\sim$\+Handler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destroy the \mbox{\hyperlink{class_handler}{Handler}}\+:\+: \mbox{\hyperlink{class_handler}{Handler}} object. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_handler_a7bd0e88a87bfe01e456138bd24761800}\label{class_handler_a7bd0e88a87bfe01e456138bd24761800}} 
+\index{Handler@{Handler}!getHMCvalue@{getHMCvalue}}
+\index{getHMCvalue@{getHMCvalue}!Handler@{Handler}}
+\doxysubsubsection{\texorpdfstring{getHMCvalue()}{getHMCvalue()}}
+{\footnotesize\ttfamily std\+::string Handler\+::get\+HMCvalue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This function return a string with the x,y and z value of the HMC sensor. 
+
+\begin{DoxyReturn}{Returns}
+std\+::string 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Balisa/src/handler/handler.\+h\item 
+Balisa/src/handler/handler.\+cpp\end{DoxyCompactItemize}

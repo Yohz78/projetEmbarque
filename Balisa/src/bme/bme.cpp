@@ -53,7 +53,7 @@ int32_t bme::getTemperatureCalibration(bme280_calib_data *cal, int32_t adc_T) {
 /**
  * @brief Function reading the calibration data and saving it in the data struct passed in parameter
  * 
- * @param[in] fd $ File descriptor 
+ * @param[in] int \p fd $ File descriptor 
  * @param[in] bme280_calib_data \p data $ Struct for calibration data
  */
 void bme::readCalibrationData(int fd, bme280_calib_data *data) {
@@ -81,7 +81,7 @@ void bme::readCalibrationData(int fd, bme280_calib_data *data) {
 
 
 /**
- * @brief This method computes the temperature in Celsius.
+ * @brief This function computes the temperature in Celsius.
  * 
  * @param[in] int32_t \p t_fine 
  * @return float 
@@ -155,7 +155,7 @@ float bme::compensateHumidity(int32_t adc_H, bme280_calib_data *cal, int32_t t_f
 /**
  * @brief This function retrieve the raw data from the sensor.
  * 
- * @param[in] fd $File descriptor
+ * @param[in] int \p fd $File descriptor
  * @param[in] bme280_raw_data \p raw $Struct for the raw data 
  */
 void bme::getRawData(int fd, bme280_raw_data *raw) {
