@@ -34,7 +34,6 @@ int main() {
     }
     pthread_create(&thread, NULL, read_sensor_data, NULL);
     pthread_join(thread, NULL);
-    read_sensor_data();
     serialClose(fd); // Ferme le port série
     return 0;
 }
