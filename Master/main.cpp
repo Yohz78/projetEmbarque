@@ -1,9 +1,11 @@
 #include <wiringSerial.h>
 #include <pthread.h>
 #include <unistd.h> // pour sleep
+#include <iostream>
 
 int fd;
 int interval = 1; // Intervalle en secondes
+pthread_t thread;
 
 void* read_sensor_data(void* args) {
     while (true) {
@@ -11,7 +13,7 @@ void* read_sensor_data(void* args) {
         char data[1000];
         int index = 0;
         while (serialDataAvail(fd)) {
-            data[index] = serialGetChar(fd);
+            data[index] = serialGetchar(fd);
             index++;
         }
         data[index] = '\0';
