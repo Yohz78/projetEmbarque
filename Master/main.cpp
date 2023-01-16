@@ -17,6 +17,7 @@ void* read_sensor_data(void *args) {
             if (c < 0) {
                 std::cout << "Error: Unable to receive data over UART" << std::endl;
             }
+            std::cout << "Des données sont présentes : " << data << std::endl;
             data[index] = c;
             index++;
         }
