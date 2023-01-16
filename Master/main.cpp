@@ -37,6 +37,12 @@ int main() {
     sleep(3);
     std::cout << "controle_servo.setServo(0,90)" << std::endl;
     controle_servo.setServo(0,90);
+
+    std::cout << "controle_servo.setServo(1,45)" << std::endl;
+    controle_servo.setServo(1,45);
+    sleep(3);
+    std::cout << "controle_servo.setServo(1,90)" << std::endl;
+    controle_servo.setServo(1,90);
     /*while (true) {
         read_sensor_data(fd);
     }*/
