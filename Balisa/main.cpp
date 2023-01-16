@@ -61,7 +61,7 @@ int main() {
         return -1;
     }
 
-    Handler handler_test; // Creation du wrapper
+    Handler handler; // Creation du wrapper
 
     while (true) {
         std::cout << "Valeur de fd=====================> " << fd << std::endl;
