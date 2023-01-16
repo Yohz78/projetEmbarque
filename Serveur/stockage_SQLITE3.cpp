@@ -1,7 +1,7 @@
 #include <boost>
 #include <sstream>
 #include <iostream>
-#include <SQLite3>
+#include <sqlite3>
 
 int main() {
     // Exemple de données JSON sous forme de chaîne
