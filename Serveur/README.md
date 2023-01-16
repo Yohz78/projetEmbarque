@@ -24,3 +24,32 @@ Il utilise un switch-case pour exécuter le code approprié pour chaque instruct
 Il est important de noter que ceci est juste un exemple simple pour vous donner une idée de comment l'instruction de position peut être utilisé pour contrôler les moteurs, 
 
 il faut implémenter la logique de contrôle de moteur en fonction de votre système.
+
+**************************************************************************************************************************************************************
+Bibliothèque Socket :
+
+La bibliothèque socket en C++ est utilisée pour créer des applications réseau en utilisant les sockets. 
+Les sockets sont des points finaux de communication entre deux programmes exécutés sur un réseau. 
+Ils permettent à ces programmes de communiquer entre eux en utilisant des protocoles de communication réseau tels que TCP ou UDP. 
+La bibliothèque socket en C++ inclut des fonctions pour créer et gérer des sockets, envoyer et recevoir des données à travers des sockets, configurer les options de socket, et résoudre les noms d'hôte.
+
+Il existe deux types de sockets en C++: les sockets de niveau de transport (TCP) et les sockets de niveau de datagramme (UDP). 
+Les sockets TCP sont utilisés pour les communications de flux de données fiables, tandis que les sockets UDP sont utilisés pour les communications de données non fiables, mais plus rapides.
+
+Il existe des bibliothèques de sockets pour C++, comme Boost.Asio, qui fournissent des implémentations plus modernes et plus faciles à utiliser des sockets que les fonctionnalités standard de C++.
+**************************************************************************************************************************************************************
+Bibliothèque Netinet :
+La bibliothèque netinet en C++ est une bibliothèque de réseau qui contient des types de données et des fonctions utiles pour les protocoles de réseau Internet, tels que TCP et UDP. 
+Elle fait partie des bibliothèques système de C++ et est généralement incluse dans les systèmes d'exploitation Unix et Linux.
+
+La bibliothèque contient des structures de données pour représenter les adresses IP, les ports et les protocoles de transport. 
+Il y a aussi des fonctions pour créer et gérer les sockets, envoyer et recevoir des données à travers des connexions réseau, et convertir entre les différents formats d'adresses.
+
+En général, cette bibliothèque est utilisée pour écrire des programmes de réseau tels que des serveurs et des clients réseau en C++. 
+Il peut être utilisé pour créer des applications client-serveur, des chat, des jeux en ligne, etc.
+**************************************************************************************************************************************************************
+Bibliothèque Boost :
+Boost est une bibliothèque de logiciels pour le langage de programmation C++ qui fournit une variété de fonctionnalités avancées telles que des structures de données, 
+des algorithmes, des fonctions mathématiques, des expressions régulières, des outils de manipulation de chaînes, des gestionnaires de mémoire, et plus encore.
+Ces fonctionnalités sont souvent utilisées pour améliorer la performance et la productivité lors de la programmation en C++. Boost est open-source et est distribué sous la licence Boost Software.
+Il est largement utilisé dans les projets open-source et commerciaux.

@@ -1,8 +1,7 @@
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
+#include <boost>
 #include <sstream>
 #include <iostream>
-#include <SQLiteCpp/SQLiteCpp.h>
+#include <SQLite3>
 
 int main() {
     // Exemple de données JSON sous forme de chaîne

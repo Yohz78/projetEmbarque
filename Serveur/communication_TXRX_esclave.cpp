@@ -1,7 +1,7 @@
 #include <iostream>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <string.h>
+#include <socket>
+#include <netinet>
+#include <string>
 
 int main() {
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
