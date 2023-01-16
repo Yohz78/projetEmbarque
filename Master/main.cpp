@@ -6,8 +6,7 @@
 void* read_sensor_data(int fd) {
     while (true) {
         char data[10000];
-        int index = 0;
-        serialPuts(fd, "all"); 
+        int index = 0; 
         while (serialDataAvail(fd) > 0) {
             int c = serialGetchar(fd);
             if (c < 0) {
