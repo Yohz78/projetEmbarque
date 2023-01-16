@@ -9,6 +9,24 @@
 #include "src/handler/handler.h"
 //#include "src/bme/bme.h"
 
+
+/**
+ * @brief This function gets a command input from the Master and execute the command. 
+ * 
+ * @param[in] fd 
+ * @param[in] Handler handler 
+ */
+void loop(int fd,Handler* handler) {
+            std::ostringstream oss;
+            std::cout << "---------------------DATAS---------------------" << std::endl;
+            oss << handler->getBME().harvestDataAndRun();
+            oss << handler->getHMCvalue();
+            oss << handler->getHCSR().checkMotion();
+            serialPuts(fd,oss.c_str());
+            std::cout << "----------------------------------------------" << std::endl;
+}
+
+
 int main() {
     int fd = serialOpen("/dev/ttyAMA0", 9600); // Ouvre le port série sur /dev/ttyS0 à 9600 bauds
     if (fd < 0) {
@@ -27,18 +45,3 @@ int main() {
     return 0;
 }
 
-/**
- * @brief This function gets a command input from the Master and execute the command. 
- * 
- * @param[in] fd 
- * @param[in] Handler handler 
- */
-void loop(int fd,Handler* handler) {
-            std::ostringstream oss;
-            std::cout << "---------------------DATAS---------------------" << std::endl;
-            oss << handler->getBME().harvestDataAndRun();
-            oss << handler->getHMCvalue();
-            oss << handler->getHCSR().checkMotion();
-            serialPuts(fd,oss.c_str());
-            std::cout << "----------------------------------------------" << std::endl;
-}
