@@ -17,7 +17,7 @@ void* read_sensor_data(int fd) {
             index++;
         }
         data[index] = '\0';
-        std::cout << "Données reçues : " << data[0] << std::endl;
+        std::cout << "Données reçues : " << data << std::endl;
         sleep(1); // Fait une pause pendant interval secondes
     }
 }
