@@ -48,6 +48,7 @@ int main() {
         }else{
             std::cout << "J'ai pas trouvé de données chef !!! " << std::endl;    
         }
+        sleep(1); // Fait une pause pendant 1 seconde
     }
 
     serialClose(fd); // Ferme le port série
