@@ -1,9 +1,9 @@
 #include <wiringSerial.h>
 #include <unistd.h> // pour sleep
 #include <iostream>
-#include <json/json.h>
+//#include <json/json.h>
 
-void* read_sensor_data(void *args) {
+void* read_sensor_data(int fd) {
     while (true) {
         char data[10000];
         int index = 0;
