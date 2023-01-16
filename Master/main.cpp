@@ -28,6 +28,31 @@ void* read_sensor_data(void *args) {
     }
 }
 
+
+void lecture(){
+    std::cout << "On envoie la commande " + commande + " au slave" << std::endl;
+    serialPuts(fd,commande.c_str());
+    sleep(1);
+    if (serialDataAvail(fd) > 0) { // Vérifie s'il y a des données disponibles pour lecture
+        std::string data;
+            while (serialDataAvail(fd) > 0) {
+                char c = serialGetchar(fd);
+                data += c;
+            }
+        std::cout << "Données reçues : " << data << std::endl;
+        }else{
+            std::cout << "J'ai pas trouvé de données chef !!! " << std::endl;    
+    } 
+}
+
+void ecriture_rand(){
+    int data = rand() % 100; // Génère un nombre aléatoire entre 0 et 99
+    std::string data_str = std::to_string(data); // Convertit le nombre en chaîne de caractères
+    serialPuts(fd, data_str.c_str()); // Envoie les données sur le port série */ 
+    std::cout << "Données envoyées : " << data_str << std::endl;    
+}
+
+
 int main() {
     int fd = serialOpen("/dev/ttyAMA0", 9600); // Ouvre le port série sur /dev/ttyAMA0 à 9600 bauds
     if (fd < 0) {
@@ -41,23 +66,14 @@ int main() {
     while (true) {
         std::cout << "Valeur de fd=====================> " << fd << std::endl;
         std::cout << "Valeur de serialDataAvail(fd)====> " << serialDataAvail(fd) << std::endl;
-        /*std::cout << "On envoie la commande " + commande + " au slave" << std::endl;
-        serialPuts(fd,commande.c_str());
-        sleep(1);
-        if (serialDataAvail(fd) > 0) { // Vérifie s'il y a des données disponibles pour lecture
-            std::string data;
-            while (serialDataAvail(fd) > 0) {
-                char c = serialGetchar(fd);
-                data += c;
-            }
-            std::cout << "Données reçues : " << data << std::endl;
-        }else{
-            std::cout << "J'ai pas trouvé de données chef !!! " << std::endl;    
-        } */
+        
+        //ecriture_rand();
         int data = rand() % 100; // Génère un nombre aléatoire entre 0 et 99
         std::string data_str = std::to_string(data); // Convertit le nombre en chaîne de caractères
         serialPuts(fd, data_str.c_str()); // Envoie les données sur le port série */ 
-        std::cout << "Données envoyées : " << data_str << std::endl;
+        std::cout << "Données envoyées : " << data_str << std::endl; 
+        
+        
         sleep(1); // Fait une pause pendant 1 seconde
     }
 
