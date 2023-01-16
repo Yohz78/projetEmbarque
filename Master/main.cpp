@@ -30,9 +30,12 @@ int main() {
     }
 
     PCA9685 controle_servo;
+    std::cout << "controle_servo.init()" << std::endl;
     controle_servo.init();
+    std::cout << "controle_servo.setServo(0,45)" << std::endl;
     controle_servo.setServo(0,45);
     sleep(3);
+    std::cout << "controle_servo.setServo(0,90)" << std::endl;
     controle_servo.setServo(0,90);
     /*while (true) {
         read_sensor_data(fd);
