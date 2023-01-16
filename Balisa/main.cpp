@@ -24,13 +24,17 @@ int main() {
         return -1;
     }
 
+    Handler handler_test; // Creation du wrapper
+
     while (true) {
-        std::cout << "Valeur de fd=====================> " << fd << std::endl;
+        /*std::cout << "Valeur de fd=====================> " << fd << std::endl;
         int data = rand() % 100; // Génère un nombre aléatoire entre 0 et 99
         std::string data_str = std::to_string(data); // Convertit le nombre en chaîne de caractères
-        serialPuts(fd, data_str.c_str()); // Envoie les données sur le port série
-        std::cout << "Données envoyées : " << data_str << std::endl;
-        sleep(1); // Fait une pause pendant 1 seconde
+        serialPuts(fd, data_str.c_str()); // Envoie les données sur le port série */ 
+        // std::cout << "Données envoyées : " << data_str << std::endl; 
+
+        loop(fd,&handler_test); // Query / Answer Query
+        sleep(5); // Fait une pause pendant 1 seconde
     }
 
     serialClose(fd); // Ferme le port série
