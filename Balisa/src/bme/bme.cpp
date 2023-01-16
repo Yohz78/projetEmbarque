@@ -232,13 +232,14 @@ std::string bme::harvestDataAndRun(){
 
     time_t time_now = time(0);
     const char* dt = ctime(&time_now);
+    std::string date = dt;
 
       int32_t t_fine = getTemperatureCalibration(&cal, raw.temperature);
       this->temp = compensateTemperature(t_fine); // C
       this->pression = compensatePressure(raw.pressure, &cal, t_fine) / 100; // hPa
       this->humidite = compensateHumidity(raw.humidity, &cal, t_fine);       // %
       //float a = getAltitude(p);                         // meters
-      std::string flux = "\"timestamp\": " + dt
+      std::string flux = "\"timestamp\":" + date
                         +",\"temperature\":" + std::to_string(getTemperature())
                         +",\"pressure\": " + std::to_string(getPressure())
                         +",\"humidity\":" + std::to_string(getHumidite());
