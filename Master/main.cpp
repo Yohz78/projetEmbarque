@@ -17,6 +17,7 @@ void* read_sensor_data(void *args) {
             if (c < 0) {
                 std::cout << "Error: Unable to receive data over UART" << std::endl;
             }
+            std::cout << "Des données sont présentes : " << data << std::endl;
             data[index] = c;
             index++;
         }
@@ -28,7 +29,32 @@ void* read_sensor_data(void *args) {
 }
 
 int main() {
-    fd = serialOpen("/dev/ttyS0", 9600); // Ouvre le port série sur /dev/ttyAMA0 à 9600 bauds
+    int fd = serialOpen("/dev/ttyAMA0", 9600); // Ouvre le port série sur /dev/ttyAMA0 à 9600 bauds
+    if (fd < 0) {
+        std::cout << "Error: Unable to open UART device" << std::endl;
+        return -1;
+    }
+
+    while (true) {
+        if (serialDataAvail(fd) > 0) { // Vérifie s'il y a des données disponibles pour lecture
+            std::string data;
+            while (serialDataAvail(fd) > 0) {
+                char c = serialGetchar(fd);
+                data += c;
+            }
+            std::cout << "Données reçues : " << data << std::endl;
+        }else{
+            std::cout << "J'ai pas trouvé de données chef !!! " << std::endl;    
+        }
+    }
+
+    serialClose(fd); // Ferme le port série
+    return 0;
+}
+
+/*
+int main() {
+    fd = serialOpen("/dev/ttyAMA0", 9600); // Ouvre le port série sur /dev/ttyAMA0 à 9600 bauds
     if (fd < 0) {
         std::cout << "Error: Unable to open UART device" << std::endl;
         return -1;
@@ -38,3 +64,4 @@ int main() {
     serialClose(fd); // Ferme le port série
     return 0;
 }
+*/
