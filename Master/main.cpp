@@ -29,7 +29,8 @@ void* read_sensor_data(void *args) {
 }
 
 
-void lecture(){
+void lecture(int fd){
+    std::string commande = "all";
     std::cout << "On envoie la commande " + commande + " au slave" << std::endl;
     serialPuts(fd,commande.c_str());
     sleep(1);

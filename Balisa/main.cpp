@@ -54,7 +54,8 @@ void loop(int fd,Handler* handler) {
     }
 }
 
-void lecture(){
+void lecture(int fd){
+    std::string commande = "all";
     std::cout << "On envoie la commande " + commande + " au slave" << std::endl;
         serialPuts(fd,commande.c_str());
         sleep(1);
@@ -92,6 +93,7 @@ int main() {
         
         
         //lecture();
+        std::string commande = "all";
         std::cout << "On envoie la commande " + commande + " au slave" << std::endl;
         serialPuts(fd,commande.c_str());
         sleep(1);
