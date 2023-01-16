@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <iostream>
+#include <sstream>
 #include <cstring>
 #include <wiringSerial.h>
 #include <cstdlib>
@@ -18,22 +19,8 @@ int main() {
     Handler handler; // Creation du wrapper
 
     while (true) {
-        std::cout << "Valeur de fd=====================> " << fd << std::endl;
-        std::cout << "Valeur de serialDataAvail(fd)====> " << serialDataAvail(fd) << std::endl;
         
-
-        //lecture
-        if (serialDataAvail(fd) > 0) { // Vérifie s'il y a des données disponibles pour lecture
-            std::string data;
-            while (serialDataAvail(fd) > 0) {
-                char c = serialGetchar(fd);
-                data += c;
-            }
-            std::cout << "Données reçues : " << data << std::endl;
-        }
-        else{
-            std::cout << "J'ai pas trouvé de données chef !!! " << std::endl;    
-        } 
+        loop(fd, &handler);
         sleep(1); // Fait une pause pendant 1 seconde  
     }
     serialClose(fd); // Ferme le port série
@@ -47,64 +34,11 @@ int main() {
  * @param[in] Handler handler 
  */
 void loop(int fd,Handler* handler) {
-    if (serialDataAvail(fd)) {
-        char command[20];
-        int index=0;
-        while(serialGetchar(fd)!='\n'){
-            command[index] = serialGetchar(fd);
-            index++;
-        }
-        command[index]='\0';
-        if(strcmp(command,"BME")==0) {
-            std::cout << "---------------------BME280---------------------" << std::endl;
-            std::cout << handler->getBME().harvestDataAndRun() << std::endl;
-            serialPuts(fd,handler->getBME().harvestDataAndRun().c_str());
-        }
-        if(strcmp(command,"HMC")==0) {
-            std::cout << "---------------------HMC---------------------" << std::endl;
-            std::cout << "Valeur HMC : " << handler->getHMCvalue() << std::endl;
-            serialPuts(fd,handler->getHMCvalue().c_str()); // SENDING DATA
-        }
-        if(strcmp(command,"HCSR")==0) {
-            std::cout << "---------------------HCSR---------------------" << std::endl;
-            std::string data = "Mouvement: " + std::to_string(handler->getHCSR().checkMotion()) + "\n";
-            serialPuts(fd, data.c_str()); // SENDING DATA
-        }
-        if(strcmp(command,"all")==0) {
-            std::cout << "---------------------BME280---------------------" << std::endl;
-            std::cout << handler->getBME().harvestDataAndRun() << std::endl;
-            serialPuts(fd,handler->getBME().harvestDataAndRun().c_str());
-            std::cout << "---------------------HMC---------------------" << std::endl;
-            std::cout << "Valeur HMC : " << handler->getHMCvalue() << std::endl;
-            serialPuts(fd,handler->getHMCvalue().c_str()); // SENDING DATA
-            std::cout << "---------------------HCSR---------------------" << std::endl;
-            std::string data = "Mouvement: " + std::to_string(handler->getHCSR().checkMotion()) + "\n";
-            serialPuts(fd, data.c_str()); // SENDING DATA
+            std::ostringstream oss;
+            std::cout << "---------------------DATAS---------------------" << std::endl;
+            oss << handler->getBME().harvestDataAndRun();
+            oss << handler->getHMCvalue();
+            oss << handler->getHCSR().checkMotion();
+            serialPuts(fd,oss.c_str());
             std::cout << "----------------------------------------------" << std::endl;
-        }
-    }
-}
-
-void lecture(int fd){
-    std::string commande = "all";
-    std::cout << "On envoie la commande " + commande + " au slave" << std::endl;
-        serialPuts(fd,commande.c_str());
-        sleep(1);
-        if (serialDataAvail(fd) > 0) { // Vérifie s'il y a des données disponibles pour lecture
-            std::string data;
-            while (serialDataAvail(fd) > 0) {
-                char c = serialGetchar(fd);
-                data += c;
-            }
-            std::cout << "Données reçues : " << data << std::endl;
-        }else{
-            std::cout << "J'ai pas trouvé de données chef !!! " << std::endl;    
-    } 
-}
-
-void ecriture_rand(int fd){
-    int data = rand() % 100; // Génère un nombre aléatoire entre 0 et 99
-    std::string data_str = std::to_string(data); // Convertit le nombre en chaîne de caractères
-    serialPuts(fd, data_str.c_str()); // Envoie les données sur le port série */ 
-    std::cout << "Données envoyées : " << data_str << std::endl;    
 }
