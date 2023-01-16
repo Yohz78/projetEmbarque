@@ -19,9 +19,13 @@
 void loop(int fd,Handler* handler) {
             std::ostringstream oss;
             std::cout << "---------------------DATAS---------------------" << std::endl;
+            oss << "{";
             oss << handler->getBME().harvestDataAndRun();
+            oss << ",";
             oss << handler->getHMCvalue();
+            oss << ",";
             oss << handler->getHCSR().checkMotion();
+            oss << "}";
             serialPuts(fd,oss.str().c_str());
             std::cout << "----------------------------------------------" << std::endl;
 }

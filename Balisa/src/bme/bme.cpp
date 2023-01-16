@@ -238,10 +238,10 @@ std::string bme::harvestDataAndRun(){
       this->pression = compensatePressure(raw.pressure, &cal, t_fine) / 100; // hPa
       this->humidite = compensateHumidity(raw.humidity, &cal, t_fine);       // %
       //float a = getAltitude(p);                         // meters
-      std::string flux = "{\"sensor\": \"bme280\", \"humidity\"" + std::to_string(getHumidite())
-                        +",\"pressure\": " + std::to_string(getPressure())
+      std::string flux = "\"timestamp\": " + dt
                         +",\"temperature\":" + std::to_string(getTemperature())
-                        +", \"timestamp\": " + dt +"}";
+                        +",\"pressure\": " + std::to_string(getPressure())
+                        +",\"humidity\":" + std::to_string(getHumidite());
       /*printf("{\"sensor\":\"bme280\", \"humidity\":%.2f, \"pressure\":%.2f,"
         " \"temperature\":%.2f, \"timestamp\":%d}\n",
         getHumidite(), getPressure(), getTemperature(), (int)time(NULL));*/

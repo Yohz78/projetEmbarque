@@ -27,15 +27,15 @@ HCSR50::~HCSR50()
  * @return true 
  * @return false 
  */
-bool HCSR50::checkMotion(){
+std::string HCSR50::checkMotion(){
     int value = digitalRead(this->motionPin);
     if (value == HIGH) {
         if (this->motionDetected == false) {
             this->motionDetected = true;
         }
-        return true;
+        return "\"Mvt\":\"true\"";
     } else {
         this->motionDetected = false;
     }
-    return false;
+    return "\"Mvt\":\"false\"";
 }
