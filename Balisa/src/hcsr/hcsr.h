@@ -19,6 +19,6 @@ class HCSR50 {
     ~HCSR50();
 
     // Function to check if motion was detected
-    bool checkMotion();
+    std::string checkMotion();
 
 };
