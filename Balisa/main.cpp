@@ -71,7 +71,7 @@ void lecture(int fd){
     } 
 }
 
-void ecriture_rand(){
+void ecriture_rand(int fd){
     int data = rand() % 100; // Génère un nombre aléatoire entre 0 et 99
     std::string data_str = std::to_string(data); // Convertit le nombre en chaîne de caractères
     serialPuts(fd, data_str.c_str()); // Envoie les données sur le port série */ 
@@ -104,9 +104,10 @@ int main() {
                 data += c;
             }
             std::cout << "Données reçues : " << data << std::endl;
-        }else{
+        }
+        else{
             std::cout << "J'ai pas trouvé de données chef !!! " << std::endl;    
-    } 
+        } 
         
         
         sleep(1); // Fait une pause pendant 1 seconde
@@ -152,11 +153,10 @@ int main() {
             }*/
         
         }
-    }
 
     serialClose(fd); // Ferme le port série
     return 0;
-}
+    }
 
 
 
