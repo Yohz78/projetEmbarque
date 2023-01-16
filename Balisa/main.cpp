@@ -18,13 +18,14 @@
 
 
 int main() {
-    int fd = serialOpen("/dev/ttyS0", 9600); // Ouvre le port série sur /dev/ttyS0 à 9600 bauds
+    int fd = serialOpen("/dev/ttyAMA0", 9600); // Ouvre le port série sur /dev/ttyS0 à 9600 bauds
     if (fd < 0) {
         std::cout << "Error: Unable to open UART device" << std::endl;
         return -1;
     }
 
     while (true) {
+        std::cout << "Valeur de fd=====================> " << fd << std::endl;
         int data = rand() % 100; // Génère un nombre aléatoire entre 0 et 99
         std::string data_str = std::to_string(data); // Convertit le nombre en chaîne de caractères
         serialPuts(fd, data_str.c_str()); // Envoie les données sur le port série

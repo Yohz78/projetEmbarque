@@ -36,6 +36,8 @@ int main() {
     }
 
     while (true) {
+        std::cout << "Valeur de fd=====================> " << fd << std::endl;
+        std::cout << "Valeur de serialDataAvail(fd)====> " << serialDataAvail(fd) << std::endl;
         if (serialDataAvail(fd) > 0) { // Vérifie s'il y a des données disponibles pour lecture
             std::string data;
             while (serialDataAvail(fd) > 0) {
