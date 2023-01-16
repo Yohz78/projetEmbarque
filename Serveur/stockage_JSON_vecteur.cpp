@@ -19,14 +19,14 @@ int main() {
 
     std::cout << "Data stored in vector: " << std::endl;
     for (const auto &e : data) {
-        std::cout << "timestamp: " << e["timestamp"] << std::endl;
-        std::cout << "humidity: " << e["humidity"] << std::endl;
-        std::cout << "temp: " << e["temp"] << std::endl;
-        std::cout << "pression: " << e["pression"] << std::endl;
-        std::cout << "x: " << e["x"] << std::endl;
-        std::cout << "y: " << e["y"] << std::endl;
-        std::cout << "z: " << e["z"] << std::endl;
-        std::cout << "mvt: " << e["mvt"] << std::endl;
+        std::cout << "timestamp: " << entry["timestamp"] << std::endl;
+        std::cout << "humidity: " << entry["humidity"] << std::endl;
+        std::cout << "temp: " << entry["temp"] << std::endl;
+        std::cout << "pression: " << entry["pression"] << std::endl;
+        std::cout << "x: " << entry["x"] << std::endl;
+        std::cout << "y: " << entry["y"] << std::endl;
+        std::cout << "z: " << entry["z"] << std::endl;
+        std::cout << "mvt: " << entry["mvt"] << std::endl;
     }
     return 0;
 }
