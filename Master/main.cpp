@@ -43,6 +43,7 @@ int main() {
         std::cout << "Valeur de serialDataAvail(fd)====> " << serialDataAvail(fd) << std::endl;
         std::cout << "On envoie la commande " + commande + " au slave" << std::endl;
         serialPuts(fd,commande.c_str());
+        sleep(1);
         if (serialDataAvail(fd) > 0) { // Vérifie s'il y a des données disponibles pour lecture
             std::string data;
             while (serialDataAvail(fd) > 0) {
@@ -53,7 +54,7 @@ int main() {
         }else{
             std::cout << "J'ai pas trouvé de données chef !!! " << std::endl;    
         }
-        sleep(5); // Fait une pause pendant 1 seconde
+        sleep(4); // Fait une pause pendant 1 seconde
     }
 
     serialClose(fd); // Ferme le port série

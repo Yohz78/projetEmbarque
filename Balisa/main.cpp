@@ -79,7 +79,7 @@ int main() {
                 index++;
             }
             command[index]='\0';
-            if(strcmp(command,"BME")==0) {
+            /*if(strcmp(command,"BME")==0) {
                 std::cout << "---------------------BME280---------------------" << std::endl;
                 std::cout << handler.getBME().harvestDataAndRun() << std::endl;
                 serialPuts(fd,handler.getBME().harvestDataAndRun().c_str());
@@ -93,7 +93,7 @@ int main() {
                 std::cout << "---------------------HCSR---------------------" << std::endl;
                 std::string data = "Mouvement: " + std::to_string(handler.getHCSR().checkMotion()) + "\n";
                 serialPuts(fd, data.c_str()); // SENDING DATA
-            }
+            }*/
             if(strcmp(command,"all")==0) {
                 std::cout << "---------------------BME280---------------------" << std::endl;
                 std::cout << handler.getBME().harvestDataAndRun() << std::endl;
