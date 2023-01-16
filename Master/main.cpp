@@ -13,12 +13,10 @@ void* read_sensor_data(void *args) {
             if (c < 0) {
                 std::cout << "Error: Unable to receive data over UART" << std::endl;
             }
-            std::cout << "Des données sont présentes : " << data << std::endl;
             data[index] = c;
             index++;
         }
         data[index] = '\0';
-        std::cout << "Données reçues : " << data << std::endl;
         std::cout << "Données reçues : " << data[0] << std::endl;
         sleep(1); // Fait une pause pendant interval secondes
     }
@@ -33,7 +31,6 @@ int main() {
 
     while (true) {
         read_sensor_data(fd);
-        sleep(1); // Fait une pause pendant 1 seconde
     }
 
     serialClose(fd); // Ferme le port série
