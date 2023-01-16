@@ -28,8 +28,8 @@ std::string Handler::getHMCvalue(){
     this->hmc.readX();
     this->hmc.readY();
     this->hmc.readZ();
-    std::string flux = "x = " + std::to_string(this->hmc.getX())+
-                       "y = " + std::to_string(this->hmc.getY())+
-                       "z = " + std::to_string(this->hmc.getZ());
+    std::string flux = "\"x\":" + std::to_string(this->hmc.getX())+
+                       ",\"y\":" + std::to_string(this->hmc.getY())+
+                       ",\"z\":" + std::to_string(this->hmc.getZ());
     return flux;
 }
