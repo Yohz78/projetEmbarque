@@ -53,3 +53,9 @@ Boost est une bibliothèque de logiciels pour le langage de programmation C++ qu
 des algorithmes, des fonctions mathématiques, des expressions régulières, des outils de manipulation de chaînes, des gestionnaires de mémoire, et plus encore.
 Ces fonctionnalités sont souvent utilisées pour améliorer la performance et la productivité lors de la programmation en C++. Boost est open-source et est distribué sous la licence Boost Software.
 Il est largement utilisé dans les projets open-source et commerciaux.
+**************************************************************************************************************************************************************
+Bibliothèque Adafruit:
+Ce code initialise la communication I2C avec la carte PCA9685, configure la fréquence PWM à 50 Hz, puis utilise la fonction setPWM pour définir la position du servo connecté au canal 0.
+Notez que les valeurs de 0, 150, 375, 600 sont des exemples de valeurs pour les positions de 0, 90, 180 degrés respectivement, ces valeurs p :euvent varier en fonction de votre servo. 
+Il est important de consulter la documentation du servo pour connaître la plage de valeurs appropriées.
+Il est important de noter que ceci n'est qu'un exemple de base, vous devriez ajuster ce code en fonction de vos besoins spécifiques.
