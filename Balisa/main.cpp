@@ -22,7 +22,7 @@ void loop(int fd,Handler* handler) {
             oss << handler->getBME().harvestDataAndRun();
             oss << handler->getHMCvalue();
             oss << handler->getHCSR().checkMotion();
-            serialPuts(fd,oss.c_str());
+            serialPuts(fd,oss);
             std::cout << "----------------------------------------------" << std::endl;
 }
 
