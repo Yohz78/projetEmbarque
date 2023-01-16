@@ -64,13 +64,49 @@ int main() {
     Handler handler_test; // Creation du wrapper
 
     while (true) {
-        /*std::cout << "Valeur de fd=====================> " << fd << std::endl;
-        int data = rand() % 100; // Génère un nombre aléatoire entre 0 et 99
+        std::cout << "Valeur de fd=====================> " << fd << std::endl;
+        std::cout << "Valeur de serialDataAvail(fd)====> " << serialDataAvail(fd) << std::endl;
+        /*int data = rand() % 100; // Génère un nombre aléatoire entre 0 et 99
         std::string data_str = std::to_string(data); // Convertit le nombre en chaîne de caractères
         serialPuts(fd, data_str.c_str()); // Envoie les données sur le port série */ 
         // std::cout << "Données envoyées : " << data_str << std::endl; 
 
-        loop(fd,&handler_test); // Query / Answer Query
+       if (serialDataAvail(fd)) {
+            char command[20];
+            int index=0;
+            while(serialGetchar(fd)!='\n'){
+                command[index] = serialGetchar(fd);
+                index++;
+            }
+            command[index]='\0';
+            if(strcmp(command,"BME")==0) {
+                std::cout << "---------------------BME280---------------------" << std::endl;
+                std::cout << handler->getBME().harvestDataAndRun() << std::endl;
+                serialPuts(fd,handler->getBME().harvestDataAndRun().c_str());
+            }
+            if(strcmp(command,"HMC")==0) {
+                std::cout << "---------------------HMC---------------------" << std::endl;
+                std::cout << "Valeur HMC : " << handler->getHMCvalue() << std::endl;
+                serialPuts(fd,handler->getHMCvalue().c_str()); // SENDING DATA
+            }
+            if(strcmp(command,"HCSR")==0) {
+                std::cout << "---------------------HCSR---------------------" << std::endl;
+                std::string data = "Mouvement: " + std::to_string(handler->getHCSR().checkMotion()) + "\n";
+                serialPuts(fd, data.c_str()); // SENDING DATA
+            }
+            if(strcmp(command,"all")==0) {
+                std::cout << "---------------------BME280---------------------" << std::endl;
+                std::cout << handler->getBME().harvestDataAndRun() << std::endl;
+                serialPuts(fd,handler->getBME().harvestDataAndRun().c_str());
+                std::cout << "---------------------HMC---------------------" << std::endl;
+                std::cout << "Valeur HMC : " << handler->getHMCvalue() << std::endl;
+                serialPuts(fd,handler->getHMCvalue().c_str()); // SENDING DATA
+                std::cout << "---------------------HCSR---------------------" << std::endl;
+                std::string data = "Mouvement: " + std::to_string(handler->getHCSR().checkMotion()) + "\n";
+                serialPuts(fd, data.c_str()); // SENDING DATA
+                std::cout << "----------------------------------------------" << std::endl;
+            }
+        }
         sleep(5); // Fait une pause pendant 1 seconde
     }
 
