@@ -2,7 +2,7 @@
 #include <unistd.h> // pour sleep
 #include <iostream>
 //#include <json/json.h>
-#include "../src/pca.h"
+#include "src/pca.h"
 
 void* read_sensor_data(int fd) {
     while (true) {
