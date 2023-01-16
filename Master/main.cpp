@@ -43,6 +43,8 @@ int main() {
                 data += c;
             }
             std::cout << "Données reçues : " << data << std::endl;
+        }else{
+            std::cout << "J'ai pas trouvé de données chef !!! " << std::endl;    
         }
     }
 
