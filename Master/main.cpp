@@ -2,6 +2,7 @@
 #include <unistd.h> // pour sleep
 #include <iostream>
 //#include <json/json.h>
+#include "../src/pca.h"
 
 void* read_sensor_data(int fd) {
     while (true) {
@@ -28,9 +29,14 @@ int main() {
         return -1;
     }
 
-    while (true) {
+    PCA9685 controle_servo;
+    controle_servo.init();
+    controle_servo.setServo(0,45);
+    sleep(3);
+    controle_servo.setServo(0,90);
+    /*while (true) {
         read_sensor_data(fd);
-    }
+    }*/
 
     serialClose(fd); // Ferme le port série
     return 0;
