@@ -58,7 +58,7 @@ bool PCA9685::init(){
     else{
 	    error = true;
     }
-    log_init(this->getNom(), !error);
+    //log_init(this->getNom(), !error);
 
     return !error;
 }
@@ -67,7 +67,7 @@ void PCA9685::clean()
 {
     if (deviceI2C != NULL)
     {
-        PLOGD << "Clean de " << this->getNom();
+        //PLOGD << "Clean de " << this->getNom();
         delete deviceI2C;
         deviceI2C = nullptr;
     }
