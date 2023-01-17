@@ -32,7 +32,7 @@ int main() {
         return -1;
     }
 
-    PCA9685 pca;
+    PCA9685 pca(1,0x40);
     pca.init();
     pca.moveBlueFlag(0);
     sleep(2);
