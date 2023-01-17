@@ -27,15 +27,31 @@ void PCA9685::setServo(int servo, int angle){
     wiringPiI2CWriteReg8(this->fd, LED0_OFF_H + 4 * servo, off >> 8);    
 }*/
 
+/**
+ * @brief Construct a new PCA9685::PCA9685 object
+ * 
+ * @param i2c_bus 
+ * @param i2c_address 
+ */
 PCA9685::PCA9685(uint8_t i2c_bus, uint8_t i2c_address) : i2c_bus(i2c_bus), i2c_address(i2c_address), nom("PCA9685"), deviceI2C(nullptr)
 {
     
 }
 
+/**
+ * @brief Destroy the PCA9685::PCA9685 object
+ * 
+ */
 PCA9685::~PCA9685(){
     this->clean();
 }
 
+/**
+ * @brief Initialisation function for the PCA9685 card
+ * 
+ * @return true 
+ * @return false 
+ */
 bool PCA9685::init(){
     //std::cout  << "Initialisation de la carte de controle des moteurs" << std::endl;
     deviceI2C = new i2c(this->getAdresse(), this->getBus());
@@ -62,6 +78,10 @@ bool PCA9685::init(){
     return !error;
 }
 
+/**
+ * @brief CLean function for the destructor
+ * 
+ */
 void PCA9685::clean()
 {
     if (deviceI2C != NULL)
@@ -71,6 +91,11 @@ void PCA9685::clean()
     }
 }
 
+/**
+ * @brief Function to set pwm
+ * 
+ * @param frequency 
+ */
 void PCA9685::setPwmFrequency(uint16_t frequency){
     float prescaleval = 25000000.0; //25MHz
     prescaleval /= 4096.0;         //12-bit
@@ -90,6 +115,13 @@ void PCA9685::setPwmFrequency(uint16_t frequency){
     deviceI2C->WriteReg8(MODE1, oldmode | 0x80);
 }
 
+/**
+ * @brief Function setting pwm 
+ * 
+ * @param channel 
+ * @param on 
+ * @param off 
+ */
 void PCA9685::setPwm(uint8_t channel, uint16_t on, uint16_t off){
     deviceI2C->WriteReg8(LED0_ON_L+4*channel, on & 0xFF);
     deviceI2C->WriteReg8(LED0_ON_H+4*channel, on >> 8);
@@ -97,6 +129,12 @@ void PCA9685::setPwm(uint8_t channel, uint16_t on, uint16_t off){
     deviceI2C->WriteReg8(LED0_OFF_H+4*channel, off >> 8);
 }
 
+/**
+ * @brief Function setting pwm
+ * 
+ * @param on 
+ * @param off 
+ */
 void PCA9685::setAllPwm(uint16_t on, uint16_t off){
     deviceI2C->WriteReg8(ALL_LED_ON_L, on & 0xFF);
     deviceI2C->WriteReg8(ALL_LED_ON_H, on >> 8);
@@ -104,32 +142,64 @@ void PCA9685::setAllPwm(uint16_t on, uint16_t off){
     deviceI2C->WriteReg8(ALL_LED_OFF_H, off >> 8);
 }
 
+/**
+ * @brief Move the servo motor
+ * 
+ * @param channel 
+ * @param deg 
+ */
 void PCA9685::move(uint8_t channel, int deg){
     float pwm = 570.0 + ((deg/180.0) * 1700.0);
     pwm = (4096.0/20000.0) * pwm;
     setPwm(channel, 0, (int) pwm);
 }
 
+/**
+ * @brief Move the servo motor with the Yellow flag
+ * 
+ * @param deg 
+ */
 void PCA9685::moveYellowFlag(int deg)
 {
     move(yellowFlagChannel, deg);
 }
 
+/**
+ * @brief Move the servo motor with the Blue flag
+ * 
+ * @param deg 
+ */
 void PCA9685::moveBlueFlag(int deg)
 {
     move(blueFlagChannel, deg);
 }
 
+/**
+ * @brief Getter for error
+ * 
+ * @return true 
+ * @return false 
+ */
 bool PCA9685::getError()
 {
 	return error;
 }
 
+/**
+ * @brief Getter for i2c_adress
+ * 
+ * @return uint8_t 
+ */
 uint8_t PCA9685::getAdresse()
 {
     return i2c_address;
 }
 
+/**
+ * @brief Getter for i2c_bus
+ * 
+ * @return uint8_t 
+ */
 uint8_t PCA9685::getBus()
 {
     return i2c_bus;

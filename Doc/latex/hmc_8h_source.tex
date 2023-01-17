@@ -1,0 +1,33 @@
+\hypertarget{hmc_8h_source}{}\doxysection{hmc.\+h}
+\label{hmc_8h_source}\index{Balisa/src/hmc/hmc.h@{Balisa/src/hmc/hmc.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <wiringPiI2C.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ HMC\_ADDRESS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x68}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_h_m_c5883_l}{HMC5883L}}\{}
+\DoxyCodeLine{00013\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{int}\ fd;\ \textcolor{comment}{//\ I2C\ file\ descriptor}}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{int}\ x,\ y,\ z,\ temp;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//\ Constructor}}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{class_h_m_c5883_l_ab552ed5dd985c500aa37ac11f9ed3eed}{HMC5883L}}();}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{comment}{//\ Destructor}}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{class_h_m_c5883_l_a040912db6d866437216b93073e4d29fa}{\string~HMC5883L}}();}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//\ Read\ data\ from\ the\ sensor}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_h_m_c5883_l_a9eba5a315b85287366147179ba6e6c30}{readX}}();}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_h_m_c5883_l_a20e97c5b17b8bdc19ce1f923bc00e8ca}{readY}}();}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_h_m_c5883_l_ab54d9ba816027c210bdb09e86960578c}{readZ}}();}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_h_m_c5883_l_a8f75b3c024c566e2a085f4b7e45025de}{getX}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_h_m_c5883_l_a9e408564702102cf5b2c3a539910735e}{getY}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_h_m_c5883_l_a2979ec9dbd3df31944923118833413ea}{getZ}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00031\ \};}
+
+\end{DoxyCode}

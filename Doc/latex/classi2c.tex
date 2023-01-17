@@ -1,0 +1,232 @@
+\hypertarget{classi2c}{}\doxysection{i2c Class Reference}
+\label{classi2c}\index{i2c@{i2c}}
+
+
+Class managing read and write with \mbox{\hyperlink{classi2c}{i2c}} interfaces.  
+
+
+
+
+{\ttfamily \#include $<$i2c.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classi2c_a5162468c52567c6cfc93a042035c286e}{i2c}} (int adresse\+I2C, int id\+Bus\+I2C=I2\+C\+\_\+\+DEFAULT\+\_\+\+BUS)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{classi2c_a5162468c52567c6cfc93a042035c286e}{i2c\+::i2c}} object. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classi2c_ace1c0d95eb1c6f64c20b7211a46fe1c0}{get\+Error}} ()
+\begin{DoxyCompactList}\small\item\em Return Error. \end{DoxyCompactList}\item 
+unsigned char \mbox{\hyperlink{classi2c_ac2a3e1068233ea53804d3acfe8f78e5e}{Read}} ()
+\begin{DoxyCompactList}\small\item\em Read data from bus. \end{DoxyCompactList}\item 
+unsigned char \mbox{\hyperlink{classi2c_af5a0be8f2e79aaa87b844324f05da049}{Read\+Reg8}} (int reg)
+\begin{DoxyCompactList}\small\item\em Read 8 bit register. \end{DoxyCompactList}\item 
+unsigned short \mbox{\hyperlink{classi2c_ad9326bcbbf958f7cf9514970c428a729}{Read\+Reg16}} (int reg)
+\begin{DoxyCompactList}\small\item\em Read 16 bit register. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classi2c_a02195aeec200f00fc36d9f7f51f662c2}{Read\+Block\+Data}} (int reg, int length, int $\ast$values)
+\begin{DoxyCompactList}\small\item\em Read Block Data. \end{DoxyCompactList}\item 
+unsigned char \mbox{\hyperlink{classi2c_a95c8ec96fddd3882c6e096d3e15ec3f6}{Write}} (int data)
+\begin{DoxyCompactList}\small\item\em Write func. \end{DoxyCompactList}\item 
+unsigned char \mbox{\hyperlink{classi2c_a48f0c215651419cffc45e0fb0bb4cfb9}{Write\+Reg8}} (int reg, int value)
+\begin{DoxyCompactList}\small\item\em Write into a 8 bit register. \end{DoxyCompactList}\item 
+unsigned short \mbox{\hyperlink{classi2c_a8bb0d1c4db2f09368cbcfbbe1b2f01ef}{Write\+Reg16}} (int reg, int value)
+\begin{DoxyCompactList}\small\item\em Write into a 16 bit register. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classi2c_a960dd46475ba229e7fa270a4ce4e332e}{Write\+Block\+Data}} (int reg, int length, int $\ast$data)
+\begin{DoxyCompactList}\small\item\em Write Block Data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class managing read and write with \mbox{\hyperlink{classi2c}{i2c}} interfaces. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classi2c_a5162468c52567c6cfc93a042035c286e}\label{classi2c_a5162468c52567c6cfc93a042035c286e}} 
+\index{i2c@{i2c}!i2c@{i2c}}
+\index{i2c@{i2c}!i2c@{i2c}}
+\doxysubsubsection{\texorpdfstring{i2c()}{i2c()}}
+{\footnotesize\ttfamily i2c\+::i2c (\begin{DoxyParamCaption}\item[{int}]{adresse\+I2C,  }\item[{int}]{id\+Bus\+I2C = {\ttfamily I2C\+\_\+DEFAULT\+\_\+BUS} }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{classi2c_a5162468c52567c6cfc93a042035c286e}{i2c\+::i2c}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em adresse\+I2C} & \\
+\hline
+{\em id\+Bus\+I2C} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classi2c_ace1c0d95eb1c6f64c20b7211a46fe1c0}\label{classi2c_ace1c0d95eb1c6f64c20b7211a46fe1c0}} 
+\index{i2c@{i2c}!getError@{getError}}
+\index{getError@{getError}!i2c@{i2c}}
+\doxysubsubsection{\texorpdfstring{getError()}{getError()}}
+{\footnotesize\ttfamily bool i2c\+::get\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Return Error. 
+
+\begin{DoxyReturn}{Returns}
+true 
+
+false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classi2c_ac2a3e1068233ea53804d3acfe8f78e5e}\label{classi2c_ac2a3e1068233ea53804d3acfe8f78e5e}} 
+\index{i2c@{i2c}!Read@{Read}}
+\index{Read@{Read}!i2c@{i2c}}
+\doxysubsubsection{\texorpdfstring{Read()}{Read()}}
+{\footnotesize\ttfamily unsigned char i2c\+::\+Read (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Read data from bus. 
+
+\begin{DoxyReturn}{Returns}
+unsigned char 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classi2c_a02195aeec200f00fc36d9f7f51f662c2}\label{classi2c_a02195aeec200f00fc36d9f7f51f662c2}} 
+\index{i2c@{i2c}!ReadBlockData@{ReadBlockData}}
+\index{ReadBlockData@{ReadBlockData}!i2c@{i2c}}
+\doxysubsubsection{\texorpdfstring{ReadBlockData()}{ReadBlockData()}}
+{\footnotesize\ttfamily int i2c\+::\+Read\+Block\+Data (\begin{DoxyParamCaption}\item[{int}]{reg,  }\item[{int}]{length,  }\item[{int $\ast$}]{values }\end{DoxyParamCaption})}
+
+
+
+Read Block Data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & \\
+\hline
+{\em length} & \\
+\hline
+{\em values} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classi2c_ad9326bcbbf958f7cf9514970c428a729}\label{classi2c_ad9326bcbbf958f7cf9514970c428a729}} 
+\index{i2c@{i2c}!ReadReg16@{ReadReg16}}
+\index{ReadReg16@{ReadReg16}!i2c@{i2c}}
+\doxysubsubsection{\texorpdfstring{ReadReg16()}{ReadReg16()}}
+{\footnotesize\ttfamily unsigned short i2c\+::\+Read\+Reg16 (\begin{DoxyParamCaption}\item[{int}]{reg }\end{DoxyParamCaption})}
+
+
+
+Read 16 bit register. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+unsigned short 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classi2c_af5a0be8f2e79aaa87b844324f05da049}\label{classi2c_af5a0be8f2e79aaa87b844324f05da049}} 
+\index{i2c@{i2c}!ReadReg8@{ReadReg8}}
+\index{ReadReg8@{ReadReg8}!i2c@{i2c}}
+\doxysubsubsection{\texorpdfstring{ReadReg8()}{ReadReg8()}}
+{\footnotesize\ttfamily unsigned char i2c\+::\+Read\+Reg8 (\begin{DoxyParamCaption}\item[{int}]{reg }\end{DoxyParamCaption})}
+
+
+
+Read 8 bit register. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+unsigned char 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classi2c_a95c8ec96fddd3882c6e096d3e15ec3f6}\label{classi2c_a95c8ec96fddd3882c6e096d3e15ec3f6}} 
+\index{i2c@{i2c}!Write@{Write}}
+\index{Write@{Write}!i2c@{i2c}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}}
+{\footnotesize\ttfamily unsigned char i2c\+::\+Write (\begin{DoxyParamCaption}\item[{int}]{data }\end{DoxyParamCaption})}
+
+
+
+Write func. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+unsigned char 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classi2c_a960dd46475ba229e7fa270a4ce4e332e}\label{classi2c_a960dd46475ba229e7fa270a4ce4e332e}} 
+\index{i2c@{i2c}!WriteBlockData@{WriteBlockData}}
+\index{WriteBlockData@{WriteBlockData}!i2c@{i2c}}
+\doxysubsubsection{\texorpdfstring{WriteBlockData()}{WriteBlockData()}}
+{\footnotesize\ttfamily int i2c\+::\+Write\+Block\+Data (\begin{DoxyParamCaption}\item[{int}]{reg,  }\item[{int}]{length,  }\item[{int $\ast$}]{values }\end{DoxyParamCaption})}
+
+
+
+Write Block Data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & \\
+\hline
+{\em length} & \\
+\hline
+{\em values} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classi2c_a8bb0d1c4db2f09368cbcfbbe1b2f01ef}\label{classi2c_a8bb0d1c4db2f09368cbcfbbe1b2f01ef}} 
+\index{i2c@{i2c}!WriteReg16@{WriteReg16}}
+\index{WriteReg16@{WriteReg16}!i2c@{i2c}}
+\doxysubsubsection{\texorpdfstring{WriteReg16()}{WriteReg16()}}
+{\footnotesize\ttfamily unsigned short i2c\+::\+Write\+Reg16 (\begin{DoxyParamCaption}\item[{int}]{reg,  }\item[{int}]{value }\end{DoxyParamCaption})}
+
+
+
+Write into a 16 bit register. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & \\
+\hline
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+unsigned short 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classi2c_a48f0c215651419cffc45e0fb0bb4cfb9}\label{classi2c_a48f0c215651419cffc45e0fb0bb4cfb9}} 
+\index{i2c@{i2c}!WriteReg8@{WriteReg8}}
+\index{WriteReg8@{WriteReg8}!i2c@{i2c}}
+\doxysubsubsection{\texorpdfstring{WriteReg8()}{WriteReg8()}}
+{\footnotesize\ttfamily unsigned char i2c\+::\+Write\+Reg8 (\begin{DoxyParamCaption}\item[{int}]{reg,  }\item[{int}]{value }\end{DoxyParamCaption})}
+
+
+
+Write into a 8 bit register. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reg} & \\
+\hline
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+unsigned char 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Master/src/i2c/i2c.\+h\item 
+Master/src/i2c/i2c.\+cpp\end{DoxyCompactItemize}

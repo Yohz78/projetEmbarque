@@ -1,0 +1,104 @@
+\hypertarget{pca_8h_source}{}\doxysection{pca.\+h}
+\label{pca_8h_source}\index{Master/src/pca/pca.h@{Master/src/pca/pca.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PCA\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PCA\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}../i2c/i2c.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ MODE1\ \ \ \ \ \ \ \ \ \ \ 0x00}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ MODE2\ \ \ \ \ \ \ \ \ \ \ 0x01}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ SUBADR1\ \ \ \ \ \ \ \ \ 0x02}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ SUBADR2\ \ \ \ \ \ \ \ \ 0x03}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ SUBADR3\ \ \ \ \ \ \ \ \ 0x04}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ PRESCALE\ \ \ \ \ \ \ \ 0xFE}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ LED0\_ON\_L\ \ \ \ \ \ \ 0x06}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ LED0\_ON\_H\ \ \ \ \ \ \ 0x07}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ LED0\_OFF\_L\ \ \ \ \ \ 0x08}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ LED0\_OFF\_H\ \ \ \ \ \ 0x09}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ ALL\_LED\_ON\_L\ \ \ \ 0xFA}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ ALL\_LED\_ON\_H\ \ \ \ 0xFB}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ ALL\_LED\_OFF\_L\ \ \ 0xFC}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ ALL\_LED\_OFF\_H\ \ \ 0xFD}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ Bits}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ RESTART\ \ \ \ \ \ \ \ \ 0x80}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ SLEEP\ \ \ \ \ \ \ \ \ \ \ 0x10}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ ALLCALL\ \ \ \ \ \ \ \ \ 0x01}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ INVRT\ \ \ \ \ \ \ \ \ \ \ 0x10}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ OUTDRV\ \ \ \ \ \ \ \ \ \ 0x04}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ PAN\ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ TILT\ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#define\ FREQUENCY\ \ \ \ \ \ \ 50}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ CLOCKFREQ\ \ \ \ \ \ \ 25000000}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ PANOFFSET\ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ PANSCALE\ \ \ \ \ \ \ \ 1.4}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ TILTOFFSET\ \ \ \ \ \ 30}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ TILTSCALE\ \ \ \ \ \ \ 1.43}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ PANMAX\ \ \ \ \ \ \ \ \ \ 270}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ PANMIN\ \ \ \ \ \ \ \ \ \ 90}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ TILTMAX\ \ \ \ \ \ \ \ \ 90}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ TILTMIN\ \ \ \ \ \ \ \ \ -\/45}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_p_c_a9685}{PCA9685}}}
+\DoxyCodeLine{00046\ \{}
+\DoxyCodeLine{00047\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_p_c_a9685}{PCA9685}}(uint8\_t\ i2c\_bus,\ uint8\_t\ i2c\_address);}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{class_p_c_a9685_a4b7e96c290456da4c0018ef9270939f3}{\string~PCA9685}}();}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_p_c_a9685_a436dbfc6cf3b5e2499772b1dfad9a485}{init}}();}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_c_a9685_a284a79fa0e272631ba80a8ad266b0873}{clean}}();}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_p_c_a9685_ae034242d5f2ec3c0f1402b63a7c6fd0a}{getError}}();}
+\DoxyCodeLine{00053\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{class_p_c_a9685_a50d52cf1cd6a9dd7e4b9d6218b04a50e}{getBus}}();}
+\DoxyCodeLine{00054\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{class_p_c_a9685_a2d04401a0d035166b326a65d49e48a88}{getAdresse}}();}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ getNom()\ \{\textcolor{keywordflow}{return}\ nom;\};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_c_a9685_a3ddfb8fd310205bf4c3bf6e5f0e5017f}{moveYellowFlag}}(\textcolor{keywordtype}{int}\ deg);}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_p_c_a9685_a8e5efd35508d691ec1d5f92acaab773a}{moveBlueFlag}}(\textcolor{keywordtype}{int}\ deg);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ private\ :}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ setPwmFrequency(uint16\_t\ frequency);}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ setPwm(uint8\_t\ channel,\ uint16\_t\ on,\ uint16\_t\ off);}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ setAllPwm(uint16\_t\ on,\ uint16\_t\ off);}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ move(uint8\_t\ channel\ ,\ \textcolor{keywordtype}{int}\ deg);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ i2c\_bus;}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ i2c\_address;}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ nom;}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ yellowFlagChannel\ =1;}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ blueFlagChannel\ =\ 2;}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{classi2c}{i2c}}\ *deviceI2C;}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{bool}\ error;}
+\DoxyCodeLine{00079\ \};}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ PCA\_H}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{comment}{/*\#define\ LED0\_ON\_L\ 0x06}}
+\DoxyCodeLine{00085\ \textcolor{comment}{\#define\ LED0\_ON\_H\ 0x07}}
+\DoxyCodeLine{00086\ \textcolor{comment}{\#define\ LED0\_OFF\_L\ 0x08}}
+\DoxyCodeLine{00087\ \textcolor{comment}{\#define\ LED0\_OFF\_H\ 0x09}}
+\DoxyCodeLine{00088\ \textcolor{comment}{}}
+\DoxyCodeLine{00089\ \textcolor{comment}{class\ PCA9685\ \{}}
+\DoxyCodeLine{00090\ \textcolor{comment}{\ \ \ \ private:}}
+\DoxyCodeLine{00091\ \textcolor{comment}{\ \ \ \ \ \ \ \ int\ fd;}}
+\DoxyCodeLine{00092\ \textcolor{comment}{\ \ \ \ \ \ \ \ const\ int\ PCA9685\_ADDRESS\ =\ 0x40;}}
+\DoxyCodeLine{00093\ \textcolor{comment}{\ \ \ \ \ \ \ \ const\ int\ PCA9685\_MODE1\ =\ 0x00;}}
+\DoxyCodeLine{00094\ \textcolor{comment}{\ \ \ \ \ \ \ \ const\ int\ PCA9685\_PRESCALE\ =\ 0xFE;}}
+\DoxyCodeLine{00095\ \textcolor{comment}{\ \ \ \ \ \ \ \ const\ int\ SERVO\_1\ =\ 0;}}
+\DoxyCodeLine{00096\ \textcolor{comment}{\ \ \ \ \ \ \ \ const\ int\ SERVO\_2\ =\ 1;}}
+\DoxyCodeLine{00097\ \textcolor{comment}{}}
+\DoxyCodeLine{00098\ \textcolor{comment}{\ \ \ \ public:}}
+\DoxyCodeLine{00099\ \textcolor{comment}{\ \ \ \ \ \ \ \ void\ init();}}
+\DoxyCodeLine{00100\ \textcolor{comment}{}}
+\DoxyCodeLine{00101\ \textcolor{comment}{\ \ \ \ \ \ \ \ void\ setServo(int\ servo,\ int\ angle);}}
+\DoxyCodeLine{00102\ \textcolor{comment}{\};\ */}\ }
+
+\end{DoxyCode}

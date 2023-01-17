@@ -1,0 +1,34 @@
+\hypertarget{handler_8h_source}{}\doxysection{handler.\+h}
+\label{handler_8h_source}\index{Balisa/src/handler/handler.h@{Balisa/src/handler/handler.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <pthread.h>}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}../hcsr/hcsr.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../bme/bme.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../hmc/hmc.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_handler}{Handler}}\{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_h_c_s_r50}{HCSR50}}\ hcsr;}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_h_m_c5883_l}{HMC5883L}}\ hmc;}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classbme}{bme}}\ bme280;}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_handler_a6eb353aae22778422bc71f6b00aad8be}{Handler}}();}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{class_handler_ae28d722f283b987386f29ce960cd3a6b}{\string~Handler}}();}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{class_h_c_s_r50}{HCSR50}}\ getHCSR()\ \{\textcolor{keywordflow}{return}\ hcsr;\}}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{class_h_m_c5883_l}{HMC5883L}}\ getHMC()\{\textcolor{keywordflow}{return}\ hmc;\}}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{classbme}{bme}}\ getBME()\{\textcolor{keywordflow}{return}\ bme280;\}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ std::string\ \mbox{\hyperlink{class_handler_a7bd0e88a87bfe01e456138bd24761800}{getHMCvalue}}();}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{comment}{//void\ run();}}
+\DoxyCodeLine{00032\ \};}
+
+\end{DoxyCode}

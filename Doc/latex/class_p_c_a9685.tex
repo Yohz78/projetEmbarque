@@ -1,0 +1,173 @@
+\hypertarget{class_p_c_a9685}{}\doxysection{PCA9685 Class Reference}
+\label{class_p_c_a9685}\index{PCA9685@{PCA9685}}
+
+
+Class managing the \mbox{\hyperlink{class_p_c_a9685}{PCA9685}} card, and handle the servo motors.  
+
+
+
+
+{\ttfamily \#include $<$pca.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_p_c_a9685_a6d8810af1c03618141bd327643c06bb0}{PCA9685}} (uint8\+\_\+t i2c\+\_\+bus, uint8\+\_\+t i2c\+\_\+address)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_p_c_a9685_a6d8810af1c03618141bd327643c06bb0}{PCA9685\+::\+PCA9685}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_p_c_a9685_a4b7e96c290456da4c0018ef9270939f3}{$\sim$\+PCA9685}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_p_c_a9685_a6d8810af1c03618141bd327643c06bb0}{PCA9685\+::\+PCA9685}} object. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_p_c_a9685_a436dbfc6cf3b5e2499772b1dfad9a485}{init}} ()
+\begin{DoxyCompactList}\small\item\em Initialisation function for the \mbox{\hyperlink{class_p_c_a9685}{PCA9685}} card. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_p_c_a9685_a284a79fa0e272631ba80a8ad266b0873}{clean}} ()
+\begin{DoxyCompactList}\small\item\em CLean function for the destructor. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_p_c_a9685_ae034242d5f2ec3c0f1402b63a7c6fd0a}{get\+Error}} ()
+\begin{DoxyCompactList}\small\item\em Getter for error. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{class_p_c_a9685_a50d52cf1cd6a9dd7e4b9d6218b04a50e}{get\+Bus}} ()
+\begin{DoxyCompactList}\small\item\em Getter for i2c\+\_\+bus. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{class_p_c_a9685_a2d04401a0d035166b326a65d49e48a88}{get\+Adresse}} ()
+\begin{DoxyCompactList}\small\item\em Getter for i2c\+\_\+adress. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_p_c_a9685_a0f4925bd132149a569cb96fb5e915f63}\label{class_p_c_a9685_a0f4925bd132149a569cb96fb5e915f63}} 
+const char $\ast$ {\bfseries get\+Nom} ()
+\item 
+void \mbox{\hyperlink{class_p_c_a9685_a3ddfb8fd310205bf4c3bf6e5f0e5017f}{move\+Yellow\+Flag}} (int deg)
+\begin{DoxyCompactList}\small\item\em Move the servo motor with the Yellow flag. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_p_c_a9685_a8e5efd35508d691ec1d5f92acaab773a}{move\+Blue\+Flag}} (int deg)
+\begin{DoxyCompactList}\small\item\em Move the servo motor with the Blue flag. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class managing the \mbox{\hyperlink{class_p_c_a9685}{PCA9685}} card, and handle the servo motors. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_p_c_a9685_a6d8810af1c03618141bd327643c06bb0}\label{class_p_c_a9685_a6d8810af1c03618141bd327643c06bb0}} 
+\index{PCA9685@{PCA9685}!PCA9685@{PCA9685}}
+\index{PCA9685@{PCA9685}!PCA9685@{PCA9685}}
+\doxysubsubsection{\texorpdfstring{PCA9685()}{PCA9685()}}
+{\footnotesize\ttfamily PCA9685\+::\+PCA9685 (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{i2c\+\_\+bus,  }\item[{uint8\+\_\+t}]{i2c\+\_\+address }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct a new \mbox{\hyperlink{class_p_c_a9685_a6d8810af1c03618141bd327643c06bb0}{PCA9685\+::\+PCA9685}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i2c\+\_\+bus} & \\
+\hline
+{\em i2c\+\_\+address} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_p_c_a9685_a4b7e96c290456da4c0018ef9270939f3}\label{class_p_c_a9685_a4b7e96c290456da4c0018ef9270939f3}} 
+\index{PCA9685@{PCA9685}!````~PCA9685@{$\sim$PCA9685}}
+\index{````~PCA9685@{$\sim$PCA9685}!PCA9685@{PCA9685}}
+\doxysubsubsection{\texorpdfstring{$\sim$PCA9685()}{~PCA9685()}}
+{\footnotesize\ttfamily PCA9685\+::$\sim$\+PCA9685 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destroy the \mbox{\hyperlink{class_p_c_a9685_a6d8810af1c03618141bd327643c06bb0}{PCA9685\+::\+PCA9685}} object. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_p_c_a9685_a284a79fa0e272631ba80a8ad266b0873}\label{class_p_c_a9685_a284a79fa0e272631ba80a8ad266b0873}} 
+\index{PCA9685@{PCA9685}!clean@{clean}}
+\index{clean@{clean}!PCA9685@{PCA9685}}
+\doxysubsubsection{\texorpdfstring{clean()}{clean()}}
+{\footnotesize\ttfamily void PCA9685\+::clean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+CLean function for the destructor. 
+
+\mbox{\Hypertarget{class_p_c_a9685_a2d04401a0d035166b326a65d49e48a88}\label{class_p_c_a9685_a2d04401a0d035166b326a65d49e48a88}} 
+\index{PCA9685@{PCA9685}!getAdresse@{getAdresse}}
+\index{getAdresse@{getAdresse}!PCA9685@{PCA9685}}
+\doxysubsubsection{\texorpdfstring{getAdresse()}{getAdresse()}}
+{\footnotesize\ttfamily uint8\+\_\+t PCA9685\+::get\+Adresse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Getter for i2c\+\_\+adress. 
+
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_p_c_a9685_a50d52cf1cd6a9dd7e4b9d6218b04a50e}\label{class_p_c_a9685_a50d52cf1cd6a9dd7e4b9d6218b04a50e}} 
+\index{PCA9685@{PCA9685}!getBus@{getBus}}
+\index{getBus@{getBus}!PCA9685@{PCA9685}}
+\doxysubsubsection{\texorpdfstring{getBus()}{getBus()}}
+{\footnotesize\ttfamily uint8\+\_\+t PCA9685\+::get\+Bus (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Getter for i2c\+\_\+bus. 
+
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_p_c_a9685_ae034242d5f2ec3c0f1402b63a7c6fd0a}\label{class_p_c_a9685_ae034242d5f2ec3c0f1402b63a7c6fd0a}} 
+\index{PCA9685@{PCA9685}!getError@{getError}}
+\index{getError@{getError}!PCA9685@{PCA9685}}
+\doxysubsubsection{\texorpdfstring{getError()}{getError()}}
+{\footnotesize\ttfamily bool PCA9685\+::get\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Getter for error. 
+
+\begin{DoxyReturn}{Returns}
+true 
+
+false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_p_c_a9685_a436dbfc6cf3b5e2499772b1dfad9a485}\label{class_p_c_a9685_a436dbfc6cf3b5e2499772b1dfad9a485}} 
+\index{PCA9685@{PCA9685}!init@{init}}
+\index{init@{init}!PCA9685@{PCA9685}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool PCA9685\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initialisation function for the \mbox{\hyperlink{class_p_c_a9685}{PCA9685}} card. 
+
+\begin{DoxyReturn}{Returns}
+true 
+
+false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_p_c_a9685_a8e5efd35508d691ec1d5f92acaab773a}\label{class_p_c_a9685_a8e5efd35508d691ec1d5f92acaab773a}} 
+\index{PCA9685@{PCA9685}!moveBlueFlag@{moveBlueFlag}}
+\index{moveBlueFlag@{moveBlueFlag}!PCA9685@{PCA9685}}
+\doxysubsubsection{\texorpdfstring{moveBlueFlag()}{moveBlueFlag()}}
+{\footnotesize\ttfamily void PCA9685\+::move\+Blue\+Flag (\begin{DoxyParamCaption}\item[{int}]{deg }\end{DoxyParamCaption})}
+
+
+
+Move the servo motor with the Blue flag. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em deg} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_p_c_a9685_a3ddfb8fd310205bf4c3bf6e5f0e5017f}\label{class_p_c_a9685_a3ddfb8fd310205bf4c3bf6e5f0e5017f}} 
+\index{PCA9685@{PCA9685}!moveYellowFlag@{moveYellowFlag}}
+\index{moveYellowFlag@{moveYellowFlag}!PCA9685@{PCA9685}}
+\doxysubsubsection{\texorpdfstring{moveYellowFlag()}{moveYellowFlag()}}
+{\footnotesize\ttfamily void PCA9685\+::move\+Yellow\+Flag (\begin{DoxyParamCaption}\item[{int}]{deg }\end{DoxyParamCaption})}
+
+
+
+Move the servo motor with the Yellow flag. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em deg} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Master/src/pca/pca.\+h\item 
+Master/src/pca/pca.\+cpp\end{DoxyCompactItemize}

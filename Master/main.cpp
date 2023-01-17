@@ -7,6 +7,12 @@
 #include <cstring>
 //#include <PCA9685.h>
 
+/**
+ * @brief This function read the sensor data from the slave over TX/RX communication
+ * 
+ * @param fd 
+ * @return std::string 
+ */
 std::string read_sensor_data(int fd) {
     PCA9685 pca(1,0x40);
     pca.init();
@@ -28,6 +34,12 @@ std::string read_sensor_data(int fd) {
     }
 }
 
+/**
+ * @brief This function parse the data from the read_sensor_data(fd) function and move the 
+ * Yellow flag accordingly. 
+ * 
+ * @param fd 
+ */
 void read_and_send(int fd){
         PCA9685 pca(1,0x40);
         pca.init();

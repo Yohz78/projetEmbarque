@@ -1,0 +1,103 @@
+\hypertarget{i2c_8h_source}{}\doxysection{i2c.\+h}
+\label{i2c_8h_source}\index{Master/src/i2c/i2c.h@{Master/src/i2c/i2c.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ I2C\_H\_INCLUDED}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ I2C\_H\_INCLUDED}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <errno.h>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <fcntl.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <sys/ioctl.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ I2C\_DEFAULT\_BUS\ 1}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{comment}{//\ I2C\ definitions}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ I2C\_SLAVE\ \ \ 0x0703\ \ }\textcolor{comment}{/*\ Use\ this\ slave\ address\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ I2C\_ACK\_TEST\ \ \ \ 0x0710\ \ }\textcolor{comment}{/*\ Voir\ si\ un\ esclave\ est\ à\ une\ adresse\ spécifique\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ I2C\_SMBUS\ \ \ 0x0720\ \ }\textcolor{comment}{/*\ SMBus\ transfer\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ I2C\_SMBUS\_READ\ \ 1}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ I2C\_SMBUS\_WRITE\ 0}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ SMBus\ transaction\ types}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#define\ I2C\_SMBUS\_QUICK\ \ \ \ \ \ \ \ \ 0\ \ }\textcolor{comment}{//\ This\ sends\ a\ single\ bit\ to\ the\ device,\ at\ the\ place\ of\ the\ Rd/Wr\ bit.}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ I2C\_SMBUS\_BYTE\ \ \ \ \ \ \ \ \ \ 1\ \ }\textcolor{comment}{//\ Handles\ the\ SMBus\ read\_byte\ and\ write\_byte\ commands}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ I2C\_SMBUS\_BYTE\_DATA\ \ \ \ \ 2\ \ }\textcolor{comment}{//\ Handles\ the\ SMBus\ read\_byte\_data\ and\ write\_byte\_data\ commands}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ I2C\_SMBUS\_WORD\_DATA\ \ \ \ \ 3\ \ }\textcolor{comment}{//\ Handles\ the\ SMBus\ read\_word\_data\ and\ write\_word\_data\ commands}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ I2C\_SMBUS\_PROC\_CALL\ \ \ \ \ 4\ \ }\textcolor{comment}{//\ This\ command\ selects\ a\ device\ register\ (through\ the\ Comm\ byte),\ sends}}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 16\ bits\ of\ data\ to\ it,\ and\ reads\ 16\ bits\ of\ data\ in\ return.}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ I2C\_SMBUS\_BLOCK\_DATA\ \ \ \ \ \ \ \ 5\ \ }\textcolor{comment}{//\ Handles\ the\ SMBus\ read\_block\_data\ and\ write\_block\_data\ commands}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ I2C\_SMBUS\_I2C\_BLOCK\_BROKEN\ \ 6\ \ }\textcolor{comment}{//\ }}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ I2C\_SMBUS\_BLOCK\_PROC\_CALL\ \ \ 7\ \ }\textcolor{comment}{//\ This\ command\ selects\ a\ device\ register\ (through\ the\ Comm\ byte),\ sends}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 1\ to\ 31\ bytes\ of\ data\ to\ it,\ and\ reads\ 1\ to\ 31\ bytes\ of\ data\ in\ return.}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ I2C\_SMBUS\_I2C\_BLOCK\_DATA\ \ \ \ 8}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{comment}{//\ SMBus\ messages}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#define\ I2C\_SMBUS\_BLOCK\_MAX\ 32\ \ }\textcolor{comment}{/*\ taille\ maxi\ d'un\ bloc\ de\ données\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ I2C\_SMBUS\_I2C\_BLOCK\_MAX\ 32\ \ }\textcolor{comment}{/*\ Not\ specified\ but\ we\ use\ same\ structure\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{comment}{//\ Structures\ utilisées\ par\ les\ appels\ ioctl()}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{comment}{//\ La\ donnée\ peut\ être\ soit\ un\ Octet,\ soit\ un\ Mot\ ou\ un\ tableau\ d'octet}}
+\DoxyCodeLine{00051\ \textcolor{keyword}{union\ }\mbox{\hyperlink{unioni2c__smbus__data}{i2c\_smbus\_data}}}
+\DoxyCodeLine{00052\ \{}
+\DoxyCodeLine{00053\ \ \ uint8\_t\ \ byte\ ;}
+\DoxyCodeLine{00054\ \ \ uint16\_t\ word\ ;}
+\DoxyCodeLine{00055\ \ \ uint8\_t\ \ block\ [I2C\_SMBUS\_BLOCK\_MAX\ +\ 2]\ ;\ \ \ \ \textcolor{comment}{//\ 2\ car\ block\ [0]\ est\ utilisé\ pour\ la\ longeur\ +\ 1\ pour\ PEC\ (Controle\ CRC)}}
+\DoxyCodeLine{00056\ \};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structi2c__smbus__ioctl__data}{i2c\_smbus\_ioctl\_data}}}
+\DoxyCodeLine{00059\ \{}
+\DoxyCodeLine{00060\ \ \ \textcolor{keywordtype}{char}\ read\_write\ ;}
+\DoxyCodeLine{00061\ \ \ uint8\_t\ command\ ;}
+\DoxyCodeLine{00062\ \ \ \textcolor{keywordtype}{int}\ size\ ;}
+\DoxyCodeLine{00063\ \ \ \textcolor{keyword}{union\ }\mbox{\hyperlink{unioni2c__smbus__data}{i2c\_smbus\_data}}\ *data\ ;}
+\DoxyCodeLine{00064\ \};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00071\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classi2c}{i2c}}}
+\DoxyCodeLine{00072\ \{}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ le\ constructeur}}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classi2c}{i2c}}(\textcolor{keywordtype}{int}\ adresseI2C,\ \textcolor{keywordtype}{int}\ idBusI2C=I2C\_DEFAULT\_BUS);}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{comment}{//idBusI2C\ =\ 0\ pour\ les\ raspberry\ version\ 1}}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{comment}{//idBusI2C\ =\ 1\ pour\ les\ raspberry\ version\ 2,\ 3\ et\ 4}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classi2c_ace1c0d95eb1c6f64c20b7211a46fe1c0}{getError}}();}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classi2c_ac2a3e1068233ea53804d3acfe8f78e5e}{Read}}\ ();}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classi2c_af5a0be8f2e79aaa87b844324f05da049}{ReadReg8}}\ (\textcolor{keywordtype}{int}\ reg);}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ \mbox{\hyperlink{classi2c_ad9326bcbbf958f7cf9514970c428a729}{ReadReg16}}\ (\textcolor{keywordtype}{int}\ reg);}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classi2c_a02195aeec200f00fc36d9f7f51f662c2}{ReadBlockData}}\ (\textcolor{keywordtype}{int}\ reg,\ \textcolor{keywordtype}{int}\ length,\ \textcolor{keywordtype}{int}\ *values);}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classi2c_a95c8ec96fddd3882c6e096d3e15ec3f6}{Write}}\ (\textcolor{keywordtype}{int}\ data);}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classi2c_a48f0c215651419cffc45e0fb0bb4cfb9}{WriteReg8}}\ (\textcolor{keywordtype}{int}\ reg,\ \textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ \mbox{\hyperlink{classi2c_a8bb0d1c4db2f09368cbcfbbe1b2f01ef}{WriteReg16}}\ (\textcolor{keywordtype}{int}\ reg,\ \textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classi2c_a960dd46475ba229e7fa270a4ce4e332e}{WriteBlockData}}\ (\textcolor{keywordtype}{int}\ reg,\ \textcolor{keywordtype}{int}\ length,\ \textcolor{keywordtype}{int}\ *data);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ fd;}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ error;}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ i2c\_smbus\_access\ (\textcolor{keywordtype}{char}\ rw,\ uint8\_t\ command,\ \textcolor{keywordtype}{int}\ size,\ \textcolor{keyword}{union}\ \mbox{\hyperlink{unioni2c__smbus__data}{i2c\_smbus\_data}}\ *data);}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ I2C\_H\_INCLUDED}}
+
+\end{DoxyCode}

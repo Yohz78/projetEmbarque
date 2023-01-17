@@ -64,7 +64,10 @@ struct i2c_smbus_ioctl_data
 };
 
 
-
+/**
+ * @class i2c
+ * @brief Class managing read and write with i2c interfaces
+ */
 class i2c
 {
 

@@ -37,6 +37,11 @@
 #define TILTMAX			90
 #define TILTMIN			-45
 
+
+/**
+ * @class PCA9685
+ * @brief Class managing the PCA9685 card, and handle the servo motors
+ */
 class PCA9685
 {
 public:

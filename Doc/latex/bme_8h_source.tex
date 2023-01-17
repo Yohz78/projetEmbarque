@@ -1,0 +1,127 @@
+\hypertarget{bme_8h_source}{}\doxysection{bme.\+h}
+\label{bme_8h_source}\index{Balisa/src/bme/bme.h@{Balisa/src/bme/bme.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ \_\_BME280\_H\_\_}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ \_\_BME280\_H\_\_}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#define\ BME280\_ADDRESS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x76}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_DIG\_T1\ \ \ \ \ \ \ \ 0x88}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_DIG\_T2\ \ \ \ \ \ \ \ 0x8A}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_DIG\_T3\ \ \ \ \ \ \ \ 0x8C}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_DIG\_P1\ \ \ \ \ \ \ \ 0x8E}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_DIG\_P2\ \ \ \ \ \ \ \ 0x90}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_DIG\_P3\ \ \ \ \ \ \ \ 0x92}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_DIG\_P4\ \ \ \ \ \ \ \ 0x94}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_DIG\_P5\ \ \ \ \ \ \ \ 0x96}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_DIG\_P6\ \ \ \ \ \ \ \ 0x98}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_DIG\_P7\ \ \ \ \ \ \ \ 0x9A}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_DIG\_P8\ \ \ \ \ \ \ \ 0x9C}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_DIG\_P9\ \ \ \ \ \ \ \ 0x9E}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_DIG\_H1\ \ \ \ \ \ \ \ 0xA1}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_DIG\_H2\ \ \ \ \ \ \ \ 0xE1}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_DIG\_H3\ \ \ \ \ \ \ \ 0xE3}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_DIG\_H4\ \ \ \ \ \ \ \ 0xE4}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_DIG\_H5\ \ \ \ \ \ \ \ 0xE5}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_DIG\_H6\ \ \ \ \ \ \ \ 0xE7}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_CHIPID\ \ \ \ \ \ \ \ 0xD0}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_VERSION\ \ \ \ \ \ \ 0xD1}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_SOFTRESET\ \ \ \ \ 0xE0}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ BME280\_RESET\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0xB6}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_CAL26\ \ \ \ \ \ \ \ \ 0xE1}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_CONTROLHUMID\ \ 0xF2}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_CONTROL\ \ \ \ \ \ \ 0xF4}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_CONFIG\ \ \ \ \ \ \ \ 0xF5}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_PRESSUREDATA\ \ 0xF7}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_TEMPDATA\ \ \ \ \ \ 0xFA}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ BME280\_REGISTER\_HUMIDDATA\ \ \ \ \ 0xFD}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ MEAN\_SEA\_LEVEL\_PRESSURE\ \ \ \ \ \ \ 1013}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00040\ \textcolor{comment}{*\ Immutable\ calibration\ data\ read\ from\ bme280}}
+\DoxyCodeLine{00041\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00048\ \{}
+\DoxyCodeLine{00049\ \ \ uint16\_t\ dig\_T1;}
+\DoxyCodeLine{00050\ \ \ int16\_t\ \ dig\_T2;}
+\DoxyCodeLine{00051\ \ \ int16\_t\ \ dig\_T3;}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ uint16\_t\ dig\_P1;}
+\DoxyCodeLine{00054\ \ \ int16\_t\ \ dig\_P2;}
+\DoxyCodeLine{00055\ \ \ int16\_t\ \ dig\_P3;}
+\DoxyCodeLine{00056\ \ \ int16\_t\ \ dig\_P4;}
+\DoxyCodeLine{00057\ \ \ int16\_t\ \ dig\_P5;}
+\DoxyCodeLine{00058\ \ \ int16\_t\ \ dig\_P6;}
+\DoxyCodeLine{00059\ \ \ int16\_t\ \ dig\_P7;}
+\DoxyCodeLine{00060\ \ \ int16\_t\ \ dig\_P8;}
+\DoxyCodeLine{00061\ \ \ int16\_t\ \ dig\_P9;}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ uint8\_t\ \ dig\_H1;}
+\DoxyCodeLine{00064\ \ \ int16\_t\ \ dig\_H2;}
+\DoxyCodeLine{00065\ \ \ uint8\_t\ \ dig\_H3;}
+\DoxyCodeLine{00066\ \ \ int16\_t\ \ dig\_H4;}
+\DoxyCodeLine{00067\ \ \ int16\_t\ \ dig\_H5;}
+\DoxyCodeLine{00068\ \ \ int8\_t\ \ \ dig\_H6;}
+\DoxyCodeLine{00069\ \}\ \mbox{\hyperlink{structbme280__calib__data}{bme280\_calib\_data}};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00072\ \textcolor{comment}{*\ Raw\ sensor\ measurement\ data\ from\ bme280}}
+\DoxyCodeLine{00073\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00078\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00079\ \{}
+\DoxyCodeLine{00080\ \ \ uint8\_t\ pmsb;}
+\DoxyCodeLine{00081\ \ \ uint8\_t\ plsb;}
+\DoxyCodeLine{00082\ \ \ uint8\_t\ pxsb;}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ uint8\_t\ tmsb;}
+\DoxyCodeLine{00085\ \ \ uint8\_t\ tlsb;}
+\DoxyCodeLine{00086\ \ \ uint8\_t\ txsb;}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ uint8\_t\ hmsb;}
+\DoxyCodeLine{00089\ \ \ uint8\_t\ hlsb;}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ uint32\_t\ temperature;}
+\DoxyCodeLine{00092\ \ \ uint32\_t\ pressure;}
+\DoxyCodeLine{00093\ \ \ uint32\_t\ humidity;}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \}\ \mbox{\hyperlink{structbme280__raw__data}{bme280\_raw\_data}};}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00103\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classbme}{bme}}\{}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{int}\ fd;}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{float}\ temp;}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{float}\ pression;}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{float}\ humidite;}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{comment}{//CTOR}}
+\DoxyCodeLine{00116\ \ \ \ \ \mbox{\hyperlink{classbme}{bme}}(\textcolor{keywordtype}{float}=0,\textcolor{keywordtype}{float}=0,\textcolor{keywordtype}{float}=0);}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{comment}{//DTOR}}
+\DoxyCodeLine{00118\ \ \ \ \ \mbox{\hyperlink{classbme_abde634fb769aa5ff76ad74270370b4e5}{\string~bme}}();}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbme_a6c5101724349fbac2f02a1e930301d0e}{readCalibrationData}}(\textcolor{keywordtype}{int}\ fd,\ \mbox{\hyperlink{structbme280__calib__data}{bme280\_calib\_data}}\ *cal);}
+\DoxyCodeLine{00121\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classbme_a687090b9cc8359007567098b5f65ab79}{getTemperatureCalibration}}(\mbox{\hyperlink{structbme280__calib__data}{bme280\_calib\_data}}\ *cal,\ int32\_t\ adc\_T);}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbme_a7e8c4476fad0b05d68d46b2130561390}{compensateTemperature}}(int32\_t\ t\_fine);}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbme_a2c2f12c9634d77683d3f9fc03209aede}{compensatePressure}}(int32\_t\ adc\_P,\ \mbox{\hyperlink{structbme280__calib__data}{bme280\_calib\_data}}\ *cal,\ int32\_t\ t\_fine);}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbme_a35b8e86239158e07065e6460538d2323}{compensateHumidity}}(int32\_t\ adc\_H,\ \mbox{\hyperlink{structbme280__calib__data}{bme280\_calib\_data}}\ *cal,\ int32\_t\ t\_fine);}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classbme_a798402e680783750a50fda1b82012966}{getRawData}}(\textcolor{keywordtype}{int}\ fd,\ \mbox{\hyperlink{structbme280__raw__data}{bme280\_raw\_data}}\ *raw);}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbme_af7038b40df669238664f5c3ea246cecc}{getAltitude}}(\textcolor{keywordtype}{float}\ pressure);}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ std::string\ \mbox{\hyperlink{classbme_ace6c92343bf82117def8cb42f7757d1e}{harvestDataAndRun}}();}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbme_a42eca4cb1b5f95c32b59c0466d71e9b4}{getTemperature}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ temp;\ \}}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbme_a3c2d694657cdfe78b3ca05fb21f6b07e}{getPressure}}()\textcolor{keyword}{\ const\ \ }\{\ \textcolor{keywordflow}{return}\ pression;\ \}}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classbme_a54d3128e57b23f6233e78008ead84179}{getHumidite}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ humidite;\ \}}
+\DoxyCodeLine{00148\ \};}
+\DoxyCodeLine{00149\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00150\ }
+
+\end{DoxyCode}
