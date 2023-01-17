@@ -56,7 +56,7 @@ int main() {
                 std::cout << "Error parsing JSON" << std::endl;
                 return 1;
             }
-            for (unsigned int i = 0; i < data.size(); i++) {
+            for (unsigned int i = 0; i < root.size(); i++) {
                 double presence = root["mvt"].asDouble();
                 std::cout << "root ?????? : " << root << std::endl;
                 if(presence==0 && mvt_tracker==1){
