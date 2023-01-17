@@ -28,7 +28,7 @@ void loop(int fd,Handler* handler) {
             oss << "}";
             serialPuts(fd,oss.str().c_str());
             std::cout << "Donnees envoyees:" << std::endl;
-            std::cout << oss;
+            std::cout << oss.str();
             std::cout << std::endl;
             std::cout << "----------------------------------------------" << std::endl;
 }
