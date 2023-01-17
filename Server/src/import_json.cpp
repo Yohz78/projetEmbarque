@@ -1,6 +1,8 @@
 #include <sqlite3.h>
 #include <jsoncpp/json/json.h>
 #include <fstream>
+#include <string>
+
 
 
 /**
@@ -66,7 +68,7 @@ void import_json() {
         int y = item["y"].asInt();
         int z = item["z"].asInt();
         int mvt = item["mvt"].asInt();
-        char *sql = sqlite3_mprintf("INSERT INTO data (timestamp, temperature, pressure, humidity, x, y, z, mvt) VALUES ('%q', %f, %f, %f, %d, %d, %d, %d)", timestamp.c_str(), temperature, pressure, humidity, x, y, z, mvt);
+        char *sql = sqlite3_mprintf("INSERT INTO data (timestamp, temperature, pressure, humidity, x, y, z, mvt) VALUES (%s, %f, %f, %f, %d, %d, %d, %d)", timestamp, temperature, pressure, humidity, x, y, z, mvt);
         rc = sqlite3_exec(db, sql, NULL, 0, &zErrMsg);
         if( rc != SQLITE_OK ){
             fprintf(stderr, "SQL error: %s\n", zErrMsg);

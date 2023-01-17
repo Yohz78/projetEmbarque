@@ -5,7 +5,7 @@
 #include "src/pca/pca.h"
 #include <sstream>
 #include <cstring>
-//#include <PCA9685.h>
+#include <curl/curl.h>
 
 /**
  * @brief This function read the sensor data from the slave over TX/RX communication
@@ -36,11 +36,11 @@ std::string read_sensor_data(int fd) {
 
 /**
  * @brief This function parse the data from the read_sensor_data(fd) function and move the 
- * Yellow flag accordingly. 
+ * Yellow flag accordingly. Then it writes the data into the file data.json
  * 
  * @param fd 
  */
-void read_and_send(int fd){
+void read_and_write(int fd){
         PCA9685 pca(1,0x40);
         pca.init();
         while (true) {
@@ -78,6 +78,32 @@ void read_and_send(int fd){
         }
 }
 
+
+
+
+void send(){
+    CURL *curl;
+    CURLcode res;
+    std::string sftpUrl = "sftp://ubuntu@57.128.34.47/Data/data.json";
+
+    curl = curl_easy_init();
+    if(curl) {
+        curl_easy_setopt(curl, CURLOPT_URL, sftpUrl.c_str());
+        curl_easy_setopt(curl, CURLOPT_UPLOAD, 1L);
+        curl_easy_setopt(curl, CURLOPT_READDATA, fdopen(open("data.json", O_RDONLY), "rb"));
+        curl_easy_setopt(curl, CURLOPT_SSH_PRIVATE_KEYFILE, "opom__227__0_");
+        curl_easy_setopt(curl, CURLOPT_SSH_AUTH_TYPES, CURLSSH_AUTH_PUBLICKEY);
+        res = curl_easy_perform(curl);
+        /* Check for errors */
+        if(res != CURLE_OK) {
+            fprintf(stderr, "curl_easy_perform() failed: %s\n",
+                    curl_easy_strerror(res));
+        }
+        /* always cleanup */
+        curl_easy_cleanup(curl);
+    }
+}
+
 int main() {
 
     
@@ -87,7 +113,9 @@ int main() {
         return -1;
     }
 
-    read_and_send(fd);
+
+    // C  est ici que l'on va avoir besoin des threads, un qui recupere de la data et un qui envoie, les deux a differents intervalles
+    read_and_write(fd);
 
     serialClose(fd); // Ferme le port série
     return 0;
