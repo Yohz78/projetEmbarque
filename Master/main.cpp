@@ -3,7 +3,7 @@
 #include <iostream>
 //#include <json/json.h>
 #include "src/pca/pca.h"
-#include <PCA9685.h>
+//#include <PCA9685.h>
 
 void* read_sensor_data(int fd) {
     while (true) {
@@ -31,26 +31,6 @@ int main() {
         std::cout << "Error: Unable to open UART device" << std::endl;
         return -1;
     }
-
-
-    PCA9685 pca;
-    pca.init();
-    pca.setServo(1,90);
-    sleep(2);
-    pca.setServo(1,45);
-    sleep(2);
-    pca.setServo(1,135);
-    sleep(2);
-    pca.setServo(1,90);
-
-    pca.setServo(2,90);
-    sleep(2);
-    pca.setServo(2,45);
-    sleep(2);
-    pca.setServo(2,135);
-    sleep(2);
-    pca.setServo(2,90);
-
 
     /*
     while (true) {
