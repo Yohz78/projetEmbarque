@@ -240,12 +240,14 @@ std::string bme::harvestDataAndRun(){
     oss << std::put_time(&tm, "%Y-%m-%dT%H:%M:%S");
     std::string iso_time = oss.str();
 
+    std::string sep = "\"";
+
       int32_t t_fine = getTemperatureCalibration(&cal, raw.temperature);
       this->temp = compensateTemperature(t_fine); // C
       this->pression = compensatePressure(raw.pressure, &cal, t_fine) / 100; // hPa
       this->humidite = compensateHumidity(raw.humidity, &cal, t_fine);       // %
       //float a = getAltitude(p);                         // meters
-      std::string flux = "\"timestamp\":" + "\"" + iso_time + "\""
+      std::string flux = "\"timestamp\":" + sep + iso_time + sep
                         +",\"temperature\":" + std::to_string(getTemperature())
                         +",\"pressure\": " + std::to_string(getPressure())
                         +",\"humidity\":" + std::to_string(getHumidite());
