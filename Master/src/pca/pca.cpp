@@ -37,7 +37,7 @@ PCA9685::~PCA9685(){
 }
 
 bool PCA9685::init(){
-    std::cout  << "Initialisation de la carte de controle des moteurs" << std::endl;
+    //std::cout  << "Initialisation de la carte de controle des moteurs" << std::endl;
     deviceI2C = new i2c(this->getAdresse(), this->getBus());
     if (!deviceI2C->getError()){
 
@@ -76,10 +76,10 @@ void PCA9685::setPwmFrequency(uint16_t frequency){
     prescaleval /= 4096.0;         //12-bit
     prescaleval /= float(frequency);
     prescaleval -= 1.0;
-    std::cout <<"Setting PWM frequency to "<<frequency<<" hz" << std::endl;
-    std::cout <<"Estimated pre-scale: "<<prescaleval << std::endl;
+    //std::cout <<"Setting PWM frequency to "<<frequency<<" hz" << std::endl;
+    //std::cout <<"Estimated pre-scale: "<<prescaleval << std::endl;
     int prescale = (int)floor(prescaleval + 0.5);
-    std::cout <<"Final pre-scale: "<<prescale << std::endl;
+    //std::cout <<"Final pre-scale: "<<prescale << std::endl;
     uint8_t oldmode = (uint8_t)deviceI2C->ReadReg8(MODE1);
     uint8_t newmode = (oldmode & 0x7F) | 0x10; // sleep
     deviceI2C->WriteReg8(MODE1, newmode);      //go to sleep
