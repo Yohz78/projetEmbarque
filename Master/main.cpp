@@ -20,7 +20,7 @@ void* read_sensor_data(int fd) {
             index++;
         }
         data[index] = '\0';
-        if (data[index]["mvt"]=="0" ){
+        if (data[index]["mvt"]=="0"){
             pca.moveYellowFlag(0);
         }
         std::cout << "Mouvement : " << data[index]["mvt"] << std::endl;
@@ -39,23 +39,6 @@ int main() {
 
     PCA9685 pca(1,0x40);
     pca.init();
-    pca.moveBlueFlag(0);
-    sleep(2);
-    pca.moveBlueFlag(45);
-    sleep(2);
-    pca.moveBlueFlag(90);
-    sleep(2);
-    pca.moveBlueFlag(135);
-    sleep(2);
-    
-
-    pca.moveYellowFlag(45);
-    sleep(2);
-    pca.moveYellowFlag(90);
-    sleep(2);
-    pca.moveYellowFlag(135);
-    sleep(2);
-    pca.moveYellowFlag(90);
     
     while (true) {
         read_sensor_data(fd);
