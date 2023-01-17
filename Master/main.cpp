@@ -52,7 +52,7 @@ void read_and_send(int fd){
                 pca.moveYellowFlag(180);
             }
             if(presence==0 && mvt_tracker==0){
-                pca.moveYellowFlag(180);
+                pca.moveYellowFlag(0);
             }
             if(presence==1){
                 pca.moveYellowFlag(90);
