@@ -2,6 +2,7 @@
 #include <errno.h>
 #include <stdint.h>
 #include <time.h>
+#include <iomanip>
 #include <math.h>
 #include <wiringPiI2C.h>
 #include<unistd.h>
@@ -230,16 +231,20 @@ std::string bme::harvestDataAndRun(){
     bme280_raw_data raw;
     getRawData(fd, &raw);
 
-    time_t time_now = time(0);
-    const char* dt = ctime(&time_now);
-    std::string date = dt;
+
+    std::time_t t = std::time(nullptr);
+    std::tm tm = *std::localtime(&t);
+
+    std::ostringstream oss;
+    oss << std::put_time(&tm, "%Y-%m-%dT%H:%M:%S");
+    std::string iso_time = oss.str();
 
       int32_t t_fine = getTemperatureCalibration(&cal, raw.temperature);
       this->temp = compensateTemperature(t_fine); // C
       this->pression = compensatePressure(raw.pressure, &cal, t_fine) / 100; // hPa
       this->humidite = compensateHumidity(raw.humidity, &cal, t_fine);       // %
       //float a = getAltitude(p);                         // meters
-      std::string flux = "\"timestamp\":" + date
+      std::string flux = "\"timestamp\":" + "\"" + iso_time + "\""
                         +",\"temperature\":" + std::to_string(getTemperature())
                         +",\"pressure\": " + std::to_string(getPressure())
                         +",\"humidity\":" + std::to_string(getHumidite());
