@@ -1,7 +1,7 @@
 #include <wiringSerial.h>
 #include <unistd.h> // pour sleep
 #include <iostream>
-#include <json/json.h>
+#include <jsoncpp>
 #include "src/pca/pca.h"
 #include <sstream>
 #include <cstring>
