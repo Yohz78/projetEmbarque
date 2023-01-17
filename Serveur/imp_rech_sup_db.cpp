@@ -2,12 +2,11 @@
 #include <vector>
 #include <map>
 #include <sqlite3.h>
+#include <fstream>
 
 void perform_database_operation(int operation)
 {
     std::vector<std::map<std::string, double>> data;
-
-    // Open the JSON file
     std::ifstream json_file("data.json");
     nlohmann::json json_data;
     json_file >> json_data;
