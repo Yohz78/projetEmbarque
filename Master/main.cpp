@@ -42,10 +42,14 @@ int main() {
     while (true) {
         int mvt_tracker = 0;
         std::string string_data = read_sensor_data(fd);
+        std::istringstream json_stream(string_data);
         Json::Value root;
         Json::CharReaderBuilder builder;
         JSONCPP_STRING errs;
-        bool parsingSuccessful = Json::parseFromStream(builder, string_data, &root, &errs);
+        bool parsingSuccessful = Json::parseFromStream(builder,
+                                                       json_stream,
+                                                       &root,
+                                                       &errs);
         if (!parsingSuccessful) {
             std::cout << "Error parsing JSON: " << errs << std::endl;
             return 1;
