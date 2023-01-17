@@ -3,9 +3,11 @@
 #include <iostream>
 //#include <json/json.h>
 #include "src/pca/pca.h"
+#include <sstream>
+#include <cstring>
 //#include <PCA9685.h>
 
-void* read_sensor_data(int fd) {
+std::string read_sensor_data(int fd) {
     PCA9685 pca(1,0x40);
     pca.init();
     while (true) {
@@ -20,10 +22,7 @@ void* read_sensor_data(int fd) {
             index++;
         }
         data[index] = '\0';
-        if (data[index]["mvt"]=="0"){
-            pca.moveYellowFlag(0);
-        }
-        std::cout << "Mouvement : " << data[index]["mvt"] << std::endl;
+        return data;
         sleep(1); // Fait une pause pendant interval secondes
     }
 }
@@ -39,10 +38,36 @@ int main() {
 
     PCA9685 pca(1,0x40);
     pca.init();
+    if (data[index]["mvt"]=="0"){
+        pca.moveYellowFlag(0);
+    }
     
     while (true) {
-        read_sensor_data(fd);
-    }
+        int mvt_tracker = 0;
+        std::string string_data = read_sensor_data(fd);
+        Json::Value root;
+        Json::Reader reader;
+        bool parsingSuccessful = reader.parse(string_data, root);
+        if (!parsingSuccessful) {
+            std::cout << "Error parsing JSON" << std::endl;
+            return 1;
+        }
+        Json::Value data = root["data"];
+        for (unsigned int i = 0; i < data.size(); i++) {
+            double presence = data[i]["mvt"].asDouble()
+            std::cout << "Presence: " << presence << std::endl;
+            if(presence==0 && mvt_tracker==1){
+                pca.moveYellowFlag(180);
+            }
+            if(presence==0 && mvt_tracker==0){
+                pca.moveYellowFlag(0);
+            }
+            if(presence==1){
+                pca.moveYellowFlag(90);
+                mvt_tracker=1;
+            }
+        }
+        }
 
     serialClose(fd); // Ferme le port série
     return 0;
