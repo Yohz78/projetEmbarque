@@ -73,6 +73,7 @@ int main() {
         }else{
             std::cout << "No data available, as a result, flags won't move." << std::endl;
         } 
+        sleep(1);
         }
 
     serialClose(fd); // Ferme le port série
