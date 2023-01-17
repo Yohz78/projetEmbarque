@@ -43,6 +43,7 @@ int main() {
         int mvt_tracker = 0;
         std::string string_data = read_sensor_data(fd);
         if(!string_data.empty()){
+            std::istringstream json_stream(string_data);
             Json::Value root;
             Json::CharReaderBuilder builder;
             JSONCPP_STRING errs;
