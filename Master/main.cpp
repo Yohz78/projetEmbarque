@@ -59,6 +59,7 @@ void read_and_send(int fd){
                     mvt_tracker=1;
                 }
             }
+            std::cout << "Data received and treated"<< std::endl;
         }else{
             std::cout << "No data available, as a result, flags won't move." << std::endl;
         } 
