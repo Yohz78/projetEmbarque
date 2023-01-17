@@ -2,7 +2,13 @@
 #include <jsoncpp/json/json.h>
 #include <fstream>
 
-int main() {
+
+/**
+ * @brief This function import the data from the json file into the db
+ *        The name of the json file is hard-coded (even if in reality you might to avoid that)
+ *        Same for the database name
+ */
+void import_json() {
     // Open the JSON file
     std::ifstream jsonFile("data.json");
     Json::Value data;
@@ -31,7 +37,14 @@ int main() {
     }
     else {
         // Create table
-        char *sql = "CREATE TABLE data (field1 TEXT, field2 INTEGER, field3 REAL)";
+        char *sql = "CREATE TABLE sensor_data (timestamp TEXT,~
+                                             temperature REAL,
+                                              pressure REAL,
+                                               humidity REAL,
+                                                x INTEGER,
+                                                 y INTEGER,
+                                                  z INTEGER,
+                                                   mvt INTEGER)";
         rc = sqlite3_exec(db, sql, NULL, 0, &zErrMsg);
 
         if( rc != SQLITE_OK ){
@@ -45,10 +58,15 @@ int main() {
 
     // Insert data into the table
     for (auto item : data) {
-        std::string field1 = item["field1"].asString();
-        int field2 = item["field2"].asInt();
-        double field3 = item["field3"].asDouble();
-        char *sql = sqlite3_mprintf("INSERT INTO data (field1, field2, field3) VALUES ('%q', %d, %f)", field1.c_str(), field2, field3);
+        std::string timestamp = item["timestamp"].asString();
+        double temperature = item["temperature"].asDouble();
+        double pressure = item["pressure"].asDouble();
+        double humidity = item["humidity"].asDouble();
+        int x = item["x"].asInt();
+        int y = item["y"].asInt();
+        int z = item["z"].asInt();
+        int mvt = item["mvt"].asInt();
+        char *sql = sqlite3_mprintf("INSERT INTO data (timestamp, temperature, pressure, humidity, x, y, z, mvt) VALUES ('%q', %f, %f, %f, %d, %d, %d, %d)", timestamp.c_str(), temperature, pressure, humidity, x, y, z, mvt);
         rc = sqlite3_exec(db, sql, NULL, 0, &zErrMsg);
         if( rc != SQLITE_OK ){
             fprintf(stderr, "SQL error: %s\n", zErrMsg);
