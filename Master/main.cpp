@@ -43,7 +43,7 @@ int main() {
         int mvt_tracker = 0;
         std::string string_data = read_sensor_data(fd);
         Json::Value root;
-        Json::Reader reader;
+        Json::Reader CharReader;
         bool parsingSuccessful = reader.parse(string_data, root);
         if (!parsingSuccessful) {
             std::cout << "Error parsing JSON" << std::endl;
