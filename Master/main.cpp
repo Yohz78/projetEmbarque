@@ -42,37 +42,34 @@ int main() {
     while (true) {
         int mvt_tracker = 0;
         std::string string_data = read_sensor_data(fd);
-        std::istringstream json_stream(string_data);
-        Json::Value root;
-        Json::CharReaderBuilder builder;
-        JSONCPP_STRING errs;
-        bool parsingSuccessful = Json::parseFromStream(builder,
-                                                       json_stream,
-                                                       &root,
-                                                       &errs);
-        if (!parsingSuccessful) {
-            std::cout << "Error parsing JSON: " << errs << std::endl;
-            return 1;
+        if(!string_data.empty()){
+            Json::Value root;
+            Json::Reader CharReader;
+            bool parsingSuccessful = reader.parse(string_data, root);
+            if (!parsingSuccessful) {
+                std::cout << "Error parsing JSON" << std::endl;
+                return 1;
+            }
+            Json::Value data = root["data"];
+            for (unsigned int i = 0; i < data.size(); i++) {
+                double presence = data[i]["mvt"].asDouble();
+                std::cout << "Presence: " << presence << std::endl;
+                if(presence==0 && mvt_tracker==1){
+                    pca.moveYellowFlag(180);
+                }
+                if(presence==0 && mvt_tracker==0){
+                    pca.moveYellowFlag(0);
+                }
+                if(presence==1){
+                    pca.moveYellowFlag(90);
+                    mvt_tracker=1;
+                }
+            }
+        }else{
+            std::cout << "No data available, as a result, flags won't move." << std::endl;
+        } 
         }
-        Json::Value data = root["data"];
-        for (unsigned int i = 0; i < data.size(); i++) {
-            double presence = data[i]["mvt"].asDouble();
-            std::cout << "Presence: " << presence << std::endl;
-            if(presence==0 && mvt_tracker==1){
-                pca.moveYellowFlag(180);
-            }
-            if(presence==0 && mvt_tracker==0){
-                pca.moveYellowFlag(0);
-            }
-            if(presence==1){
-                pca.moveYellowFlag(90);
-                mvt_tracker=1;
-            }
-        }
-    }
 
     serialClose(fd); // Ferme le port série
     return 0;
 }
-
-
