@@ -48,6 +48,7 @@ void read_and_send(int fd){
             }
             for (unsigned int i = 0; i < root.size(); i++) {
                 double presence = root["mvt"].asDouble();
+                std::cout << root << std::endl;
                 if(presence==0 && mvt_tracker==1){
                     pca.moveYellowFlag(180);
                 }
