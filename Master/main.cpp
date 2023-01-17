@@ -38,9 +38,6 @@ int main() {
 
     PCA9685 pca(1,0x40);
     pca.init();
-    if (data[index]["mvt"]=="0"){
-        pca.moveYellowFlag(0);
-    }
     
     while (true) {
         int mvt_tracker = 0;
