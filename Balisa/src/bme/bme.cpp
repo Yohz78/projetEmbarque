@@ -8,6 +8,7 @@
 #include<unistd.h>
 #include <ctime>
 #include <string>
+#include <sstream>
 #include "bme.h"
 
 
