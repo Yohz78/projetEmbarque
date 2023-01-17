@@ -28,19 +28,8 @@ std::string read_sensor_data(int fd) {
     }
 }
 
-int main() {
-
-    
-    int fd = serialOpen("/dev/ttyAMA0", 9600); // Ouvre le port série sur /dev/ttyAMA0 à 9600 bauds
-    if (fd < 0) {
-        std::cout << "Error: Unable to open UART device" << std::endl;
-        return -1;
-    }
-
-    PCA9685 pca(1,0x40);
-    pca.init();
-    
-    while (true) {
+void read_and_send(int fd){
+        while (true) {
         int mvt_tracker = 0;
         std::string string_data = read_sensor_data(fd);
         if(!string_data.empty()){
@@ -74,6 +63,21 @@ int main() {
         } 
         sleep(1);
         }
+}
+
+int main() {
+
+    
+    int fd = serialOpen("/dev/ttyAMA0", 9600); // Ouvre le port série sur /dev/ttyAMA0 à 9600 bauds
+    if (fd < 0) {
+        std::cout << "Error: Unable to open UART device" << std::endl;
+        return -1;
+    }
+
+    PCA9685 pca(1,0x40);
+    pca.init();
+    
+    read_and_send(fd);
 
     serialClose(fd); // Ferme le port série
     return 0;
