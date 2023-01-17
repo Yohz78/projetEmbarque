@@ -29,6 +29,8 @@ std::string read_sensor_data(int fd) {
 }
 
 void read_and_send(int fd){
+        PCA9685 pca(1,0x40);
+        pca.init();
         while (true) {
         int mvt_tracker = 0;
         std::string string_data = read_sensor_data(fd);
@@ -43,7 +45,6 @@ void read_and_send(int fd){
                                                        &errs);
             if (!parsingSuccessful) {
                 std::cout << "Error parsing JSON" << std::endl;
-                return 1;
             }
             for (unsigned int i = 0; i < root.size(); i++) {
                 double presence = root["mvt"].asDouble();
@@ -74,9 +75,6 @@ int main() {
         return -1;
     }
 
-    PCA9685 pca(1,0x40);
-    pca.init();
-    
     read_and_send(fd);
 
     serialClose(fd); // Ferme le port série
