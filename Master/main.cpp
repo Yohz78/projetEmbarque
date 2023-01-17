@@ -6,6 +6,8 @@
 //#include <PCA9685.h>
 
 void* read_sensor_data(int fd) {
+    PCA9685 pca(1,0x40);
+    pca.init();
     while (true) {
         char data[10000];
         int index = 0; 
@@ -18,7 +20,10 @@ void* read_sensor_data(int fd) {
             index++;
         }
         data[index] = '\0';
-        std::cout << "Données reçues : " << data << std::endl;
+        if (data[index]["mvt"]=="0" ){
+            pca.moveYellowFlag(0);
+        }
+        std::cout << "Mouvement : " << data[index]["mvt"] << std::endl;
         sleep(1); // Fait une pause pendant interval secondes
     }
 }
@@ -51,10 +56,10 @@ int main() {
     pca.moveYellowFlag(135);
     sleep(2);
     pca.moveYellowFlag(90);
-    /*
+    
     while (true) {
         read_sensor_data(fd);
-    }*/
+    }
 
     serialClose(fd); // Ferme le port série
     return 0;
