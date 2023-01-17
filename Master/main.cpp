@@ -31,6 +31,7 @@ std::string read_sensor_data(int fd) {
 void read_and_send(int fd){
         PCA9685 pca(1,0x40);
         pca.init();
+        pca.moveYellowFlag(180);
         while (true) {
         int mvt_tracker = 0;
         std::string string_data = read_sensor_data(fd);
