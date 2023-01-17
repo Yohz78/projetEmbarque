@@ -33,9 +33,9 @@ std::string HCSR50::checkMotion(){
         if (this->motionDetected == false) {
             this->motionDetected = true;
         }
-        return "\"Mvt\":\"true\"";
+        return "\"Mvt\":\"1\"";
     } else {
         this->motionDetected = false;
     }
-    return "\"Mvt\":\"false\"";
+    return "\"Mvt\":\"0\"";
 }
