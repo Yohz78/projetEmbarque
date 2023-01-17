@@ -32,6 +32,25 @@ int main() {
         return -1;
     }
 
+    PCA9685 pca;
+    pca.init();
+    pca.moveBlueFlag(0);
+    sleep(2);
+    pca.moveBlueFlag(45);
+    sleep(2);
+    pca.moveBlueFlag(90);
+    sleep(2);
+    pca.moveBlueFlag(135);
+    sleep(2);
+    
+
+    pca.moveYellowFlag(45);
+    sleep(2);
+    pca.moveYellowFlag(90);
+    sleep(2);
+    pca.moveYellowFlag(135);
+    sleep(2);
+    pca.moveYellowFlag(90);
     /*
     while (true) {
         read_sensor_data(fd);
