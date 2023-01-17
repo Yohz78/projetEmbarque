@@ -3,7 +3,8 @@
 #include <map>
 #include <sqlite3.h>
 
-void perform_database_operation(int operation) {
+void perform_database_operation(int operation)
+{
     std::vector<std::map<std::string, double>> data;
 
     // Fill the data vector with your data
@@ -17,8 +18,8 @@ void perform_database_operation(int operation) {
     }
 
     sqlite3_stmt *stmt;
-    switch (operation) 
-        case 1: {
+    switch (operation) {
+        case 1: 
             // Insert data into the database
             rc = sqlite3_prepare_v2(db, "INSERT INTO data (timestamp, humidity, temp, pression, x, y, z, mvt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", -1, &stmt, nullptr);
             if (rc) {
@@ -48,39 +49,39 @@ void perform_database_operation(int operation) {
             }
             sqlite3_finalize(stmt);
             break;
-        }
-        case 2:
+
+        case 2: 
             // Delete data where the timestamp is greater than a certain value
             double timestamp = 1500000000;
             std::string query = "DELETE FROM data WHERE timestamp > ?";
-            sqlite3_stmt *stmt;
-            int rc = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, nullptr);
+            rc = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, nullptr);
             if (rc) {
                 std::cerr << "Error preparing statement: " << sqlite3_errmsg(db) << std::endl;
                 sqlite3_close(db);
-                return 1;
+                return;
             }
             sqlite3_bind_double(stmt, 1, timestamp);
 
             rc = sqlite3_step(stmt);
+
             if (rc != SQLITE_DONE) {
                 std::cerr << "Error deleting data: " << sqlite3_errmsg(db) << std::endl;
                 sqlite3_finalize(stmt);
                 sqlite3_close(db);
-                return 1;
+                return;
             }
             sqlite3_finalize(stmt);
             break;
-        case 3:
+
+        case 3: 
             // Select data where the temperature is greater than a certain value
             double temp = 25;
             std::string query = "SELECT * FROM data WHERE temp > ?";
-            sqlite3_stmt *stmt;
-            int rc = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, nullptr);
+            rc = sqlite3_prepare_v2(db, query.c_str(), -1, &stmt, nullptr);
             if (rc) {
                 std::cerr << "Error preparing statement: " << sqlite3_errmsg(db) << std::endl;
                 sqlite3_close(db);
-                return 1;
+                return;
             }
             sqlite3_bind_double(stmt, 1, temp);
 
@@ -101,8 +102,9 @@ void perform_database_operation(int operation) {
                 std::cerr << "Error selecting data: " << sqlite3_errmsg(db) << std::endl;
                 sqlite3_finalize(stmt);
                 sqlite3_close(db);
-                return 1;
+                return;
             }
             sqlite3_finalize(stmt);
             break;
-}
+        }
+}  
