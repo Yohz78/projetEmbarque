@@ -27,6 +27,9 @@ void loop(int fd,Handler* handler) {
             oss << handler->getHCSR().checkMotion();
             oss << "}";
             serialPuts(fd,oss.str().c_str());
+            std::cout << "Donnees envoyees:" << std::endl;
+            std::cout << oss;
+            std::cout << std::endl;
             std::cout << "----------------------------------------------" << std::endl;
 }
 
