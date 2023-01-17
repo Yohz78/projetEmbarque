@@ -43,10 +43,11 @@ int main() {
         int mvt_tracker = 0;
         std::string string_data = read_sensor_data(fd);
         Json::Value root;
-        Json::Reader CharReader;
-        bool parsingSuccessful = reader.parse(string_data, root);
+        Json::CharReaderBuilder builder;
+        JSONCPP_STRING errs;
+        bool parsingSuccessful = Json::parseFromStream(builder, string_data, &root, &errs);
         if (!parsingSuccessful) {
-            std::cout << "Error parsing JSON" << std::endl;
+            std::cout << "Error parsing JSON: " << errs << std::endl;
             return 1;
         }
         Json::Value data = root["data"];
@@ -64,7 +65,7 @@ int main() {
                 mvt_tracker=1;
             }
         }
-        }
+    }
 
     serialClose(fd); // Ferme le port série
     return 0;
