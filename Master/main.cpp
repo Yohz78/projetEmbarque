@@ -44,8 +44,12 @@ int main() {
         std::string string_data = read_sensor_data(fd);
         if(!string_data.empty()){
             Json::Value root;
-            Json::Reader CharReader;
-            bool parsingSuccessful = reader.parse(string_data, root);
+            Json::CharReaderBuilder builder;
+            JSONCPP_STRING errs;
+            bool parsingSuccessful = Json::parseFromStream(builder,
+                                                       json_stream,
+                                                       &root,
+                                                       &errs);
             if (!parsingSuccessful) {
                 std::cout << "Error parsing JSON" << std::endl;
                 return 1;
