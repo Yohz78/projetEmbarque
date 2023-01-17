@@ -22,6 +22,7 @@ std::string read_sensor_data(int fd) {
             index++;
         }
         data[index] = '\0';
+        std::cout << "Donnée reçue"<< data << std::endl;
         return data;
         sleep(1); // Fait une pause pendant interval secondes
     }
