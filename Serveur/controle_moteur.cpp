@@ -5,23 +5,23 @@
 using namespace std;
 
 void motor1() {
-    // code pour contrôler le moteur 1
+    // code pour bouger le moteur 1
 }
 
 void motor2() {
-    // code pour contrôler le moteur 2
+    // code pour bouger le moteur 2
 }
 
 void motor3() {
-    // code pour contrôler le moteur 3
+    // code pour bouger le moteur 3
 }
 
 void motor4() {
-    // code pour contrôler le moteur 4
+    // code pour bouger le moteur 4
 }
 
 void motor5() {
-    // code pour contrôler le moteur 5
+    // code pour bouger le moteur 5
 }
 
 int main()
