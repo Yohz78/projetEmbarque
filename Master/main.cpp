@@ -51,7 +51,7 @@ int main() {
         }
         Json::Value data = root["data"];
         for (unsigned int i = 0; i < data.size(); i++) {
-            double presence = data[i]["mvt"].asDouble()
+            double presence = data[i]["mvt"].asDouble();
             std::cout << "Presence: " << presence << std::endl;
             if(presence==0 && mvt_tracker==1){
                 pca.moveYellowFlag(180);
