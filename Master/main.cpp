@@ -46,19 +46,17 @@ void read_and_send(int fd){
             if (!parsingSuccessful) {
                 std::cout << "Error parsing JSON" << std::endl;
             }
-            for (unsigned int i = 0; i < root.size(); i++) {
-                double presence = root["mvt"].asDouble();
-                std::cout << root << std::endl;
-                if(presence==0 && mvt_tracker==1){
-                    pca.moveYellowFlag(180);
-                }
-                if(presence==0 && mvt_tracker==0){
-                    pca.moveYellowFlag(0);
-                }
-                if(presence==1){
-                    pca.moveYellowFlag(90);
-                    mvt_tracker=1;
-                }
+            double presence = root["mvt"].asDouble();
+            std::cout << root << std::endl;
+            if(presence==0 && mvt_tracker==1){
+                pca.moveYellowFlag(180);
+            }
+            if(presence==0 && mvt_tracker==0){
+                pca.moveYellowFlag(0);
+            }
+            if(presence==1){
+                pca.moveYellowFlag(90);
+                mvt_tracker=1;
             }
             std::cout << "Data received and treated"<< std::endl;
         }else{
