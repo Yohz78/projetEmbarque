@@ -22,7 +22,7 @@ std::string read_sensor_data(int fd) {
             index++;
         }
         data[index] = '\0';
-        std::cout << "Donnée reçue"<< data << std::endl;
+        //std::cout << "Donnée reçue"<< data << std::endl;
         return data;
         sleep(1); // Fait une pause pendant interval secondes
     }
@@ -56,10 +56,9 @@ int main() {
                 std::cout << "Error parsing JSON" << std::endl;
                 return 1;
             }
-            Json::Value data = root["data"];
             for (unsigned int i = 0; i < data.size(); i++) {
-                double presence = data[i]["mvt"].asDouble();
-                std::cout << "Presence: " << presence << std::endl;
+                double presence = root["mvt"].asDouble();
+                std::cout << "root ?????? : " << root << std::endl;
                 if(presence==0 && mvt_tracker==1){
                     pca.moveYellowFlag(180);
                 }
