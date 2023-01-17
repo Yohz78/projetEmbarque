@@ -46,7 +46,7 @@ int main() {
     while (true) {
         
         loop(fd, &handler);
-        sleep(1); // Fait une pause pendant 1 seconde  
+        sleep(3); // Fait une pause pendant 1 seconde  
     }
     serialClose(fd); // Ferme le port série
     return 0;

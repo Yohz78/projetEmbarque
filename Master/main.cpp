@@ -62,7 +62,7 @@ void read_and_send(int fd){
         }else{
             std::cout << "No data available, as a result, flags won't move." << std::endl;
         } 
-        sleep(1);
+        sleep(3);
         }
 }
 
