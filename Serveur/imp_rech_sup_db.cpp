@@ -7,8 +7,24 @@ void perform_database_operation(int operation)
 {
     std::vector<std::map<std::string, double>> data;
 
-    // Fill the data vector with your data
-    // ...
+    // Open the JSON file
+    std::ifstream json_file("data.json");
+    nlohmann::json json_data;
+    json_file >> json_data;
+
+    // Iterate through the JSON array
+    for (const auto& entry : json_data) {
+        std::map<std::string, double> data_entry;
+        data_entry["timestamp"] = entry["timestamp"].get<double>();
+        data_entry["humidity"] = entry["humidity"].get<double>();
+        data_entry["temp"] = entry["temp"].get<double>();
+        data_entry["pression"] = entry["pression"].get<double>();
+        data_entry["x"] = entry["x"].get<double>();
+        data_entry["y"] = entry["y"].get<double>();
+        data_entry["z"] = entry["z"].get<double>();
+        data_entry["mvt"] = entry["mvt"].get<double>();
+        data.push_back;
+    }
 
     sqlite3 *db;
     int rc = sqlite3_open("data.db", &db);
