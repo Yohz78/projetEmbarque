@@ -8,7 +8,7 @@ SRC = $(wildcard *.cpp) $(wildcard src/*/*.cpp)
 OBJ = $(SRC:.cpp=.o)
 
 # Librairies
-LIB = -lwiringPi -lpthread
+LIB = -lwiringPi -lpthread -I/usr/include/jsoncpp
 
 # Flags de compilation
 CXXFLAGS = -std=c++11 -Wall -Wextra
