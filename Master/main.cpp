@@ -46,7 +46,7 @@ std::string read_sensor_data(int fd) {
  * 
  * @param fd 
  */
-void read_and_write(int fd){
+void read_and_write(int fd, std::vector<Json::Value> &res){
         PCA9685 pca(1,0x40);
         pca.init();
         while (true) {
@@ -83,6 +83,7 @@ void read_and_write(int fd){
             output_file << root;
             //output_file << ",";
             output_file.close();
+            res.pushback(root);
         }else{
             std::cout << "No data available, as a result, flags won't move." << std::endl;
         } 
@@ -95,7 +96,7 @@ void read_and_write(int fd){
  * @brief This function transfer the flux of data to the server located at ubuntu@57.128.34.47
  * 
  */
-void send_boost(std::vector<Json::Value> root){
+void send_boost(std::vector<Json::Value> &res){
 
     // Create an io_context object to manage the network connection
         boost::asio::io_context io_context;
@@ -117,21 +118,20 @@ void send_boost(std::vector<Json::Value> root){
         socket.handshake(ssl::stream_base::client);
 
     // Serialize the vector
-    std::stringstream ss;
-    boost::archive::text_oarchive oa(ss);
-    oa << root;
-    std::string data = ss.str();
+        std::stringstream ss;
+        boost::archive::text_oarchive oa(ss);
+        oa << res;
+        std::string data = ss.str();
 
     // Send the serialized data to the server
-    write(socket, buffer(data));
+        write(socket, buffer(data));
 
     // Close the socket
-    socket.shutdown();
-    socket.lowest_layer().close();
+        socket.shutdown();
+        socket.lowest_layer().close();
+    // Clean the vector 
+    res.clear();
 }
-
-
-
 
 int main() {
 
@@ -140,11 +140,11 @@ int main() {
         std::cout << "Error: Unable to open UART device" << std::endl;
         return -1;
     }
-    vector<Json::value> root;
+    vector<Json::value> res;
     pthread_t thread_rw, thread_send;
 
-    pthread_create(&thread_rw, NULL, read_and_write, &fd);
-    pthread_create(&thread_send, NULL,send, &fd);
+    pthread_create(&thread_rw, NULL, read_and_write, &fd, &res);
+    pthread_create(&thread_send, NULL,send_boost, &fd, &res);
     pthread_join(thread_rw, NULL);
     pthread_join(thread_send, NULL);
 
