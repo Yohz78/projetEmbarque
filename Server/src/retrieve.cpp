@@ -5,7 +5,7 @@
 #include <boost/serialization/vector.hpp>
 #include <jsoncpp/json/json.h>
 
-std::vector<Json::value>& retrieve_data_from_master(){
+std::vector<Json::Value>& retrieve_data_from_master(){
     // Create an io_context object to manage the network connection
     boost::asio::io_context io_context;
 
@@ -23,14 +23,14 @@ std::vector<Json::value>& retrieve_data_from_master(){
     acceptor.accept(socket);
 
     // Read the data from the socket
-    std::string data;
+    std::vector<Json::Value> data;
     read(socket, buffer(data));
 
     // Deserialize the vector
-    std::vector<Json::Value> root;
-    std::stringstream ss(data);
-    boost::archive::text_iarchive ia(ss);
-    ia >> root;
+    // std::vector<Json::Value> root;
+    // std::stringstream ss(data);
+    // boost::archive::text_iarchive ia(ss);
+    // ia >> root;
 
-    return root;
+    return data;
 }
