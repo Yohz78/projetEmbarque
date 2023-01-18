@@ -73,18 +73,16 @@ void read_and_write(int fd, std::vector<Json::Value> &res){
                 std::cout << "Error parsing JSON" << std::endl;
             }
             //double presence = root["mvt"].asDouble();
-            std::cout << root << std::endl;
-            if(pos_tracker==0){
+            // std::cout << root << std::endl;
+            if(pos_tracker==3){
                 pca.moveBlueFlag(45);
                 pos_tracker=2;
                 std::cout << pos_tracker << std::endl;
-            }
-            if(pos_tracker==2){
+            }else if(pos_tracker==2){
                 pca.moveBlueFlag(135);
                 pos_tracker=3;
                 std::cout << pos_tracker << std::endl;
-            }
-            if(pos_tracker==3){
+            }else if(pos_tracker==0){
                 pca.moveBlueFlag(45);
                 pos_tracker=2;
                 std::cout << pos_tracker << std::endl;
