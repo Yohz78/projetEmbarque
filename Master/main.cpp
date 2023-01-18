@@ -7,6 +7,9 @@
 #include <cstring>
 #include <pthread.h>
 #include <boost/asio.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/serialization/vector.hpp>
+#include <jsoncpp/json/json.h>
 
 
 #define INTERVALLE_RECUP 5
