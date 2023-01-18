@@ -77,14 +77,17 @@ void read_and_write(int fd, std::vector<Json::Value> &res){
             if(pos_tracker==0){
                 pca.moveBlueFlag(45);
                 pos_tracker=2;
+                std::cout << pos_tracker << std::endl;
             }
             if(pos_tracker==2){
                 pca.moveBlueFlag(135);
                 pos_tracker=3;
+                std::cout << pos_tracker << std::endl;
             }
             if(pos_tracker==3){
                 pca.moveBlueFlag(45);
                 pos_tracker=2;
+                std::cout << pos_tracker << std::endl;
             }
             std::cout << "Data received and treated"<< std::endl;
             res.push_back(root);
