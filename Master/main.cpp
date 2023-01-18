@@ -91,7 +91,7 @@ void read_and_write(int fd, std::vector<Json::Value> &res){
             }
             std::cout << "Data received and treated"<< std::endl;
             res.push_back(root);
-            std::cout << res[i] << std::endl;
+            // std::cout << res[i] << std::endl;
             i++;
         }else{
             std::cout << "No data available, Blue flag back to rest position." << std::endl;
