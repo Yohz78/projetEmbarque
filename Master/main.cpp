@@ -1,12 +1,10 @@
 #include <wiringSerial.h>
 #include <unistd.h> // pour sleep
 #include <iostream>
-//#include <"/usr/include/jsoncpp/json/json.h">
 #include <jsoncpp/json/json.h>
 #include "src/pca/pca.h"
 #include <sstream>
 #include <cstring>
-#include <curl/curl.h>
 #include <pthread.h>
 
 
@@ -151,30 +149,4 @@ int main() {
 
     serialClose(fd); // Ferme le port série
     return 0;
-}
-
-
-void send_curl(){
-    CURL *curl;
-    CURLcode res;
-    std::string sftpUrl = "sftp://ubuntu@57.128.34.47/Data/data.json";
-
-    curl = curl_easy_init();
-    if(curl) {
-        curl_easy_setopt(curl, CURLOPT_URL, sftpUrl.c_str());
-        curl_easy_setopt(curl, CURLOPT_UPLOAD, 1L);
-        curl_easy_setopt(curl, CURLOPT_READDATA, fdopen(open("data.json", O_RDONLY), "rb"));
-        curl_easy_setopt(curl, CURLOPT_SSH_PRIVATE_KEYFILE, "opom__227__0_");
-        curl_easy_setopt(curl, CURLOPT_SSH_AUTH_TYPES, CURLSSH_AUTH_PUBLICKEY);
-        res = curl_easy_perform(curl);
-        /* Check for errors */
-        if(res != CURLE_OK) {
-            fprintf(stderr, "curl_easy_perform() failed: %s\n",
-                    curl_easy_strerror(res));
-        }
-        /* always cleanup */
-        curl_easy_cleanup(curl);
-    }
-    sleep(INTERVALLE_ENVOI_SERVEUR); // Send every 60sec
-    pthread_exit(NULL);
 }
