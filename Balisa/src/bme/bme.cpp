@@ -237,7 +237,7 @@ std::string bme::harvestDataAndRun(){
       this->temp = compensateTemperature(t_fine); // C
       this->pression = compensatePressure(raw.pressure, &cal, t_fine) / 100; // hPa
       this->humidite = compensateHumidity(raw.humidity, &cal, t_fine);       // %
-      std::string flux = sep+"BME"+sep+": { \"temperature\" : " + std::to_string(getTemperature())+
+      std::string flux = sep+"BME"+sep+": {\"temperature\": " + std::to_string(getTemperature())+
                         +",\"pressure\": " + std::to_string(getPressure())
                         +",\"humidity\": " + std::to_string(getHumidite())+"}";
       return flux;

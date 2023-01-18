@@ -30,6 +30,6 @@ std::string Handler::getHMCvalue(){
     this->hmc.readZ();
     std::string flux = "\"HMC\": {\"x\": " + std::to_string(this->hmc.getX())+
                        ",\"y\": " + std::to_string(this->hmc.getY())+
-                       ",\"z\" :" + std::to_string(this->hmc.getZ())+"}";
+                       ",\"z\":" + std::to_string(this->hmc.getZ())+"}";
     return flux;
 }

@@ -32,7 +32,7 @@ void loop(int fd,Handler* handler) {
     std::string sep = "\"";
             std::ostringstream oss;
             std::cout << "---------------------DATAS---------------------" << std::endl;
-            oss << "{\"timestamp\":" + sep + iso_time + sep;
+            oss << "{\"date\":" + sep + iso_time + sep;
             oss << ",";
             oss << handler->getBME().harvestDataAndRun();
             oss << ",";
