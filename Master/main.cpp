@@ -57,8 +57,8 @@ void read_and_write(int fd, std::vector<Json::Value> &res){
         PCA9685 pca(1,0x40);
         pca.init();
         int i = 0;
-        while (true) {
         int pos_tracker = 0;
+        while (true) {
         std::string string_data = read_sensor_data(fd);
         if(!string_data.empty()){
             std::istringstream json_stream(string_data);
