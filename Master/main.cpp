@@ -50,7 +50,7 @@ void read_and_write(int fd, std::vector<Json::Value> &res){
         PCA9685 pca(1,0x40);
         pca.init();
         while (true) {
-        int mvt_tracker = 0;
+        int pos_tracker = 0;
         std::string string_data = read_sensor_data(fd);
         if(!string_data.empty()){
             std::istringstream json_stream(string_data);
@@ -64,28 +64,26 @@ void read_and_write(int fd, std::vector<Json::Value> &res){
             if (!parsingSuccessful) {
                 std::cout << "Error parsing JSON" << std::endl;
             }
-            double presence = root["mvt"].asDouble();
+            //double presence = root["mvt"].asDouble();
             std::cout << root << std::endl;
-            if(presence==0 && mvt_tracker==1){
-                pca.moveYellowFlag(180);
+            if(pos_tracker==0){
+                pca.moveBlueFlag(45);
+                pos_tracker==2;
             }
-            if(presence==0 && mvt_tracker==0){
-                pca.moveYellowFlag(0);
+            if(pos_tracker==2){
+                pca.moveBlueFlag(135);
+                pos_tracker==3;
             }
-            if(presence==1){
-                pca.moveYellowFlag(90);
-                mvt_tracker=1;
+            if(pos_tracker==3){
+                pca.moveBlueFlag(45);
+                pos_tracker==2;
             }
             std::cout << "Data received and treated"<< std::endl;
-
-            // Write root to a file named "data.json"
-            std::ofstream output_file("data.json", std::ios::app);
-            output_file << root;
-            //output_file << ",";
-            output_file.close();
             res.pushback(root);
         }else{
-            std::cout << "No data available, as a result, flags won't move." << std::endl;
+            std::cout << "No data available, Blue flag back to rest position." << std::endl;
+            pca.moveBlueFlag(180);
+            pos_tracker==0;
         } 
         sleep(INTERVALLE_RECUP);
         }
