@@ -8,6 +8,9 @@
 #include <time.h>
 #include <string>
 #include <ctime>
+#include <stdint.h>
+#include <unistd.h>
+#include <iomanip>
 
 #include "src/handler/handler.h"
 //#include "src/bme/bme.h"
@@ -24,7 +27,7 @@ void loop(int fd,Handler* handler) {
     std::tm tm = *std::localtime(&t);
 
     std::ostringstream oss1;
-    oss1 << put_time(&tm, "%Y-%m-%dT%H:%M:%S");
+    oss1 << std::put_time(&tm, "%Y-%m-%dT%H:%M:%S");
     std::string iso_time = oss1.str();
     std::string sep = "\"";
             std::ostringstream oss;
