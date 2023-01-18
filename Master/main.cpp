@@ -2,7 +2,7 @@
 #include <unistd.h> // pour sleep
 #include <iostream>
 //#include <"/usr/include/jsoncpp/json/json.h">
-#include <jsoncpp>
+#include <jsoncpp/json/json.h>
 #include "src/pca/pca.h"
 #include <sstream>
 #include <cstring>
