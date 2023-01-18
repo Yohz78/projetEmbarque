@@ -56,6 +56,7 @@ std::string read_sensor_data(int fd) {
 void read_and_write(int fd, std::vector<Json::Value> &res){
         PCA9685 pca(1,0x40);
         pca.init();
+        int i = 0;
         while (true) {
         int pos_tracker = 0;
         std::string string_data = read_sensor_data(fd);
@@ -87,6 +88,8 @@ void read_and_write(int fd, std::vector<Json::Value> &res){
             }
             std::cout << "Data received and treated"<< std::endl;
             res.push_back(root);
+            std::cout << root[i] << std::endl;
+            i++;
         }else{
             std::cout << "No data available, Blue flag back to rest position." << std::endl;
             pca.moveBlueFlag(180);
@@ -146,6 +149,8 @@ int main() {
         return -1;
     }
     vector<Json::Value> res;
+    read_and_write(fd,&res);
+    
     /*pthread_t thread_rw, thread_send;
 
     pthread_create(&thread_rw, NULL, read_and_write, &fd, &res);
