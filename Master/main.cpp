@@ -91,6 +91,9 @@ void read_and_write(int fd, std::vector<Json::Value> &res){
             res.push_back(root);
             // std::cout << res[i] << std::endl;
             i++;
+            if(i > 5){
+                break;
+            }
         }else{
             std::cout << "No data available, Blue flag back to rest position." << std::endl;
             pca.moveBlueFlag(180);
@@ -98,7 +101,7 @@ void read_and_write(int fd, std::vector<Json::Value> &res){
         } 
         sleep(INTERVALLE_RECUP);
         }
-        pthread_exit(NULL);
+        //pthread_exit(NULL);
 }
 
 /**
@@ -114,7 +117,7 @@ void send_boost(std::vector<Json::Value> &res){
         ssl::context ctx{ssl::context::sslv23};
     
     // Set the private key file
-        ctx.use_private_key_file("opom__227__0_", ssl::context::pem);
+        ctx.use_private_key_file("../../opom__227__0_", ssl::context::pem);
         
     // Create an endpoint to represent the server's address
         boost::asio::ip::tcp::endpoint endpoint(boost::asio::ip::address::from_string("57.128.34.47"), 22);
@@ -151,6 +154,13 @@ int main() {
     }
     vector<Json::Value> res;
     read_and_write(fd,res);
+
+    for(auto data: res){
+        std::cout << data;
+    }
+
+    std::cout << "-------------------------------ENVOI----------------------------------" << std::endl;
+    send_boost(res);
     
     /*pthread_t thread_rw, thread_send;
 
