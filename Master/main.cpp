@@ -11,6 +11,7 @@
 #include <boost/serialization/vector.hpp>
 #include <jsoncpp/json/json.h>
 #include <boost/asio/ssl.hpp>
+#include <boost/asio/ssl/stream.hpp>
 
 
 #define INTERVALLE_RECUP 5
