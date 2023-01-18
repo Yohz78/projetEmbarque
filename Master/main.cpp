@@ -124,13 +124,13 @@ void send_boost(std::vector<Json::Value> &res){
         socket.handshake(ssl::stream_base::client);
 
     // Serialize the vector
-        std::stringstream ss;
-        boost::archive::text_oarchive oa(ss);
-        oa << res;
-        std::string data = ss.str();
+        // std::stringstream ss;
+        // boost::archive::text_oarchive oa(ss);
+        // oa << res;
+        // std::string data = ss.str();
 
     // Send the serialized data to the server
-        write(socket, buffer(data));
+        write(socket, buffer(res));
 
     // Close the socket
         socket.shutdown();
