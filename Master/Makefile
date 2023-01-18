@@ -11,7 +11,7 @@ OBJ = $(SRC:.cpp=.o)
 LIB = -lwiringPi -lpthread -ljsoncpp -lboost -lssl -lcrypto -lz
 
 # Flags de compilation
-CXXFLAGS = -std=c++11 -Wall -Wextra
+CXXFLAGS = -std=c++11 -Wall -Wextra -I/usr/lib/ssl
 
 # Règle par défaut
 all: $(EXEC)
