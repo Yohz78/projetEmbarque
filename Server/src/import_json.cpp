@@ -1,5 +1,5 @@
 #include <sqlite3.h>
-#include <jsoncpp/json/json.h>
+#include <jsoncpp>
 #include <fstream>
 #include <string>
 
@@ -39,14 +39,17 @@ void import_json() {
     }
     else {
         // Create table
-        char *sql = "CREATE TABLE sensor_data (timestamp TEXT,~
-                                             temperature REAL,
-                                              pressure REAL,
-                                               humidity REAL,
+        char *sql = "CREATE TABLE sensor_data ( senseurTempPressHumi TEXT,
+                                                timestamp TEXT,
+                                                temperature REAL,
+                                                pressure REAL,
+                                                humidity REAL,
+                                                capteurGyro TEXT, 
                                                 x INTEGER,
-                                                 y INTEGER,
-                                                  z INTEGER,
-                                                   mvt INTEGER)";
+                                                y INTEGER,
+                                                z INTEGER,
+                                                capteurPresence TEXT
+                                                mvt INTEGER)";
         rc = sqlite3_exec(db, sql, NULL, 0, &zErrMsg);
 
         if( rc != SQLITE_OK ){
@@ -60,15 +63,18 @@ void import_json() {
 
     // Insert data into the table
     for (auto item : data) {
+        std::string senseurTempPressHumi = item["senseurTempPressHumi"].asString();
         std::string timestamp = item["timestamp"].asString();
         double temperature = item["temperature"].asDouble();
         double pressure = item["pressure"].asDouble();
         double humidity = item["humidity"].asDouble();
+        std::string capteurGyro = item["capteurGyro"].asString();
         int x = item["x"].asInt();
         int y = item["y"].asInt();
         int z = item["z"].asInt();
+        std::string capteurPresence = item["capteurPresence"].asString();
         int mvt = item["mvt"].asInt();
-        char *sql = sqlite3_mprintf("INSERT INTO data (timestamp, temperature, pressure, humidity, x, y, z, mvt) VALUES (%s, %f, %f, %f, %d, %d, %d, %d)", timestamp, temperature, pressure, humidity, x, y, z, mvt);
+        char *sql = sqlite3_mprintf("INSERT INTO data (nomducapteur, timestamp, temperature, pressure, humidity, nomducapteur, x, y, z, nomducapteur, mvt) VALUES (%s, %f, %f, %f, %d, %d, %d, %d)", timestamp, temperature, pressure, humidity, x, y, z, mvt);
         rc = sqlite3_exec(db, sql, NULL, 0, &zErrMsg);
         if( rc != SQLITE_OK ){
             fprintf(stderr, "SQL error: %s\n", zErrMsg);

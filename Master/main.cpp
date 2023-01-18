@@ -1,11 +1,17 @@
 #include <wiringSerial.h>
 #include <unistd.h> // pour sleep
 #include <iostream>
-#include "/usr/include/jsoncpp/json/json.h"
+//#include <"/usr/include/jsoncpp/json/json.h">
+#include <jsoncpp>
 #include "src/pca/pca.h"
 #include <sstream>
 #include <cstring>
 #include <curl/curl.h>
+#include <pthread.h>
+
+
+#define INTERVALLE_RECUP 5
+#define INTERVALLE_ENVOI_SERVEUR 60
 
 /**
  * @brief This function read the sensor data from the slave over TX/RX communication
@@ -71,17 +77,86 @@ void read_and_write(int fd){
                 mvt_tracker=1;
             }
             std::cout << "Data received and treated"<< std::endl;
+
+            // Write root to a file named "data.json"
+            std::ofstream output_file("data.json", std::ios::app);
+            output_file << root;
+            //output_file << ",";
+            output_file.close();
         }else{
             std::cout << "No data available, as a result, flags won't move." << std::endl;
         } 
-        sleep(3);
+        sleep(INTERVALLE_RECUP);
         }
+        pthread_exit(NULL);
+}
+
+/**
+ * @brief This function transfer the flux of data to the server located at ubuntu@57.128.34.47
+ * 
+ */
+void send_boost(std::vector<Json::Value> root){
+
+    // Create an io_context object to manage the network connection
+        boost::asio::io_context io_context;
+    
+    // Create a ssl context
+        ssl::context ctx{ssl::context::sslv23};
+    
+    // Set the private key file
+        ctx.use_private_key_file("opom__227__0_", ssl::context::pem);
+        
+    // Create an endpoint to represent the server's address
+        boost::asio::ip::tcp::endpoint endpoint(boost::asio::ip::address::from_string("57.128.34.47"), 22);
+    
+    // Create a ssl socket and connect it to the endpoint
+        ssl::stream<ip::tcp::socket> socket(io_context, ctx);
+        socket.lowest_layer().connect(endpoint);
+    
+    // Perform the SSL/TLS handshake
+        socket.handshake(ssl::stream_base::client);
+
+    // Serialize the vector
+    std::stringstream ss;
+    boost::archive::text_oarchive oa(ss);
+    oa << root;
+    std::string data = ss.str();
+
+    // Send the serialized data to the server
+    write(socket, buffer(data));
+
+    // Close the socket
+    socket.shutdown();
+    socket.lowest_layer().close();
 }
 
 
 
 
-void send(){
+int main() {
+
+    int fd = serialOpen("/dev/ttyAMA0", 9600); // Ouvre le port série sur /dev/ttyAMA0 à 9600 bauds
+    if (fd < 0) {
+        std::cout << "Error: Unable to open UART device" << std::endl;
+        return -1;
+    }
+    vector<Json::value> root;
+    pthread_t thread_rw, thread_send;
+
+    pthread_create(&thread_rw, NULL, read_and_write, &fd);
+    pthread_create(&thread_send, NULL,send, &fd);
+    pthread_join(thread_rw, NULL);
+    pthread_join(thread_send, NULL);
+
+    // C  est ici que l'on va avoir besoin des threads, un qui recupere de la data et un qui envoie, les deux a differents intervalles
+    read_and_write(fd);
+
+    serialClose(fd); // Ferme le port série
+    return 0;
+}
+
+
+void send_curl(){
     CURL *curl;
     CURLcode res;
     std::string sftpUrl = "sftp://ubuntu@57.128.34.47/Data/data.json";
@@ -102,21 +177,6 @@ void send(){
         /* always cleanup */
         curl_easy_cleanup(curl);
     }
-}
-
-int main() {
-
-    
-    int fd = serialOpen("/dev/ttyAMA0", 9600); // Ouvre le port série sur /dev/ttyAMA0 à 9600 bauds
-    if (fd < 0) {
-        std::cout << "Error: Unable to open UART device" << std::endl;
-        return -1;
-    }
-
-
-    // C  est ici que l'on va avoir besoin des threads, un qui recupere de la data et un qui envoie, les deux a differents intervalles
-    read_and_write(fd);
-
-    serialClose(fd); // Ferme le port série
-    return 0;
+    sleep(INTERVALLE_ENVOI_SERVEUR); // Send every 60sec
+    pthread_exit(NULL);
 }
