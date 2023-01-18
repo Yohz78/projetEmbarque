@@ -10,11 +10,12 @@
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/serialization/vector.hpp>
 #include <jsoncpp/json/json.h>
-#include <boost/asio/ssl.hpp>
 
 
 #define INTERVALLE_RECUP 5
 #define INTERVALLE_ENVOI_SERVEUR 60
+
+using namespace boost::asio;
 
 /**
  * @brief This function read the sensor data from the slave over TX/RX communication
