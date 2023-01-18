@@ -68,22 +68,22 @@ void read_and_write(int fd, std::vector<Json::Value> &res){
             std::cout << root << std::endl;
             if(pos_tracker==0){
                 pca.moveBlueFlag(45);
-                pos_tracker==2;
+                pos_tracker=2;
             }
             if(pos_tracker==2){
                 pca.moveBlueFlag(135);
-                pos_tracker==3;
+                pos_tracker=3;
             }
             if(pos_tracker==3){
                 pca.moveBlueFlag(45);
-                pos_tracker==2;
+                pos_tracker=2;
             }
             std::cout << "Data received and treated"<< std::endl;
             res.pushback(root);
         }else{
             std::cout << "No data available, Blue flag back to rest position." << std::endl;
             pca.moveBlueFlag(180);
-            pos_tracker==0;
+            pos_tracker=0;
         } 
         sleep(INTERVALLE_RECUP);
         }
