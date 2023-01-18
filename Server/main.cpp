@@ -1,3 +1,7 @@
+#include <iostream>
 
 
-#define dbName "data.db"
+int main(){
+    
+}
+

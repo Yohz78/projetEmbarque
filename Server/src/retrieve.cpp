@@ -5,7 +5,7 @@
 #include <boost/serialization/vector.hpp>
 #include <jsoncpp/json/json.h>
 
-std::vector<Json::value> retrieve_data_from_master(){
+std::vector<Json::value>& retrieve_data_from_master(){
     // Create an io_context object to manage the network connection
     boost::asio::io_context io_context;
 
