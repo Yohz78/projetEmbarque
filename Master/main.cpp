@@ -140,7 +140,7 @@ int main() {
         std::cout << "Error: Unable to open UART device" << std::endl;
         return -1;
     }
-    vector<Json::value> res;
+    vector<Json::Value> res;
     pthread_t thread_rw, thread_send;
 
     pthread_create(&thread_rw, NULL, read_and_write, &fd, &res);
