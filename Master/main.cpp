@@ -77,7 +77,7 @@ void read_and_write(int fd, std::vector<Json::Value> &res){
                 pos_tracker=2;
             }
             std::cout << "Data received and treated"<< std::endl;
-            res.pushback(root);
+            res.push_back(root);
         }else{
             std::cout << "No data available, Blue flag back to rest position." << std::endl;
             pca.moveBlueFlag(180);
