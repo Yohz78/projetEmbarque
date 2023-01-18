@@ -149,7 +149,7 @@ int main() {
         return -1;
     }
     vector<Json::Value> res;
-    read_and_write(fd,&res);
+    read_and_write(fd,res);
     
     /*pthread_t thread_rw, thread_send;
 
