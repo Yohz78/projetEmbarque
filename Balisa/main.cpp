@@ -6,6 +6,8 @@
 #include <wiringSerial.h>
 #include <cstdlib>
 #include <time.h>
+#include <string>
+#include <ctime>
 
 #include "src/handler/handler.h"
 //#include "src/bme/bme.h"
