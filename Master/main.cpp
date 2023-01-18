@@ -6,7 +6,7 @@
 #include <sstream>
 #include <cstring>
 #include <pthread.h>
-#include <boost>
+#include <boost/asio.hpp>
 
 
 #define INTERVALLE_RECUP 5
