@@ -5,7 +5,7 @@
 #include <iomanip>
 #include <math.h>
 #include <wiringPiI2C.h>
-#include<unistd.h>
+#include <unistd.h>
 #include <ctime>
 #include <string>
 #include <sstream>
@@ -231,29 +231,15 @@ std::string bme::harvestDataAndRun(){
 
     bme280_raw_data raw;
     getRawData(fd, &raw);
-
-
-    std::time_t t = std::time(nullptr);
-    std::tm tm = *std::localtime(&t);
-
-    std::ostringstream oss;
-    oss << std::put_time(&tm, "%Y-%m-%dT%H:%M:%S");
-    std::string iso_time = oss.str();
-
     std::string sep = "\"";
 
       int32_t t_fine = getTemperatureCalibration(&cal, raw.temperature);
       this->temp = compensateTemperature(t_fine); // C
       this->pression = compensatePressure(raw.pressure, &cal, t_fine) / 100; // hPa
       this->humidite = compensateHumidity(raw.humidity, &cal, t_fine);       // %
-      //float a = getAltitude(p);                         // meters
-      std::string flux = "\"timestamp\":" + sep + iso_time + sep
-                        +",\"temperature\":" + std::to_string(getTemperature())
+      std::string flux = sep+"BME"+sep+": {\"temperature\": " + std::to_string(getTemperature())+
                         +",\"pressure\": " + std::to_string(getPressure())
-                        +",\"humidity\":" + std::to_string(getHumidite());
-      /*printf("{\"sensor\":\"bme280\", \"humidity\":%.2f, \"pressure\":%.2f,"
-        " \"temperature\":%.2f, \"timestamp\":%d}\n",
-        getHumidite(), getPressure(), getTemperature(), (int)time(NULL));*/
+                        +",\"humidity\": " + std::to_string(getHumidite())+"}";
       return flux;
 }
 

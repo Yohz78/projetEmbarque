@@ -5,6 +5,12 @@
 #include <cstring>
 #include <wiringSerial.h>
 #include <cstdlib>
+#include <time.h>
+#include <string>
+#include <ctime>
+#include <stdint.h>
+#include <unistd.h>
+#include <iomanip>
 
 #include "src/handler/handler.h"
 //#include "src/bme/bme.h"
@@ -17,14 +23,22 @@
  * @param[in] Handler handler 
  */
 void loop(int fd,Handler* handler) {
+    std::time_t t = std::time(nullptr);
+    std::tm tm = *std::localtime(&t);
+
+    std::ostringstream oss1;
+    oss1 << std::put_time(&tm, "%Y-%m-%dT%H:%M:%S");
+    std::string iso_time = oss1.str();
+    std::string sep = "\"";
             std::ostringstream oss;
             std::cout << "---------------------DATAS---------------------" << std::endl;
-            oss << "{";
+            oss << "{\"date\":" + sep + iso_time + sep;
+            oss << ",";
             oss << handler->getBME().harvestDataAndRun();
             oss << ",";
-            oss << handler->getHMCvalue();
+            oss << handler->getHCSR().checkMotion(); 
             oss << ",";
-            oss << handler->getHCSR().checkMotion();
+            oss << handler->getHMCvalue();
             oss << "}";
             serialPuts(fd,oss.str().c_str());
             std::cout << "Donnees envoyees:" << std::endl;
