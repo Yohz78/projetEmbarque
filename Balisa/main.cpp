@@ -21,13 +21,14 @@ void loop(int fd,Handler* handler) {
     std::time_t t = std::time(nullptr);
     std::tm tm = *std::localtime(&t);
 
-    std::ostringstream oss;
-    oss << std::put_time(&tm, "%Y-%m-%dT%H:%M:%S");
-    std::string iso_time = oss.str();
+    std::ostringstream oss1;
+    oss1 << std::put_time(&tm, "%Y-%m-%dT%H:%M:%S");
+    std::string iso_time = oss1.str();
     std::string sep = "\"";
             std::ostringstream oss;
             std::cout << "---------------------DATAS---------------------" << std::endl;
-            oss << "{\"timestamp\": + sep + iso_time + sep,";
+            oss << "{\"timestamp\":" + sep + iso_time + sep;
+            oss << ",";
             oss << handler->getBME().harvestDataAndRun();
             oss << ",";
             oss << handler->getHCSR().checkMotion(); 
