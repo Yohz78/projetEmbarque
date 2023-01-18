@@ -10,6 +10,7 @@
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/serialization/vector.hpp>
 #include <jsoncpp/json/json.h>
+#include <boost/asio/ssl.hpp>
 
 
 #define INTERVALLE_RECUP 5
