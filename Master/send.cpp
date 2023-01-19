@@ -122,7 +122,7 @@ void read_and_write(int fd, vector<Json::Value> &res){
 
 void sendData(vector<Json::Value> &jsonVec) {
     string ip = "57.128.34.47";
-    char *serverIp = ip.c_str();
+    const char *serverIp = ip.c_str();
     int port = 22;
     int clientSd = socket(AF_INET, SOCK_STREAM, 0);
     sockaddr_in sendSockAddr;

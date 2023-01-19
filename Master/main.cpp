@@ -9,9 +9,6 @@
 #include "src/pca/pca.h"
 #include "send.cpp"
 
-#define INTERVALLE_RECUP 5
-#define INTERVALLE_ENVOI_SERVEUR 60
-
 
 int main() {
 
