@@ -52,7 +52,7 @@ int  serv_init(){
 
 int retrieve(int serverSd, vector<Json::Value>& jsonVec) {
     cout << " retrieve DEBUT" << endl;
-    char msg[1500];
+    char msg[2000+1];
     cout << "retrieve: Waiting for a client to connect..." << endl;
     cout << "retrieve: LISTENING ON" << endl;
     listen(serverSd, 5);
