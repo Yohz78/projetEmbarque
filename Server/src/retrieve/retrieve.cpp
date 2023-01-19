@@ -46,7 +46,7 @@ int  serv_init(){
     return serverSd;
 }
 
-vector<Json::Value> retrieve(int serverSd, int& resNewSd) {
+void retrieve(int serverSd, int& resNewSd, vector<Json::Value>& jsonVec) {
     char msg[1500];
     cout << "Waiting for a client to connect..." << endl;
     listen(serverSd, 5);
@@ -62,26 +62,43 @@ vector<Json::Value> retrieve(int serverSd, int& resNewSd) {
 
     cout << "Connected with client!" << endl;
 
-    int vecSize;
-    recv(newSd, &vecSize, sizeof(int), 0);
-    vector<Json::Value> jsonVec;
-    for (int i = 0; i < vecSize; i++) {
-        Json::Value jsonVal;
-        Json::Reader reader;
-        recv(newSd, &msg, sizeof(msg), 0);
-        if (reader.parse(msg, jsonVal)) {
-            jsonVec.push_back(jsonVal);
+    while(1){
+        int vecSize;
+        recv(newSd, &vecSize, sizeof(int), 0);
+        for (int i = 0; i < vecSize; i++) {
+            // Json::Value jsonVal;
+            // Json::Reader reader;
+            // recv(newSd, &msg, sizeof(msg), 0);
+            // if (reader.parse(msg, jsonVal)) {
+            //     jsonVec.push_back(jsonVal);
+            // }
+
+            // istringstream json_stream(string_data);
+            // Json::Value root;
+            // Json::CharReaderBuilder builder;
+            // JSONCPP_STRING errs;
+            // bool parsingSuccessful = Json::parseFromStream(builder,
+            //                                            json_stream,
+            //                                            &root,
+            //                                            &errs);
+            Json::Value jsonVal;
+            Json::CharReaderBuilder builder;
+            std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
+            std::string msg;
+            recv(newSd, &msg, sizeof(msg), 0);
+            if (reader->parse(msg.c_str(), msg.c_str() + msg.size(), &jsonVal, nullptr)) {
+                jsonVec.push_back(jsonVal);
+            }
+        }
+        if(!jsonVec.empty()){
+            cout << "Received vector of Json objects from client:" << endl;
+            for (auto json : jsonVec) {
+                cout << json << endl;
+            }
+        }else{
+            cout << "JSONVEC is empty" << endl;
         }
     }
-    if(!jsonVec.empty()){
-        cout << "Received vector of Json objects from client:" << endl;
-        for (auto json : jsonVec) {
-            cout << json << endl;
-        }
-    }else{
-        cout << "JSONVEC is empty" << endl;
-    }
-    return jsonVec;
 }
 
 void serv_close(int& newSd, int& serverSd){
