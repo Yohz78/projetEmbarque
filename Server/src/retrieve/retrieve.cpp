@@ -104,14 +104,16 @@ int retrieve(int serverSd, vector<Json::Value>& jsonVec) {
             //     jsonVec.push_back(jsonVal);
             // }
         }
-        if(!jsonVec.empty()){
-            cout << "retrieve: Received vector of Json objects from client:" << endl;
-            for (auto json : jsonVec) {
-                cout << json << endl;
-            }
-        }else{
-            cout << "retrieve: JSONVEC is empty" << endl;
-        }
+        cout << "retrieve: Nombre d'element: " << jsonVec.size() << endl;
+         
+        // if(!jsonVec.empty()){
+        //     cout << "retrieve: Received vector of Json objects from client:" << endl;
+        //     for (auto json : jsonVec) {
+        //         cout << json << endl;
+        //     }
+        // }else{
+        //     cout << "retrieve: JSONVEC is empty" << endl;
+        // }
         cout << " retrieve FIN" << endl;
         return newSd;
     //}
