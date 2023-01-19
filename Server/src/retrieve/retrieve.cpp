@@ -20,6 +20,7 @@
 using namespace std;
 
 int  serv_init(){
+    cout << " serv_init DEBUT" << endl;
     int port = 1500;
     
     sockaddr_in servAddr;
@@ -30,25 +31,27 @@ int  serv_init(){
     int serverSd = socket(AF_INET, SOCK_STREAM, 0);
 
     if (serverSd < 0) {
-        cerr << "Error establishing the server socket" << endl;
+        cerr << "serv_init: Error establishing the server socket" << endl;
         exit(0);
     }
 
     int bindStatus = bind(serverSd, (struct sockaddr*) &servAddr, sizeof(servAddr));
-    cout << "Valeur de bindStatus: " << bindStatus << endl;
+    cout << "serv_init: Valeur de bindStatus: " << bindStatus << endl;
 
     if (bindStatus < 0) {
-        cerr << "Error binding socket to local address" << endl;
+        cerr << "serv_init: Error binding socket to local address" << endl;
         close(serverSd);
         //close(newSd);
         exit(0);
     }
 
-    cout << "Valeur de serverSd = " << serverSd << endl;
+    cout << "serv_init: Valeur de serverSd = " << serverSd << endl;
+    cout << " serv_init FIN" << endl;
     return serverSd;
 }
 
 void retrieve(int serverSd, int& resNewSd, vector<Json::Value>& jsonVec) {
+    cout << " retrieve DEBUT" << endl;
     char msg[1500];
     cout << "retrieve: Waiting for a client to connect..." << endl;
     listen(serverSd, 5);
@@ -102,10 +105,13 @@ void retrieve(int serverSd, int& resNewSd, vector<Json::Value>& jsonVec) {
         }else{
             cout << "retrieve: JSONVEC is empty" << endl;
         }
+        cout << " retrieve FIN" << endl;
     //}
 }
 
 void serv_close(int& newSd, int& serverSd){
+    cout << " serv_close DEBUT" << endl;
     close(newSd);
     close(serverSd);
+    cout << " serv_close FIN" << endl;
 }
