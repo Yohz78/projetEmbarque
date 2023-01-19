@@ -49,7 +49,7 @@ int  serv_init(){
 }
 
 void retrieve(int serverSd, int& resNewSd, vector<Json::Value>& jsonVec) {
-    //char msg[1500];
+    char msg[1500];
     cout << "retrieve: Waiting for a client to connect..." << endl;
     listen(serverSd, 5);
     sockaddr_in newSockAddr;
