@@ -1,5 +1,5 @@
 # Nom de l'exécutable
-EXEC = master_handler
+EXEC = server_handler
 
 # Fichiers sources
 SRC = $(wildcard *.cpp) $(wildcard src/*/*.cpp)
