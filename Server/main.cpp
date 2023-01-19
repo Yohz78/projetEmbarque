@@ -11,7 +11,7 @@ using namespace std;
 int main(){
     //menu();
     int serverSd = serv_init();
-    int resNewSd;
+    int resNewSd = 0;
     vector<Json::Value> res;
     retrieve(serverSd,resNewSd,res);
     for(auto data: res){
