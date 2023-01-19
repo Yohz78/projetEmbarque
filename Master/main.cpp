@@ -36,9 +36,9 @@ int main() {
         std::cout << "Error: Unable to open UART device" << std::endl;
         return -1;
     }
-    vector<Json::Value> res;
     int clientSd = send_init();
     while(1){
+    vector<Json::Value> res;
     read_and_write(fd,res);
 
     for(auto data: res){
@@ -48,7 +48,6 @@ int main() {
     std::cout << "-------------------------------ENVOI----------------------------------" << std::endl;
     sendData(clientSd,res);
     res.clear();
-    res.shrink_to_fit();
     // while(res.size() !=0){
     //     res.pop_back();
     // }
