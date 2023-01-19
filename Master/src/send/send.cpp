@@ -165,7 +165,6 @@ void sendData(int clientSd, vector<Json::Value> &jsonVec) {
     cout << "sendData: TABLEAU JSONTSTR:   " << jsonStr << endl;
     cout << "-------------------------------------------" << endl;
     send(clientSd, jsonStr, sizeof(jsonStr), 0);
-    free(jsonStr);
 }
 
 void send_close(int clientSd){
