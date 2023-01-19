@@ -78,34 +78,34 @@ void read_and_write(int fd, vector<Json::Value> &res){
                                                        &root,
                                                        &errs);
             if (!parsingSuccessful) {
-                cout << "Error parsing JSON" << endl;
+                cout << "read_and_write: Error parsing JSON" << endl;
             }
             if(pos_tracker==3){
                 pca.moveBlueFlag(45);
                 pos_tracker=2;
-                cout << "Blue flag to 45°" << endl;
+                cout << "read_and_write: Blue flag to 45°" << endl;
             }else if(pos_tracker==2){
                 pca.moveBlueFlag(135);
                 pos_tracker=3;
-                cout << "Blue flag to 135°" << endl;
+                cout << "read_and_write: Blue flag to 135°" << endl;
             }else if(pos_tracker==0){
                 pca.moveBlueFlag(45);
                 pos_tracker=2;
-                cout << "Blue flag to 45°" << endl;
+                cout << "read_and_write: Blue flag to 45°" << endl;
             }
             //Yellow flag logic
             double presence = root["HCSR"]["mvt"].asDouble();
             if(presence==0 && mvt_tracker==1){
                 pca.moveYellowFlag(180);
-                cout << "Yellow flag to 180°" << endl;
+                cout << "read_and_write: Yellow flag to 180°" << endl;
             }
             if(presence==0 && mvt_tracker==0){
                 pca.moveYellowFlag(0);
-                cout << "Yellow flag to 0°" << endl;
+                cout << "read_and_write: Yellow flag to 0°" << endl;
             }    
             if(presence==1){
                 pca.moveYellowFlag(90);
-                cout << "Yellow flag to 90°" << endl;
+                cout << "read_and_write: Yellow flag to 90°" << endl;
                 mvt_tracker=1;
             }    
             res.push_back(root);
@@ -114,7 +114,7 @@ void read_and_write(int fd, vector<Json::Value> &res){
                 break;
             }
         }else{
-            cout << "No data available, Blue flag back to rest position." << endl;
+            cout << "read_and_write:: No data available, Blue flag back to rest position." << endl;
             pca.moveBlueFlag(180);
             pos_tracker=0;
         } 
