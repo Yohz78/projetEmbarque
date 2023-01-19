@@ -47,7 +47,7 @@ string read_sensor_data(int fd) {
             index++;
         }
         data[index] = '\0';
-        //cout << "Donnée reçue"<< data << endl;
+        cout << "read_sensor_data: Donnée reçue: "<< data << endl;
         return data;
         sleep(1); // Fait une pause pendant interval secondes
     }
@@ -68,6 +68,7 @@ void read_and_write(int fd, vector<Json::Value> &res){
 
         while (true) {
         string string_data = read_sensor_data(fd);
+        cout << "read_and_write: string_data:  " << string_data << endl;
         if(!string_data.empty()){
             istringstream json_stream(string_data);
             Json::Value root;
