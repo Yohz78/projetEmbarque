@@ -50,7 +50,7 @@ int  serv_init(){
     return serverSd;
 }
 
-void retrieve(int serverSd, int& resNewSd, vector<Json::Value>& jsonVec) {
+int retrieve(int serverSd, vector<Json::Value>& jsonVec) {
     cout << " retrieve DEBUT" << endl;
     char msg[1500];
     cout << "retrieve: Waiting for a client to connect..." << endl;
@@ -63,9 +63,9 @@ void retrieve(int serverSd, int& resNewSd, vector<Json::Value>& jsonVec) {
     int newSd = accept(serverSd, (sockaddr *)&newSockAddr, &newSockAddrSize);
     cout << "retrieve: NEWSD FIN" << endl;
 
-    cout << "retrieve: resNEWSD DEBUT" << endl;
-    resNewSd = newSd;
-    cout << "retrieve: resNEWSD FIN" << endl;
+    // cout << "retrieve: resNEWSD DEBUT" << endl;
+    // resNewSd = newSd;
+    // cout << "retrieve: resNEWSD FIN" << endl;
 
     if (newSd < 0) {
         cerr << "retrieve: Error accepting request from client!" << endl;
@@ -113,6 +113,7 @@ void retrieve(int serverSd, int& resNewSd, vector<Json::Value>& jsonVec) {
             cout << "retrieve: JSONVEC is empty" << endl;
         }
         cout << " retrieve FIN" << endl;
+        return newSd;
     //}
 }
 
