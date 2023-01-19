@@ -145,10 +145,10 @@ int send_init(){
 void sendData(int clientSd, vector<Json::Value> &jsonVec) {
     int vecSize = jsonVec.size();
     send(clientSd, &vecSize, sizeof(int), 0);
+    char jsonStr[2000];
     for (auto json : jsonVec) {
         Json::FastWriter writer;
         string output = writer.write(json);
-        char jsonStr[2000];
         strcpy(jsonStr,output.c_str());
         int jsonLen = strlen(jsonStr);
         send(clientSd, &jsonLen, sizeof(int), 0);
