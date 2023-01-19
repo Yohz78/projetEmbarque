@@ -66,10 +66,15 @@ vector<Json::Value> retrieve() {
             jsonVec.push_back(jsonVal);
         }
     }
-    cout << "Received vector of Json objects from client:" << endl;
-    for (auto json : jsonVec) {
-        cout << json << endl;
+    if(!jsonVec.empty()){
+        cout << "Received vector of Json objects from client:" << endl;
+        for (auto json : jsonVec) {
+            cout << json << endl;
+        }
+    }else{
+        cout << "JSONVEC is empty" << endl;
     }
+    
 
     close(newSd);
     close(serverSd);

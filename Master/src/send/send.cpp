@@ -149,9 +149,13 @@ void sendData(int clientSd, vector<Json::Value> &jsonVec) {
     for (auto json : jsonVec) {
         Json::FastWriter writer;
         string output = writer.write(json);
+        cout << "send.cpp l151: OUTPUT: " << output << endl;
         strcpy(jsonStr,output.c_str());
+        cout << "send.cpp l153: jsonstr: " << jsonStr << endl;
         int jsonLen = strlen(jsonStr);
+        cout << "send(clientSd, &jsonLen, sizeof(int), 0);" << endl; 
         send(clientSd, &jsonLen, sizeof(int), 0);
+        cout << "send(clientSd, jsonStr, jsonLen, 0);" << endl; 
         send(clientSd, jsonStr, jsonLen, 0);
     }
     free(jsonStr);
