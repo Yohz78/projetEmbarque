@@ -169,7 +169,7 @@ void sendData(int clientSd, vector<Json::Value> &jsonVec) {
     // cout << "sendData: TABLEAU JSONTSTR:   " << jsonStr << endl;
     // cout << "-------------------------------------------" << endl;
     //send(clientSd, jsonStr, sizeof(jsonStr), 0);
-    send(clientSd, "TOTO", sizeof("TOTO") ,0);
+    //send(clientSd, "TOTO", sizeof("TOTO") ,0);
     send(clientSd, test, sizeof(test) ,0);
     send(clientSd, "{\"temperature\": 22.860001}", sizeof("{\"temperature\": 22.860001}"), 0);
 }
