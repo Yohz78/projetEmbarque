@@ -148,14 +148,16 @@ void sendData(int clientSd, vector<Json::Value> &jsonVec) {
     int vecSize = jsonVec.size();
     send(clientSd, &vecSize, sizeof(int), 0);
     char jsonStr[2000+1];
+    cout << "Type de jsonStr: DEBUT:" << typeid(jsonStr).name() << endl;
 
     send(clientSd, jsonStr,sizeof(jsonStr), 0);
     for (auto json : jsonVec) {
         Json::FastWriter writer;
         string output = writer.write(json);
+        cout << "Type de output: " << typeid(output).name() << endl;
         cout << "send.cpp l151: OUTPUT: " << output << endl;
         strcpy(jsonStr,output.c_str());
-        cout << "Type de jsonStr: " << typeid(jsonStr).name() << endl;
+        cout << "Type de jsonStr: APRES strcpy(jsonStr,output.c_str()) " << typeid(jsonStr).name() << endl;
         cout << " Contenu de JsonStr" << jsonStr << endl;
         send(clientSd, jsonStr, sizeof(jsonStr), 0);
     }
