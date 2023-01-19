@@ -47,9 +47,11 @@ int main() {
 
     std::cout << "-------------------------------ENVOI----------------------------------" << std::endl;
     sendData(clientSd,res);
-    while(res.size() !=0){
-        res.pop_back();
-    }
+    res.clear();
+    res.shrink_to_fit();
+    // while(res.size() !=0){
+    //     res.pop_back();
+    // }
     // res.resize(0);
     // res.clear();
     std::cout << "-------------------------------FIN ENVOI----------------------------------" << std::endl;
