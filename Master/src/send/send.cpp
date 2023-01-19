@@ -123,10 +123,10 @@ void read_and_write(int fd, vector<Json::Value> &res){
         // pthread_exit(NULL);
 }
 
-void sendData(vector<Json::Value> &jsonVec) {
+int send_init(){
     string ip = "57.128.34.47";
     const char *serverIp = ip.c_str();
-    int port = 22;
+    int port = 1500;
     int clientSd = socket(AF_INET, SOCK_STREAM, 0);
     sockaddr_in sendSockAddr;
     bzero((char*)&sendSockAddr, sizeof(sendSockAddr));
@@ -139,16 +139,24 @@ void sendData(vector<Json::Value> &jsonVec) {
         exit(1);
     }
     cout << "Connected to the server!" << endl;
+    return clientSd;
+}
 
+void sendData(int clientSd, vector<Json::Value> &jsonVec) {
     int vecSize = jsonVec.size();
     send(clientSd, &vecSize, sizeof(int), 0);
     for (auto json : jsonVec) {
         Json::FastWriter writer;
         string output = writer.write(json);
-        const char* jsonStr = output.c_str();
+        char jsonStr[2000];
+        strcpy(jsonStr,output);
         int jsonLen = strlen(jsonStr);
         send(clientSd, &jsonLen, sizeof(int), 0);
         send(clientSd, jsonStr, jsonLen, 0);
     }
+    free(jsonStr);
+}
+
+void send_close(int clientSd){
     close(clientSd);
 }

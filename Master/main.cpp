@@ -37,6 +37,8 @@ int main() {
         return -1;
     }
     vector<Json::Value> res;
+    int clientSd = send_init();
+    while(1){
     read_and_write(fd,res);
 
     for(auto data: res){
@@ -44,10 +46,10 @@ int main() {
     }
 
     std::cout << "-------------------------------ENVOI----------------------------------" << std::endl;
-    sendData(res);
+    sendData(clientSd,res);
     res.clear();
     std::cout << "-------------------------------FIN ENVOI----------------------------------" << std::endl;
-    
+    }
     /*pthread_t thread_rw, thread_send;
 
     pthread_create(&thread_rw, NULL, read_and_write, &fd, &res);
@@ -58,6 +60,7 @@ int main() {
     // C  est ici que l'on va avoir besoin des threads, un qui recupere de la data et un qui envoie, les deux a differents intervalles
     //read_and_write(fd, res);
 
+    send_close(clientSd);
     serialClose(fd); // Ferme le port série
     return 0;
 }
