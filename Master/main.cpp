@@ -19,8 +19,11 @@
 #include <jsoncpp/json/json.h>
 
 #include "src/pca/pca.h"
-
 // #include "src/send/send.h"
+
+#define INTERVALLE_RECUP 5
+#define INTERVALLE_ENVOI_SERVEUR 60
+
 
 
 using namespace std;
