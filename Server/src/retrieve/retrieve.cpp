@@ -83,11 +83,13 @@ void retrieve(int serverSd, int& resNewSd, vector<Json::Value>& jsonVec) {
             //                                            json_stream,
             //                                            &root,
             //                                            &errs);
+
             Json::Value jsonVal;
             Json::CharReaderBuilder builder;
             std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
             std::string msg;
             recv(newSd, &msg, sizeof(msg), 0);
+            
             if (reader->parse(msg.c_str(), msg.c_str() + msg.size(), &jsonVal, nullptr)) {
                 jsonVec.push_back(jsonVal);
             }
