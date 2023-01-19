@@ -161,10 +161,14 @@ void sendData(int clientSd, vector<Json::Value> &jsonVec) {
         // cout << "sendData: Contenu de JsonStr" << jsonStr << endl;
         
     }
-    cout << "-------------------------------------------" << endl;
-    cout << "sendData: TABLEAU JSONTSTR:   " << jsonStr << endl;
-    cout << "-------------------------------------------" << endl;
-    send(clientSd, jsonStr, sizeof(jsonStr), 0);
+    // {"date":"2023-01-19T17:18:25","BME": {"temperature": 22.860001,"pressure": 999.383728,"humidity": 28.709961},
+    // "HCSR": {"mvt": 0},"HMC": {"x": 18146,"y": -358,"z":-1587}}
+
+    // cout << "-------------------------------------------" << endl;
+    // cout << "sendData: TABLEAU JSONTSTR:   " << jsonStr << endl;
+    // cout << "-------------------------------------------" << endl;
+    //send(clientSd, jsonStr, sizeof(jsonStr), 0);
+    send(clientSd, "{\"temperature\": 22.860001}", sizeof("{\"temperature\": 22.860001}"), 0);
 }
 
 void send_close(int clientSd){
