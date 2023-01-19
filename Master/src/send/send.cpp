@@ -148,19 +148,23 @@ void sendData(int clientSd, vector<Json::Value> &jsonVec) {
     int vecSize = jsonVec.size();
     send(clientSd, &vecSize, sizeof(int), 0);
     char jsonStr[2000+1];
-    cout << "Type de jsonStr: DEBUT:" << typeid(jsonStr).name() << endl;
+    // cout << "Type de jsonStr: DEBUT:" << typeid(jsonStr).name() << endl;
 
     send(clientSd, jsonStr,sizeof(jsonStr), 0);
     for (auto json : jsonVec) {
         Json::FastWriter writer;
         string output = writer.write(json);
-        cout << "Type de output: " << typeid(output).name() << endl;
-        cout << "send.cpp l151: OUTPUT: " << output << endl;
-        strcpy(jsonStr,output.c_str());
-        cout << "Type de jsonStr: APRES strcpy(jsonStr,output.c_str()) " << typeid(jsonStr).name() << endl;
-        cout << " Contenu de JsonStr" << jsonStr << endl;
-        send(clientSd, jsonStr, sizeof(jsonStr), 0);
+        // cout << "sendData: Type de output: " << typeid(output).name() << endl;
+        // cout << "sendData: OUTPUT: " << output << endl;
+        strcat(jsonStr,output.c_str());
+        // cout << "sendData: Type de jsonStr: APRES strcpy(jsonStr,output.c_str()) " << typeid(jsonStr).name() << endl;
+        // cout << "sendData: Contenu de JsonStr" << jsonStr << endl;
+        
     }
+    cout << "-------------------------------------------" << endl;
+    cout << "sendData: TABLEAU JSONTSTR:   " << jsonStr << endl;
+    cout << "-------------------------------------------" << endl;
+    send(clientSd, jsonStr, sizeof(jsonStr), 0);
     free(jsonStr);
 }
 
