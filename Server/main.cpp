@@ -12,7 +12,7 @@ int main(){
     //menu();
     vector<Json::Value> res = retrieve();
     for(auto data: res){
-        cout << res;
+        cout << data;
     }
 
     return 0;
