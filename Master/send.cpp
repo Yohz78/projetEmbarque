@@ -18,6 +18,9 @@
 #include <wiringSerial.h>
 #include <jsoncpp/json/json.h>
 
+#define INTERVALLE_RECUP 5
+#define INTERVALLE_ENVOI_SERVEUR 60
+
 using namespace std;
 
 /**
@@ -118,7 +121,7 @@ void read_and_write(int fd, vector<Json::Value> &res){
 }
 
 void sendData(vector<Json::Value> &jsonVec) {
-    string ip = "57.128.34.47"
+    string ip = "57.128.34.47";
     char *serverIp = ip.c_str();
     int port = 22;
     int clientSd = socket(AF_INET, SOCK_STREAM, 0);
