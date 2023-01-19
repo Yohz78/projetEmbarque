@@ -15,7 +15,7 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #include <fstream>
-#include <json/json.h>
+#include <jsoncpp/json/json.h>
 
 using namespace std;
 
