@@ -25,6 +25,8 @@
 
 std::string read_sensor_data(int);
 void read_and_write(int, vector<Json::Value>&);
+int send_init();
 void sendData(vector<Json::Value>&);
+void send_close(int);
 
 #endif //SEND_H
