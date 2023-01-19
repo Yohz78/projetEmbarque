@@ -39,6 +39,8 @@ int  serv_init(){
 
     if (bindStatus < 0) {
         cerr << "Error binding socket to local address" << endl;
+        close(serverSd);
+        //close(newSd);
         exit(0);
     }
 
