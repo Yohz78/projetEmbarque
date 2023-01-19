@@ -47,7 +47,8 @@ int main() {
 
     std::cout << "-------------------------------ENVOI----------------------------------" << std::endl;
     sendData(clientSd,res);
-    res.clear();
+    res.resize(0);
+    // res.clear();
     std::cout << "-------------------------------FIN ENVOI----------------------------------" << std::endl;
     }
     /*pthread_t thread_rw, thread_send;
