@@ -3,7 +3,7 @@
 
 
 #include <jsoncpp/json/json.h>
-#include "menu.cpp"
+#include "src/menu/menu.h"
 #include "src/retrieve/retrieve.h"
 
 using namespace std;
