@@ -35,7 +35,8 @@ vector<Json::Value> retrieve() {
     }
 
     int bindStatus = bind(serverSd, (struct sockaddr*) &servAddr, sizeof(servAddr));
-
+    cout << "Valeur de bindStatus: " << bindStatus << endl;
+    
     if (bindStatus < 0) {
         cerr << "Error binding socket to local address" << endl;
         exit(0);
