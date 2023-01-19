@@ -19,4 +19,6 @@
 
 using namespace std;
 
+int  serv_init();
 vector<Json::Value> retrieve();
+void serv_close();

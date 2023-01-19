@@ -10,12 +10,15 @@ using namespace std;
 
 int main(){
     //menu();
+    int serverSd = serv_init();
+
     while(1){
-        vector<Json::Value> res = retrieve();
+        vector<Json::Value> res = retrieve(serverSd);
         for(auto data: res){
             cout << data;
         }
     }
+    serv_close();
     return 0;
 }
 

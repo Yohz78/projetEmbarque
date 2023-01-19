@@ -19,7 +19,7 @@
 
 using namespace std;
 
-vector<Json::Value> retrieve() {
+int  serv_init(){
     int port = 1500;
     char msg[1500];
     sockaddr_in servAddr;
@@ -42,6 +42,12 @@ vector<Json::Value> retrieve() {
         exit(0);
     }
 
+    cout << "Valeur de serverSd = " << serverSd << endl;
+    return serverSd;
+}
+
+vector<Json::Value> retrieve(int serverSd) {
+    
     cout << "Waiting for a client to connect..." << endl;
     listen(serverSd, 5);
     sockaddr_in newSockAddr;
@@ -74,9 +80,10 @@ vector<Json::Value> retrieve() {
     }else{
         cout << "JSONVEC is empty" << endl;
     }
-    
+    return jsonVec;
+}
 
+void serv_close(){
     close(newSd);
     close(serverSd);
-    return jsonVec;
 }
