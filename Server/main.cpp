@@ -10,11 +10,12 @@ using namespace std;
 
 int main(){
     //menu();
-    vector<Json::Value> res = retrieve();
-    for(auto data: res){
-        cout << data;
+    while(1){
+        vector<Json::Value> res = retrieve();
+        for(auto data: res){
+            cout << data;
+        }
     }
-
     return 0;
 }
 

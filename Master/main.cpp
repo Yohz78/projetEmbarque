@@ -39,7 +39,7 @@ int main() {
     int clientSd = send_init();
     while(1){
     vector<Json::Value> res;
-    cout << "-----------main: res size AFTER = " << res.size() << endl;
+    cout << "-----------main: res size BEGIN = " << res.size() << endl;
     read_and_write(fd,res);
 
     // for(auto data: res){
