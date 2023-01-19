@@ -57,7 +57,7 @@ void afficheHMC(Json::Value root){
 }
 
 void menu(){
-    std::string jsonString= {"date": "2023-01-17T15:38:16","BME": {"temperature": "22.250000","pression": "977.488647","humidity": "29.601562"},"HCSR": {"mvt": "0"},"HMC": {"x": "18146""y": "-358","z": "-1587"}}
+    std::string jsonString= {"date": "2023-01-17T15:38:16","BME": {"temperature": "22.250000","pression": "977.488647","humidity": "29.601562"},"HCSR": {"mvt": "0"},"HMC": {"x": "18146""y": "-358","z": "-1587"}};
     Json::Value root;
     Json::Reader reader;
     bool parsingSuccessful = reader.parse(jsonString, root);
