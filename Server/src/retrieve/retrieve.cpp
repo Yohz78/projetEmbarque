@@ -20,7 +20,7 @@
 using namespace std;
 
 vector<Json::Value> retrieve() {
-    int port = 21;
+    int port = 1500;
     char msg[1500];
     sockaddr_in servAddr;
     bzero((char*)&servAddr, sizeof(servAddr));
@@ -36,7 +36,7 @@ vector<Json::Value> retrieve() {
 
     int bindStatus = bind(serverSd, (struct sockaddr*) &servAddr, sizeof(servAddr));
     cout << "Valeur de bindStatus: " << bindStatus << endl;
-    
+
     if (bindStatus < 0) {
         cerr << "Error binding socket to local address" << endl;
         exit(0);
