@@ -1,36 +1,76 @@
 #include <iostream>
+#include <string>
+#include <stdio.h>
 #include <vector>
-#include <boost/asio.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/serialization/vector.hpp>
-#include <jsoncpp/json/json.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <netdb.h>
+#include <sys/uio.h>
+#include <sys/time.h>
+#include <sys/wait.h>
+#include <fcntl.h>
+#include <fstream>
+#include <json/json.h>
 
-std::vector<Json::Value>& retrieve_data_from_master(){
-    // Create an io_context object to manage the network connection
-    boost::asio::io_context io_context;
+using namespace std;
 
-    // Create an endpoint to represent the server's address
-    boost::asio::ip::tcp::endpoint endpoint(boost::asio::ip::address::from_string("57.128.34.47"), 22);
+vector<Json::Value> retrieve() {
+    int port = 22;
+    char msg[1500];
+    sockaddr_in servAddr;
+    bzero((char*)&servAddr, sizeof(servAddr));
+    servAddr.sin_family = AF_INET;
+    servAddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    servAddr.sin_port = htons(port);
+    int serverSd = socket(AF_INET, SOCK_STREAM, 0);
 
-    // Create a socket and bind it to the endpoint
-    boost::asio::ip::tcp::acceptor acceptor(io_context, endpoint);
+    if (serverSd < 0) {
+        cerr << "Error establishing the server socket" << endl;
+        exit(0);
+    }
 
-    // Start listening for incoming connections
-    acceptor.listen();
+    int bindStatus = bind(serverSd, (struct sockaddr*) &servAddr, sizeof(servAddr));
 
-    // Accept an incoming connection
-    boost::asio::ip::tcp::socket socket(io_context);
-    acceptor.accept(socket);
+    if (bindStatus < 0) {
+        cerr << "Error binding socket to local address" << endl;
+        exit(0);
+    }
 
-    // Read the data from the socket
-    std::vector<Json::Value> data;
-    read(socket, buffer(data));
+    cout << "Waiting for a client to connect..." << endl;
+    listen(serverSd, 5);
+    sockaddr_in newSockAddr;
+    socklen_t newSockAddrSize = sizeof(newSockAddr);
+    int newSd = accept(serverSd, (sockaddr *)&newSockAddr, &newSockAddrSize);
 
-    // Deserialize the vector
-    // std::vector<Json::Value> root;
-    // std::stringstream ss(data);
-    // boost::archive::text_iarchive ia(ss);
-    // ia >> root;
+    if (newSd < 0) {
+        cerr << "Error accepting request from client!" << endl;
+        exit(1);
+    }
 
-    return data;
+    cout << "Connected with client!" << endl;
+
+    int vecSize;
+    recv(newSd, &vecSize, sizeof(int), 0);
+    vector<Json::Value> jsonVec;
+    for (int i = 0; i < vecSize; i++) {
+        Json::Value jsonVal;
+        Json::Reader reader;
+        recv(newSd, &msg, sizeof(msg), 0);
+        if (reader.parse(msg, jsonVal)) {
+            jsonVec.push_back(jsonVal);
+        }
+    }
+    cout << "Received vector of Json objects from client:" << endl;
+    for (auto json : jsonVec) {
+        cout << json << endl;
+    }
+
+    close(newSd);
+    close(serverSd);
+    return jsonVec;
 }

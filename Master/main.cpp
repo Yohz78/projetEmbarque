@@ -12,6 +12,7 @@
 #include <jsoncpp/json/json.h>
 #include <boost/asio/ssl.hpp>
 #include <boost/asio/ssl/stream.hpp>
+#include "send.cpp"
 
 #define INTERVALLE_RECUP 5
 #define INTERVALLE_ENVOI_SERVEUR 60
@@ -172,7 +173,9 @@ int main() {
     }
 
     std::cout << "-------------------------------ENVOI----------------------------------" << std::endl;
-    send_boost(res);
+    sendData(res);
+    res.clear();
+    std::cout << "-------------------------------FIN ENVOI----------------------------------" << std::endl;
     
     /*pthread_t thread_rw, thread_send;
 
