@@ -1,5 +1,5 @@
 #include <wiringSerial.h>
-#include <unistd.h> // pour sleep
+#include <unistd.h>
 #include <iostream>
 #include "src/pca/pca.h"
 #include <sstream>
@@ -56,8 +56,10 @@ std::string read_sensor_data(int fd) {
 void read_and_write(int fd, std::vector<Json::Value> &res){
         PCA9685 pca(1,0x40);
         pca.init();
+        int mvt_tracker = 0;
         int i = 0;
         int pos_tracker = 0;
+
         while (true) {
         std::string string_data = read_sensor_data(fd);
         if(!string_data.empty()){
@@ -72,24 +74,35 @@ void read_and_write(int fd, std::vector<Json::Value> &res){
             if (!parsingSuccessful) {
                 std::cout << "Error parsing JSON" << std::endl;
             }
-            //double presence = root["mvt"].asDouble();
-            // std::cout << root << std::endl;
             if(pos_tracker==3){
                 pca.moveBlueFlag(45);
                 pos_tracker=2;
-                std::cout << pos_tracker << std::endl;
+                std::cout << "Blue flag to 45°" << std::endl;
             }else if(pos_tracker==2){
                 pca.moveBlueFlag(135);
                 pos_tracker=3;
-                std::cout << pos_tracker << std::endl;
+                std::cout << "Blue flag to 135°" << std::endl;
             }else if(pos_tracker==0){
                 pca.moveBlueFlag(45);
                 pos_tracker=2;
-                std::cout << pos_tracker << std::endl;
+                std::cout << "Blue flag to 45°" << std::endl;
             }
-            std::cout << "Data received and treated"<< std::endl;
+            //Yellow flag logic
+            double presence = root["mvt"].asDouble();
+            if(presence==0 && mvt_tracker==1){
+                pca.moveYellowFlag(180);
+                std::cout << "Yellow flag to 180°" << std::endl;
+            }
+            if(presence==0 && mvt_tracker==0){
+                pca.moveYellowFlag(0);
+                std::cout << "Yellow flag to 0°" << std::endl;
+            }    
+            if(presence==1){
+                pca.moveYellowFlag(90);
+                std::cout << "Yellow flag to 90°" << std::endl;
+                mvt_tracker=1;
+            }    
             res.push_back(root);
-            // std::cout << res[i] << std::endl;
             i++;
             if(i > 5){
                 break;
@@ -101,8 +114,9 @@ void read_and_write(int fd, std::vector<Json::Value> &res){
         } 
         sleep(INTERVALLE_RECUP);
         }
-        //pthread_exit(NULL);
+        // pthread_exit(NULL);
 }
+
 
 /**
  * @brief This function transfer the flux of data to the server located at ubuntu@57.128.34.47
