@@ -80,9 +80,13 @@ int retrieve(int serverSd, vector<Json::Value>& jsonVec) {
         for (int i = 0; i < vecSize; i++) {
             Json::Value jsonVal;
             Json::Reader reader;
-            recv(newSd, &msg, sizeof(msg), 0);
+            recv(newSd, &msg, sizeof(msg), 0); // reception msg
+            cout << "Valeur de message : " << msg << endl;
             if (reader.parse(msg, jsonVal)) {
                 jsonVec.push_back(jsonVal);
+            }else{
+                cout << "retrieve: reader.parse(msg, jsonVal): "
+                 <<reader.parse(msg, jsonVal)  << endl;
             }
 
             // istringstream json_stream(string_data);
@@ -105,7 +109,7 @@ int retrieve(int serverSd, vector<Json::Value>& jsonVec) {
             // }
         }
         cout << "retrieve: Nombre d'element: " << jsonVec.size() << endl;
-         
+
         // if(!jsonVec.empty()){
         //     cout << "retrieve: Received vector of Json objects from client:" << endl;
         //     for (auto json : jsonVec) {
