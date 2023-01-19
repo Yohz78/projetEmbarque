@@ -146,20 +146,22 @@ int send_init(){
 void sendData(int clientSd, vector<Json::Value> &jsonVec) {
     int vecSize = jsonVec.size();
     send(clientSd, &vecSize, sizeof(int), 0);
-    char jsonStr[2000];
-    for (auto json : jsonVec) {
-        Json::FastWriter writer;
-        string output = writer.write(json);
-        cout << "send.cpp l151: OUTPUT: " << output << endl;
-        strcpy(jsonStr,output.c_str());
-        cout << "send.cpp l153: jsonstr: " << jsonStr << endl;
-        int jsonLen = strlen(jsonStr);
-        cout << "send(clientSd, &jsonLen, sizeof(int), 0);" << endl; 
-        send(clientSd, &jsonLen, sizeof(int), 0);
-        cout << "send(clientSd, jsonStr, jsonLen, 0);" << endl; 
-        send(clientSd, jsonStr, sizeof(jsonStr), 0);
-    }
-    free(jsonStr);
+    char jsonStr[2000+1] = "ENVOI DU MESSAGE EN DUR";
+
+    send(clientSd, jsonStr,sizeof(jsonStr), 0);
+    // for (auto json : jsonVec) {
+    //     Json::FastWriter writer;
+    //     string output = writer.write(json);
+    //     cout << "send.cpp l151: OUTPUT: " << output << endl;
+    //     strcpy(jsonStr,output.c_str());
+    //     cout << "send.cpp l153: jsonstr: " << jsonStr << endl;
+    //     int jsonLen = strlen(jsonStr);
+    //     cout << "send(clientSd, &jsonLen, sizeof(int), 0);" << endl; 
+    //     send(clientSd, &jsonLen, sizeof(int), 0);
+    //     cout << "send(clientSd, jsonStr, jsonLen, 0);" << endl; 
+    //     send(clientSd, jsonStr, sizeof(jsonStr), 0);
+    // }
+    // free(jsonStr);
 }
 
 void send_close(int clientSd){
