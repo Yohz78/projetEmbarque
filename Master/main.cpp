@@ -6,7 +6,6 @@
 #include <pthread.h>
 #include <jsoncpp/json/json.h>
 
-#include "src/pca/pca.h"
 #include "send.cpp"
 
 
