@@ -13,8 +13,6 @@
 #include <boost/asio/ssl.hpp>
 #include <boost/asio/ssl/stream.hpp>
 
-
-
 #define INTERVALLE_RECUP 5
 #define INTERVALLE_ENVOI_SERVEUR 60
 
