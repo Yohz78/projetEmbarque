@@ -1,17 +1,12 @@
 #include <wiringSerial.h>
 #include <unistd.h>
 #include <iostream>
-#include "src/pca/pca.h"
 #include <sstream>
 #include <cstring>
 #include <pthread.h>
-#include <boost/asio.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/serialization/vector.hpp>
 #include <jsoncpp/json/json.h>
-#include <boost/asio/ssl.hpp>
-#include <boost/asio/ssl/stream.hpp>
+
+#include "src/pca/pca.h"
 #include "send.cpp"
 
 #define INTERVALLE_RECUP 5
@@ -116,47 +111,6 @@ void read_and_write(int fd, std::vector<Json::Value> &res){
         // pthread_exit(NULL);
 }
 
-
-/**
- * @brief This function transfer the flux of data to the server located at ubuntu@57.128.34.47
- * 
- */
-void send_boost(std::vector<Json::Value> &res){
-
-    // Create an io_context object to manage the network connection
-        boost::asio::io_context io_context;
-    
-    // Create a ssl context
-        ssl::context ctx{ssl::context::sslv23};
-    
-    // Set the private key file
-        ctx.use_private_key_file("../../opom__227__0_", ssl::context::pem);
-        
-    // Create an endpoint to represent the server's address
-        boost::asio::ip::tcp::endpoint endpoint(boost::asio::ip::address::from_string("57.128.34.47"), 22);
-    
-    // Create a ssl socket and connect it to the endpoint
-        ssl::stream<ip::tcp::socket> socket(io_context, ctx);
-        socket.lowest_layer().connect(endpoint);
-    
-    // Perform the SSL/TLS handshake
-        socket.handshake(ssl::stream_base::client);
-
-    // Serialize the vector
-        // std::stringstream ss;
-        // boost::archive::text_oarchive oa(ss);
-        // oa << res;
-        // std::string data = ss.str();
-
-    // Send the serialized data to the server
-        write(socket, buffer(res));
-
-    // Close the socket
-        socket.shutdown();
-        socket.lowest_layer().close();
-    // Clean the vector 
-    res.clear();
-}
 
 int main() {
 
