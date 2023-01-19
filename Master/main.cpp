@@ -42,9 +42,9 @@ int main() {
     cout << "main: res size = " << res.size() << endl;
     read_and_write(fd,res);
 
-    for(auto data: res){
-        std::cout << "main: " << data;
-    }
+    // for(auto data: res){
+    //     std::cout << "main: " << data;
+    // }
 
     std::cout << "-------------------------------ENVOI----------------------------------" << std::endl;
     sendData(clientSd,res);
