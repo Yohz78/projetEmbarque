@@ -149,6 +149,7 @@ void sendData(int clientSd, vector<Json::Value> &jsonVec) {
     send(clientSd, &vecSize, sizeof(int), 0);
     char jsonStr[2000+1];
     char test[2000+1] = "TOTO";
+    char testJson[2000+1] = "{\"temperature\": 22.860001}";
     // cout << "Type de jsonStr: DEBUT:" << typeid(jsonStr).name() << endl;
 
     send(clientSd, jsonStr,sizeof(jsonStr), 0);
@@ -171,7 +172,7 @@ void sendData(int clientSd, vector<Json::Value> &jsonVec) {
     //send(clientSd, jsonStr, sizeof(jsonStr), 0);
     //send(clientSd, "TOTO", sizeof("TOTO") ,0);
     send(clientSd, test, sizeof(test) ,0);
-    send(clientSd, "{\"temperature\": 22.860001}", sizeof("{\"temperature\": 22.860001}"), 0);
+    send(clientSd, testJson, sizeof(testJson), 0);
 }
 
 void send_close(int clientSd){
