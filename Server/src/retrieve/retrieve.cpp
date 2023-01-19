@@ -21,7 +21,7 @@ using namespace std;
 
 int  serv_init(){
     int port = 1500;
-    char msg[1500];
+    
     sockaddr_in servAddr;
     bzero((char*)&servAddr, sizeof(servAddr));
     servAddr.sin_family = AF_INET;
@@ -46,13 +46,14 @@ int  serv_init(){
     return serverSd;
 }
 
-vector<Json::Value> retrieve(int serverSd) {
-    
+vector<Json::Value> retrieve(int serverSd, int& resNewSd) {
+    char msg[1500];
     cout << "Waiting for a client to connect..." << endl;
     listen(serverSd, 5);
     sockaddr_in newSockAddr;
     socklen_t newSockAddrSize = sizeof(newSockAddr);
     int newSd = accept(serverSd, (sockaddr *)&newSockAddr, &newSockAddrSize);
+    resNewSd = newSd;
 
     if (newSd < 0) {
         cerr << "Error accepting request from client!" << endl;
@@ -83,7 +84,7 @@ vector<Json::Value> retrieve(int serverSd) {
     return jsonVec;
 }
 
-void serv_close(){
+void serv_close(int& newSd, int& serverSd){
     close(newSd);
     close(serverSd);
 }

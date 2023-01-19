@@ -11,14 +11,14 @@ using namespace std;
 int main(){
     //menu();
     int serverSd = serv_init();
-
+    int resNewSd;
     while(1){
-        vector<Json::Value> res = retrieve(serverSd);
+        vector<Json::Value> res = retrieve(serverSd, resNewSd);
         for(auto data: res){
             cout << data;
         }
     }
-    serv_close();
+    serv_close(resNewSd,serverSd);
     return 0;
 }
 
