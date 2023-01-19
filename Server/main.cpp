@@ -13,10 +13,12 @@ int main(){
     int serverSd = serv_init();
     int resNewSd;
     while(1){
-        vector<Json::Value> res = retrieve(serverSd, resNewSd);
+        vector<Json::Value> res;
+        retrieve(serverSd, resNewSd,res);
         for(auto data: res){
             cout << data;
         }
+        res.clear();
     }
     serv_close(resNewSd,serverSd);
     return 0;
