@@ -94,7 +94,7 @@ void read_and_write(int fd, vector<Json::Value> &res){
                 cout << "Blue flag to 45°" << endl;
             }
             //Yellow flag logic
-            double presence = root["mvt"].asDouble();
+            double presence = root["HCSR"]["mvt"].asDouble();
             if(presence==0 && mvt_tracker==1){
                 pca.moveYellowFlag(180);
                 cout << "Yellow flag to 180°" << endl;
