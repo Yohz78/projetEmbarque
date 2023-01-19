@@ -15,12 +15,12 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #include <fstream>
-#include <jsoncpp/json/json.h>
+#include <json/json.h>
 
 using namespace std;
 
 vector<Json::Value> retrieve() {
-    int port = 22;
+    int port = 21;
     char msg[1500];
     sockaddr_in servAddr;
     bzero((char*)&servAddr, sizeof(servAddr));
