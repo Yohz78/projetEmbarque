@@ -171,7 +171,7 @@ void sendData(int clientSd, vector<Json::Value> &jsonVec) {
     // cout << "-------------------------------------------" << endl;
     //send(clientSd, jsonStr, sizeof(jsonStr), 0);
     //send(clientSd, "TOTO", sizeof("TOTO") ,0);
-    send(clientSd, test, sizeof(test) ,0);
+    //send(clientSd, test, sizeof(test) ,0);
     send(clientSd, testJson, sizeof(testJson), 0);
 }
 
