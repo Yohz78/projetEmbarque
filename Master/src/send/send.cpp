@@ -149,7 +149,7 @@ void sendData(int clientSd, vector<Json::Value> &jsonVec) {
         Json::FastWriter writer;
         string output = writer.write(json);
         char jsonStr[2000];
-        strcpy(jsonStr,output);
+        strcpy(jsonStr,output.c_str());
         int jsonLen = strlen(jsonStr);
         send(clientSd, &jsonLen, sizeof(int), 0);
         send(clientSd, jsonStr, jsonLen, 0);
