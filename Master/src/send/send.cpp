@@ -21,7 +21,7 @@
 #include "../pca/pca.h"
 #include "send.h"
 
-#define INTERVALLE_RECUP 5
+#define INTERVALLE_RECUP 3
 #define INTERVALLE_ENVOI_SERVEUR 60
 
 using namespace std;
