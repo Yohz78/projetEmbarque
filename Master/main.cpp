@@ -6,7 +6,7 @@
 #include <pthread.h>
 #include <jsoncpp/json/json.h>
 
-#include "send.cpp"
+#include "src/send/send.h"
 
 
 int main() {

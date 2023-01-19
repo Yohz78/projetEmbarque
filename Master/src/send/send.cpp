@@ -18,7 +18,8 @@
 #include <wiringSerial.h>
 #include <jsoncpp/json/json.h>
 
-#include "src/pca/pca.h"
+#include "../pca/pca.h"
+#include "send.h"
 
 #define INTERVALLE_RECUP 5
 #define INTERVALLE_ENVOI_SERVEUR 60
