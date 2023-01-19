@@ -50,7 +50,7 @@ int  serv_init(){
 
 void retrieve(int serverSd, int& resNewSd, vector<Json::Value>& jsonVec) {
     //char msg[1500];
-    cout << "Waiting for a client to connect..." << endl;
+    cout << "retrieve: Waiting for a client to connect..." << endl;
     listen(serverSd, 5);
     sockaddr_in newSockAddr;
     socklen_t newSockAddrSize = sizeof(newSockAddr);
@@ -58,14 +58,14 @@ void retrieve(int serverSd, int& resNewSd, vector<Json::Value>& jsonVec) {
     resNewSd = newSd;
 
     if (newSd < 0) {
-        cerr << "Error accepting request from client!" << endl;
+        cerr << "retrieve: Error accepting request from client!" << endl;
         exit(1);
     }
 
-    cout << "Connected with client!" << endl;
+    cout << "retrieve: Connected with client!" << endl;
 
-    while(1){
-        int vecSize;
+    //while(1){
+        int vecSize = 2;
         recv(newSd, &vecSize, sizeof(int), 0);
         for (int i = 0; i < vecSize; i++) {
             // Json::Value jsonVal;
@@ -89,20 +89,20 @@ void retrieve(int serverSd, int& resNewSd, vector<Json::Value>& jsonVec) {
             std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
             std::string msg;
             recv(newSd, &msg, sizeof(msg), 0);
-            
+
             if (reader->parse(msg.c_str(), msg.c_str() + msg.size(), &jsonVal, nullptr)) {
                 jsonVec.push_back(jsonVal);
             }
         }
         if(!jsonVec.empty()){
-            cout << "Received vector of Json objects from client:" << endl;
+            cout << "retrieve: Received vector of Json objects from client:" << endl;
             for (auto json : jsonVec) {
                 cout << json << endl;
             }
         }else{
-            cout << "JSONVEC is empty" << endl;
+            cout << "retrieve: JSONVEC is empty" << endl;
         }
-    }
+    //}
 }
 
 void serv_close(int& newSd, int& serverSd){

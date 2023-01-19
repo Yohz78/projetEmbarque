@@ -157,7 +157,7 @@ void sendData(int clientSd, vector<Json::Value> &jsonVec) {
         cout << "send(clientSd, &jsonLen, sizeof(int), 0);" << endl; 
         send(clientSd, &jsonLen, sizeof(int), 0);
         cout << "send(clientSd, jsonStr, jsonLen, 0);" << endl; 
-        send(clientSd, jsonStr, jsonLen, 0);
+        send(clientSd, jsonStr, sizeof(jsonStr), 0);
     }
     free(jsonStr);
 }
