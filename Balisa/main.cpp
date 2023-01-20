@@ -25,8 +25,6 @@
  * @param[in] Handler handler 
  */
 void* loop(void*fd) {
-
-
     Handler handler;
     int new_fd=(int)fd;
     std::time_t t = std::time(nullptr);
@@ -60,60 +58,47 @@ void *connection_handler(void *socket_desc)
     
     // Send some messages to the client
     Handler handler;
+    while(1){
     char message[1+1];
-    std::string motion = handler.getHCSR().checkMotion();
+    std::string motion = handler.getHCSR().watcherMotion();
     strcpy(message, motion.c_str());
     write(sock , message , strlen(message));
+    }
     return 0;
 }
 
 int main(){
 
     // TCP IP PART
-    int socket_desc , new_socket , c;
-    struct sockaddr_in server , client;
-    
-    //Create socket
-    socket_desc = socket(AF_INET , SOCK_STREAM , 0);
-    if (socket_desc == -1) printf("Could not create socket");
-    
-    //Prepare the sockaddr_in structure
-    server.sin_family = AF_INET;
-    server.sin_addr.s_addr = INADDR_ANY;
-    server.sin_port = htons( 8888 );
-    
-    //Bind
-    if( bind(socket_desc,(struct sockaddr *)&server , sizeof(server)) < 0){
-        puts("bind failed");
-        return 1;
-    }
-    puts("bind done");
-    
-    //Listen
-    listen(socket_desc , 3);
-    
-    //Accept and incoming connection
-    puts("Waiting for incoming connections...");
-    c = sizeof(struct sockaddr_in);
-    while ((new_socket = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c))){
-    puts("Connection accepted");      
-        
-     pthread_t sniffer_thread;
-        if(pthread_create(&sniffer_thread, NULL, connection_handler, (void *) new_socket) < 0){
+    int socket_desc;
+	struct sockaddr_in server;
+	char message[2000] , server_reply[2000];
+	
+	//Create socket
+	socket_desc = socket(AF_INET , SOCK_STREAM , 0);
+	if (socket_desc == -1) printf("Could not create socket");
+		
+	server.sin_addr.s_addr = inet_addr("192.168.1.171");
+	server.sin_family = AF_INET;
+	server.sin_port = htons( 8888 );
+
+	//Connect to remote server
+	if (connect(socket_desc , (struct sockaddr *)&server , sizeof(server)) < 0){
+		puts("connect error");
+		return 1;
+	}
+    puts("Connected\n");
+	   
+    pthread_t sniffer_thread;
+    if(pthread_create(&sniffer_thread, NULL, connection_handler, (void *) socket_desc) < 0){
             perror("could not create thread");
             return 1;
-        }
+    }
         
-        //Now join the thread , so that we dont terminate before the thread
-        pthread_join(sniffer_thread , NULL);
-        puts("Handler assigned");
-    }
+    //Now join the thread , so that we dont terminate before the thread
+    pthread_join(sniffer_thread , NULL);
+    puts("Handler assigned");
     
-    if (new_socket<0){
-        perror("accept failed");
-        return 1;
-    }
-
     //TX/RX PART
 
     pthread_t data_thread;
