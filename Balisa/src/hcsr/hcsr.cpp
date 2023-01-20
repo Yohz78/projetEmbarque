@@ -40,7 +40,7 @@ std::string HCSR50::checkMotion(){
     } 
 }
 
-std::string HCSR50::checkMotion(){
+std::string HCSR50::watcherMotion(){
     int value = digitalRead(this->motionPin);
     if (value == HIGH) {
         if (this->motionDetected == false) {
