@@ -145,17 +145,12 @@ int send_init(){
 }
 
 void sendData(int clientSd, vector<string> &stringVec) {
-    // int vecSize = stringVec.size();
-    // send(clientSd, &vecSize, sizeof(int), 0);
     char buffer[2000];
     memset(buffer,0,2000);
-    // cout << "Type de jsonStr: DEBUT:" << typeid(jsonStr).name() << endl;
     for (auto string_data : stringVec) {
-        // Json::FastWriter writer;
-        // string output = writer.write(json);
-        strcat(buffer,string_data.c_str());
+        strcpy(buffer,string_data.c_str());
+        send(clientSd, buffer, sizeof(buffer) ,0);
     }
-    send(clientSd, buffer, sizeof(buffer) ,0);
 }
 
 void send_close(int clientSd){

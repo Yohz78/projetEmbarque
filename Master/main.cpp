@@ -42,19 +42,10 @@ int main() {
     cout << "-----------main: res size BEGIN = " << res.size() << endl;
     read_and_write(fd,res);
 
-    // for(auto data: res){
-    //     std::cout << "main: " << data;
-    // }
-
     std::cout << "-------------------------------ENVOI----------------------------------" << std::endl;
     sendData(clientSd,res);
     cout << "-----------main: res size AFTER = " << res.size() << endl;
     res.clear();
-    // while(res.size() !=0){
-    //     res.pop_back();
-    // }
-    // res.resize(0);
-    // res.clear();
     std::cout << "-------------------------------FIN ENVOI----------------------------------" << std::endl;
     }
     /*pthread_t thread_rw, thread_send;
