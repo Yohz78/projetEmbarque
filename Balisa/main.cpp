@@ -67,8 +67,8 @@ void watcher(Handler* handler){
 	puts("Watcher : Connected\n");
 	
     while(true){
-        	//Send some data
-        std::string messageStr = handler->getHCSR().checkMotion();
+        //send motion value
+        std::string messageStr = handler->getHCSR().watcherMotion();
         strcpy(message,messageStr.c_str());
         if( send(socket_desc , message , strlen(message) , 0) < 0){
             puts("Watcher : Send failed");

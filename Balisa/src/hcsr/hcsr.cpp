@@ -39,3 +39,16 @@ std::string HCSR50::checkMotion(){
         return "\"HCSR\": {\"mvt\": 0}";
     } 
 }
+
+std::string HCSR50::checkMotion(){
+    int value = digitalRead(this->motionPin);
+    if (value == HIGH) {
+        if (this->motionDetected == false) {
+            this->motionDetected = true;
+        }
+        return "1";
+    } else {
+        this->motionDetected = false;
+        return "0";
+    } 
+}
