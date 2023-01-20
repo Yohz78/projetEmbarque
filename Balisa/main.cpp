@@ -11,10 +11,10 @@
 #include <stdint.h>
 #include <unistd.h>
 #include <iomanip>
-
+#include<sys/socket.h>
+#include<arpa/inet.h>	
 #include "src/handler/handler.h"
 //#include "src/bme/bme.h"
-
 
 /**
  * @brief This function gets a command input from the Master and execute the command. 
@@ -47,6 +47,42 @@ void loop(int fd,Handler* handler) {
             std::cout << "----------------------------------------------" << std::endl;
 }
 
+void watcher(Handler* handler){
+    int socket_desc;
+	struct sockaddr_in server;
+	char message[2000] , server_reply[2000];
+    //Create socket
+	socket_desc = socket(AF_INET , SOCK_STREAM , 0);
+	if (socket_desc == -1) printf("Watcher : Could not create socket");
+		
+	server.sin_addr.s_addr = inet_addr("192.168.68.63");
+	server.sin_family = AF_INET;
+	server.sin_port = htons( 8888 );
+
+	//Connect to remote server
+	if (connect(socket_desc , (struct sockaddr *)&server , sizeof(server)) < 0){
+		puts("Watcher : connect error");
+	}
+	
+	puts("Watcher : Connected\n");
+	
+    while(true){
+        	//Send some data
+        std::string messageStr = handler->getHCSR().checkMotion();
+        strcpy(message,messageStr.c_str());
+        if( send(socket_desc , message , strlen(message) , 0) < 0){
+            puts("Watcher : Send failed");
+        }
+        puts("Watcher : Data Send\n");
+        
+        //Receive a reply from the server
+        if (recv(socket_desc, server_reply , 2000 , 0) < 0){
+            puts("Watcher : recv failed");
+        }
+        puts("Watcher : Reply received\n");
+        puts(server_reply);
+    }
+}
 
 int main() {
     int fd = serialOpen("/dev/ttyAMA0", 9600); // Ouvre le port série sur /dev/ttyS0 à 9600 bauds
@@ -57,12 +93,16 @@ int main() {
 
     Handler handler; // Creation du wrapper
 
+    // thread 1
     while (true) {
-        
         loop(fd, &handler);
         sleep(3); // Fait une pause pendant 1 seconde  
     }
+
+    // thread 2 
+    watcher(&handler);
+
+    
     serialClose(fd); // Ferme le port série
     return 0;
 }
-
