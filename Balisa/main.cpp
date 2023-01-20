@@ -50,6 +50,7 @@ void* loop(void*fd) {
     std::cout << oss.str();
     std::cout << std::endl;
     std::cout << "----------------------------------------------" << std::endl;
+    sleep(3);
     return 0;
 }
 
