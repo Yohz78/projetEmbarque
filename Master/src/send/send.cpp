@@ -18,7 +18,6 @@
 #include <arpa/inet.h>
 
 #include <wiringSerial.h>
-#include <jsoncpp/json/json.h>
 
 #include "../pca/pca.h"
 #include "send.h"
