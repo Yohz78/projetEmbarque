@@ -24,9 +24,9 @@
 #include "../pca/pca.h"
 
 std::string read_sensor_data(int);
-void read_and_write(int, vector<Json::Value>&);
+void read_and_write(int, vector<std::string>&);
 int send_init();
-void sendData(int,vector<Json::Value>&);
+void sendData(int,vector<std::string>&);
 void send_close(int);
 
 #endif //SEND_H
