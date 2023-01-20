@@ -81,6 +81,11 @@ int retrieve(int serverSd, vector<string>& jsonVec) {
             cout << "retrieve: data_received -----: " << data_received  << endl;
             cout << "retrieve: Valeur de message -: " << msg << endl;
             jsonVec.push_back(msg);
+                if((jsonVec.size()-1) > 0){
+                    cout << "------------------------------------------------" << endl;
+                    cout << jsonVec[(jsonVec.size()-1)] << endl;
+                    cout << "------------------------------------------------" << endl; 
+                }            
             }else{
                 cout << "retrieve: <========================RIEN========================>" << endl;
             }
