@@ -19,7 +19,6 @@
 #include <arpa/inet.h>
 
 #include <wiringSerial.h>
-#include <jsoncpp/json/json.h>
 
 
 int balise_send_init();
