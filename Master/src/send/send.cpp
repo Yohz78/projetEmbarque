@@ -147,7 +147,8 @@ int send_init(){
 void sendData(int clientSd, vector<string> &stringVec) {
     char buffer[4000];
     memset(buffer,0,4000);
-    int vecSize = stringVec.size();
+    // int vecSize = stringVec.size();
+    // cout << "-------------------------TAILLE DE STRINGVEC==================> " << vecSize << endl;
     send(clientSd, &vecSize, sizeof(int) ,0);
     for (auto string_data : stringVec) {
         strcpy(buffer,string_data.c_str());

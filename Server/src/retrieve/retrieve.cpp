@@ -70,14 +70,16 @@ int retrieve(int serverSd, vector<string>& jsonVec) {
 
     cout << "retrieve: Connected with client!" << endl;
 
-        int vecSize;
-        recv(newSd, &vecSize, sizeof(int), 0);
-        for (int i = 0; i < vecSize; i++) {
+        // int vecSize;
+        // recv(newSd, &vecSize, sizeof(int), 0);
+        // for (int i = 0; i < vecSize; i++) {
+        while(1){
             recv(newSd, &msg, sizeof(msg), 0); // reception msg
-            cout << "Valeur de message : " << msg << endl;
+            cout << "retrieve: Valeur de message : " << msg << endl;
             jsonVec.push_back(msg);
-         }
+        // }
         cout << "retrieve: Nombre d'element: " << jsonVec.size() << endl;
+        }
         cout << " retrieve FIN" << endl;
         return newSd;
     //}
