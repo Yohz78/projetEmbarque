@@ -65,12 +65,12 @@ void* watcher( void* socket_descriptor){
 
     PCA9685 pca(1,0x40);
     pca.init();
-    int socketD = (int) socket_descriptor;	
+    int serverSd = (int) socket_descriptor;	
     char client_message[1+1];
     int mvt_tracker = 0;
 
     //Listen
-	listen(socketD , 1);
+	listen(serverSd , 1);
 
     sockaddr_in newSockAddr;
     socklen_t newSockAddrSize = sizeof(newSockAddr);
@@ -82,7 +82,7 @@ void* watcher( void* socket_descriptor){
 	
  	while(1){
         //Receive a message from client
-        int read_size = recv(socketD , client_message , sizeof(client_message) , 0);
+        int read_size = recv(newSd , client_message , sizeof(client_message) , 0);
         if((strcmp(client_message,"1"))==0){
             pca.moveYellowFlag(90);
             cout << "read_and_write: Yellow flag to 90°" << endl;
