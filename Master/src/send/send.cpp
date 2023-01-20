@@ -50,7 +50,7 @@ string read_sensor_data(int fd) {
         data[index] = '\0';
         cout << "read_sensor_data: Donnée reçue: "<< data << endl;
         return data;
-        sleep(1); // Fait une pause pendant interval secondes
+        // sleep(1); // Fait une pause pendant interval secondes
     }
 }
 
@@ -102,7 +102,7 @@ void read_and_write(int fd,int clientSd){
             pca.moveBlueFlag(180);
             pos_tracker=0;
         } 
-        sleep(INTERVALLE_RECUP-1);
+        sleep(INTERVALLE_RECUP);
 }
 
 int send_init(){
