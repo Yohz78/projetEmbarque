@@ -60,41 +60,14 @@ string read_sensor_data(int fd) {
  * 
  * @param fd 
  */
-void read_and_write(int fd, vector<string> &res){
+void read_and_write(int fd,int clientSd){
         PCA9685 pca(1,0x40);
         pca.init();
         int mvt_tracker = 0;
-        // int i = 0;
         int pos_tracker = 0;
-
-        while (true) {
         string string_data = read_sensor_data(fd);
         cout << "read_and_write: string_data:  " << string_data << endl;
         if(!string_data.empty()){
-            // istringstream json_stream(string_data);
-            // Json::Value root;
-            // Json::CharReaderBuilder builder;
-            // JSONCPP_STRING errs;
-            // bool parsingSuccessful = Json::parseFromStream(builder,
-            //                                            json_stream,
-            //                                            &root,
-            //                                            &errs);
-            // if (!parsingSuccessful) {
-            //     cout << "read_and_write: Error parsing JSON" << endl;
-            // }
-            if(pos_tracker==3){
-                pca.moveBlueFlag(45);
-                pos_tracker=2;
-                cout << "read_and_write: Blue flag to 45°" << endl;
-            }else if(pos_tracker==2){
-                pca.moveBlueFlag(135);
-                pos_tracker=3;
-                cout << "read_and_write: Blue flag to 135°" << endl;
-            }else if(pos_tracker==0){
-                pca.moveBlueFlag(45);
-                pos_tracker=2;
-                cout << "read_and_write: Blue flag to 45°" << endl;
-            }
             //Yellow flag logic
             // double presence = root["HCSR"]["mvt"].asDouble();
             // if(presence==0 && mvt_tracker==1){
@@ -110,19 +83,26 @@ void read_and_write(int fd, vector<string> &res){
             //     cout << "read_and_write: Yellow flag to 90°" << endl;
             //     mvt_tracker=1;
             // }    
-            res.push_back(string_data);
-            // i++;
-            // if(i > 1){
-            //     break;
-            // }
+            sendData(clientSd,string_data);
+            if(pos_tracker==3){
+                pca.moveBlueFlag(45);
+                pos_tracker=2;
+                cout << "read_and_write: Blue flag to 45°" << endl;
+            }else if(pos_tracker==2){
+                pca.moveBlueFlag(135);
+                pos_tracker=3;
+                cout << "read_and_write: Blue flag to 135°" << endl;
+            }else if(pos_tracker==0){
+                pca.moveBlueFlag(45);
+                pos_tracker=2;
+                cout << "read_and_write: Blue flag to 45°" << endl;
+            }
         }else{
             cout << "read_and_write:: No data available, Blue flag back to rest position." << endl;
             pca.moveBlueFlag(180);
             pos_tracker=0;
         } 
         sleep(INTERVALLE_RECUP);
-        }
-        // pthread_exit(NULL);
 }
 
 int send_init(){
@@ -144,16 +124,11 @@ int send_init(){
     return clientSd;
 }
 
-void sendData(int clientSd, vector<string> &stringVec) {
+void sendData(int clientSd, string& string_data) {
     char buffer[4000];
     memset(buffer,0,4000);
-    // int vecSize = stringVec.size();
-    // cout << "-------------------------TAILLE DE STRINGVEC==================> " << vecSize << endl;
-    // send(clientSd, &vecSize, sizeof(int) ,0);
-    for (auto string_data : stringVec) {
-        strcpy(buffer,string_data.c_str());
-        send(clientSd, &buffer, sizeof(buffer) ,0);
-    }
+    strcpy(buffer,string_data.c_str());
+    send(clientSd, &buffer, sizeof(buffer) ,0);
 }
 
 void send_close(int clientSd){
