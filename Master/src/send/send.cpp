@@ -64,26 +64,10 @@ string read_sensor_data(int fd) {
 void read_and_write(int fd,int clientSd){
         PCA9685 pca(1,0x40);
         pca.init();
-        int mvt_tracker = 0;
         int pos_tracker = 0;
         string string_data = read_sensor_data(fd);
         cout << "read_and_write: string_data:  " << string_data << endl;
         if(!string_data.empty()){
-            //Yellow flag logic
-            // double presence = root["HCSR"]["mvt"].asDouble();
-            // if(presence==0 && mvt_tracker==1){
-            //     pca.moveYellowFlag(180);
-            //     cout << "read_and_write: Yellow flag to 180°" << endl;
-            // }
-            // if(presence==0 && mvt_tracker==0){
-            //     pca.moveYellowFlag(0);
-            //     cout << "read_and_write: Yellow flag to 0°" << endl;
-            // }    
-            // if(presence==1){
-            //     pca.moveYellowFlag(90);
-            //     cout << "read_and_write: Yellow flag to 90°" << endl;
-            //     mvt_tracker=1;
-            // }    
             sendData(clientSd,string_data);
             if(pos_tracker==3){
                 pca.moveBlueFlag(45);
