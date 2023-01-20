@@ -60,7 +60,8 @@ void *connection_handler(void *socket_desc)
     
     // Send some messages to the client
     Handler handler;
-    char *message = handler.getHCSR().checkMotion().c_str();
+    char message[1+1];
+    message = handler.getHCSR().checkMotion().c_str();
     write(sock , message , strlen(message));
     return 0;
 }
