@@ -75,9 +75,9 @@ int retrieve(int serverSd, vector<string>& jsonVec) {
         // for (int i = 0; i < vecSize; i++) {
         int i=0;
         //while((newsocket = accept(serverSd, (sockaddr *)&newSockAddr, &newSockAddrSize))){
-        while(i<10){
+        while(true){
             int data_received = recv(newSd, &msg, sizeof(msg), 0); // reception msg
-            if(data_received > 2000){
+            if(data_received > 3500){
             cout << "retrieve: data_received -----: " << data_received  << endl;
             cout << "retrieve: Valeur de message -: " << msg << endl;
             jsonVec.push_back(msg);
