@@ -64,7 +64,6 @@ string read_sensor_data(int fd) {
 void read_and_write(int fd,int clientSd){
         PCA9685 pca(1,0x40);
         pca.init();
-        int mvt_tracker = 0;
         int pos_tracker = 0;
         string string_data = read_sensor_data(fd);
         cout << "read_and_write: string_data:  " << string_data << endl;

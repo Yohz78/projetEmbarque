@@ -109,7 +109,6 @@ int main() {
     int serverSD = master_serv_init(); // DESCRIPTOR FOR BALISE => MASTER
 
     pthread_t watcher_thread;
-    pthread_t rw_thread;
 
     //thread 1
     pthread_create(&watcher_thread,NULL, watcher, (void*) serverSD);
