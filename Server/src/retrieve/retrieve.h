@@ -20,5 +20,5 @@
 using namespace std;
 
 int  serv_init();
-int retrieve(int,vector<Json::Value>&);
+int retrieve(int,vector<string>&);
 void serv_close(int&,int&);

@@ -50,9 +50,9 @@ int  serv_init(){
     return serverSd;
 }
 
-int retrieve(int serverSd, vector<Json::Value>& jsonVec) {
+int retrieve(int serverSd, vector<string>& jsonVec) {
     cout << " retrieve DEBUT" << endl;
-    char msg[2000+1];
+    char msg[4000];
     cout << "retrieve: Waiting for a client to connect..." << endl;
     cout << "retrieve: LISTENING ON" << endl;
     listen(serverSd, 5);
@@ -63,10 +63,6 @@ int retrieve(int serverSd, vector<Json::Value>& jsonVec) {
     int newSd = accept(serverSd, (sockaddr *)&newSockAddr, &newSockAddrSize);
     cout << "retrieve: NEWSD FIN" << endl;
 
-    // cout << "retrieve: resNEWSD DEBUT" << endl;
-    // resNewSd = newSd;
-    // cout << "retrieve: resNEWSD FIN" << endl;
-
     if (newSd < 0) {
         cerr << "retrieve: Error accepting request from client!" << endl;
         exit(1);
@@ -75,7 +71,7 @@ int retrieve(int serverSd, vector<Json::Value>& jsonVec) {
     cout << "retrieve: Connected with client!" << endl;
 
     //while(1){
-        int vecSize = 2;
+        int vecSize = 1;
         recv(newSd, &vecSize, sizeof(int), 0);
         for (int i = 0; i < vecSize; i++) {
             Json::Value jsonVal;
@@ -88,25 +84,6 @@ int retrieve(int serverSd, vector<Json::Value>& jsonVec) {
                 cout << "retrieve: reader.parse(msg, jsonVal): "
                  <<reader.parse(msg, jsonVal)  << endl;
             }
-
-            // istringstream json_stream(string_data);
-            // Json::Value root;
-            // Json::CharReaderBuilder builder;
-            // JSONCPP_STRING errs;
-            // bool parsingSuccessful = Json::parseFromStream(builder,
-            //                                            json_stream,
-            //                                            &root,
-            //                                            &errs);
-
-            // Json::Value jsonVal;
-            // Json::CharReaderBuilder builder;
-            // std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
-            // std::string msg;
-            // recv(newSd, &msg, sizeof(msg), 0);
-
-            // if (reader->parse(msg.c_str(), msg.c_str() + msg.size(), &jsonVal, nullptr)) {
-            //     jsonVec.push_back(jsonVal);
-            // }
         }
         cout << "retrieve: Nombre d'element: " << jsonVec.size() << endl;
 

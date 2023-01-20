@@ -12,7 +12,7 @@ int main(){
     //menu();
     int serverSd = serv_init();
     int resNewSd = 0;
-    vector<Json::Value> res;
+    vector<string> res;
     resNewSd = retrieve(serverSd,res);
     for(auto data: res){
         cout << data;
