@@ -110,15 +110,18 @@ int main() {
 
     pthread_t watcher_thread;
     pthread_t rw_thread;
+
     //thread 1
+    pthread_create(&watcher_thread,NULL, watcher, (void*) serverSD);
+
+    //thread 2
     while(1){
     std::cout << "-------------------------------ENVOI----------------------------------" << std::endl;
     read_and_write(fd,clientSd);
     std::cout << "-------------------------------FIN ENVOI----------------------------------" << std::endl;
     }
 
-    //thread 2
-    pthread_create(&watcher_thread,NULL, watcher, (void*) serverSD);
+
 
 
     send_close(clientSd);
