@@ -60,7 +60,7 @@ string read_sensor_data(int fd) {
  * 
  * @param fd 
  */
-void read_and_write(int fd, vector<Json::Value> &res){
+void read_and_write(int fd, vector<string> &res){
         PCA9685 pca(1,0x40);
         pca.init();
         int mvt_tracker = 0;
@@ -110,7 +110,7 @@ void read_and_write(int fd, vector<Json::Value> &res){
                 cout << "read_and_write: Yellow flag to 90°" << endl;
                 mvt_tracker=1;
             }    
-            res.push_back(root);
+            res.push_back(string_data);
             i++;
             if(i > 1){
                 break;
@@ -144,21 +144,18 @@ int send_init(){
     return clientSd;
 }
 
-void sendData(int clientSd, vector<Json::Value> &jsonVec) {
-    int vecSize = jsonVec.size();
+void sendData(int clientSd, vector<string> &stringVec) {
+    int vecSize = stringVec.size();
     send(clientSd, &vecSize, sizeof(int), 0);
-    char jsonStr[2000+1];
-    char test[2000+1] = "TOTO";
-    char testJson[2000+1] = "{\"temperature\": 22.860001}";
+    char buffer[2000];
+    memset(buffer,0,2000);
     // cout << "Type de jsonStr: DEBUT:" << typeid(jsonStr).name() << endl;
-
-    send(clientSd, jsonStr,sizeof(jsonStr), 0);
-    for (auto json : jsonVec) {
-        Json::FastWriter writer;
-        string output = writer.write(json);
+    for (auto string_data : stringVec) {
+        // Json::FastWriter writer;
+        // string output = writer.write(json);
         // cout << "sendData: Type de output: " << typeid(output).name() << endl;
         // cout << "sendData: OUTPUT: " << output << endl;
-        strcat(jsonStr,output.c_str());
+        strcat(buffer,string_data.c_str());
         // cout << "sendData: Type de jsonStr: APRES strcpy(jsonStr,output.c_str()) " << typeid(jsonStr).name() << endl;
         // cout << "sendData: Contenu de JsonStr" << jsonStr << endl;
         
@@ -172,7 +169,7 @@ void sendData(int clientSd, vector<Json::Value> &jsonVec) {
     //send(clientSd, jsonStr, sizeof(jsonStr), 0);
     //send(clientSd, "TOTO", sizeof("TOTO") ,0);
     //send(clientSd, test, sizeof(test) ,0);
-    send(clientSd, testJson, sizeof(testJson), 0);
+    send(clientSd, buffer, sizeof(buffer), 0);
 }
 
 void send_close(int clientSd){
