@@ -38,15 +38,10 @@ int main() {
     }
     int clientSd = send_init();
     while(1){
-    vector<string> res;
-    cout << "-----------main: res size BEGIN = " << res.size() << endl;
-    read_and_write(fd,res);
-
     std::cout << "-------------------------------ENVOI----------------------------------" << std::endl;
-    sendData(clientSd,res);
-    cout << "-----------main: res size AFTER = " << res.size() << endl;
-    res.clear();
+    read_and_write(fd,clientSd);
     std::cout << "-------------------------------FIN ENVOI----------------------------------" << std::endl;
+    
     }
     /*pthread_t thread_rw, thread_send;
 
