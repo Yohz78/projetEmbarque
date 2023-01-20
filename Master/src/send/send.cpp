@@ -129,8 +129,15 @@ void sendData(int clientSd, string& string_data) {
     char buffer[4000];
     memset(buffer,0,4000);
     strcpy(buffer,string_data.c_str());
-    std::regex pattern("^\\{\"date\":\"\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\",\"BME\": \\{\"temperature\": [-+]?[0-9]*\\.?[0-9]+,[-+]?[0-9]*\\.?[0-9]+,[-+]?[0-9]*\\.?[0-9]+\\},\"HCSR\": \\{\"mvt\": [-+]?[0-9]*\\.?[0-9]+\\},\"HMC\": \\{\"x\": [-+]?[0-9]*\\.?[0-9]+,[-+]?[0-9]*\\.?[0-9]+,[-+]?[0-9]*\\.?[0-9]+\\}\\}$");
-    if(std::regex_match(string_data, pattern)){
+    std::regex pattern("^\\{\"date\":\"\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\","
+                        "\"BME\": \\{\"temperature\": [-+]?[0-9]+.?[0-9]+,"
+                        "\"pressure\": [0-9]+.?[0-9]+,"
+                        "\"humidity\": [0-9]+.?[0-9]+\\},"
+                        "\"HCSR\": \\{\"mvt\": [0-1]\\},"
+                        "\"HMC\": \\{\"x\": [-+]?[0-9]+,"
+                        "\"y\": [-+]?[0-9]+,"
+                        "\"z\":[-+]?[0-9]+\\}\\}$");
+        if(std::regex_match(string_data, pattern)){
         cout << "sendDATA=====> REGEX MATCH =====> SENDING DATA" << endl;
         send(clientSd, &buffer, sizeof(buffer) ,0);
     }
