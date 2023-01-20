@@ -89,7 +89,7 @@ int retrieve(int serverSd, vector<string>& jsonVec) {
         i++;
         }
         for(auto data: jsonVec){
-            cout << data;
+            cout << "DATA DANS JSONVEC =============>" << data << endl ;
         }
         cout << " retrieve FIN" << endl;
         return newSd;
