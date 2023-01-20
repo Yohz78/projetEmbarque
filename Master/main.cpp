@@ -58,17 +58,6 @@ int  master_serv_init(){
     cout << "serv_init: Valeur de serverSd = " << serverSd << endl;
     cout << " serv_init FIN" << endl;
 
-    
-	//Listen
-	listen(socketD , 1);
-
-    sockaddr_in newSockAddr;
-    socklen_t newSockAddrSize = sizeof(newSockAddr);
-    int newSd = accept(serverSd, (sockaddr *)&newSockAddr, &newSockAddrSize);
-    if (newSd < 0) {
-        cerr << "retrieve: Error accepting request from client!" << endl;
-        exit(1);
-    }
     return serverSd;
 }
 
@@ -79,10 +68,21 @@ void* watcher( void* socket_descriptor){
     int socketD = (int) socket_descriptor;	
     char client_message[1+1];
     int mvt_tracker = 0;
+
+    //Listen
+	listen(socketD , 1);
+
+    sockaddr_in newSockAddr;
+    socklen_t newSockAddrSize = sizeof(newSockAddr);
+    int newSd = accept(serverSd, (sockaddr *)&newSockAddr, &newSockAddrSize);
+    if (newSd < 0) {
+        cerr << "retrieve: Error accepting request from client!" << endl;
+        exit(1);
+    }
 	
  	while(1){
         //Receive a message from client
-        int read_size = recv(socketD , client_message , sizeof(client_message) , 0)
+        int read_size = recv(socketD , client_message , sizeof(client_message) , 0);
         if((strcmp(client_message,"1"))==0){
             pca.moveYellowFlag(90);
             cout << "read_and_write: Yellow flag to 90°" << endl;
@@ -118,7 +118,7 @@ int main() {
     }
 
     //thread 2
-    pthred_create(&watcher_thread,NULL, watcher, (void*) serverSD);
+    pthread_create(&watcher_thread,NULL, watcher, (void*) serverSD);
 
 
     send_close(clientSd);
