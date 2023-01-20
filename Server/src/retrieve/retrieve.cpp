@@ -82,10 +82,10 @@ void jsonToFile(vector<Json::Value>& jsonWrite){
 
 void* retrieve(void* args) { //int serverSd, int resNewSd, vector<Json::Value>& jsonWrite
     
-    argsRetrieve* args = (argsRetrieve*)args;
+    argsRetrieve* argsFunc = (argsRetrieve*)args;
     cout << " retrieve DEBUT" << endl;
-    int serverSd = args->serverSd;
-    int resNewSd = args->resNewSd;
+    int serverSd = argsFunc->serverSd;
+    int resNewSd = argsFunc->resNewSd;
     vector<Json::Value> jsonWrite;
     char msg[4000];
 
