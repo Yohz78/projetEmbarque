@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <stdio.h>
 #include <vector>
@@ -50,59 +51,88 @@ int  serv_init(){
     return serverSd;
 }
 
-int retrieve(int serverSd, vector<string>& jsonVec) {
+void jsoning(vector<string>& string_data_vec, vector<Json::value>& jsonWrite){
+    
+    Json::CharReaderBuilder builder;
+    JSONCPP_STRING errs;
+
+    for (const string& s : string_data_vec) {
+        Json::Value jsonVal;
+        if (Json::parseFromStream(builder, s, &jsonVal, &errs)) {
+            jsonWrite.push_back(jsonVal);
+        }
+        else {
+            // Handle parse error
+            std::cout << "Error parsing JSON: " << errs << std::endl;
+        }
+    }
+}
+
+void jsonToFile(vector<Json::value>& jsonWrite){
+    Json::StyledWriter writer;
+    std::ofstream json_file("data.json");
+    json_file << writer.write(jsonWrite);
+    json_file.close();
+}
+
+void* retrieve(void* args) { //int serverSd, int resNewSd, vector<Json::value>& jsonWrite
+    
+    argsRetrieve* myStruct = (argsRetrieve*)arg;
     cout << " retrieve DEBUT" << endl;
+    int serverSd = myStruct->serverSd;
+    int resNewSd = myStruct->resNewSd;
+    vector<Json::value>& jsonWrite;
     char msg[4000];
+
     cout << "retrieve: Waiting for a client to connect..." << endl;
+    
     cout << "retrieve: LISTENING ON" << endl;
     listen(serverSd, 5);
     cout << "retrieve: LISTENING OVER" << endl;
+
     sockaddr_in newSockAddr;
     socklen_t newSockAddrSize = sizeof(newSockAddr);
     cout << "retrieve: NEWSD DEBUT" << endl;
     int newSd = accept(serverSd, (sockaddr *)&newSockAddr, &newSockAddrSize);
     cout << "retrieve: NEWSD FIN" << endl;
-
     if (newSd < 0) {
         cerr << "retrieve: Error accepting request from client!" << endl;
         exit(1);
     }
 
     cout << "retrieve: Connected with client!" << endl;
+    int i=0;
+    while(true){
+        vector<string>& string_data_vec;
 
-        // int vecSize;
-        // recv(newSd, &vecSize, sizeof(int), 0);
-        // for (int i = 0; i < vecSize; i++) {
-        int i=0;
-        //while((newsocket = accept(serverSd, (sockaddr *)&newSockAddr, &newSockAddrSize))){
-        while(true){
+        for(int i=0;i<10;i++){
             int data_received = recv(newSd, &msg, sizeof(msg), 0); // reception msg
             if(data_received > 3500){
             cout << "retrieve: data_received -----: " << data_received  << endl;
             cout << "retrieve: Valeur de message -: " << msg << endl;
-            jsonVec.push_back(msg);
-                if((jsonVec.size()-1) > 0){
+            string_data_vec.push_back(msg);
+                
+                if((string_data_vec.size()-1) > 0){
                     cout << "------------------------------------------------" << endl;
-                    cout << jsonVec[(jsonVec.size()-1)] << endl;
+                    cout << string_data_vec[(string_data_vec.size()-1)] << endl;
                     cout << "------------------------------------------------" << endl; 
                 }            
-            }else{
-                cout << "retrieve: <========================RIEN========================>" << endl;
-            }
-        // }
-        cout << "retrieve: Nombre d'element: " << jsonVec.size() << endl;
-        sleep(3);
-        i++;
-        cout << "retrieve: VALEUR DE i: " << i << endl;
-        cout << endl;
-        }
-        for(auto data: jsonVec){
-            cout << "retrieve: DATA DANS JSONVEC =============>" << data << endl ;
+                }else{
+                    cout << "retrieve: <========================RIEN========================>" << endl;
+                }
+        
+            cout << "retrieve: Nombre d'element: " << string_data_vec.size() << endl;
+            sleep(3);
+            cout << "retrieve: VALEUR DE i: " << i << endl;
             cout << endl;
         }
-        cout << " retrieve FIN" << endl;
-        return newSd;
-    //}
+        jsoning(string_data_vec,jsonWrite);
+        string_data_vec.clear();
+        // ecriture dans le fichier data.json a partir de jsonWrite quand jsonWrite a une taille
+        jsonToFile(jsonWrite);
+        jsonWrite.clear();
+    }
+        return NULL;
 }
 
 void serv_close(int& newSd, int& serverSd){

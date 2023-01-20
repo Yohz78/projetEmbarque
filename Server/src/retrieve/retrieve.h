@@ -19,6 +19,14 @@
 
 using namespace std;
 
+struct argsRetrieve {
+    int serverSd;
+    int resNewSd;
+    argsRetrieve(int serverSd, int resNewSd) : serverSd(serverSd), resNewSd(resNewSd) {}
+}argsRetrieve;
+
 int  serv_init();
-int retrieve(int,vector<string>&);
+void jsoning(vector<string>&,vector<Json::value>&);
+void jsonToFile(vector<Json::value>&);
+void* retrieve(void*); // args: int serverSd, int resnewMD,vector<Json::value>& jsonWrite
 void serv_close(int&,int&);
