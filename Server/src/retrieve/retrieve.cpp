@@ -70,29 +70,14 @@ int retrieve(int serverSd, vector<string>& jsonVec) {
 
     cout << "retrieve: Connected with client!" << endl;
 
-        // int vecSize = 1;
-        // recv(newSd, &vecSize, sizeof(int), 0);
-        //for (int i = 0; i < vecSize; i++) {
-            // Json::Value jsonVal;
-            // Json::Reader reader;
+        int vecSize;
+        recv(newSd, &vecSize, sizeof(int), 0);
+        for (int i = 0; i < vecSize; i++) {
             recv(newSd, &msg, sizeof(msg), 0); // reception msg
             cout << "Valeur de message : " << msg << endl;
-            //if (reader.parse(msg, jsonVal)) {
             jsonVec.push_back(msg);
-            // }else{
-            //     cout << "retrieve: reader.parse(msg, jsonVal): "
-            //      <<reader.parse(msg, jsonVal)  << endl;
-            // }
+         }
         cout << "retrieve: Nombre d'element: " << jsonVec.size() << endl;
-
-        // if(!jsonVec.empty()){
-        //     cout << "retrieve: Received vector of Json objects from client:" << endl;
-        //     for (auto json : jsonVec) {
-        //         cout << json << endl;
-        //     }
-        // }else{
-        //     cout << "retrieve: JSONVEC is empty" << endl;
-        // }
         cout << " retrieve FIN" << endl;
         return newSd;
     //}
