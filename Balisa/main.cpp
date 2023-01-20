@@ -63,7 +63,9 @@ void *connection_handler(void *socket_desc)
     char message[1+1];
     std::string motion = handler.getHCSR().watcherMotion();
     strcpy(message, motion.c_str());
-    write(sock , message , strlen(message));
+    if((strcmp(client_message,"1"))==0){
+        write(sock , message , strlen(message));
+    }
     }
     return 0;
 }
@@ -78,7 +80,7 @@ int main(){
 	socket_desc = socket(AF_INET , SOCK_STREAM , 0);
 	if (socket_desc == -1) printf("Could not create socket");
 		
-	server.sin_addr.s_addr = inet_addr("192.168.1.171");
+	server.sin_addr.s_addr = inet_addr("90.86.59.230");
 	server.sin_family = AF_INET;
 	server.sin_port = htons( 8888 );
 
