@@ -61,15 +61,16 @@ void jsoning(vector<string>& string_data_vec, vector<Json::Value>& jsonWrite){
     JSONCPP_STRING errs;
 
     for (const string& s : string_data_vec) {
-        Json::Value jsonVal;
-        if (Json::parseFromStream(builder, s, &jsonVal, &errs)) {
-            jsonWrite.push_back(jsonVal);
-        }
-        else {
-            // Handle parse error
-            std::cout << "Error parsing JSON: " << errs << std::endl;
-        }
+    Json::Value jsonVal;
+    std::istringstream stream(s);
+    if (Json::parseFromStream(builder, stream, &jsonVal, &errs)) {
+        jsonWrite.push_back(jsonVal);
     }
+    else {
+        // Handle parse error
+        std::cout << "Error parsing JSON: " << errs << std::endl;
+    }
+}
 }
 
 void jsonToFile(vector<Json::Value>& jsonWrite){
