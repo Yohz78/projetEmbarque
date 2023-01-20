@@ -18,7 +18,11 @@
 #include <fstream>
 #include <jsoncpp/json/json.h>
 
+#include "retrieve.h"
+
 using namespace std;
+
+
 
 int  serv_init(){
     cout << " serv_init DEBUT" << endl;
@@ -51,7 +55,7 @@ int  serv_init(){
     return serverSd;
 }
 
-void jsoning(vector<string>& string_data_vec, vector<Json::value>& jsonWrite){
+void jsoning(vector<string>& string_data_vec, vector<Json::Value>& jsonWrite){
     
     Json::CharReaderBuilder builder;
     JSONCPP_STRING errs;
@@ -68,20 +72,20 @@ void jsoning(vector<string>& string_data_vec, vector<Json::value>& jsonWrite){
     }
 }
 
-void jsonToFile(vector<Json::value>& jsonWrite){
+void jsonToFile(vector<Json::Value>& jsonWrite){
     Json::StyledWriter writer;
     std::ofstream json_file("data.json");
     json_file << writer.write(jsonWrite);
     json_file.close();
 }
 
-void* retrieve(void* args) { //int serverSd, int resNewSd, vector<Json::value>& jsonWrite
+void* retrieve(void* args) { //int serverSd, int resNewSd, vector<Json::Value>& jsonWrite
     
     argsRetrieve* myStruct = (argsRetrieve*)arg;
     cout << " retrieve DEBUT" << endl;
     int serverSd = myStruct->serverSd;
     int resNewSd = myStruct->resNewSd;
-    vector<Json::value>& jsonWrite;
+    vector<Json::Value>& jsonWrite;
     char msg[4000];
 
     cout << "retrieve: Waiting for a client to connect..." << endl;

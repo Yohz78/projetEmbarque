@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <stdio.h>
 #include <vector>
@@ -26,7 +27,7 @@ struct argsRetrieve {
 }argsRetrieve;
 
 int  serv_init();
-void jsoning(vector<string>&,vector<Json::value>&);
-void jsonToFile(vector<Json::value>&);
-void* retrieve(void*); // args: int serverSd, int resnewMD,vector<Json::value>& jsonWrite
+void jsoning(vector<string>&,vector<Json::Value>&);
+void jsonToFile(vector<Json::Value>&);
+void* retrieve(void*); // args: int serverSd, int resnewMD,vector<Json::Value>& jsonWrite
 void serv_close(int&,int&);
