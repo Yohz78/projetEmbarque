@@ -24,7 +24,9 @@ struct argsRetrieve {
     int serverSd;
     int resNewSd;
     argsRetrieve(int serverSd, int resNewSd) : serverSd(serverSd), resNewSd(resNewSd) {}
-}argsRetrieve;
+}
+
+typedef struct argsRetrieve argsRetrieve;
 
 int  serv_init();
 void jsoning(vector<string>&,vector<Json::Value>&);
