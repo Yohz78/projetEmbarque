@@ -78,18 +78,22 @@ int retrieve(int serverSd, vector<string>& jsonVec) {
         while(i<10){
             int data_received = recv(newSd, &msg, sizeof(msg), 0); // reception msg
             if(data_received > 0){
-            cout << "retrieve: Valeur de message : " << msg << endl;
+            cout << "retrieve: data_received -----: " << data_received  << endl;
+            cout << "retrieve: Valeur de message -: " << msg << endl;
             jsonVec.push_back(msg);
             }else{
-                cout << "<========================RIEN========================>" << endl;
+                cout << "retrieve: <========================RIEN========================>" << endl;
             }
         // }
         cout << "retrieve: Nombre d'element: " << jsonVec.size() << endl;
         sleep(3);
         i++;
+        cout << "retrieve: VALEUR DE i: " << i << endl;
+        cout << endl;
         }
         for(auto data: jsonVec){
-            cout << "DATA DANS JSONVEC =============>" << data << endl ;
+            cout << "retrieve: DATA DANS JSONVEC =============>" << data << endl ;
+            cout << endl;
         }
         cout << " retrieve FIN" << endl;
         return newSd;
