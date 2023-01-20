@@ -145,31 +145,17 @@ int send_init(){
 }
 
 void sendData(int clientSd, vector<string> &stringVec) {
-    int vecSize = stringVec.size();
-    send(clientSd, &vecSize, sizeof(int), 0);
+    // int vecSize = stringVec.size();
+    // send(clientSd, &vecSize, sizeof(int), 0);
     char buffer[2000];
     memset(buffer,0,2000);
     // cout << "Type de jsonStr: DEBUT:" << typeid(jsonStr).name() << endl;
     for (auto string_data : stringVec) {
         // Json::FastWriter writer;
         // string output = writer.write(json);
-        // cout << "sendData: Type de output: " << typeid(output).name() << endl;
-        // cout << "sendData: OUTPUT: " << output << endl;
         strcat(buffer,string_data.c_str());
-        // cout << "sendData: Type de jsonStr: APRES strcpy(jsonStr,output.c_str()) " << typeid(jsonStr).name() << endl;
-        // cout << "sendData: Contenu de JsonStr" << jsonStr << endl;
-        
     }
-    // {"date":"2023-01-19T17:18:25","BME": {"temperature": 22.860001,"pressure": 999.383728,"humidity": 28.709961},
-    // "HCSR": {"mvt": 0},"HMC": {"x": 18146,"y": -358,"z":-1587}}
-
-    // cout << "-------------------------------------------" << endl;
-    // cout << "sendData: TABLEAU JSONTSTR:   " << jsonStr << endl;
-    // cout << "-------------------------------------------" << endl;
-    //send(clientSd, jsonStr, sizeof(jsonStr), 0);
-    //send(clientSd, "TOTO", sizeof("TOTO") ,0);
-    //send(clientSd, test, sizeof(test) ,0);
-    send(clientSd, buffer, sizeof(buffer), 0);
+    send(clientSd, buffer, sizeof(buffer) ,0);
 }
 
 void send_close(int clientSd){
