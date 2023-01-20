@@ -61,7 +61,8 @@ void *connection_handler(void *socket_desc)
     // Send some messages to the client
     Handler handler;
     char message[1+1];
-    message = handler.getHCSR().checkMotion().c_str();
+    std::string motion = handler.getHCSR().checkMotion();
+    strcpy(message, motion.c_str());
     write(sock , message , strlen(message));
     return 0;
 }
