@@ -75,17 +75,18 @@ void jsoning(vector<string>& string_data_vec, vector<Json::Value>& jsonWrite){
 void jsonToFile(vector<Json::Value>& jsonWrite){
     Json::StyledWriter writer;
     std::ofstream json_file("data.json");
-    json_file << writer.write(jsonWrite);
+    for(auto jsonVal : jsonWrite)
+    json_file << writer.write(jsonVal);
     json_file.close();
 }
 
 void* retrieve(void* args) { //int serverSd, int resNewSd, vector<Json::Value>& jsonWrite
     
-    argsRetrieve* myStruct = (argsRetrieve*)arg;
+    argsRetrieve* args = (argsRetrieve*)args;
     cout << " retrieve DEBUT" << endl;
-    int serverSd = myStruct->serverSd;
-    int resNewSd = myStruct->resNewSd;
-    vector<Json::Value>& jsonWrite;
+    int serverSd = args->serverSd;
+    int resNewSd = args->resNewSd;
+    vector<Json::Value> jsonWrite;
     char msg[4000];
 
     cout << "retrieve: Waiting for a client to connect..." << endl;
