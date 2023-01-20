@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <pthread>
+#include <pthread.h>
 
 
 #include <jsoncpp/json/json.h>
