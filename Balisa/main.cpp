@@ -14,6 +14,7 @@
 #include<sys/socket.h>
 #include<arpa/inet.h>	
 #include "src/handler/handler.h"
+#include "src/send/send.h"
 #include<pthread.h> //for threading , link with lpthread
 
 //#include "src/bme/bme.h"
@@ -52,53 +53,36 @@ void* loop(void*fd) {
     return 0;
 }
 
-void *connection_handler(void *socket_desc)
-{
-    //Get the socket descriptor
-    int sock = (int) socket_desc;
-    
-    // Send some messages to the client
-    Handler handler;
-    while(1){
-    char message[1+1];
-    std::string motion = handler.getHCSR().watcherMotion();
-    strcpy(message, motion.c_str());
-    if((strcmp(message,"1"))==0){
-        write(sock , message , strlen(message));
-    }
-    }
-    return 0;
-}
+    // void *connection_handler(void *socket_desc)
+    // {
+    //     //Get the socket descriptor
+    //     int sock = (int) socket_desc;
+        
+    //     // Send some messages to the client
+    //     Handler handler;
+    //     while(1){
+    //     char message[1+1];
+    //     std::string motion = handler.getHCSR().watcherMotion();
+    //     strcpy(message, motion.c_str());
+    //     if((strcmp(message,"1"))==0){
+    //         write(sock , message , strlen(message));
+    //     }
+    //     }
+    //     return 0;
+    // }
 
 int main(){
 
-    // TCP IP PART
-    int socket_desc;
-	struct sockaddr_in server;
-
-	//Create socket
-	socket_desc = socket(AF_INET , SOCK_STREAM , 0);
-	if (socket_desc == -1) printf("Could not create socket");
-		
-	server.sin_addr.s_addr = inet_addr("90.86.59.230");
-	server.sin_family = AF_INET;
-	server.sin_port = htons( 8888 );
-
-	//Connect to remote server
-	if (connect(socket_desc , (struct sockaddr *)&server , sizeof(server)) < 0){
-		puts("connect error");
-		return 1;
-	}
-    puts("Connected\n");
+    int clientSd = balise_send_init();
 	   
-    pthread_t sniffer_thread;
-    if(pthread_create(&sniffer_thread, NULL, connection_handler, (void *) socket_desc) < 0){
+    pthread_t tcp_thread;
+    if(pthread_create(&tcp_thread, NULL, balise_sendData, (void *) clientSd) < 0){
             perror("could not create thread");
             return 1;
     }
         
     //Now join the thread , so that we dont terminate before the thread
-    pthread_join(sniffer_thread , NULL);
+    pthread_join(tcp_thread , NULL);
     puts("Handler assigned");
     
     //TX/RX PART

@@ -1,3 +1,6 @@
+#ifndef HANDLER_H
+#define HANDLER_H
+
 #include <pthread.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -30,3 +33,6 @@ class Handler{
 
     //void run();
 };
+
+
+#endif //SEND_H
