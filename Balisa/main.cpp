@@ -60,7 +60,7 @@ void *connection_handler(void *socket_desc)
     
     // Send some messages to the client
     Handler handler;
-    char *message = handler.getHCSR().checkMotion().c_str();
+    char *message = handler.getHCSR().checkMotion();
     write(sock , message , strlen(message));
     return 0;
 }
@@ -95,13 +95,9 @@ int main(int argc , char *argv[]){
     puts("Waiting for incoming connections...");
     c = sizeof(struct sockaddr_in);
     while ((new_socket = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c))){
-        puts("Connection accepted");
+    puts("Connection accepted");      
         
-        //Reply to the client
-        message = "Hello Client , I have received your connection. And now I will assign a handler for you\n";
-        write(new_socket , message , strlen(message));
-        
-        pthread_t sniffer_thread;
+     pthread_t sniffer_thread;
         if(pthread_create(&sniffer_thread, NULL, connection_handler, (void *) new_socket) < 0){
             perror("could not create thread");
             return 1;
@@ -121,7 +117,7 @@ int main(int argc , char *argv[]){
 
     pthread_t data_thread;
     int fd;
-    while((int fd = serialOpen("/dev/ttyAMA0", 9600))>0){
+    while((fd = serialOpen("/dev/ttyAMA0", 9600))>0){
         if (fd < 0) {
             std::cout << "Error: Unable to open UART device" << std::endl;
             return -1;
@@ -130,7 +126,7 @@ int main(int argc , char *argv[]){
             std::cout <<"could not create thread"<< std::endl;
             return 1;
         }
-        pthread_join(data_thread , NULL);
+        pthread_join(data_thread, NULL);
     }
     serialClose(fd);
     return 0;
