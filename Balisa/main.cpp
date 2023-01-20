@@ -63,7 +63,7 @@ void *connection_handler(void *socket_desc)
     char message[1+1];
     std::string motion = handler.getHCSR().watcherMotion();
     strcpy(message, motion.c_str());
-    if((strcmp(client_message,"1"))==0){
+    if((strcmp(message,"1"))==0){
         write(sock , message , strlen(message));
     }
     }
