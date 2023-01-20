@@ -106,9 +106,8 @@ void* retrieve(void* args) { //int serverSd, int resNewSd, vector<Json::Value>& 
     }
 
     cout << "retrieve: Connected with client!" << endl;
-    int i=0;
     while(true){
-        vector<string>& string_data_vec;
+        vector<string> string_data_vec;
 
         for(int i=0;i<10;i++){
             int data_received = recv(newSd, &msg, sizeof(msg), 0); // reception msg
