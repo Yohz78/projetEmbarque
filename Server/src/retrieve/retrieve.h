@@ -24,7 +24,7 @@ struct argsRetrieve {
     int serverSd;
     int resNewSd;
     argsRetrieve(int serverSd, int resNewSd) : serverSd(serverSd), resNewSd(resNewSd) {}
-}
+};
 
 typedef struct argsRetrieve argsRetrieve;
 
