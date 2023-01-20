@@ -79,9 +79,9 @@ void read_and_write(int fd, vector<string> &res){
             //                                            json_stream,
             //                                            &root,
             //                                            &errs);
-            if (!parsingSuccessful) {
-                cout << "read_and_write: Error parsing JSON" << endl;
-            }
+            // if (!parsingSuccessful) {
+            //     cout << "read_and_write: Error parsing JSON" << endl;
+            // }
             if(pos_tracker==3){
                 pca.moveBlueFlag(45);
                 pos_tracker=2;
@@ -96,20 +96,20 @@ void read_and_write(int fd, vector<string> &res){
                 cout << "read_and_write: Blue flag to 45°" << endl;
             }
             //Yellow flag logic
-            double presence = root["HCSR"]["mvt"].asDouble();
-            if(presence==0 && mvt_tracker==1){
-                pca.moveYellowFlag(180);
-                cout << "read_and_write: Yellow flag to 180°" << endl;
-            }
-            if(presence==0 && mvt_tracker==0){
-                pca.moveYellowFlag(0);
-                cout << "read_and_write: Yellow flag to 0°" << endl;
-            }    
-            if(presence==1){
-                pca.moveYellowFlag(90);
-                cout << "read_and_write: Yellow flag to 90°" << endl;
-                mvt_tracker=1;
-            }    
+            // double presence = root["HCSR"]["mvt"].asDouble();
+            // if(presence==0 && mvt_tracker==1){
+            //     pca.moveYellowFlag(180);
+            //     cout << "read_and_write: Yellow flag to 180°" << endl;
+            // }
+            // if(presence==0 && mvt_tracker==0){
+            //     pca.moveYellowFlag(0);
+            //     cout << "read_and_write: Yellow flag to 0°" << endl;
+            // }    
+            // if(presence==1){
+            //     pca.moveYellowFlag(90);
+            //     cout << "read_and_write: Yellow flag to 90°" << endl;
+            //     mvt_tracker=1;
+            // }    
             res.push_back(string_data);
             i++;
             if(i > 1){
@@ -149,7 +149,7 @@ void sendData(int clientSd, vector<string> &stringVec) {
     memset(buffer,0,4000);
     // int vecSize = stringVec.size();
     // cout << "-------------------------TAILLE DE STRINGVEC==================> " << vecSize << endl;
-    send(clientSd, &vecSize, sizeof(int) ,0);
+    // send(clientSd, &vecSize, sizeof(int) ,0);
     for (auto string_data : stringVec) {
         strcpy(buffer,string_data.c_str());
         send(clientSd, &buffer, sizeof(buffer) ,0);
