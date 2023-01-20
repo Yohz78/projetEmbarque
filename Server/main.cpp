@@ -17,7 +17,7 @@ int main(){
     //menu();
     pthread_join(retrieve_thread, NULL);
     //delete args;
-    serv_close(args->resNewSd,args->serverSd);
+    serv_close(args.resNewSd,args.serverSd);
     return 0;
 }
 
