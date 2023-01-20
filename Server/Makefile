@@ -8,7 +8,7 @@ SRC = $(wildcard *.cpp) $(wildcard src/*/*.cpp)
 OBJ = $(SRC:.cpp=.o)
 
 # Librairies
-LIB = -ljsoncpp 
+LIB = -ljsoncpp -lpthread
 
 # Flags de compilation
 CXXFLAGS = -std=c++11 -Wall -Wextra

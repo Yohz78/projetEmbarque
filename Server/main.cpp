@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <pthread.h>
 
 
 #include <jsoncpp/json/json.h>
@@ -9,18 +10,14 @@
 using namespace std;
 
 int main(){
+    struct argsRetrieve *args = new argsRetrieve(serv_init(),0);
+
+    pthread_t retrieve_thread;
+    pthread_create(&retrieve_thread, NULL,retrieve,(void*) args); // retrieve();
     //menu();
-    int serverSd = serv_init();
-    int resNewSd = 0;
-    vector<string> res;
-    resNewSd = retrieve(serverSd,res);
-    for(auto data: res){
-        cout << "------------------------------------------------" << endl;
-        cout << data << endl;
-        cout << "------------------------------------------------" << endl;
-    }
-    res.clear();
-    serv_close(resNewSd,serverSd);
+    pthread_join(retrieve_thread, NULL);
+    delete args;
+    serv_close(args->resNewSd,args->serverSd);
     return 0;
 }
 

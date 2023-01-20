@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <stdio.h>
 #include <vector>
@@ -19,6 +20,16 @@
 
 using namespace std;
 
+struct argsRetrieve {
+    int serverSd;
+    int resNewSd;
+    argsRetrieve(int serverSd, int resNewSd) : serverSd(serverSd), resNewSd(resNewSd) {}
+}
+
+typedef struct argsRetrieve argsRetrieve;
+
 int  serv_init();
-int retrieve(int,vector<string>&);
+void jsoning(vector<string>&,vector<Json::Value>&);
+void jsonToFile(vector<Json::Value>&);
+void* retrieve(void*); // args: int serverSd, int resnewMD,vector<Json::Value>& jsonWrite
 void serv_close(int&,int&);
