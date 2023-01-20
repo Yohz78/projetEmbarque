@@ -14,9 +14,8 @@ int main(){
 
     pthread_t retrieve_thread;
     pthread_create(&retrieve_thread, NULL,retrieve,(void*) &args); // retrieve();
-    //menu();
     pthread_join(retrieve_thread, NULL);
-    //delete args;
+    //menu();
     serv_close(args.resNewSd,args.serverSd);
     return 0;
 }

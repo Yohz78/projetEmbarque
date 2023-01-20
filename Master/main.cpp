@@ -28,79 +28,74 @@
 
 using namespace std;
 
-void watcher(){
-	int socket_desc , new_socket , c;
-	struct sockaddr_in server , client;
-	char *message, client_message[2000]="niet";
-    int read_size=0; 
 
-	//Create socket
-	socket_desc = socket(AF_INET , SOCK_STREAM , 0);
-	if (socket_desc == -1) printf("Watcher : Could not create socket");
-	
-	//Prepare the sockaddr_in structure
-	server.sin_family = AF_INET;
-	server.sin_addr.s_addr = INADDR_ANY;
-	server.sin_port = htons( 8888 );
-	
-	//Bind
-	if( bind(socket_desc,(struct sockaddr *)&server , sizeof(server)) < 0){
-		puts("Watcher : bind failed");
-	}
-	puts("Watcher : bind done");
-	
-	//Listen
-	listen(socket_desc , 3);
-	
- 	while(1)
- {
- 
-	//Accept and incoming connection
-	puts("Watcher : Waiting for incoming connections...");
-	c = sizeof(struct sockaddr_in);
-	new_socket = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c);
-	if (new_socket<0){
-		perror("Watcher : accept failed");
-	}
-
-  
-    //Receive a message from client
-	
-    while ((read_size = recv(new_socket , client_message , 2000 , 0)) > 0){
-    printf("\nread_size %d", read_size);
-		//Send the message back to client
-		write(new_socket , client_message , strlen(client_message));
-	}
+int  master_serv_init(){
+    cout << " serv_init DEBUT" << endl;
+    int port = 8888;
     
-    //use client message to check for motion and move yellow flag if needed.
-    puts(client_message);
+    sockaddr_in servAddr;
+    bzero((char*)&servAddr, sizeof(servAddr));
+    servAddr.sin_family = AF_INET;
+    servAddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    servAddr.sin_port = htons(port);
+    int serverSd = socket(AF_INET, SOCK_STREAM, 0);
+
+    if (serverSd < 0) {
+        cerr << "serv_init: Error establishing the server socket" << endl;
+        exit(0);
+    }
+
+    int bindStatus = bind(serverSd, (struct sockaddr*) &servAddr, sizeof(servAddr));
+    cout << "serv_init: Valeur de bindStatus: " << bindStatus << endl;
+
+    if (bindStatus < 0) {
+        cerr << "serv_init: Error binding socket to local address" << endl;
+        close(serverSd);
+        //close(newSd);
+        exit(0);
+    }
+
+    cout << "serv_init: Valeur de serverSd = " << serverSd << endl;
+    cout << " serv_init FIN" << endl;
+
+    
+	//Listen
+	listen(socketD , 1);
+
+    sockaddr_in newSockAddr;
+    socklen_t newSockAddrSize = sizeof(newSockAddr);
+    int newSd = accept(serverSd, (sockaddr *)&newSockAddr, &newSockAddrSize);
+    if (newSd < 0) {
+        cerr << "retrieve: Error accepting request from client!" << endl;
+        exit(1);
+    }
+    return serverSd;
+}
+
+void* watcher( void* socket_descriptor){
+
     PCA9685 pca(1,0x40);
     pca.init();
+    int socketD = (int) socket_descriptor;	
+    char client_message[1+1];
     int mvt_tracker = 0;
-    if(strcmp(client_message,"0")==0 && mvt_tracker==1){
-        pca.moveYellowFlag(180);
-        cout << "read_and_write: Yellow flag to 180°" << endl;
+	
+ 	while(1){
+        //Receive a message from client
+        int read_size = recv(socketD , client_message , sizeof(client_message) , 0)
+        if((strcmp(client_message,"1"))==0){
+            pca.moveYellowFlag(90);
+            cout << "read_and_write: Yellow flag to 90°" << endl;
+            mvt_tracker=1;
+        }else if((mvt_tracker==1)&&(read_size == -1)){
+            pca.moveYellowFlag(180);
+            cout << "read_and_write: Yellow flag to 180°" << endl;
+        }else if((mvt_tracker==0)&&(read_size == -1)){
+            pca.moveYellowFlag(0);
+            cout << "read_and_write: Yellow flag to 0°" << endl;
+        }
     }
-    if(strcmp(client_message,"0")==0 && mvt_tracker==0){
-        pca.moveYellowFlag(0);
-        cout << "read_and_write: Yellow flag to 0°" << endl;
-    }    
-    if(strcmp(client_message,"1")==0){
-        pca.moveYellowFlag(90);
-        cout << "read_and_write: Yellow flag to 90°" << endl;
-        mvt_tracker=1;
-    }    
- 
- 	puts("Connection accepted");
-
-	if(read_size == 0){
-		puts("Client disconnected");
-		fflush(stdout);
-	}
-	else if(read_size == -1){
-		perror("recv failed");
-	}
-  }
+    return NULL;
 }
 
 int main() {
@@ -110,8 +105,11 @@ int main() {
         std::cout << "Error: Unable to open UART device" << std::endl;
         return -1;
     }
-    int clientSd = send_init();
+    int clientSd = send_init(); // DESCRIPTOR FOR TCP MASTER => SERVER
+    int serverSD = master_serv_init(); // DESCRIPTOR FOR BALISE => MASTER
 
+    pthread_t watcher_thread;
+    pthread_t rw_thread;
     //thread 1
     while(1){
     std::cout << "-------------------------------ENVOI----------------------------------" << std::endl;
@@ -120,7 +118,7 @@ int main() {
     }
 
     //thread 2
-    watcher();
+    pthred_create(&watcher_thread,NULL, watcher, (void*) serverSD);
 
 
     send_close(clientSd);
