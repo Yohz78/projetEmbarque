@@ -15,7 +15,9 @@ int main(){
     vector<string> res;
     resNewSd = retrieve(serverSd,res);
     for(auto data: res){
-        cout << data;
+        cout << "------------------------------------------------" << endl;
+        cout << data << endl;
+        cout << "------------------------------------------------" << endl;
     }
     res.clear();
     serv_close(resNewSd,serverSd);
