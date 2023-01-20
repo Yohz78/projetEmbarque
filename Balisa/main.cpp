@@ -14,6 +14,8 @@
 #include<sys/socket.h>
 #include<arpa/inet.h>	
 #include "src/handler/handler.h"
+#include<pthread.h> //for threading , link with lpthread
+
 //#include "src/bme/bme.h"
 
 /**
@@ -22,7 +24,11 @@
  * @param[in] fd 
  * @param[in] Handler handler 
  */
-void loop(int fd,Handler* handler) {
+void* loop(void*fd) {
+
+
+    Handler handler;
+
     std::time_t t = std::time(nullptr);
     std::tm tm = *std::localtime(&t);
 
@@ -30,79 +36,125 @@ void loop(int fd,Handler* handler) {
     oss1 << std::put_time(&tm, "%Y-%m-%dT%H:%M:%S");
     std::string iso_time = oss1.str();
     std::string sep = "\"";
-            std::ostringstream oss;
-            std::cout << "---------------------DATAS---------------------" << std::endl;
-            oss << "{\"date\":" + sep + iso_time + sep;
-            oss << ",";
-            oss << handler->getBME().harvestDataAndRun();
-            oss << ",";
-            oss << handler->getHCSR().checkMotion(); 
-            oss << ",";
-            oss << handler->getHMCvalue();
-            oss << "}";
-            serialPuts(fd,oss.str().c_str());
-            std::cout << "Donnees envoyees:" << std::endl;
-            std::cout << oss.str();
-            std::cout << std::endl;
-            std::cout << "----------------------------------------------" << std::endl;
+    std::ostringstream oss;
+    std::cout << "---------------------DATAS---------------------" << std::endl;
+    oss << "{\"date\":" + sep + iso_time + sep;
+    oss << ",";
+    oss << handler->getBME().harvestDataAndRun();
+    oss << ",";
+    oss << handler->getHCSR().checkMotion(); 
+    oss << ",";
+    oss << handler->getHMCvalue();
+    oss << "}";
+    serialPuts(fd,oss.str().c_str());
+    std::cout << "Donnees envoyees:" << std::endl;
+    std::cout << oss.str();
+    std::cout << std::endl;
+    std::cout << "----------------------------------------------" << std::endl;
 }
 
-void watcher(Handler* handler){
-    int socket_desc;
-	struct sockaddr_in server;
-	char message[2000] , server_reply[2000];
-    //Create socket
-	socket_desc = socket(AF_INET , SOCK_STREAM , 0);
-	if (socket_desc == -1) printf("Watcher : Could not create socket");
-		
-	server.sin_addr.s_addr = inet_addr("192.168.68.63");
-	server.sin_family = AF_INET;
-	server.sin_port = htons( 8888 );
-
-	//Connect to remote server
-	if (connect(socket_desc , (struct sockaddr *)&server , sizeof(server)) < 0){
-		puts("Watcher : connect error");
-	}
-	
-	puts("Watcher : Connected\n");
-	
-    while(true){
-        //send motion value
-        std::string messageStr = handler->getHCSR().watcherMotion();
-        strcpy(message,messageStr.c_str());
-        if( send(socket_desc , message , strlen(message) , 0) < 0){
-            puts("Watcher : Send failed");
-        }
-        puts("Watcher : Data Send\n");
-        
-        //Receive a reply from the server
-        if (recv(socket_desc, server_reply , 2000 , 0) < 0){
-            puts("Watcher : recv failed");
-        }
-        puts("Watcher : Reply received\n");
-        puts(server_reply);
-    }
-}
-
-int main() {
-    int fd = serialOpen("/dev/ttyAMA0", 9600); // Ouvre le port série sur /dev/ttyS0 à 9600 bauds
-    if (fd < 0) {
-        std::cout << "Error: Unable to open UART device" << std::endl;
-        return -1;
-    }
-
-    Handler handler; // Creation du wrapper
-
-    // thread 1
-    while (true) {
-        loop(fd, &handler);
-        sleep(3); // Fait une pause pendant 1 seconde  
-    }
-
-    // thread 2 
-    watcher(&handler);
-
+void *connection_handler(void *socket_desc)
+{
+    //Get the socket descriptor
+    int sock = (int) socket_desc;
     
-    serialClose(fd); // Ferme le port série
+    // Send some messages to the client
+    Handler handler;
+    char *message = handler->getHCSR().checkMotion().c_str();
+    write(sock , message , strlen(message));
     return 0;
 }
+
+int main(int argc , char *argv[]){
+
+    // TCP IP PART
+    int socket_desc , new_socket , c;
+    struct sockaddr_in server , client;
+    char *message;
+    
+    //Create socket
+    socket_desc = socket(AF_INET , SOCK_STREAM , 0);
+    if (socket_desc == -1) printf("Could not create socket");
+    
+    //Prepare the sockaddr_in structure
+    server.sin_family = AF_INET;
+    server.sin_addr.s_addr = INADDR_ANY;
+    server.sin_port = htons( 8888 );
+    
+    //Bind
+    if( bind(socket_desc,(struct sockaddr *)&server , sizeof(server)) < 0){
+        puts("bind failed");
+        return 1;
+    }
+    puts("bind done");
+    
+    //Listen
+    listen(socket_desc , 3);
+    
+    //Accept and incoming connection
+    puts("Waiting for incoming connections...");
+    c = sizeof(struct sockaddr_in);
+    while ((new_socket = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c))){
+        puts("Connection accepted");
+        
+        //Reply to the client
+        message = "Hello Client , I have received your connection. And now I will assign a handler for you\n";
+        write(new_socket , message , strlen(message));
+        
+        pthread_t sniffer_thread;
+        if(pthread_create(&sniffer_thread, NULL, connection_handler, (void *) new_socket) < 0){
+            perror("could not create thread");
+            return 1;
+        }
+        
+        //Now join the thread , so that we dont terminate before the thread
+        pthread_join(sniffer_thread , NULL);
+        puts("Handler assigned");
+    }
+    
+    if (new_socket<0){
+        perror("accept failed");
+        return 1;
+    }
+
+    //TX/RX PART
+
+    pthread_t data_thread;
+    int fd;
+    while((int fd = serialOpen("/dev/ttyAMA0", 9600))>0){
+        if (fd < 0) {
+            std::cout << "Error: Unable to open UART device" << std::endl;
+            return -1;
+        }
+        if(pthread_create(&data_thread, NULL, loop, (void *) fd) < 0){
+            std::cout <<"could not create thread"<< std::endl;
+            return 1;
+        }
+        pthread_join(data_thread , NULL);
+    }
+    serialClose(fd);
+    return 0;
+}
+
+// int main() {
+//     int fd = serialOpen("/dev/ttyAMA0", 9600); // Ouvre le port série sur /dev/ttyS0 à 9600 bauds
+//     if (fd < 0) {
+//         std::cout << "Error: Unable to open UART device" << std::endl;
+//         return -1;
+//     }
+
+//     Handler handler; // Creation du wrapper
+
+//     // thread 1
+//     while (true) {
+//         loop(fd, &handler);
+//         sleep(3); // Fait une pause pendant 1 seconde  
+//     }
+
+//     // thread 2 
+//     watcher(&handler);
+
+    
+//     serialClose(fd); // Ferme le port série
+//     return 0;
+// }
