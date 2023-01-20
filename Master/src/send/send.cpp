@@ -64,7 +64,7 @@ void read_and_write(int fd, vector<string> &res){
         PCA9685 pca(1,0x40);
         pca.init();
         int mvt_tracker = 0;
-        int i = 0;
+        // int i = 0;
         int pos_tracker = 0;
 
         while (true) {
@@ -111,10 +111,10 @@ void read_and_write(int fd, vector<string> &res){
             //     mvt_tracker=1;
             // }    
             res.push_back(string_data);
-            i++;
-            if(i > 1){
-                break;
-            }
+            // i++;
+            // if(i > 1){
+            //     break;
+            // }
         }else{
             cout << "read_and_write:: No data available, Blue flag back to rest position." << endl;
             pca.moveBlueFlag(180);
