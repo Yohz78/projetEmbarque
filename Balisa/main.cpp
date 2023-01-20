@@ -28,7 +28,7 @@ void* loop(void*fd) {
 
 
     Handler handler;
-
+    int new_fd=(int)fd;
     std::time_t t = std::time(nullptr);
     std::tm tm = *std::localtime(&t);
 
@@ -40,13 +40,13 @@ void* loop(void*fd) {
     std::cout << "---------------------DATAS---------------------" << std::endl;
     oss << "{\"date\":" + sep + iso_time + sep;
     oss << ",";
-    oss << handler->getBME().harvestDataAndRun();
+    oss << handler.getBME().harvestDataAndRun();
     oss << ",";
-    oss << handler->getHCSR().checkMotion(); 
+    oss << handler.getHCSR().checkMotion(); 
     oss << ",";
-    oss << handler->getHMCvalue();
+    oss << handler.getHMCvalue();
     oss << "}";
-    serialPuts(fd,oss.str().c_str());
+    serialPuts(new_fd,oss.str().c_str());
     std::cout << "Donnees envoyees:" << std::endl;
     std::cout << oss.str();
     std::cout << std::endl;
@@ -60,7 +60,7 @@ void *connection_handler(void *socket_desc)
     
     // Send some messages to the client
     Handler handler;
-    char *message = handler->getHCSR().checkMotion().c_str();
+    char *message = handler.getHCSR().checkMotion().c_str();
     write(sock , message , strlen(message));
     return 0;
 }
