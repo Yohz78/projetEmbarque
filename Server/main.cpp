@@ -10,7 +10,7 @@
 using namespace std;
 
 int main(){
-     rgsRetrieve args(serv_init(),0);
+    argsRetrieve args(serv_init(),0);
 
     pthread_t retrieve_thread;
     pthread_create(&retrieve_thread, NULL,retrieve,(void*) &args); // retrieve();
