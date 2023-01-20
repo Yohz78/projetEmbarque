@@ -71,14 +71,14 @@ void read_and_write(int fd, vector<string> &res){
         string string_data = read_sensor_data(fd);
         cout << "read_and_write: string_data:  " << string_data << endl;
         if(!string_data.empty()){
-            istringstream json_stream(string_data);
-            Json::Value root;
-            Json::CharReaderBuilder builder;
-            JSONCPP_STRING errs;
-            bool parsingSuccessful = Json::parseFromStream(builder,
-                                                       json_stream,
-                                                       &root,
-                                                       &errs);
+            // istringstream json_stream(string_data);
+            // Json::Value root;
+            // Json::CharReaderBuilder builder;
+            // JSONCPP_STRING errs;
+            // bool parsingSuccessful = Json::parseFromStream(builder,
+            //                                            json_stream,
+            //                                            &root,
+            //                                            &errs);
             if (!parsingSuccessful) {
                 cout << "read_and_write: Error parsing JSON" << endl;
             }

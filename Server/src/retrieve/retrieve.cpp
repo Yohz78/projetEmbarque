@@ -73,7 +73,8 @@ int retrieve(int serverSd, vector<string>& jsonVec) {
         // int vecSize;
         // recv(newSd, &vecSize, sizeof(int), 0);
         // for (int i = 0; i < vecSize; i++) {
-        while(1){
+        int newsocket;
+        while((newsocket = accept(serverSd, (sockaddr *)&newSockAddr, &newSockAddrSize))){
             recv(newSd, &msg, sizeof(msg), 0); // reception msg
             cout << "retrieve: Valeur de message : " << msg << endl;
             jsonVec.push_back(msg);
