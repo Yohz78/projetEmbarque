@@ -85,7 +85,7 @@ int retrieve(int serverSd, vector<string>& jsonVec) {
             }
         // }
         cout << "retrieve: Nombre d'element: " << jsonVec.size() << endl;
-        sleep(3)
+        sleep(3);
         i++;
         }
         for(auto data: jsonVec){
