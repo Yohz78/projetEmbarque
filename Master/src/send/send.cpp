@@ -7,6 +7,7 @@
 #include <cstring>
 #include <string>
 #include <vector>
+#include <regex>
 
 #include <stdio.h>
 
@@ -128,7 +129,14 @@ void sendData(int clientSd, string& string_data) {
     char buffer[4000];
     memset(buffer,0,4000);
     strcpy(buffer,string_data.c_str());
-    send(clientSd, &buffer, sizeof(buffer) ,0);
+    std::regex pattern("^\\{\"date\":\"\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\",\"BME\": \\{\"temperature\": [-+]?[0-9]*\\.?[0-9]+,[-+]?[0-9]*\\.?[0-9]+,[-+]?[0-9]*\\.?[0-9]+\\},\"HCSR\": \\{\"mvt\": [-+]?[0-9]*\\.?[0-9]+\\},\"HMC\": \\{\"x\": [-+]?[0-9]*\\.?[0-9]+,[-+]?[0-9]*\\.?[0-9]+,[-+]?[0-9]*\\.?[0-9]+\\}\\}$");
+    if(std::regex_match(string_data, pattern)){
+        cout << "sendDATA=====> REGEX MATCH =====> SENDING DATA" << endl;
+        send(clientSd, &buffer, sizeof(buffer) ,0);
+    }
+    else{
+        cout << "sendDATA=====> REGEX DID NOT MATCH =====> NOT SENDING DATA" << endl;
+    }
 }
 
 void send_close(int clientSd){
