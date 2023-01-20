@@ -60,17 +60,16 @@ void *connection_handler(void *socket_desc)
     
     // Send some messages to the client
     Handler handler;
-    char *message = handler.getHCSR().checkMotion();
+    char *message = handler.getHCSR().checkMotion().c_str();
     write(sock , message , strlen(message));
     return 0;
 }
 
-int main(int argc , char *argv[]){
+int main(){
 
     // TCP IP PART
     int socket_desc , new_socket , c;
     struct sockaddr_in server , client;
-    char *message;
     
     //Create socket
     socket_desc = socket(AF_INET , SOCK_STREAM , 0);
