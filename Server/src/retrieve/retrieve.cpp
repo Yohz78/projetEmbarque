@@ -82,10 +82,10 @@ void jsonToFile(vector<Json::Value>& jsonWrite){
 
 void* retrieve(void* args) { //int serverSd, int resNewSd, vector<Json::Value>& jsonWrite
     
-    argsRetrieve* args = (argsRetrieve*)args;
+    argsRetrieve* argsFunc = (argsRetrieve*)args;
     cout << " retrieve DEBUT" << endl;
-    int serverSd = args->serverSd;
-    int resNewSd = args->resNewSd;
+    int serverSd = argsFunc->serverSd;
+    int resNewSd = argsFunc->resNewSd;
     vector<Json::Value> jsonWrite;
     char msg[4000];
 
@@ -106,9 +106,8 @@ void* retrieve(void* args) { //int serverSd, int resNewSd, vector<Json::Value>& 
     }
 
     cout << "retrieve: Connected with client!" << endl;
-    int i=0;
     while(true){
-        vector<string>& string_data_vec;
+        vector<string> string_data_vec;
 
         for(int i=0;i<10;i++){
             int data_received = recv(newSd, &msg, sizeof(msg), 0); // reception msg
