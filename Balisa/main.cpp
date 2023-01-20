@@ -49,6 +49,7 @@ void* loop(void*fd) {
     std::cout << oss.str();
     std::cout << std::endl;
     std::cout << "----------------------------------------------" << std::endl;
+    return 0;
 }
 
 void *connection_handler(void *socket_desc)
@@ -72,8 +73,7 @@ int main(){
     // TCP IP PART
     int socket_desc;
 	struct sockaddr_in server;
-	char message[2000] , server_reply[2000];
-	
+
 	//Create socket
 	socket_desc = socket(AF_INET , SOCK_STREAM , 0);
 	if (socket_desc == -1) printf("Could not create socket");
