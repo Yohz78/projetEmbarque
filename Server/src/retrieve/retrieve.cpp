@@ -70,21 +70,19 @@ int retrieve(int serverSd, vector<string>& jsonVec) {
 
     cout << "retrieve: Connected with client!" << endl;
 
-    //while(1){
-        int vecSize = 1;
-        recv(newSd, &vecSize, sizeof(int), 0);
-        for (int i = 0; i < vecSize; i++) {
-            Json::Value jsonVal;
-            Json::Reader reader;
+        // int vecSize = 1;
+        // recv(newSd, &vecSize, sizeof(int), 0);
+        //for (int i = 0; i < vecSize; i++) {
+            // Json::Value jsonVal;
+            // Json::Reader reader;
             recv(newSd, &msg, sizeof(msg), 0); // reception msg
             cout << "Valeur de message : " << msg << endl;
-            if (reader.parse(msg, jsonVal)) {
-                jsonVec.push_back(jsonVal);
-            }else{
-                cout << "retrieve: reader.parse(msg, jsonVal): "
-                 <<reader.parse(msg, jsonVal)  << endl;
-            }
-        }
+            //if (reader.parse(msg, jsonVal)) {
+            jsonVec.push_back(msg);
+            // }else{
+            //     cout << "retrieve: reader.parse(msg, jsonVal): "
+            //      <<reader.parse(msg, jsonVal)  << endl;
+            // }
         cout << "retrieve: Nombre d'element: " << jsonVec.size() << endl;
 
         // if(!jsonVec.empty()){
