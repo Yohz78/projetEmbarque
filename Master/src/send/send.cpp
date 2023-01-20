@@ -102,7 +102,7 @@ void read_and_write(int fd,int clientSd){
             pca.moveBlueFlag(180);
             pos_tracker=0;
         } 
-        sleep(INTERVALLE_RECUP);
+        sleep(INTERVALLE_RECUP-1);
 }
 
 int send_init(){
