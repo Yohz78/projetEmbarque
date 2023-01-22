@@ -53,28 +53,22 @@ PCA9685::~PCA9685(){
  * @return false 
  */
 bool PCA9685::init(){
-    //std::cout  << "Initialisation de la carte de controle des moteurs" << std::endl;
     deviceI2C = new i2c(this->getAdresse(), this->getBus());
     if (!deviceI2C->getError()){
 
         deviceI2C->WriteReg8(MODE2, OUTDRV);
         deviceI2C->WriteReg8(MODE1, ALLCALL);
-        //time.sleep(0.005)  # wait for oscillator
         usleep(5000);
         uint8_t mode1 = (uint8_t)deviceI2C->ReadReg8(MODE1);
         mode1 = mode1 & ~SLEEP;  // wake up (reset sleep)
         deviceI2C->WriteReg8(MODE1, mode1);
-        //time.sleep(0.005)  # wait for oscillator
         usleep(5000);
         setPwmFrequency(50);
-
-        error = false;
-        
+        error = false; 
     }
     else{
 	    error = true;
     }
-
     return !error;
 }
 

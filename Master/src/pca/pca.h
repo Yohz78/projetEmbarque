@@ -63,15 +63,12 @@ private :
     void setAllPwm(uint16_t on, uint16_t off);
     void move(uint8_t channel , int deg);
 
-
-
     const uint8_t i2c_bus;
     const uint8_t i2c_address;
     const char* nom;
 
     const uint8_t yellowFlagChannel =1;
     const uint8_t blueFlagChannel = 2;
-
 
     i2c *deviceI2C;
 
