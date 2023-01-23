@@ -71,7 +71,6 @@ void* read_and_write(void* args){
         int pos_tracker = 0;
         while(true){
             string string_data = read_sensor_data(fd);
-            cout << "read_and_write: string_data:  " << string_data << endl;
             if(!string_data.empty()){
             //Yellow flag logic
             // double presence = root["HCSR"]["mvt"].asDouble();
