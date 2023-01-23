@@ -110,10 +110,14 @@ int main() {
 
     pthread_t watcher_thread;
 
+    std::cout << "//thread 1: pthread_create" << std::endl; 
     //thread 1
     pthread_create(&watcher_thread,NULL, watcher, (void*) serverSD);
+
+    std::cout << "//thread 1: pthread_join" << std::endl;
     pthread_join(watcher_thread, NULL);
 
+    std::cout << "//Read and write" << std::endl;
     //Read and write
     read_and_write(fd,clientSd);
 
