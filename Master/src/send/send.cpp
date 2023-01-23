@@ -72,8 +72,8 @@ void logicYellowFlag(string string_data, int &mvt_tracker, PCA9685 &pca){
                                                 &errs);
     if (!parsingSuccessful) {
         std::cout << "Error parsing JSON" << std::endl;
-    }
-    double presence = root["mvt"].asDouble();
+    }else{
+    double presence = root["HCSR"]["mvt"].asDouble();
     std::cout << root << std::endl;
     if(presence==0 && mvt_tracker==1){
         pca.moveYellowFlag(180);
@@ -84,6 +84,7 @@ void logicYellowFlag(string string_data, int &mvt_tracker, PCA9685 &pca){
     if(presence==1){
         pca.moveYellowFlag(90);
         mvt_tracker=1;
+    }
     }
 }
 
@@ -128,10 +129,10 @@ void* read_and_write(void* args){
             cout << "read_and_write:: No data available, Blue flag back to rest position." << endl;
             pca.moveBlueFlag(180);
             pos_tracker=0;
-        } 
+            } 
+        sleep(INTERVALLE_RECUP);
         }
         
-        sleep(INTERVALLE_RECUP);
         return NULL;
 }
 
