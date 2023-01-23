@@ -62,12 +62,14 @@ string read_sensor_data(int fd) {
  * @param fd 
  */
 void read_and_write(int fd,int clientSd){
+    
         PCA9685 pca(1,0x40);
         pca.init();
         int pos_tracker = 0;
-        string string_data = read_sensor_data(fd);
-        cout << "read_and_write: string_data:  " << string_data << endl;
-        if(!string_data.empty()){
+        while(true){
+            string string_data = read_sensor_data(fd);
+            cout << "read_and_write: string_data:  " << string_data << endl;
+            if(!string_data.empty()){
             //Yellow flag logic
             // double presence = root["HCSR"]["mvt"].asDouble();
             // if(presence==0 && mvt_tracker==1){
@@ -83,7 +85,9 @@ void read_and_write(int fd,int clientSd){
             //     cout << "read_and_write: Yellow flag to 90°" << endl;
             //     mvt_tracker=1;
             // }    
+            std::cout << "-------------------------------ENVOI----------------------------------" << std::endl;
             sendData(clientSd,string_data);
+            std::cout << "-------------------------------FIN ENVOI----------------------------------" << std::endl;
             if(pos_tracker==3){
                 pca.moveBlueFlag(45);
                 pos_tracker=2;
@@ -106,6 +110,8 @@ void read_and_write(int fd,int clientSd){
             pos_tracker=0;
         } 
         sleep(INTERVALLE_RECUP);
+        }
+        
 }
 
 int send_init(){
