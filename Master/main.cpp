@@ -122,7 +122,7 @@ int main() {
 
     std::cout << "//thread 1: pthread_create" << std::endl; 
     //thread 1
-    pthread_create(&watcher_thread,NULL, watcher, (void*) serverSD);
+    pthread_create(&watcher_thread,NULL, watcher, (void*) &serverSD);
 
     std::cout << "//thread 1: pthread_join" << std::endl;
     pthread_join(watcher_thread, NULL);
@@ -130,7 +130,7 @@ int main() {
     std::cout << "//Read and write" << std::endl;
     //Read and write
     pthread_t rw_thread;
-    pthread_create(&rw_thread, NULL, read_and_write, (void*) argsFuncRW);
+    pthread_create(&rw_thread, NULL, read_and_write, (void*) &argsFuncRW);
     pthread_join(rw_thread, NULL);
 
 
