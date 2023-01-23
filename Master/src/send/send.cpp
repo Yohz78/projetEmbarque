@@ -143,8 +143,8 @@ void* read_and_write(void* args){
             pca.moveBlueFlag(180);
             pos_tracker=0;
             } 
+            }
         sleep(INTERVALLE_RECUP);
-        }
         }
         
         return NULL;
