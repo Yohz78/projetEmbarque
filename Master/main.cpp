@@ -113,15 +113,8 @@ int main() {
     //thread 1
     pthread_create(&watcher_thread,NULL, watcher, (void*) serverSD);
 
-    //thread 2
-    while(1){
-    std::cout << "-------------------------------ENVOI----------------------------------" << std::endl;
+    //Read and write
     read_and_write(fd,clientSd);
-    std::cout << "-------------------------------FIN ENVOI----------------------------------" << std::endl;
-    }
-
-
-
 
     send_close(clientSd);
     serialClose(fd); // Ferme le port série
