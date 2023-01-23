@@ -91,7 +91,7 @@ int main(){
             std::cout <<"could not create thread"<< std::endl;
             return 1;
         }
-        pthread_join(data_thread, NULL);
+        pthread_detach(data_thread, NULL);
     }
 
     int clientSd = balise_send_init();
@@ -103,7 +103,7 @@ int main(){
     }
         
     //Now join the thread , so that we dont terminate before the thread
-    pthread_join(tcp_thread , NULL);
+    pthread_detach(tcp_thread , NULL);
     puts("Handler assigned");
 
 
