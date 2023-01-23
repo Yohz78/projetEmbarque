@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <iostream>
 
 
 /**
@@ -63,7 +64,7 @@ void import_json_vector(std::vector<Json::Value> &jsonWrite) {
             std::cout << "stderr, Failed to prepare statement: " << sqlite3_errmsg(db) << std::endl;
         }
 
-        sqlite3_bind_text(stmt, 1, date , -1, NULL);
+        sqlite3_bind_text(stmt, 1, date.c_str() , -1, NULL);
         sqlite3_bind_double(stmt, 2,temperature );
         sqlite3_bind_double(stmt, 3,pressure);
         sqlite3_bind_double(stmt, 4,humidity);
