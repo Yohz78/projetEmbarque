@@ -49,13 +49,13 @@ void import_json_vector(std::vector<Json::Value> &jsonWrite) {
     // Insert data into the table
     for (auto item : jsonWrite) {
         std::string timestamp = item["date"].asString();
-        double temperature = item["temperature"].asDouble();
-        double pressure = item["pressure"].asDouble();
-        double humidity = item["humidity"].asDouble();
-        int x = item["x"].asInt();
-        int y = item["y"].asInt();
-        int z = item["z"].asInt();
-        int mvt = item["mvt"].asInt();
+        double temperature = item["BME"]["temperature"].asDouble();
+        double pressure = item["BME"]["pressure"].asDouble();
+        double humidity = item["BME"]["humidity"].asDouble();
+        int x = item["HMC"]["x"].asInt();
+        int y = item["HMC"]["y"].asInt();
+        int z = item["HMC"]["z"].asInt();
+        int mvt = item["HCSR"]["mvt"].asInt();
         char *sql = sqlite3_mprintf("INSERT INTO data (date, temperature, pressure, humidity, x, y, z, mvt) VALUES (%s, %f, %f, %f, %d, %d, %d, %d)", timestamp, temperature, pressure, humidity, x, y, z, mvt);
         rc = sqlite3_exec(db, sql, NULL, 0, &zErrMsg);
         if( rc != SQLITE_OK ){
