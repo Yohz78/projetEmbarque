@@ -57,6 +57,37 @@ string read_sensor_data(int fd) {
 }
 
 /**
+ * @brief This function handles the yellow flag movements.
+ * 
+ * @param string_data 
+ */
+void logicYellowFlag(string string_data){
+    std::istringstream json_stream(string_data);
+    Json::Value root;
+    Json::CharReaderBuilder builder;
+    JSONCPP_STRING errs;
+    bool parsingSuccessful = Json::parseFromStream(builder,
+                                                json_stream,
+                                                &root,
+                                                &errs);
+    if (!parsingSuccessful) {
+        std::cout << "Error parsing JSON" << std::endl;
+    }
+    double presence = root["mvt"].asDouble();
+    std::cout << root << std::endl;
+    if(presence==0 && mvt_tracker==1){
+        pca.moveYellowFlag(180);
+    }
+    if(presence==0 && mvt_tracker==0){
+        pca.moveYellowFlag(0);
+    }
+    if(presence==1){
+        pca.moveYellowFlag(90);
+        mvt_tracker=1;
+    }
+}
+
+/**
  * @brief This function parse the data from the read_sensor_data(fd) function and move the 
  * Yellow flag accordingly. Then it writes the data into the file data.json
  * 
@@ -71,22 +102,7 @@ void* read_and_write(void* args){
         int pos_tracker = 0;
         while(true){
             string string_data = read_sensor_data(fd);
-            if(!string_data.empty()){
-            //Yellow flag logic
-            // double presence = root["HCSR"]["mvt"].asDouble();
-            // if(presence==0 && mvt_tracker==1){
-            //     pca.moveYellowFlag(180);
-            //     cout << "read_and_write: Yellow flag to 180°" << endl;
-            // }
-            // if(presence==0 && mvt_tracker==0){
-            //     pca.moveYellowFlag(0);
-            //     cout << "read_and_write: Yellow flag to 0°" << endl;
-            // }    
-            // if(presence==1){
-            //     pca.moveYellowFlag(90);
-            //     cout << "read_and_write: Yellow flag to 90°" << endl;
-            //     mvt_tracker=1;
-            // }    
+            logicYellowFlag(string_data);
             std::cout << "-------------------------------ENVOI----------------------------------" << std::endl;
             sendData(clientSd,string_data);
             std::cout << "-------------------------------FIN ENVOI----------------------------------" << std::endl;
