@@ -27,12 +27,7 @@
 #define INTERVALLE_ENVOI_SERVEUR 60
 
 using namespace std;
-typedef struct argsRW argsRW;
 
-struct argsRW{
-    int fd;
-    int clientSd;
-};
 
 /**
  * @brief This function read the sensor data from the slave over TX/RX communication

@@ -23,6 +23,13 @@
 
 #include "../pca/pca.h"
 
+
+struct argsRW{
+    int fd;
+    int clientSd;
+};
+typedef struct argsRW argsRW;
+
 // Collect data from balisa
 std::string read_sensor_data(int); 
 // Manage blue flag animation and send data to server via TCP
