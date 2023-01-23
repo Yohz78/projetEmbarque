@@ -1,4 +1,5 @@
 #include <sqlite3.h>
+#include <iostream>
 
 void afficheBME() {
     sqlite3 *db;
@@ -10,7 +11,7 @@ void afficheBME() {
     // Execute the SELECT statement
     rc = sqlite3_get_table(db, "SELECT timestamp, temperature, pressure, humidity FROM sensor_data", &result, &rows, &columns, &zErrMsg);
     if (rc != SQLITE_OK) {
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+        std::cout << "stderr, SQL error: " <<  zErrMsg << std::endl;
         sqlite3_free(zErrMsg);
     } else {
         for (int i = 1; i <= rows; i++) {
@@ -30,7 +31,7 @@ void afficheHCSR() {
     // Execute the SELECT statement
     rc = sqlite3_get_table(db, "SELECT mvt FROM sensor_data", &result, &rows, &columns, &zErrMsg);
     if (rc != SQLITE_OK) {
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+        std::cout << "stderr, SQL error: " <<  zErrMsg << std::endl;
         sqlite3_free(zErrMsg);
     } else {
         for (int i = 1; i <= rows; i++) {
@@ -50,7 +51,7 @@ void afficheHMC() {
     // Execute the SELECT statement
     rc = sqlite3_get_table(db, "SELECT x, y, z FROM sensor_data", &result, &rows, &columns, &zErrMsg);
     if (rc != SQLITE_OK) {
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+        std::cout << "stderr, SQL error: " <<  zErrMsg << std::endl;
         sqlite3_free(zErrMsg);
     } else {
         for (int i = 1; i <= rows; i++) {
@@ -70,7 +71,7 @@ void afficheAllData() {
     // Execute the SELECT statement
     rc = sqlite3_get_table(db, "SELECT timestamp, temperature, pressure, humidity, mvt, x, y, z FROM sensor_data", &result, &rows, &columns, &zErrMsg);
     if (rc != SQLITE_OK) {
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+        std::cout << "stderr, SQL error: " <<  zErrMsg << std::endl;
         sqlite3_free(zErrMsg);
     } else {
         for (int i = 1; i <= rows; i++) {
