@@ -28,6 +28,11 @@
 
 using namespace std;
 
+struct argsRW{
+    int fd;
+    int clientSd;
+}
+
 /**
  * @brief This function read the sensor data from the slave over TX/RX communication
  * 
@@ -61,8 +66,10 @@ string read_sensor_data(int fd) {
  * 
  * @param fd 
  */
-void read_and_write(int fd,int clientSd){
-    
+void* read_and_write(void* args){
+        argsRW* argsFunc = (argsRW*)args;
+        int fd = argsFunc->fd;
+        int clientSd = argsFunc->clientSd;    
         PCA9685 pca(1,0x40);
         pca.init();
         int pos_tracker = 0;
@@ -111,7 +118,7 @@ void read_and_write(int fd,int clientSd){
         } 
         sleep(INTERVALLE_RECUP);
         }
-        
+        return NULL;
 }
 
 int send_init(){

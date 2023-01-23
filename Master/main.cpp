@@ -83,6 +83,7 @@ void* watcher( void* socket_descriptor){
  	while(1){
         //Receive a message from client
         int read_size = recv(newSd , client_message , sizeof(client_message) , 0);
+        //cout for debugging
         cout << "Valeur de presence: " << client_message << endl;
         if((strcmp(client_message,"1"))==0){
             pca.moveYellowFlag(90);
@@ -99,15 +100,26 @@ void* watcher( void* socket_descriptor){
     return NULL;
 }
 
+struct argsRW{
+    int fd;
+    int clientSd;
+}
+
+typedef struct argsRW argsRW;
+
 int main() {
 
-    int fd = serialOpen("/dev/ttyAMA0", 9600); // Ouvre le port série sur /dev/ttyAMA0 à 9600 bauds
+
+    argsRW argsFuncRW;
+    argsFuncRW.fd = serialOpen("/dev/ttyAMA0", 9600); // Ouvre le port série sur /dev/ttyAMA0 à 9600 bauds, int fd (file descriptor)
     if (fd < 0) {
         std::cout << "Error: Unable to open UART device" << std::endl;
         return -1;
     }
-    int clientSd = send_init(); // DESCRIPTOR FOR TCP MASTER => SERVER
-    int serverSD = master_serv_init(); // DESCRIPTOR FOR BALISE => MASTER
+
+    
+    argsFuncRW.clientSd = send_init(); // DESCRIPTOR FOR TCP MASTER => SERVER client sd
+    int serverSD = master_serv_init(); // DESCRIPTOR FOR BALISE => MASTER serversd
 
     pthread_t watcher_thread;
 
@@ -120,7 +132,12 @@ int main() {
 
     std::cout << "//Read and write" << std::endl;
     //Read and write
-    read_and_write(fd,clientSd);
+    pthread_t rw_thread;
+    
+    
+    pthread_create(&rw_thread, NULL, read_and_write, (void*) argsFuncRW);
+    pthread_join(rw_thread, NULL);
+
 
     send_close(clientSd);
     serialClose(fd); // Ferme le port série
