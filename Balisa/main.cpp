@@ -91,7 +91,7 @@ int main(){
             std::cout <<"could not create thread"<< std::endl;
             return 1;
         }
-        pthread_detach(data_thread);
+        pthread_join(data_thread, NULL);
     }
 
     int clientSd = balise_send_init();
