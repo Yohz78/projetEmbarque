@@ -31,7 +31,7 @@ using namespace std;
 
 int  master_serv_init(){
     cout << " serv_init DEBUT" << endl;
-    int port = 8888;
+    int port = 1600;
     
     sockaddr_in servAddr;
     bzero((char*)&servAddr, sizeof(servAddr));
