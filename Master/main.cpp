@@ -100,19 +100,16 @@ void* watcher( void* socket_descriptor){
     return NULL;
 }
 
-struct argsRW{
-    int fd;
-    int clientSd;
-}
 
-typedef struct argsRW argsRW;
+
+
 
 int main() {
 
 
     argsRW argsFuncRW;
     argsFuncRW.fd = serialOpen("/dev/ttyAMA0", 9600); // Ouvre le port série sur /dev/ttyAMA0 à 9600 bauds, int fd (file descriptor)
-    if (fd < 0) {
+    if ( argsFuncRW.fd < 0) {
         std::cout << "Error: Unable to open UART device" << std::endl;
         return -1;
     }
@@ -133,13 +130,11 @@ int main() {
     std::cout << "//Read and write" << std::endl;
     //Read and write
     pthread_t rw_thread;
-    
-    
     pthread_create(&rw_thread, NULL, read_and_write, (void*) argsFuncRW);
     pthread_join(rw_thread, NULL);
 
 
-    send_close(clientSd);
-    serialClose(fd); // Ferme le port série
+    send_close(argsFuncRW.clientSd);
+    serialClose(argsFuncRW.fd); // Ferme le port série
     return 0;
 }
