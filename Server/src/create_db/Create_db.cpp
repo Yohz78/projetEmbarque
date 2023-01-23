@@ -13,16 +13,13 @@ void createDatabase(const std::string &dbName) {
         sqlite3_close(db);
         return;
     }
-    char *sql = "CREATE TABLE IF NOT EXISTS sensor_data (nomducapteur TEXT
-                                                        timestamp TEXT,~
+    char *sql = "CREATE TABLE IF NOT EXISTS sensor_data (timestamp TEXT,
                                                         temperature REAL,
                                                         pressure REAL,
                                                         humidity REAL,
-                                                        nomducapteur TEXT, 
                                                         x INTEGER,
                                                         y INTEGER,
                                                         z INTEGER,
-                                                        nomducapteur TEXT
                                                         mvt INTEGER)";
     rc = sqlite3_exec(db, sql, NULL, 0, &zErrMsg);
     

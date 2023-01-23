@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <jsoncpp/json/json.h>
 

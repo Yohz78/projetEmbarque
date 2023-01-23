@@ -19,6 +19,7 @@
 #include <jsoncpp/json/json.h>
 
 #include "retrieve.h"
+#include "../import_json/import_json.h"
 
 using namespace std;
 
@@ -130,6 +131,7 @@ void* retrieve(void* args) { //int serverSd, int resNewSd, vector<Json::Value>& 
             cout << endl;
         }
         jsoning(string_data_vec,jsonWrite);
+        import_json_vector(jsonWrite);
         string_data_vec.clear();
         // ecriture dans le fichier data.json a partir de jsonWrite quand jsonWrite a une taille
         jsonToFile(jsonWrite);
