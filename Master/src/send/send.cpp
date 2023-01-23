@@ -124,12 +124,13 @@ void* read_and_write(void* args){
                 cout << "read_and_write: Pos tracker :" << pos_tracker << endl;
                 cout << "read_and_write: Blue flag to 45°" << endl;
             }
-        }
-        if(string_data.empty()){
+            if(string_data.empty()){
             cout << "read_and_write:: No data available, Blue flag back to rest position." << endl;
             pca.moveBlueFlag(180);
             pos_tracker=0;
         } 
+        }
+        
         sleep(INTERVALLE_RECUP);
         return NULL;
 }
