@@ -110,7 +110,7 @@ void* retrieve(void* args) { //int serverSd, int resNewSd, vector<Json::Value>& 
     while(true){
         vector<string> string_data_vec;
 
-        for(int i=0;i<10;i++){
+        for(int i=0;i<2;i++){
             int data_received = recv(newSd, &msg, sizeof(msg), 0); // reception msg
             if(data_received > 3500){
             cout << "retrieve: data_received -----: " << data_received  << endl;
@@ -133,6 +133,11 @@ void* retrieve(void* args) { //int serverSd, int resNewSd, vector<Json::Value>& 
         }
         cout << "JSONING THE DATA" << endl;
         jsoning(string_data_vec,jsonWrite);
+        for(auto data: jsonWrite){
+            cout << "----------------------" << endl;
+            cout << data << endl;
+            cout << "----------------------" << endl;
+        }
         cout << "IMPORTING THE DATA" << endl;
         import_json_vector(jsonWrite);
         cout << "DATA IMPORTED" << endl;
