@@ -42,12 +42,10 @@ int  serv_init(){
 
     int bindStatus = bind(serverSd, (struct sockaddr*) &servAddr, sizeof(servAddr));
     cout << "serv_init: Valeur de bindStatus: " << bindStatus << endl;
-
-    if (bindStatus < 0) {
+    int reuse = 1;
+    while(bindStatus < 0) {
         cerr << "serv_init: Error binding socket to local address" << endl;
-        close(serverSd);
-        //close(newSd);
-        exit(0);
+        setsockopt(serverSd, SOL_SOCKET, SO_REUSEADDR, (const char*)&reuse, sizeof(reuse));
     }
 
     cout << "serv_init: Valeur de serverSd = " << serverSd << endl;
