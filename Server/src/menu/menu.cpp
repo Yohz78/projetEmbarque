@@ -30,9 +30,10 @@ void afficheData(){
         std::cout << "Coordonnée Y : " << measurement["HMC"]["y"].get<std::string>() << std::endl;
         std::cout << "Coordonnée Z : " << measurement["HMC"]["z"].get<std::string>() << std::endl;
 }
+file.close();
 }
 
-void afficheBME(Json::Value root){
+void afficheBME(){
     std::ifstream file("data.json");
     json root;
     file >> root;
@@ -43,10 +44,11 @@ void afficheBME(Json::Value root){
         std::cout << "Pression : " << measurement["BME"]["pression"].get<std::string>() << std::endl;
         std::cout << "Humidité : " << measurement["BME"]["humidity"].get<std::string>() << std::endl;
     }
-       
+    file.close();
+
 }
 
-void afficheHCSR(Json::Value root){
+void afficheHCSR(){
     std::ifstream file("data.json");
     json root;
     file >> root;
@@ -58,9 +60,11 @@ void afficheHCSR(Json::Value root){
             std::cout << "Capteur HCSR : " << "Pas de présence détectée"<< std::endl;
         }
     }
+    file.close();
+
 }
 
-void afficheHMC(Json::Value root){
+void afficheHMC(){
     std::ifstream file("data.json");
     json root;
     file >> root;
@@ -70,39 +74,40 @@ void afficheHMC(Json::Value root){
         std::cout << "Coordonnée Y : " << measurement["HMC"]["y"].get<std::string>() << std::endl;
         std::cout << "Coordonnée Z : " << measurement["HMC"]["z"].get<std::string>() << std::endl;
     }  
+    file.close();
 }
 
 void menu(){
-        cout << "Bonjour utilisateur!" << endl;
+        std::cout << "Bonjour utilisateur!" << std::endl;
         while (true) {
-            cout << "Veuillez choisir une option:" << endl;
-            cout << "1. Afficher les données" << endl;
-            cout << "2. Afficher les données du capteur BME" << endl;
-            cout << "3. Afficher les données du capteur HCSR" << endl;
-            cout << "4. Afficher les données du capteur HMC" << endl;
-            cout << "0. Quitter" << endl;
+            std::cout << "Veuillez choisir une option:" << std::endl;
+            std::cout << "1. Afficher les données" << std::endl;
+            std::cout << "2. Afficher les données du capteur BME" << std::endl;
+            std::cout << "3. Afficher les données du capteur HCSR" << std::endl;
+            std::cout << "4. Afficher les données du capteur HMC" << std::endl;
+            std::cout << "0. Quitter" << std::endl;
 
             int choix;
-            cin >> choix;
+            std::cin >> choix;
 
             switch (choix) {
                 case 1:
-                    afficheData(root);
+                    afficheData();
                     break;
                 case 2:
-                    afficheBME(root);
+                    afficheBME();
                     break;
                 case 3:
-                    afficheHCSR(root);
+                    afficheHCSR();
                     break;
                 case 4:
-                    afficheHMC(root);
+                    afficheHMC();
                     break;
                 case 0:
                     cout << "Au revoir!" << endl;
                     exit(0);
                 default:
-                    cout << "Option non valide, veuillez réessayer." << endl;
+                    std::cout << "Option non valide, veuillez réessayer." << endl;
                     break;
         }
     }
