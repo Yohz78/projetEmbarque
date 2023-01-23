@@ -73,7 +73,7 @@ void jsoning(vector<string>& string_data_vec, vector<Json::Value>& jsonWrite){
 
 void jsonToFile(vector<Json::Value>& jsonWrite){
     Json::StyledWriter writer;
-    std::ofstream json_file("data.json");
+    std::ofstream json_file("data.json", std::ios::app);
     for(auto jsonVal : jsonWrite)
     json_file << writer.write(jsonVal);
     json_file.close();
