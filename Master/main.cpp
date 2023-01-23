@@ -112,6 +112,7 @@ int main() {
 
     //thread 1
     pthread_create(&watcher_thread,NULL, watcher, (void*) serverSD);
+    pthread_join(watcher_thread, NULL);
 
     //Read and write
     read_and_write(fd,clientSd);
