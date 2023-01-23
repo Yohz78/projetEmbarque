@@ -20,6 +20,7 @@
 
 #include "retrieve.h"
 #include "../import_json/import_json.h"
+#include "../create_db/create_db.h"
 
 using namespace std;
 

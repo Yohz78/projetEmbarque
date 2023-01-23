@@ -1,3 +1,3 @@
 #pragma once
 
-void import_json_vector(vector<Json::Value>);
+void import_json_vector(std::vector<Json::Value>&);
