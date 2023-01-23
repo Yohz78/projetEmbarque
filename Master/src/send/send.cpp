@@ -127,11 +127,14 @@ int send_init(){
     sendSockAddr.sin_family = AF_INET;
     sendSockAddr.sin_addr.s_addr = inet_addr(serverIp);
     sendSockAddr.sin_port = htons(port);
+
     int status = connect(clientSd, (sockaddr*) &sendSockAddr, sizeof(sendSockAddr));
-    if(status < 0) {
+    while(status < 0){
         cerr << "Error connecting to server!" << endl;
-        exit(1);
+        sleep(1);
+        status = connect(clientSd, (sockaddr*) &sendSockAddr, sizeof(sendSockAddr));
     }
+        
     cout << "Connected to the server!" << endl;
     return clientSd;
 }
