@@ -104,7 +104,7 @@ void menu(){
                     afficheHMC();
                     break;
                 case 0:
-                    cout << "Au revoir!" << endl;
+                    std::cout << "Au revoir!" << std::endl;
                     exit(0);
                 default:
                     std::cout << "Option non valide, veuillez réessayer." << endl;
