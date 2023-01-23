@@ -75,9 +75,11 @@ void* watcher( void* socket_descriptor){
     sockaddr_in newSockAddr;
     socklen_t newSockAddrSize = sizeof(newSockAddr);
     int newSd = accept(serverSd, (sockaddr *)&newSockAddr, &newSockAddrSize);
-    if (newSd < 0) {
+
+    while(newSd < 0) {
         cerr << "retrieve: Error accepting request from client!" << endl;
-        exit(1);
+        sleep(1);
+        accept(serverSd, (sockaddr *)&newSockAddr, &newSockAddrSize);
     }
 	
  	while(1){
