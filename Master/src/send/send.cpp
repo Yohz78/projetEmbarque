@@ -61,7 +61,7 @@ string read_sensor_data(int fd) {
  * 
  * @param string_data 
  */
-void logicYellowFlag(string string_data){
+void logicYellowFlag(string string_data, int &mvt_tracker, PCA9685 &pca){
     std::istringstream json_stream(string_data);
     Json::Value root;
     Json::CharReaderBuilder builder;
@@ -99,10 +99,11 @@ void* read_and_write(void* args){
         int clientSd = argsFunc->clientSd;    
         PCA9685 pca(1,0x40);
         pca.init();
-        int pos_tracker = 0;
+        int mvt_tracker = 0;
+        
         while(true){
             string string_data = read_sensor_data(fd);
-            logicYellowFlag(string_data);
+            logicYellowFlag(string_data,mvt_tracker,pca);
             std::cout << "-------------------------------ENVOI----------------------------------" << std::endl;
             sendData(clientSd,string_data);
             std::cout << "-------------------------------FIN ENVOI----------------------------------" << std::endl;
@@ -122,7 +123,8 @@ void* read_and_write(void* args){
                 cout << "read_and_write: Pos tracker :" << pos_tracker << endl;
                 cout << "read_and_write: Blue flag to 45°" << endl;
             }
-        }else{
+        }
+        if(string_data.empty()){
             cout << "read_and_write:: No data available, Blue flag back to rest position." << endl;
             pca.moveBlueFlag(180);
             pos_tracker=0;
