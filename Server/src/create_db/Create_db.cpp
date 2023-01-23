@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 
-void createDatabase(const std::string &dbName) {
+void createDatabase(const std::string dbName) {
     sqlite3 *db;
     char *zErrMsg = 0;
     int rc;
