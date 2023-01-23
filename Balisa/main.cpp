@@ -76,15 +76,7 @@ int main(){
 
     int clientSd = balise_send_init();
 	   
-    pthread_t tcp_thread;
-    if(pthread_create(&tcp_thread, NULL, balise_sendData, (void *) clientSd) < 0){
-            perror("could not create thread");
-            return 1;
-    }
-        
-    //Now join the thread , so that we dont terminate before the thread
-    pthread_join(tcp_thread , NULL);
-    puts("Handler assigned");
+
     
     //TX/RX PART
 
@@ -101,6 +93,18 @@ int main(){
         }
         pthread_join(data_thread, NULL);
     }
+
+    pthread_t tcp_thread;
+    if(pthread_create(&tcp_thread, NULL, balise_sendData, (void *) clientSd) < 0){
+            perror("could not create thread");
+            return 1;
+    }
+        
+    //Now join the thread , so that we dont terminate before the thread
+    pthread_join(tcp_thread , NULL);
+    puts("Handler assigned");
+
+
     serialClose(fd);
     return 0;
 }
