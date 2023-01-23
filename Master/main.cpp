@@ -137,8 +137,9 @@ int main() {
     pthread_create(&watcher_thread,NULL, watcher, (void*) serverSD);
 
     std::cout << "//thread 1: pthread_join" << std::endl;
-    pthread_join(watcher_thread, NULL);
-
+    // pthread_join(watcher_thread, NULL);
+    pthread_detach(watcher_thread);
+    while(true);
     send_close(argsFuncRW.clientSd);
     serialClose(argsFuncRW.fd); // Ferme le port série
     return 0;

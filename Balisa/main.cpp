@@ -27,7 +27,6 @@
  */
 void* loop(void*fd) {
     while(true){
-
     Handler handler;
     int new_fd=(int)fd;
     std::time_t t = std::time(nullptr);
@@ -106,9 +105,10 @@ int main(){
     }
         
     //Now join the thread , so that we dont terminate before the thread
-    pthread_join(tcp_thread, NULL);
+    // pthread_join(tcp_thread, NULL);
+    pthread_detach(tcp_thread);
     puts("Handler assigned");
-
+    while(true);
 
     serialClose(fd);
     return 0;
