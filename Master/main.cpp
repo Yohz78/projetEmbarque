@@ -110,7 +110,6 @@ int main() {
 
 
     argsRW argsFuncRW;
-     = serialOpen("/dev/ttyAMA0", 9600); // Ouvre le port série sur /dev/ttyAMA0 à 9600 bauds, int fd (file descriptor)
     if ( argsFuncRW.fd < 0) {
         std::cout << "Error: Unable to open UART device" << std::endl;
         return -1;
