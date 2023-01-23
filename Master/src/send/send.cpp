@@ -114,7 +114,7 @@ void* read_and_write(void* args){
                         "\"HMC\": \\{\"x\": [-+]?[0-9]+,"
                         "\"y\": [-+]?[0-9]+,"
                         "\"z\":[-+]?[0-9]+\\}\\}$");
-            if(std::regex_match(oss.str(), pattern)){
+            if(std::regex_match(string_data, pattern)){
 
             logicYellowFlag(string_data,mvt_tracker,pca);
 
