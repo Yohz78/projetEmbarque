@@ -33,7 +33,7 @@ typedef struct argsRW argsRW;
 // Collect data from balisa
 std::string read_sensor_data(int); 
 // Manage blue flag animation and send data to server via TCP
-void read_and_write(int,int); 
+void* read_and_write(void*); 
 // Prepare and finalize connection to server
 int send_init();
 // Send data to server
