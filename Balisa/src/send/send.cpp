@@ -61,9 +61,9 @@ void* balise_sendData(void* clientSd) {
     while(1){
         std::string motion = handler.getHCSR().watcherMotion();
         strcpy(message, motion.c_str());
-        if((strcmp(message,"1"))==0){
-            send(clientSD, &message, sizeof(message) ,0);
-        }
+        // if((strcmp(message,"1"))==0){
+        send(clientSD, &message, sizeof(message) ,0);
+        // }
     return NULL;
 }
 }
