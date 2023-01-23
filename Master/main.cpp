@@ -124,7 +124,7 @@ int main() {
 
     std::cout << "//thread 1: pthread_create" << std::endl; 
     //thread 1
-    pthread_create(&watcher_thread,NULL, watcher, (void*) &serverSD);
+    pthread_create(&watcher_thread,NULL, watcher, (void*) serverSD);
 
     std::cout << "//thread 1: pthread_join" << std::endl;
     pthread_join(watcher_thread, NULL);
