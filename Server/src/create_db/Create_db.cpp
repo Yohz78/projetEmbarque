@@ -1,4 +1,6 @@
 #include <sqlite3.h>
+#include <string>
+#include <iostream>
 
 void createDatabase(const std::string &dbName) {
     sqlite3 *db;
@@ -9,26 +11,19 @@ void createDatabase(const std::string &dbName) {
     rc = sqlite3_open(dbName.c_str(), &db);
 
     if(rc){
-        fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
+        std::cout << "stderr, Can't open database: " << sqlite3_errmsg(db)) << std::endl;
         sqlite3_close(db);
         return;
     }
-    char *sql = "CREATE TABLE IF NOT EXISTS sensor_data (timestamp TEXT,
-                                                        temperature REAL,
-                                                        pressure REAL,
-                                                        humidity REAL,
-                                                        x INTEGER,
-                                                        y INTEGER,
-                                                        z INTEGER,
-                                                        mvt INTEGER)";
+    char *sql = "CREATE TABLE IF NOT EXISTS sensor_data (timestamp TEXT,temperature REAL,pressure REAL,humidity REAL,x INTEGER,y INTEGER,z INTEGER,mvt INTEGER)";
     rc = sqlite3_exec(db, sql, NULL, 0, &zErrMsg);
     
     if( rc != SQLITE_OK ){
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+        std::cout << "stderr, SQL error:" <<  zErrMsg <<  std::endl;
         sqlite3_free(zErrMsg);
     }
     else {
-        fprintf(stdout, "Table created successfully\n");
+        std::cout << "stdout, Table created successfully\n" << std::endl;
     }
 
     sqlite3_close(db);
