@@ -72,8 +72,7 @@ void logicYellowFlag(string string_data, int &mvt_tracker, PCA9685 &pca){
                                                 &errs);
     if (!parsingSuccessful) {
         std::cout << "Error parsing JSON" << std::endl;
-        break;
-    }
+    }else{
     double presence = root["HCSR"]["mvt"].asDouble();
     std::cout << root << std::endl;
     if(presence==0 && mvt_tracker==1){
@@ -85,6 +84,7 @@ void logicYellowFlag(string string_data, int &mvt_tracker, PCA9685 &pca){
     if(presence==1){
         pca.moveYellowFlag(90);
         mvt_tracker=1;
+    }
     }
 }
 
