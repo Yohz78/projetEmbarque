@@ -122,6 +122,15 @@ int main() {
     argsFuncRW.fd = fd;
     int serverSD = master_serv_init(); // DESCRIPTOR FOR BALISE => MASTER serversd
 
+
+
+    std::cout << "//Read and write" << std::endl;
+    //Read and write
+    pthread_t rw_thread;
+    pthread_create(&rw_thread, NULL, read_and_write, (void*) &argsFuncRW);
+    // pthread_detach(rw_thread);
+    pthread_join(rw_thread, NULL);
+
     pthread_t watcher_thread;
 
     std::cout << "//thread 1: pthread_create" << std::endl; 
@@ -130,14 +139,8 @@ int main() {
 
     std::cout << "//thread 1: pthread_join" << std::endl;
     pthread_join(watcher_thread, NULL);
-
-    std::cout << "//Read and write" << std::endl;
-    //Read and write
-    pthread_t rw_thread;
-    pthread_create(&rw_thread, NULL, read_and_write, (void*) &argsFuncRW);
-    pthread_join(rw_thread, NULL);
-
-
+    // pthread_detach(watcher_thread);
+    while(true);
     send_close(argsFuncRW.clientSd);
     serialClose(argsFuncRW.fd); // Ferme le port série
     return 0;

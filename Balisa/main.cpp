@@ -26,6 +26,7 @@
  * @param[in] Handler handler 
  */
 void* loop(void*fd) {
+    while(true){
     Handler handler;
     int new_fd=(int)fd;
     std::time_t t = std::time(nullptr);
@@ -51,7 +52,8 @@ void* loop(void*fd) {
     std::cout << std::endl;
     std::cout << "----------------------------------------------" << std::endl;
     sleep(3);
-    return 0;
+    }
+    return NULL;
 }
 
     // void *connection_handler(void *socket_desc)
@@ -74,17 +76,9 @@ void* loop(void*fd) {
 
 int main(){
 
-    int clientSd = balise_send_init();
+    
 	   
-    pthread_t tcp_thread;
-    if(pthread_create(&tcp_thread, NULL, balise_sendData, (void *) clientSd) < 0){
-            perror("could not create thread");
-            return 1;
-    }
-        
-    //Now join the thread , so that we dont terminate before the thread
-    pthread_join(tcp_thread , NULL);
-    puts("Handler assigned");
+
     
     //TX/RX PART
 
@@ -100,7 +94,23 @@ int main(){
             return 1;
         }
         pthread_join(data_thread, NULL);
+        // pthread_detach(data_thread);
     }
+
+    int clientSd = balise_send_init();
+
+    pthread_t tcp_thread;
+    if(pthread_create(&tcp_thread, NULL, balise_sendData, (void *) clientSd) < 0){
+            perror("could not create thread");
+            return 1;
+    }
+        
+    //Now join the thread , so that we dont terminate before the thread
+    pthread_join(tcp_thread, NULL);
+    // pthread_detach(tcp_thread);
+    puts("Handler assigned");
+    while(true);
+
     serialClose(fd);
     return 0;
 }
