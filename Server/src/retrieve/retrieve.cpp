@@ -131,8 +131,11 @@ void* retrieve(void* args) { //int serverSd, int resNewSd, vector<Json::Value>& 
             cout << "retrieve: VALEUR DE i: " << i << endl;
             cout << endl;
         }
+        cout << "JSONING THE DATA" << endl;
         jsoning(string_data_vec,jsonWrite);
+        cout << "IMPORTING THE DATA" << endl;
         import_json_vector(jsonWrite);
+        cout << "DATA IMPORTED" << endl;
         string_data_vec.clear();
         // ecriture dans le fichier data.json a partir de jsonWrite quand jsonWrite a une taille
         jsonToFile(jsonWrite);

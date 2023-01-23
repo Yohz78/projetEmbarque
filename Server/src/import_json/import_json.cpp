@@ -34,7 +34,7 @@ void import_json_vector(std::vector<Json::Value> &jsonWrite) {
     }
     else {
         // Create table
-        char *sql = "CREATE TABLE sensor_data ( date TEXT,temperature REAL,pressure REAL,humidity REAL,x INTEGER,y INTEGER,z INTEGER,mvt INTEGER)";
+        char *sql = "CREATE TABLE sensor_data (date TEXT,temperature REAL,pressure REAL,humidity REAL,x INTEGER,y INTEGER,z INTEGER,mvt INTEGER)";
         rc = sqlite3_exec(db, sql, NULL, 0, &zErrMsg);
 
         if( rc != SQLITE_OK ){
@@ -56,7 +56,7 @@ void import_json_vector(std::vector<Json::Value> &jsonWrite) {
         int y = item["HMC"]["y"].asInt();
         int z = item["HMC"]["z"].asInt();
         int mvt = item["HCSR"]["mvt"].asInt();
-        char *sql = sqlite3_mprintf("INSERT INTO data (date, temperature, pressure, humidity, x, y, z, mvt) VALUES (%s, %f, %f, %f, %d, %d, %d, %d)", timestamp, temperature, pressure, humidity, x, y, z, mvt);
+        char *sql = sqlite3_mprintf("INSERT INTO sensor_data (date, temperature, pressure, humidity, x, y, z, mvt) VALUES (%s, %f, %f, %f, %d, %d, %d, %d)", timestamp, temperature, pressure, humidity, x, y, z, mvt);
         rc = sqlite3_exec(db, sql, NULL, 0, &zErrMsg);
         if( rc != SQLITE_OK ){
             fprintf(stderr, "SQL error: %s\n", zErrMsg);
