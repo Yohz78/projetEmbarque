@@ -107,7 +107,7 @@ void menu(){
                     std::cout << "Au revoir!" << std::endl;
                     exit(0);
                 default:
-                    std::cout << "Option non valide, veuillez réessayer." << endl;
+                    std::cout << "Option non valide, veuillez réessayer." << std::endl;
                     break;
         }
     }
