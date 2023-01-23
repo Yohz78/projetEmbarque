@@ -9,7 +9,7 @@ void afficheBME() {
     int rows, columns;
 
     // Execute the SELECT statement
-    rc = sqlite3_get_table(db, "SELECT timestamp, temperature, pressure, humidity FROM sensor_data", &result, &rows, &columns, &zErrMsg);
+    rc = sqlite3_get_table(db, "SELECT date, temperature, pressure, humidity FROM sensor_data", &result, &rows, &columns, &zErrMsg);
     if (rc != SQLITE_OK) {
         std::cout << "stderr, SQL error: " <<  zErrMsg << std::endl;
         sqlite3_free(zErrMsg);
@@ -69,7 +69,7 @@ void afficheAllData() {
     int rows, columns;
 
     // Execute the SELECT statement
-    rc = sqlite3_get_table(db, "SELECT timestamp, temperature, pressure, humidity, mvt, x, y, z FROM sensor_data", &result, &rows, &columns, &zErrMsg);
+    rc = sqlite3_get_table(db, "SELECT date, temperature, pressure, humidity, mvt, x, y, z FROM sensor_data", &result, &rows, &columns, &zErrMsg);
     if (rc != SQLITE_OK) {
         std::cout << "stderr, SQL error: " <<  zErrMsg << std::endl;
         sqlite3_free(zErrMsg);
