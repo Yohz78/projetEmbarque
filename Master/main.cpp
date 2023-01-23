@@ -110,14 +110,16 @@ int main() {
 
 
     argsRW argsFuncRW;
-    argsFuncRW.fd = serialOpen("/dev/ttyAMA0", 9600); // Ouvre le port série sur /dev/ttyAMA0 à 9600 bauds, int fd (file descriptor)
+     = serialOpen("/dev/ttyAMA0", 9600); // Ouvre le port série sur /dev/ttyAMA0 à 9600 bauds, int fd (file descriptor)
     if ( argsFuncRW.fd < 0) {
         std::cout << "Error: Unable to open UART device" << std::endl;
         return -1;
     }
 
-    
-    argsFuncRW.clientSd = send_init(); // DESCRIPTOR FOR TCP MASTER => SERVER client sd
+    int fd = serialOpen("/dev/ttyAMA0", 9600); // Ouvre le port série sur /dev/ttyAMA0 à 9600 bauds, int fd (file descriptor)
+    int clientSd = send_init(); // DESCRIPTOR FOR TCP MASTER => SERVER client sd
+    argsFuncRW.clientSd = clientSd;
+    argsFuncRW.fd = fd;
     int serverSD = master_serv_init(); // DESCRIPTOR FOR BALISE => MASTER serversd
 
     pthread_t watcher_thread;
