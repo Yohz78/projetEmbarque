@@ -35,10 +35,10 @@ using namespace std;
  */
 
 int balise_send_init(){
-    string ip = "90.86.59.230";
-    // string ip = "192.168.1.171";
+    // string ip = "90.86.59.230";
+    string ip = "192.168.1.171";
     const char *serverIp = ip.c_str();
-    int port = 8888;
+    int port = 1600;
     int clientSd = socket(AF_INET, SOCK_STREAM, 0);
     sockaddr_in sendSockAddr;
     bzero((char*)&sendSockAddr, sizeof(sendSockAddr));
