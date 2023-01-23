@@ -87,14 +87,17 @@ void read_and_write(int fd,int clientSd){
             if(pos_tracker==3){
                 pca.moveBlueFlag(45);
                 pos_tracker=2;
+                cout << "read_and_write: Pos tracker :" << pos_tracker << endl;
                 cout << "read_and_write: Blue flag to 45°" << endl;
             }else if(pos_tracker==2){
                 pca.moveBlueFlag(135);
                 pos_tracker=3;
+                cout << "read_and_write: Pos tracker :" << pos_tracker << endl;
                 cout << "read_and_write: Blue flag to 135°" << endl;
             }else if(pos_tracker==0){
                 pca.moveBlueFlag(45);
                 pos_tracker=2;
+                cout << "read_and_write: Pos tracker :" << pos_tracker << endl;
                 cout << "read_and_write: Blue flag to 45°" << endl;
             }
         }else{
