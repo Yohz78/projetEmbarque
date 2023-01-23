@@ -11,7 +11,7 @@ void createDatabase(const std::string &dbName) {
     rc = sqlite3_open(dbName.c_str(), &db);
 
     if(rc){
-        std::cout << "stderr, Can't open database: " << sqlite3_errmsg(db)) << std::endl;
+        std::cout << "stderr, Can't open database: " << sqlite3_errmsg(db) << std::endl;
         sqlite3_close(db);
         return;
     }
