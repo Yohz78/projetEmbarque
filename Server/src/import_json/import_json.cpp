@@ -48,6 +48,7 @@ void import_json_vector(std::vector<Json::Value> &jsonWrite) {
 
     // Insert data into the table
     for (auto item : jsonWrite) {
+        sqlite3_stmt *stmt;
         std::string timestamp = item["date"].asString();
         double temperature = item["BME"]["temperature"].asDouble();
         double pressure = item["BME"]["pressure"].asDouble();
@@ -56,13 +57,29 @@ void import_json_vector(std::vector<Json::Value> &jsonWrite) {
         int y = item["HMC"]["y"].asInt();
         int z = item["HMC"]["z"].asInt();
         int mvt = item["HCSR"]["mvt"].asInt();
-        char *sql = sqlite3_mprintf("INSERT INTO sensor_data (date, temperature, pressure, humidity, x, y, z, mvt) VALUES (%s, %f, %f, %f, %d, %d, %d, %d)", timestamp, temperature, pressure, humidity, x, y, z, mvt);
-        rc = sqlite3_exec(db, sql, NULL, 0, &zErrMsg);
+        const char *sql = "INSERT INTO sensor_data (date, temperature, pressure, humidity, x, y, z, mvt) VALUES (?,?,?,?,?,?,?,?)";
+        rc = sqlite3_preparev2(db, sql, -1, &stmt,NULL);
         if( rc != SQLITE_OK ){
-            fprintf(stderr, "SQL error: %s\n", zErrMsg);
-            sqlite3_free(zErrMsg);
+            cout << "stderr, Failed to prepare statement: " << sqlite3_errmsg(db) << std::endl;
         }
+
+        sqlite3_bind_text(stmt, 1,date , -1, NULL);
+        sqlite3_bind_double(stmt, 2,temperature );
+        sqlite3_bind_double(stmt, 3,pression);
+        sqlite3_bind_double(stmt, 4,humidity);
+        sqlite3_bind_int(stmt, 5,x );
+        sqlite3_bind_int(stmt, 6,y );
+        sqlite3_bind_int(stmt, 7,z );
+        sqlite3_bind_int(stmt, 8,mvt);
+
+        rc = sqlite3_step(stmt);
+        if (rc != SQLITE_DONE) {
+        fprintf(stderr, "Failed to insert object: %s\n", sqlite3_errmsg(db));
+        exit(0);
+    }
+
         sqlite3_free(sql);
+        sqlite3_finalize(stmt);
     }
     sqlite3_close(db);
 }
