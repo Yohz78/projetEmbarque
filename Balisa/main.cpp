@@ -46,7 +46,9 @@ void* loop(void*fd) {
     oss << ",";
     oss << handler.getHMCvalue();
     oss << "}";
+    
     serialPuts(new_fd,oss.str().c_str());
+    
     std::cout << "Donnees envoyees:" << std::endl;
     std::cout << oss.str();
     std::cout << std::endl;

@@ -92,7 +92,8 @@ void logicYellowFlag(string string_data, int &mvt_tracker, PCA9685 &pca){
  * @brief This function parse the data from the read_sensor_data(fd) function and move the 
  * Yellow flag accordingly. Then it writes the data into the file data.json
  * 
- * @param fd 
+ * @param int \p fd $File descriptor
+ * @param int \p clientSd $Client socket descriptor
  */
 void* read_and_write(void* args){
         argsRW* argsFunc = (argsRW*)args;
@@ -105,10 +106,22 @@ void* read_and_write(void* args){
         
         while(true){
             string string_data = read_sensor_data(fd);
+            std::regex pattern("^\\{\"date\":\"\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\","
+                        "\"BME\": \\{\"temperature\": [-+]?[0-9]+.?[0-9]+,"
+                        "\"pressure\": [0-9]+.?[0-9]+,"
+                        "\"humidity\": [0-9]+.?[0-9]+\\},"
+                        "\"HCSR\": \\{\"mvt\": [0-1]\\},"
+                        "\"HMC\": \\{\"x\": [-+]?[0-9]+,"
+                        "\"y\": [-+]?[0-9]+,"
+                        "\"z\":[-+]?[0-9]+\\}\\}$");
+            if(std::regex_match(oss.str(), pattern)){
+
             logicYellowFlag(string_data,mvt_tracker,pca);
+
             std::cout << "-------------------------------ENVOI----------------------------------" << std::endl;
             sendData(clientSd,string_data);
             std::cout << "-------------------------------FIN ENVOI----------------------------------" << std::endl;
+            
             if(pos_tracker==3){
                 pca.moveBlueFlag(45);
                 pos_tracker=2;
@@ -131,6 +144,7 @@ void* read_and_write(void* args){
             pos_tracker=0;
             } 
         sleep(INTERVALLE_RECUP);
+        }
         }
         
         return NULL;
@@ -162,21 +176,21 @@ void sendData(int clientSd, string& string_data) {
     char buffer[4000];
     memset(buffer,0,4000);
     strcpy(buffer,string_data.c_str());
-    std::regex pattern("^\\{\"date\":\"\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\","
-                        "\"BME\": \\{\"temperature\": [-+]?[0-9]+.?[0-9]+,"
-                        "\"pressure\": [0-9]+.?[0-9]+,"
-                        "\"humidity\": [0-9]+.?[0-9]+\\},"
-                        "\"HCSR\": \\{\"mvt\": [0-1]\\},"
-                        "\"HMC\": \\{\"x\": [-+]?[0-9]+,"
-                        "\"y\": [-+]?[0-9]+,"
-                        "\"z\":[-+]?[0-9]+\\}\\}$");
-        if(std::regex_match(string_data, pattern)){
-        cout << "sendDATA=====> REGEX MATCH =====> SENDING DATA" << endl;
-        send(clientSd, &buffer, sizeof(buffer) ,0);
-    }
-    else{
-        cout << "sendDATA=====> REGEX DID NOT MATCH =====> NOT SENDING DATA" << endl;
-    }
+    // std::regex pattern("^\\{\"date\":\"\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\","
+    //                     "\"BME\": \\{\"temperature\": [-+]?[0-9]+.?[0-9]+,"
+    //                     "\"pressure\": [0-9]+.?[0-9]+,"
+    //                     "\"humidity\": [0-9]+.?[0-9]+\\},"
+    //                     "\"HCSR\": \\{\"mvt\": [0-1]\\},"
+    //                     "\"HMC\": \\{\"x\": [-+]?[0-9]+,"
+    //                     "\"y\": [-+]?[0-9]+,"
+    //                     "\"z\":[-+]?[0-9]+\\}\\}$");
+        // if(std::regex_match(string_data, pattern)){
+        // cout << "sendDATA=====> REGEX MATCH =====> SENDING DATA" << endl;
+    send(clientSd, &buffer, sizeof(buffer) ,0);
+    // }
+    // else{
+    //     cout << "sendDATA=====> REGEX DID NOT MATCH =====> NOT SENDING DATA" << endl;
+    // }
 }
 
 void send_close(int clientSd){
