@@ -100,6 +100,7 @@ void* read_and_write(void* args){
         PCA9685 pca(1,0x40);
         pca.init();
         int mvt_tracker = 0;
+        int pos_tracker = 0;
         
         while(true){
             string string_data = read_sensor_data(fd);
@@ -130,7 +131,6 @@ void* read_and_write(void* args){
             pos_tracker=0;
         } 
         sleep(INTERVALLE_RECUP);
-        }
         return NULL;
 }
 
