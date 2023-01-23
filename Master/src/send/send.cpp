@@ -51,7 +51,7 @@ string read_sensor_data(int fd) {
         data[index] = '\0';
         cout << "read_sensor_data: Donnée reçue: "<< data << endl;
         return data;
-        // sleep(1); // Fait une pause pendant interval secondes
+        // sleep(1); 
     }
 }
 

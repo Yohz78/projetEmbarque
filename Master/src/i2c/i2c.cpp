@@ -7,7 +7,6 @@
      * @param adresseI2C 
      * @param idBusI2C 
      */
-    // Le constructeur
     i2c::i2c(int adresseI2C, int idBusI2C){
         char filename[20];
         union i2c_smbus_data data ;
@@ -23,7 +22,7 @@
             cout << "Impossible de sélectionner l'adresse I2C" << endl ;
             exit(1);
         }
-        // test de la présence du composant sur le bus
+        // Testing if the compenent is on the bus
         if (i2c_smbus_access (I2C_SMBUS_READ, 0, I2C_SMBUS_BYTE, &data)){
 	    error = true ;
 	}
@@ -203,4 +202,3 @@
                  return data.block[0];
          }
  }
- // retourne le nombre d'octets lu

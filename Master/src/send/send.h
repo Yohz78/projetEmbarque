@@ -23,15 +23,15 @@
 
 #include "../pca/pca.h"
 
-// Récupère les données venant de la balise
+// Collect data from balisa
 std::string read_sensor_data(int); 
-// Gère le drapeau bleu et transmet les données via TCP/IP
+// Manage blue flag animation and send data to server via TCP
 void read_and_write(int,int); 
-// Prépare et effectue la connexion TCP/IP au serveur
+// Prepare and finalize connection to server
 int send_init();
-// Transmet les données au serveur
+// Send data to server
 void sendData(int,std::string&);
-// Ferme la communication avec le serveur
+// End communication with the server
 void send_close(int);
 
 #endif //SEND_H

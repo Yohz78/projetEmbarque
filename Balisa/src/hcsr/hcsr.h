@@ -9,8 +9,8 @@
  */
 class HCSR50 {
   private:
-    int motionPin; // Port GPIO de la balise
-    bool motionDetected; // Booleen refletant la présence (True or False)
+    int motionPin; // GPIO port on balisa
+    bool motionDetected; // Boolean value reflecting if a mouvement has been detected
 
   public:
     // Constructor
