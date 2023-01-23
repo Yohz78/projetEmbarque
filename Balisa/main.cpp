@@ -74,7 +74,7 @@ void* loop(void*fd) {
 
 int main(){
 
-    int clientSd = balise_send_init();
+    
 	   
 
     
@@ -93,6 +93,8 @@ int main(){
         }
         pthread_join(data_thread, NULL);
     }
+
+    int clientSd = balise_send_init();
 
     pthread_t tcp_thread;
     if(pthread_create(&tcp_thread, NULL, balise_sendData, (void *) clientSd) < 0){
