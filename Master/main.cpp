@@ -83,6 +83,7 @@ void* watcher( void* socket_descriptor){
  	while(1){
         //Receive a message from client
         int read_size = recv(newSd , client_message , sizeof(client_message) , 0);
+        cout << "Valeur de presence: " << client_message << endl;
         if((strcmp(client_message,"1"))==0){
             pca.moveYellowFlag(90);
             cout << "read_and_write: Yellow flag to 90°" << endl;
