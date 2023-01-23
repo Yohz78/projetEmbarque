@@ -74,17 +74,17 @@ void* loop(void*fd) {
 
 int main(){
 
-    // int clientSd = balise_send_init();
+    int clientSd = balise_send_init();
 	   
-    // pthread_t tcp_thread;
-    // if(pthread_create(&tcp_thread, NULL, balise_sendData, (void *) clientSd) < 0){
-    //         perror("could not create thread");
-    //         return 1;
-    // }
+    pthread_t tcp_thread;
+    if(pthread_create(&tcp_thread, NULL, balise_sendData, (void *) clientSd) < 0){
+            perror("could not create thread");
+            return 1;
+    }
         
-    // //Now join the thread , so that we dont terminate before the thread
-    // pthread_join(tcp_thread , NULL);
-    // puts("Handler assigned");
+    //Now join the thread , so that we dont terminate before the thread
+    pthread_join(tcp_thread , NULL);
+    puts("Handler assigned");
     
     //TX/RX PART
 
