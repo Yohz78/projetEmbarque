@@ -25,7 +25,11 @@
 using namespace std;
 
 
-
+/**
+ * @brief This function initialize the server side for the tcp
+ * 
+ * @return int 
+ */
 int  serv_init(){
     cout << " serv_init DEBUT" << endl;
     int port = 1500;
@@ -55,6 +59,12 @@ int  serv_init(){
     return serverSd;
 }
 
+/**
+ * @brief This function transform a vector<string>  into a vector<json::value>.
+ *  
+ * @param string_data_vec 
+ * @param jsonWrite 
+ */
 void jsoning(vector<string>& string_data_vec, vector<Json::Value>& jsonWrite){
     
     Json::CharReaderBuilder builder;
@@ -73,6 +83,11 @@ void jsoning(vector<string>& string_data_vec, vector<Json::Value>& jsonWrite){
     }
 }
 
+/**
+ * @brief This function write the json vector to a file
+ * 
+ * @param jsonWrite 
+ */
 void jsonToFile(vector<Json::Value>& jsonWrite){
     Json::StyledWriter writer;
     std::ofstream json_file("data.json", std::ios::app);
@@ -81,6 +96,12 @@ void jsonToFile(vector<Json::Value>& jsonWrite){
     json_file.close();
 }
 
+/**
+ * @brief This function retrieves the data from the client. 
+ * 
+ * @param args 
+ * @return void* 
+ */
 void* retrieve(void* args) { //int serverSd, int resNewSd, vector<Json::Value>& jsonWrite
     
     argsRetrieve* argsFunc = (argsRetrieve*)args;
@@ -149,6 +170,12 @@ void* retrieve(void* args) { //int serverSd, int resNewSd, vector<Json::Value>& 
         return NULL;
 }
 
+/**
+ * @brief This function closes the connection for the server
+ * 
+ * @param newSd 
+ * @param serverSd 
+ */
 void serv_close(int& newSd, int& serverSd){
     cout << " serv_close DEBUT" << endl;
     close(newSd);

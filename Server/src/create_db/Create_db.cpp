@@ -2,6 +2,11 @@
 #include <string>
 #include <iostream>
 
+/**
+ * @brief Create a table in the database provided 
+ * 
+ * @param string \p dbName $Name of the target database
+ */
 void createDatabase(const std::string dbName) {
     sqlite3 *db;
     char *zErrMsg = 0;

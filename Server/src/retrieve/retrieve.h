@@ -21,6 +21,11 @@
 
 using namespace std;
 
+/**
+ * @struct argsRetrieve 
+ * @brief This struct is used to pass arguments for the retrieve function since we need void* for pthread
+ * 
+ */
 struct argsRetrieve {
     int serverSd;
     int resNewSd;

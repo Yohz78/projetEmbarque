@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['_7ebme_0',['~bme',['../classbme.html#abde634fb769aa5ff76ad74270370b4e5',1,'bme']]],
-  ['_7ehandler_1',['~Handler',['../class_handler.html#ae28d722f283b987386f29ce960cd3a6b',1,'Handler']]],
-  ['_7ehcsr50_2',['~HCSR50',['../class_h_c_s_r50.html#a818c9d1332db4b04ef9046a8a9752b5a',1,'HCSR50']]],
-  ['_7ehmc5883l_3',['~HMC5883L',['../class_h_m_c5883_l.html#a040912db6d866437216b93073e4d29fa',1,'HMC5883L']]],
-  ['_7epca9685_4',['~PCA9685',['../class_p_c_a9685.html#a4b7e96c290456da4c0018ef9270939f3',1,'PCA9685']]]
+  ['write_0',['Write',['../classi2c.html#a95c8ec96fddd3882c6e096d3e15ec3f6',1,'i2c']]],
+  ['writeblockdata_1',['WriteBlockData',['../classi2c.html#a960dd46475ba229e7fa270a4ce4e332e',1,'i2c']]],
+  ['writereg16_2',['WriteReg16',['../classi2c.html#a8bb0d1c4db2f09368cbcfbbe1b2f01ef',1,'i2c']]],
+  ['writereg8_3',['WriteReg8',['../classi2c.html#a48f0c215651419cffc45e0fb0bb4cfb9',1,'i2c']]]
 ];

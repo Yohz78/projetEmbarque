@@ -55,6 +55,12 @@ int balise_send_init(){
     return clientSd;
 }
 
+/**
+ * @brief This function send the HCSR data through tcp to the master
+ * 
+ * @param clientSd 
+ * @return void* 
+ */
 void* balise_sendData(void* clientSd) {
     char message[1+1];
     int clientSD = (int) clientSd;
@@ -69,6 +75,12 @@ void* balise_sendData(void* clientSd) {
 }
 }
 
+
+/**
+ * @brief This function closes the socket on client
+ * 
+ * @param clientSd 
+ */
 void balise_send_close(int clientSd){
     close(clientSd);
 }

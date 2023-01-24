@@ -32,7 +32,7 @@ using namespace std;
 /**
  * @brief This function read the sensor data from the slave over TX/RX communication
  * 
- * @param fd 
+ * @param int \p fd $File descriptor 
  * @return string 
  */
 string read_sensor_data(int fd) {
@@ -150,6 +150,11 @@ void* read_and_write(void* args){
         return NULL;
 }
 
+/**
+ * @brief This function initialize the connection to the server
+ * 
+ * @return int 
+ */
 int send_init(){
     string ip = "57.128.34.47";
     const char *serverIp = ip.c_str();
@@ -172,6 +177,12 @@ int send_init(){
     return clientSd;
 }
 
+/**
+ * @brief This function sends a string message to the server
+ * 
+ * @param int \p clientSd $Socket descriptor 
+ * @param string \p string_data $Message to be sent 
+ */
 void sendData(int clientSd, string& string_data) {
     char buffer[4000];
     memset(buffer,0,4000);
@@ -193,6 +204,11 @@ void sendData(int clientSd, string& string_data) {
     // }
 }
 
+/**
+ * @brief This function close the connection to the server
+ * 
+ * @param int \p clientSd $Socket descriptor 
+ */
 void send_close(int clientSd){
     close(clientSd);
 }

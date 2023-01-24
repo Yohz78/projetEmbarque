@@ -63,42 +63,18 @@
 \DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ setAllPwm(uint16\_t\ on,\ uint16\_t\ off);}
 \DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ move(uint8\_t\ channel\ ,\ \textcolor{keywordtype}{int}\ deg);}
 \DoxyCodeLine{00065\ }
-\DoxyCodeLine{00066\ }
-\DoxyCodeLine{00067\ }
-\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ i2c\_bus;}
-\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ i2c\_address;}
-\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ nom;}
-\DoxyCodeLine{00071\ }
-\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ yellowFlagChannel\ =1;}
-\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ blueFlagChannel\ =\ 2;}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ i2c\_bus;}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ i2c\_address;}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ nom;}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ yellowFlagChannel\ =1;}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ blueFlagChannel\ =\ 2;}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{classi2c}{i2c}}\ *deviceI2C;}
 \DoxyCodeLine{00074\ }
-\DoxyCodeLine{00075\ }
-\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{classi2c}{i2c}}\ *deviceI2C;}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{bool}\ error;}
+\DoxyCodeLine{00076\ \};}
 \DoxyCodeLine{00077\ }
-\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{bool}\ error;}
-\DoxyCodeLine{00079\ \};}
-\DoxyCodeLine{00080\ }
-\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ PCA\_H}}
-\DoxyCodeLine{00082\ }
-\DoxyCodeLine{00083\ }
-\DoxyCodeLine{00084\ \textcolor{comment}{/*\#define\ LED0\_ON\_L\ 0x06}}
-\DoxyCodeLine{00085\ \textcolor{comment}{\#define\ LED0\_ON\_H\ 0x07}}
-\DoxyCodeLine{00086\ \textcolor{comment}{\#define\ LED0\_OFF\_L\ 0x08}}
-\DoxyCodeLine{00087\ \textcolor{comment}{\#define\ LED0\_OFF\_H\ 0x09}}
-\DoxyCodeLine{00088\ \textcolor{comment}{}}
-\DoxyCodeLine{00089\ \textcolor{comment}{class\ PCA9685\ \{}}
-\DoxyCodeLine{00090\ \textcolor{comment}{\ \ \ \ private:}}
-\DoxyCodeLine{00091\ \textcolor{comment}{\ \ \ \ \ \ \ \ int\ fd;}}
-\DoxyCodeLine{00092\ \textcolor{comment}{\ \ \ \ \ \ \ \ const\ int\ PCA9685\_ADDRESS\ =\ 0x40;}}
-\DoxyCodeLine{00093\ \textcolor{comment}{\ \ \ \ \ \ \ \ const\ int\ PCA9685\_MODE1\ =\ 0x00;}}
-\DoxyCodeLine{00094\ \textcolor{comment}{\ \ \ \ \ \ \ \ const\ int\ PCA9685\_PRESCALE\ =\ 0xFE;}}
-\DoxyCodeLine{00095\ \textcolor{comment}{\ \ \ \ \ \ \ \ const\ int\ SERVO\_1\ =\ 0;}}
-\DoxyCodeLine{00096\ \textcolor{comment}{\ \ \ \ \ \ \ \ const\ int\ SERVO\_2\ =\ 1;}}
-\DoxyCodeLine{00097\ \textcolor{comment}{}}
-\DoxyCodeLine{00098\ \textcolor{comment}{\ \ \ \ public:}}
-\DoxyCodeLine{00099\ \textcolor{comment}{\ \ \ \ \ \ \ \ void\ init();}}
-\DoxyCodeLine{00100\ \textcolor{comment}{}}
-\DoxyCodeLine{00101\ \textcolor{comment}{\ \ \ \ \ \ \ \ void\ setServo(int\ servo,\ int\ angle);}}
-\DoxyCodeLine{00102\ \textcolor{comment}{\};\ */}\ }
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ PCA\_H}}
 
 \end{DoxyCode}

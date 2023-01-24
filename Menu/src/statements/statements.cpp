@@ -1,6 +1,10 @@
 #include <sqlite3.h>
 #include <iostream>
 
+/**
+ * @brief This function does a sqlite3 Select for the BME data
+ * 
+ */
 void afficheBME() {
     sqlite3 *db;
     int rc = sqlite3_open("data.db", &db);
@@ -21,6 +25,10 @@ void afficheBME() {
     sqlite3_free_table(result);
 }
 
+/**
+ * @brief This function does a sqlite3 Select for the HCSR data
+ * 
+ */
 void afficheHCSR() {
     sqlite3 *db;
     int rc = sqlite3_open("data.db", &db);
@@ -41,6 +49,10 @@ void afficheHCSR() {
     sqlite3_free_table(result);
 }
 
+/**
+ * @brief This function does a sqlite3 Select for the HMC data
+ * 
+ */
 void afficheHMC() {
     sqlite3 *db;
     int rc = sqlite3_open("data.db", &db);
@@ -61,6 +73,10 @@ void afficheHMC() {
     sqlite3_free_table(result);
 }
 
+/**
+ * @brief This function does a sqlite3 Select for all the data
+ * 
+ */
 void afficheAllData() {
     sqlite3 *db;
     int rc = sqlite3_open("data.db", &db);

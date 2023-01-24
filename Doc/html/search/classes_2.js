@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['i2c_0',['i2c',['../classi2c.html',1,'']]],
-  ['i2c_5fsmbus_5fdata_1',['i2c_smbus_data',['../unioni2c__smbus__data.html',1,'']]],
-  ['i2c_5fsmbus_5fioctl_5fdata_2',['i2c_smbus_ioctl_data',['../structi2c__smbus__ioctl__data.html',1,'']]]
+  ['handler_0',['Handler',['../class_handler.html',1,'']]],
+  ['hcsr50_1',['HCSR50',['../class_h_c_s_r50.html',1,'']]],
+  ['hmc5883l_2',['HMC5883L',['../class_h_m_c5883_l.html',1,'']]]
 ];

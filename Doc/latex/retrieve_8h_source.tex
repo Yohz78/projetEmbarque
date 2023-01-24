@@ -1,0 +1,42 @@
+\hypertarget{retrieve_8h_source}{}\doxysection{retrieve.\+h}
+\label{retrieve_8h_source}\index{Server/src/retrieve/retrieve.h@{Server/src/retrieve/retrieve.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <sys/types.h>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <sys/socket.h>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <netinet/in.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <arpa/inet.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <netdb.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <sys/uio.h>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <sys/time.h>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <sys/wait.h>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <fcntl.h>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <jsoncpp/json/json.h>}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structargs_retrieve}{argsRetrieve}}\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{int}\ serverSd;}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{int}\ resNewSd;}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{structargs_retrieve}{argsRetrieve}}(\textcolor{keywordtype}{int}\ serverSd,\ \textcolor{keywordtype}{int}\ resNewSd)\ :\ serverSd(serverSd),\ resNewSd(resNewSd)\ \{\}}
+\DoxyCodeLine{00033\ \};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structargs_retrieve}{argsRetrieve}}\ \mbox{\hyperlink{structargs_retrieve}{argsRetrieve}};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keywordtype}{int}\ \ serv\_init();}
+\DoxyCodeLine{00038\ \textcolor{keywordtype}{void}\ jsoning(vector<string>\&,vector<Json::Value>\&);}
+\DoxyCodeLine{00039\ \textcolor{keywordtype}{void}\ jsonToFile(vector<Json::Value>\&);}
+\DoxyCodeLine{00040\ \textcolor{keywordtype}{void}*\ retrieve(\textcolor{keywordtype}{void}*);\ \textcolor{comment}{//\ args:\ int\ serverSd,\ int\ resnewMD,vector<Json::Value>\&\ jsonWrite}}
+\DoxyCodeLine{00041\ \textcolor{keywordtype}{void}\ serv\_close(\textcolor{keywordtype}{int}\&,\textcolor{keywordtype}{int}\&);}
+
+\end{DoxyCode}

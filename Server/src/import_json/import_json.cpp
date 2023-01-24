@@ -9,6 +9,7 @@
 /**
  * @brief This function import the data from a JSON vector into the db
  *        Same for the database name
+ * @param jsonWrite 
  */
 void import_json_vector(std::vector<Json::Value> &jsonWrite) {
     // Open the JSON file

@@ -1,0 +1,52 @@
+\hypertarget{_master_2src_2send_2send_8h_source}{}\doxysection{send.\+h}
+\label{_master_2src_2send_2send_8h_source}\index{Master/src/send/send.h@{Master/src/send/send.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SEND\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SEND\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <cstring>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <sys/types.h>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <sys/socket.h>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <netdb.h>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <netinet/in.h>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <arpa/inet.h>}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <wiringSerial.h>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <jsoncpp/json/json.h>}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}../pca/pca.h"{}}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structargs_r_w}{argsRW}}\{}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{int}\ fd;}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{int}\ clientSd;}
+\DoxyCodeLine{00030\ \};}
+\DoxyCodeLine{00031\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structargs_r_w}{argsRW}}\ \mbox{\hyperlink{structargs_r_w}{argsRW}};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{comment}{//\ Collect\ data\ from\ balisa}}
+\DoxyCodeLine{00034\ std::string\ read\_sensor\_data(\textcolor{keywordtype}{int});\ }
+\DoxyCodeLine{00035\ \textcolor{comment}{//\ Logic\ for\ yellow\ flag}}
+\DoxyCodeLine{00036\ \textcolor{keywordtype}{void}\ logicYellowFlag(\textcolor{keywordtype}{string});}
+\DoxyCodeLine{00037\ \textcolor{comment}{//\ Manage\ blue\ flag\ animation\ and\ send\ data\ to\ server\ via\ TCP}}
+\DoxyCodeLine{00038\ \textcolor{keywordtype}{void}*\ read\_and\_write(\textcolor{keywordtype}{void}*);\ }
+\DoxyCodeLine{00039\ \textcolor{comment}{//\ Prepare\ and\ finalize\ connection\ to\ server}}
+\DoxyCodeLine{00040\ \textcolor{keywordtype}{int}\ send\_init();}
+\DoxyCodeLine{00041\ \textcolor{comment}{//\ Send\ data\ to\ server}}
+\DoxyCodeLine{00042\ \textcolor{keywordtype}{void}\ sendData(\textcolor{keywordtype}{int},std::string\&);}
+\DoxyCodeLine{00043\ \textcolor{comment}{//\ End\ communication\ with\ the\ server}}
+\DoxyCodeLine{00044\ \textcolor{keywordtype}{void}\ send\_close(\textcolor{keywordtype}{int});}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//SEND\_H}}
+
+\end{DoxyCode}

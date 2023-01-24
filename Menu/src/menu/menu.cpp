@@ -1,6 +1,4 @@
 #include <iostream>
-#include <jsoncpp/json/json.h>
-#include <nlohmann/json.hpp>
 #include <fstream>
 
 #include "menu.h"
@@ -8,7 +6,10 @@
 using json = nlohmann::json;
 
 
-
+/**
+ * @brief This function is the menu 
+ * 
+ */
 void menu(){
         std::cout << "Bonjour utilisateur!" << std::endl;
         while (true) {
