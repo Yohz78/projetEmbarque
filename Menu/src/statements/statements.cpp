@@ -99,7 +99,7 @@ void afficheAllData() {
         sqlite3_free(zErrMsg);
     } else {
         for (int i = 1; i <= rows; i++) {
-            std::cout << "DATE: " << result[i * columns + 0] 
+            std::cout << "DATE: " << result[i * columns + 0] << std::endl
             << " || température : " << result[i * columns + 1] 
             << " || pression : " << result[i * columns + 2] 
             << " || humidité : " << result[i * columns + 3] << std::endl
