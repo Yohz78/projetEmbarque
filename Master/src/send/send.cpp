@@ -99,7 +99,6 @@ void* read_and_write(void* args){
         argsRW* argsFunc = (argsRW*)args;
         int fd = argsFunc->fd;
         int clientSd = argsFunc->clientSd;    
-        vector<string> dataToSend;
         PCA9685 pca(1,0x40);
         pca.init();
         int mvt_tracker = 0;
@@ -117,21 +116,12 @@ void* read_and_write(void* args){
             if(std::regex_match(string_data, pattern)){
                 cout << "--------------REGEX MATCH--------------" << endl;
                 logicYellowFlag(string_data,mvt_tracker,pca);
-                dataToSend.push_back(string_data);
-            }
-            
-            std::cout << "-------------------------------ENVOI----------------------------------" << std::endl;
-            cout << "DATATOSEND SIZE: " << dataToSend.size() << endl;
-            if(dataToSend.size() == 3){
-                cout << "--------------ON A STOCKE 3 ELEMENTS DANS DATATOSEND--------------" << endl;
+            std::cout << "-------------------------------ENVOI----------------------------------" << std::endl
                 pca.moveBlueFlag(90);
-                for (auto data : dataToSend){
-                        sendData(clientSd,data);
-                }
-                dataToSend.clear();
-            }
+                sendData(clientSd,string_data);
+                sleep(1);
             std::cout << "-------------------------------FIN ENVOI----------------------------------" << std::endl;
-            
+            }
             if(pos_tracker==3){
                 pca.moveBlueFlag(45);
                 pos_tracker=2;
@@ -153,7 +143,7 @@ void* read_and_write(void* args){
             pca.moveBlueFlag(180);
             pos_tracker=0;
             } 
-        sleep(INTERVALLE_RECUP);
+        sleep(INTERVALLE_RECUP-1);
             }
         return NULL;
 }
