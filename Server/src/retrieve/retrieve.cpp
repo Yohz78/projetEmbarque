@@ -133,7 +133,7 @@ void* retrieve(void* args) { //int serverSd, int resNewSd, vector<Json::Value>& 
 
         for(int i=0;i<2;i++){
             int data_received = recv(newSd, &msg, sizeof(msg), 0); // reception msg
-            // if(data_received > 3500){
+            if(data_received > 3500){
             cout << "retrieve: data_received -----: " << data_received  << endl;
             cout << "retrieve: Valeur de message -: " << msg << endl;
             string_data_vec.push_back(msg);
@@ -143,15 +143,15 @@ void* retrieve(void* args) { //int serverSd, int resNewSd, vector<Json::Value>& 
                     cout << string_data_vec[(string_data_vec.size()-1)] << endl;
                     cout << "------------------------------------------------" << endl; 
                 }            
-                // }else{
-                //     cout << "retrieve: <========================RIEN========================>" << endl;
-                // }
+                }else{
+                    cout << "retrieve: <========================RIEN========================>" << endl;
+                }
         
             cout << "retrieve: Nombre d'element: " << string_data_vec.size() << endl;
             //sleep(3);
             cout << "retrieve: VALEUR DE i: " << i << endl;
             cout << endl;
-        // }
+        }
         cout << "JSONING THE DATA" << endl;
         jsoning(string_data_vec,jsonWrite);
         for(auto data: jsonWrite){
