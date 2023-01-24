@@ -7,7 +7,7 @@
  */
 void afficheBME() {
     sqlite3 *db;
-    int rc = sqlite3_open("data.db", &db);
+    int rc = sqlite3_open("../Server/data.db", &db);
     char *zErrMsg = 0;
     char **result;
     int rows, columns;
@@ -31,7 +31,7 @@ void afficheBME() {
  */
 void afficheHCSR() {
     sqlite3 *db;
-    int rc = sqlite3_open("data.db", &db);
+    int rc = sqlite3_open("../Server/data.db", &db);
     char *zErrMsg = 0;
     char **result;
     int rows, columns;
@@ -55,7 +55,7 @@ void afficheHCSR() {
  */
 void afficheHMC() {
     sqlite3 *db;
-    int rc = sqlite3_open("data.db", &db);
+    int rc = sqlite3_open("../Server/data.db", &db);
     char *zErrMsg = 0;
     char **result;
     int rows, columns;
@@ -79,7 +79,7 @@ void afficheHMC() {
  */
 void afficheAllData() {
     sqlite3 *db;
-    int rc = sqlite3_open("data.db", &db);
+    int rc = sqlite3_open("../Server/data.db", &db);
     char *zErrMsg = 0;
     char **result;
     int rows, columns;
