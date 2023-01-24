@@ -1,5 +1,6 @@
 #include <sqlite3.h>
 #include <iostream>
+#include <iomanip>
 
 /**
  * @brief This function does a sqlite3 Select for the BME data
@@ -19,7 +20,10 @@ void afficheBME() {
         sqlite3_free(zErrMsg);
     } else {
         for (int i = 1; i <= rows; i++) {
-            std::cout << "le " << result[i * columns + 0] << " la temperature était de " << result[i * columns + 1] << " la pression de " << result[i * columns + 2] << " et l'humidité de " << result[i * columns + 3] << "%" << std::endl;
+            std::cout << "DATE:" << result[i * columns] << std::endl;
+            std::cout << "---------> temperature : " <<  std::fixed << std::setprecision(2) << result[i * columns + 1] << std::endl;
+            std::cout << "------------> pression : " <<  std::fixed << std::setprecision(2) << result[i * columns + 2] << std::endl;
+            std::cout << "------------> humidité : " << result[i * columns + 3] << "%" << std::endl;
         }
     }
     sqlite3_free_table(result);
@@ -37,13 +41,14 @@ void afficheHCSR() {
     int rows, columns;
 
     // Execute the SELECT statement
-    rc = sqlite3_get_table(db, "SELECT mvt FROM sensor_data", &result, &rows, &columns, &zErrMsg);
+    rc = sqlite3_get_table(db, "SELECT date, mvt FROM sensor_data", &result, &rows, &columns, &zErrMsg);
     if (rc != SQLITE_OK) {
         std::cout << "stderr, SQL error: " <<  zErrMsg << std::endl;
         sqlite3_free(zErrMsg);
     } else {
         for (int i = 1; i <= rows; i++) {
-            std::cout << "mvt : " << result[i * columns] << std::endl;
+            std::cout << "DATE:" << result[i * columns] << std::endl;
+            std::cout << "mvt : " << result[i * columns + 1] << std::endl;
         }
     }
     sqlite3_free_table(result);
@@ -61,13 +66,16 @@ void afficheHMC() {
     int rows, columns;
 
     // Execute the SELECT statement
-    rc = sqlite3_get_table(db, "SELECT x, y, z FROM sensor_data", &result, &rows, &columns, &zErrMsg);
+    rc = sqlite3_get_table(db, "SELECT date, x, y, z FROM sensor_data", &result, &rows, &columns, &zErrMsg);
     if (rc != SQLITE_OK) {
         std::cout << "stderr, SQL error: " <<  zErrMsg << std::endl;
         sqlite3_free(zErrMsg);
     } else {
         for (int i = 1; i <= rows; i++) {
-            std::cout << "x: " << result[i * columns] << " y: " << result[i * columns + 1] << " z: " << result[i * columns + 2] << std::endl;
+            std::cout << "DATE:" << result[i * columns] << std::endl;
+            std::cout << "x: " << result[i * columns+ 1] << std::endl;
+            std::cout << "y: " << result[i * columns + 2] << std::endl;
+            std::cout << "z: " << result[i * columns + 3] << std::endl;
         }
     }
     sqlite3_free_table(result);
@@ -91,7 +99,15 @@ void afficheAllData() {
         sqlite3_free(zErrMsg);
     } else {
         for (int i = 1; i <= rows; i++) {
-            std::cout << "le " << result[i * columns + 0] << " la température était de " << result[i * columns + 1] << " la pression de " << result[i * columns + 2] << " l'humidité de " << result[i * columns + 3] << " mvt : "<< result[i * columns + 4] << " x : "<< result[i * columns + 5] << " y : "<< result[i * columns + 6] << " z : "<< result[i * columns + 7] << std::endl;
+            std::cout << "DATE: " << result[i * columns + 0] 
+            << " || température : " << result[i * columns + 1] 
+            << " || pression : " << result[i * columns + 2] 
+            << " || humidité : " << result[i * columns + 3] << std::endl
+            << " || mvt : "<< result[i * columns + 4] << std::endl
+            << " || x : "<< result[i * columns + 5] 
+            << " || y : "<< result[i * columns + 6] 
+            << " || z : "<< result[i * columns + 7] 
+            << std::endl;
         }
     }
     sqlite3_free_table(result);
