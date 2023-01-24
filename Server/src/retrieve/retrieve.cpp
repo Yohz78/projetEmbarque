@@ -148,7 +148,7 @@ void* retrieve(void* args) { //int serverSd, int resNewSd, vector<Json::Value>& 
                 }
         
             cout << "retrieve: Nombre d'element: " << string_data_vec.size() << endl;
-            sleep(3);
+            //sleep(3);
             cout << "retrieve: VALEUR DE i: " << i << endl;
             cout << endl;
         }
