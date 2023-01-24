@@ -99,6 +99,7 @@ void* read_and_write(void* args){
         argsRW* argsFunc = (argsRW*)args;
         int fd = argsFunc->fd;
         int clientSd = argsFunc->clientSd;    
+        vector<string> dataToSend;
         PCA9685 pca(1,0x40);
         pca.init();
         int mvt_tracker = 0;
@@ -112,7 +113,6 @@ void* read_and_write(void* args){
                         "\"y\": [-+]?[0-9]+,"
                         "\"z\":[-+]?[0-9]+\\}\\}$");
         while(true){
-            vector<string> dataToSend;
             string string_data = read_sensor_data(fd);
             if(std::regex_match(string_data, pattern)){
                 cout << "--------------REGEX MATCH--------------" << endl;
