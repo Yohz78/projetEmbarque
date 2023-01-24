@@ -116,7 +116,7 @@ void* read_and_write(void* args){
             if(std::regex_match(string_data, pattern)){
                 cout << "--------------REGEX MATCH--------------" << endl;
                 logicYellowFlag(string_data,mvt_tracker,pca);
-            std::cout << "-------------------------------ENVOI----------------------------------" << std::endl
+            std::cout << "-------------------------------ENVOI----------------------------------" << std::endl;
                 pca.moveBlueFlag(90);
                 sendData(clientSd,string_data);
                 sleep(1);
