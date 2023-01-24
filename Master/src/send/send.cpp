@@ -121,6 +121,7 @@ void* read_and_write(void* args){
             }
             
             std::cout << "-------------------------------ENVOI----------------------------------" << std::endl;
+            cout << "DATATOSEND SIZE: " << dataToSend.size() << endl;
             if(dataToSend.size() == 3){
                 cout << "--------------ON A STOCKE 3 ELEMENTS DANS DATATOSEND--------------" << endl;
                 pca.moveBlueFlag(90);
