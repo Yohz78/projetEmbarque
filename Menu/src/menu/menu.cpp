@@ -3,7 +3,6 @@
 
 #include "menu.h"
 #include "../statements/statements.h"
-using json = nlohmann::json;
 
 
 /**
