@@ -115,17 +115,17 @@ void* read_and_write(void* args){
             vector<string> dataToSend;
             string string_data = read_sensor_data(fd);
             if(std::regex_match(string_data, pattern)){
+                cout << "--------------REGEX MATCH--------------" << endl;
                 logicYellowFlag(string_data,mvt_tracker,pca);
+                dataToSend.push_back(string_data);
             }
-            dataToSend.push_back(string_data);
             
             std::cout << "-------------------------------ENVOI----------------------------------" << std::endl;
             if(dataToSend.size() == 3){
+                cout << "--------------ON A STOCKE 3 ELEMENTS DANS DATATOSEND--------------" << endl;
                 pca.moveBlueFlag(90);
                 for (auto data : dataToSend){
-                    if(std::regex_match(data, pattern)){
                         sendData(clientSd,data);
-                    }
                 }
             }
             std::cout << "-------------------------------FIN ENVOI----------------------------------" << std::endl;
