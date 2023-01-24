@@ -108,7 +108,7 @@ void* read_and_write(void* args){
         while(true){
             vector<string> dataToSend;
             string string_data = read_sensor_data(fd);
-            if(std::regex_match(data, pattern)){
+            if(std::regex_match(string_data, pattern)){
                 logicYellowFlag(string_data,mvt_tracker,pca);
             }
             dataToSend.push_back(string_data);
