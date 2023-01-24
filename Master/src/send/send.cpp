@@ -103,16 +103,7 @@ void* read_and_write(void* args){
         pca.init();
         int mvt_tracker = 0;
         int pos_tracker = 0;
-        
-        
-        while(true){
-            vector<string> dataToSend;
-            string string_data = read_sensor_data(fd);
-            if(std::regex_match(string_data, pattern)){
-                logicYellowFlag(string_data,mvt_tracker,pca);
-            }
-            dataToSend.push_back(string_data);
-            std::regex pattern("^\\{\"date\":\"\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\","
+        std::regex pattern("^\\{\"date\":\"\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\","
                         "\"BME\": \\{\"temperature\": [-+]?[0-9]+.?[0-9]+,"
                         "\"pressure\": [0-9]+.?[0-9]+,"
                         "\"humidity\": [0-9]+.?[0-9]+\\},"
@@ -120,7 +111,14 @@ void* read_and_write(void* args){
                         "\"HMC\": \\{\"x\": [-+]?[0-9]+,"
                         "\"y\": [-+]?[0-9]+,"
                         "\"z\":[-+]?[0-9]+\\}\\}$");
-
+        while(true){
+            vector<string> dataToSend;
+            string string_data = read_sensor_data(fd);
+            if(std::regex_match(string_data, pattern)){
+                logicYellowFlag(string_data,mvt_tracker,pca);
+            }
+            dataToSend.push_back(string_data);
+            
             std::cout << "-------------------------------ENVOI----------------------------------" << std::endl;
             if(dataToSend.size() == 3){
                 pca.moveBlueFlag(90);
@@ -153,6 +151,7 @@ void* read_and_write(void* args){
             pca.moveBlueFlag(180);
             pos_tracker=0;
             } 
+            dataToSend.clear();
         sleep(INTERVALLE_RECUP);
             }
         return NULL;
