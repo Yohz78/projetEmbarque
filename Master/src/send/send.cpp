@@ -128,6 +128,7 @@ void* read_and_write(void* args){
                 for (auto data : dataToSend){
                         sendData(clientSd,data);
                 }
+                dataToSend.clear();
             }
             std::cout << "-------------------------------FIN ENVOI----------------------------------" << std::endl;
             
